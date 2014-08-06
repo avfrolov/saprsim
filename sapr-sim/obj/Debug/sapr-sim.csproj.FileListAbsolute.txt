@@ -1,1 +1,13 @@
 D:\sapr\sapr-sim\sapr-sim\bin\Debug\sapr-sim.exe.config
+D:\sapr\sapr-sim\sapr-sim\bin\Debug\sapr-sim.exe
+D:\sapr\sapr-sim\sapr-sim\bin\Debug\sapr-sim.pdb
+D:\sapr\sapr-sim\sapr-sim\obj\Debug\sapr-sim.csprojResolveAssemblyReference.cache
+D:\sapr\sapr-sim\sapr-sim\obj\Debug\MainWindow.baml
+D:\sapr\sapr-sim\sapr-sim\obj\Debug\MainWindow.g.cs
+D:\sapr\sapr-sim\sapr-sim\obj\Debug\App.g.cs
+D:\sapr\sapr-sim\sapr-sim\obj\Debug\sapr-sim_MarkupCompile.cache
+D:\sapr\sapr-sim\sapr-sim\obj\Debug\sapr-sim.g.resources
+D:\sapr\sapr-sim\sapr-sim\obj\Debug\sapr_sim.Properties.Resources.resources
+D:\sapr\sapr-sim\sapr-sim\obj\Debug\sapr-sim.csproj.GenerateResource.Cache
+D:\sapr\sapr-sim\sapr-sim\obj\Debug\sapr-sim.exe
+D:\sapr\sapr-sim\sapr-sim\obj\Debug\sapr-sim.pdb

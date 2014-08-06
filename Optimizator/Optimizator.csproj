@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>1fcd4c3e-4343-46cc-9212-29638ea0ec01</ProjectGuid>
+    <ProjectGuid>{A45B4BB0-1E7F-4E3F-B6E4-543AC5E6D074}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Optimizator</RootNamespace>
