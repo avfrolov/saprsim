@@ -1,9 +1,69 @@
 ﻿<Window x:Class="sapr_sim.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="SAPR-SIM v. 0.1" Height="350" Width="525">
     <Grid>
-        <Label Content="Hello, World!" HorizontalAlignment="Left" Height="88" Margin="50,64,0,0" VerticalAlignment="Top" Width="336"/>
-
+        <Menu Height="20" VerticalAlignment="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Новый" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="Открыть" InputGestureText="Ctrl+O"/>
+                <Separator/>
+                <MenuItem Header="Сохранить" InputGestureText="Ctrl+S"/>
+                <MenuItem Header="Сохранить как..."/>                
+                <Separator/>
+                <MenuItem Header="Экспорт"/>
+            </MenuItem>
+            <MenuItem Header="Правка">
+                <MenuItem Header="Отменить действие" InputGestureText="Ctrl+Z"/>
+                <MenuItem Header="Вернуть действие" InputGestureText="Ctrl+Y"/>
+                <Separator/>
+                <MenuItem Header="Вырезать" InputGestureText="Ctrl+X"/>
+                <MenuItem Header="Копировать" InputGestureText="Ctrl+C"/>
+                <MenuItem Header="Вставить" InputGestureText="Ctrl+V"/>
+                <Separator/>
+                <MenuItem Header="Удалить" InputGestureText="Del"/>
+                <MenuItem Header="Выделить все" InputGestureText="Ctrl+A"/>
+            </MenuItem>
+            <MenuItem Header="Инструменты">
+                <MenuItem Header="Указатель"/>
+                <Separator/>
+                <MenuItem Header="Активность"/>
+                <MenuItem Header="Ресурс"/>
+                <MenuItem Header="Решение"/>
+                <MenuItem Header="Коллектор"/>
+                <MenuItem Header="Синхронизация"/>
+                <MenuItem Header="Параллельность"/>
+                <MenuItem Header="Сток"/>
+                <MenuItem Header="Исток"/>
+                <MenuItem Header="Рамка"/>
+                <MenuItem Header="Внешний ресурс"/>
+                <MenuItem Header="Надпись"/>
+                <Separator/>
+                <MenuItem Header="Прямая линия"/>
+                <MenuItem Header="Линия с изломом"/>
+            </MenuItem>
+            <MenuItem Header="Формат">
+                <MenuItem Header="Выровнять">
+                    <MenuItem Header="По левому краю"/>
+                    <MenuItem Header="По центру по горизонтали"/>
+                    <MenuItem Header="По правому краю"/>
+                    <Separator/>
+                    <MenuItem Header="По верхнему краю"/>
+                    <MenuItem Header="По центру по вертикали"/>
+                    <MenuItem Header="По нижнему краю"/>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Порядок">
+                    <MenuItem Header="На задний план"/>
+                    <MenuItem Header="На передний план"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Модель">
+                <MenuItem Header="Запуск моделиирования" InputGestureText="F5"/>
+                <MenuItem Header="Запуск оптимизации" InputGestureText="F2"/>
+                <Separator/>
+                <MenuItem Header="Настройка параметров ресурсов"/>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>
