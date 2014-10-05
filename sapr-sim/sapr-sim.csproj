@@ -135,27 +135,12 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\border.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\checkbox_no.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\checkbox_yes.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\collector.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\curveline.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -186,16 +171,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\down_arrow.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\entitydest.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\entitysource.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -245,26 +220,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\if.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\label.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\line.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\multithread.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\new.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -285,22 +240,12 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\procedure.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Res.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Resource.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\resource.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -316,11 +261,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Simple_Stop.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\sync.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -350,6 +290,50 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\collector.gif" />
+    <Resource Include="Resources\curveline.gif" />
+    <Resource Include="Resources\Label.gif" />
+    <Resource Include="Resources\Line.gif" />
+    <Resource Include="Resources\procedure.gif" />
+    <Resource Include="Resources\Resource.gif" />
+    <Resource Include="Resources\Sink.gif" />
+    <Resource Include="Resources\Source.gif" />
+    <Resource Include="Resources\Sync.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Border.gif" />
+    <Resource Include="Resources\Decision.gif" />
+    <Resource Include="Resources\Parallel.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\align_bottom.png" />
+    <Resource Include="Resources\align_center.png" />
+    <Resource Include="Resources\align_left.png" />
+    <Resource Include="Resources\align_middle.png" />
+    <Resource Include="Resources\align_right.png" />
+    <Resource Include="Resources\align_top.png" />
+    <Resource Include="Resources\arrow-redo.png" />
+    <Resource Include="Resources\arrow-undo.png" />
+    <Resource Include="Resources\audio_stop1.png" />
+    <Resource Include="Resources\cut.png" />
+    <Resource Include="Resources\Decision.png" />
+    <Resource Include="Resources\Export.png" />
+    <Resource Include="Resources\folder %282%29.png" />
+    <Resource Include="Resources\Folder.png" />
+    <Resource Include="Resources\move_back.png" />
+    <Resource Include="Resources\move_front.png" />
+    <Resource Include="Resources\newres.png" />
+    <Resource Include="Resources\New_document.png" />
+    <Resource Include="Resources\page_copy.png" />
+    <Resource Include="Resources\page_paste.png" />
+    <Resource Include="Resources\Save.png" />
+    <Resource Include="Resources\services.png" />
+    <Resource Include="Resources\small_database.png" />
+    <Resource Include="Resources\small_folder.png" />
+    <Resource Include="Resources\small_resources.png" />
+    <Resource Include="Resources\Undo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

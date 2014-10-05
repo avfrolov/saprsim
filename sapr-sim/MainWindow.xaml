@@ -70,70 +70,70 @@
         <ToolBarPanel Margin="0,25,0,-25">
             <ToolBar Height="26" >
                 <Button x:Name="New" ToolTip="Создать новую диаграмму">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/New_document.png" />
                 </Button>
                 <Button x:Name="Open" ToolTip="Открыть диаграмму">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/Folder.png" />
                 </Button>
                 <Button x:Name="Save" ToolTip="Сохранить">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/Save.png" />
                 </Button>
                 <Button x:Name="Export" ToolTip="Экспорт в качестве изображения">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/Export.png" />
                 </Button>
                 <Separator/>
                 
                 <Button x:Name="Cut" ToolTip="Вырезать">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/Cut.png" />
                 </Button>
                 <Button x:Name="Copy" ToolTip="Копировать">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/page_copy.png" />
                 </Button>
                 <Button x:Name="Paste" ToolTip="Вставить">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/page_paste.png" />
                 </Button>
                 <Separator/>
 
                 <Button x:Name="Undo" ToolTip="Отменить последнее действие">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/arrow-undo.png" />
                 </Button>
                 <Button x:Name="Redo" ToolTip="Вернуть последнее действие">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/arrow-redo.png" />
                 </Button>
                 <Separator/>
                 
                 <Button x:Name="Left" ToolTip="Выравнять по левому краю">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/align_left.png" />
                 </Button>
-                <Button x:Name="HCenter" ToolTip="Выравнять по центру">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                <Button x:Name="Center" ToolTip="Выравнять по центру">
+                    <Image Source="Resources/align_center.png" />
                 </Button>
                 <Button x:Name="Right" ToolTip="Выравнять по правому краю">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/align_right.png" />
                 </Button>
                 <Separator/>
 
                 <Button x:Name="Top" ToolTip="Выравнять по верхнему краю">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/align_top.png" />
                 </Button>
-                <Button x:Name="VCenter" ToolTip="Выравнять по центру">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                <Button x:Name="Middle" ToolTip="Выравнять по центру">
+                    <Image Source="Resources/align_middle.png" />
                 </Button>
                 <Button x:Name="Bottom" ToolTip="Выравнять по нижнему краю">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/align_bottom.png" />
                 </Button>
                 <Separator/>
 
-                <Button x:Name="Fore" ToolTip="На передний план">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                <Button x:Name="MoveFront" ToolTip="На передний план">
+                    <Image Source="Resources/move_front.png" />
                 </Button>
-                <Button x:Name="Back" ToolTip="На задний план">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                <Button x:Name="MoveBack" ToolTip="На задний план">
+                    <Image Source="Resources/move_back.png" />
                 </Button>
                 <Separator/>
 
                 <Button x:Name="Run" ToolTip="Запустить моделирование">
-                    <Image Source="Resources/Icon_Stop.ico" />
+                    <Image Source="Resources/Icon_PlaySolid.ico" />
                 </Button>
             </ToolBar>
             <DockPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" >
