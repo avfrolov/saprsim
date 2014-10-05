@@ -3,6 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <!-- Non-functional entities-->
+            <Image x:Key="Arrow" Source="pack://application:,,,/Resources/arrow.png"/>
+            <Image x:Key="Border" Source="pack://application:,,,/Resources/border.png"/>
+            <Image x:Key="Label" Source="pack://application:,,,/Resources/label.png"/>
+
+            <!-- Functional entities -->
+            <Image x:Key="Procedure" Source="pack://application:,,,/Resources/procedure.png"/>
+            <Image x:Key="Resource" Source="pack://application:,,,/Resources/resource.png"/>
+            <Image x:Key="Sync" Source="pack://application:,,,/Resources/sync.png"/>
+            <Image x:Key="Multithread" Source="pack://application:,,,/Resources/multithread.png"/>
+            <Image x:Key="If" Source="pack://application:,,,/Resources/if.png"/>
+            <Image x:Key="Collector" Source="pack://application:,,,/Resources/collector.png"/>
+            <Image x:Key="EntitySource" Source="pack://application:,,,/Resources/entitysource.png"/>
+            <Image x:Key="EntityDestination" Source="pack://application:,,,/Resources/entitydest.png"/>
+
+            <!-- Lines -->
+            <Image x:Key="Line" Source="Resources/line.png"/>
+            <Image x:Key="CurveLine" Source="Resources/curveline.png"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
