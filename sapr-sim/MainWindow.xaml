@@ -3,8 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         Title="SAPR-SIM v. 0.1" Height="350" Width="525" WindowState="Maximized">
+    
     <Grid>
-        <Menu Height="20" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        
+        <Menu Grid.Row="0">
             <MenuItem Header="Файл">
                 <MenuItem Header="Новый" InputGestureText="Ctrl+N"/>
                 <MenuItem Header="Открыть" InputGestureText="Ctrl+O"/>
@@ -67,7 +78,7 @@
             </MenuItem>
         </Menu>
 
-        <ToolBarPanel Margin="0,25,0,-25">
+        <ToolBarPanel Grid.Row="1">
             <ToolBar Height="26" >
                 <Button x:Name="New" ToolTip="Создать новую диаграмму">
                     <Image Source="Resources/New_document.png" />
@@ -136,16 +147,19 @@
                     <Image Source="Resources/Icon_PlaySolid.ico" />
                 </Button>
             </ToolBar>
-            <DockPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" >
-                <DockPanel Background="AliceBlue">
-                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Text="Инструменты" Name="fsf"/>
-                    <Grid DockPanel.Dock="Bottom" Width="200" Grid.Row="1">
+        </ToolBarPanel>
+
+        <DockPanel Grid.Row="2">
+            <Border Width="200" Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
+                <DockPanel Background="AliceBlue" VerticalAlignment="Top">
+                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Text="Инструменты" Name="EntitiesNameDock"/>
+                    <Grid DockPanel.Dock="Bottom" Width="200" >
                         <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition Height="*"/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -172,8 +186,19 @@
                         <Button Grid.Row="3" Grid.Column="0" Content="{StaticResource Line}"/>
                         <Button Grid.Row="3" Grid.Column="1" Content="{StaticResource CurveLine}"/>
                     </Grid>
+
                 </DockPanel>
-            </DockPanel>
-        </ToolBarPanel>
+            </Border>
+            <Border Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Bottom" Grid.Column="1">
+                <TabControl>
+                    <TabItem Header="General">
+                        <Label Content="Content goes here..." />
+                    </TabItem>
+                    <TabItem Header="Security" />
+                    <TabItem Header="Details" />
+                </TabControl>
+            </Border>
+        </DockPanel>
+
     </Grid>    
 </Window>
