@@ -77,6 +77,42 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Exceptions\ConnectorException.cs" />
+    <Compile Include="Figures\Basic\ComplexFigure.cs" />
+    <Compile Include="Figures\Basic\Diagram.cs" />
+    <Compile Include="Figures\Basic\Ellipse.cs" />
+    <Compile Include="Figures\Basic\Enums\ConnectorDirection.cs" />
+    <Compile Include="Figures\Basic\Enums\ConnectorOrientation.cs" />
+    <Compile Include="Figures\Basic\Enums\LedgeDirection.cs" />
+    <Compile Include="Figures\Basic\Enums\ResizeDirection.cs" />
+    <Compile Include="Figures\Basic\Figure.cs" />
+    <Compile Include="Figures\Basic\IBackgroundFigure.cs" />
+    <Compile Include="Figures\Basic\IConnectable.cs" />
+    <Compile Include="Figures\Basic\ISolidFigure.cs" />
+    <Compile Include="Figures\Basic\Label.cs" />
+    <Compile Include="Figures\Basic\Markers\BottomHeightMarker.cs" />
+    <Compile Include="Figures\Basic\Markers\BottomLeftMarker.cs" />
+    <Compile Include="Figures\Basic\Markers\BottomRightMarker.cs" />
+    <Compile Include="Figures\Basic\Markers\EndLineMarker.cs" />
+    <Compile Include="Figures\Basic\Markers\HeightMarker.cs" />
+    <Compile Include="Figures\Basic\Markers\LedgeMarker.cs" />
+    <Compile Include="Figures\Basic\Markers\LeftWidthMarker.cs" />
+    <Compile Include="Figures\Basic\Markers\Marker.cs" />
+    <Compile Include="Figures\Basic\Markers\RightWidthMarker.cs" />
+    <Compile Include="Figures\Basic\Markers\TopHeightMarker.cs" />
+    <Compile Include="Figures\Basic\Markers\TopLeftMarker.cs" />
+    <Compile Include="Figures\Basic\Markers\TopRightMarker.cs" />
+    <Compile Include="Figures\Basic\Markers\WidthMarker.cs" />
+    <Compile Include="Figures\Basic\Parallelogram.cs" />
+    <Compile Include="Figures\Basic\Rectangle.cs" />
+    <Compile Include="Figures\Basic\Rhomb.cs" />
+    <Compile Include="Figures\Basic\RoundRectangle.cs" />
+    <Compile Include="Figures\Basic\SolidFigure.cs" />
+    <Compile Include="Figures\Basic\Lines\LedgeLine.cs" />
+    <Compile Include="Figures\Basic\Lines\LedgePoint.cs" />
+    <Compile Include="Figures\Basic\Lines\Line.cs" />
+    <Compile Include="Figures\Basic\Util\SerializableGraphicsPath.cs" />
+    <Compile Include="Figures\Custom\Enum\ConnectorType.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -335,6 +371,7 @@
     <Resource Include="Resources\small_resources.png" />
     <Resource Include="Resources\Undo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

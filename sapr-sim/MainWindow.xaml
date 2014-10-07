@@ -113,7 +113,7 @@
                 </Button>
                 <Separator/>
                 
-                <Button x:Name="Left" ToolTip="Выравнять по левому краю">
+                <Button x:Name="LeftBtn" ToolTip="Выравнять по левому краю">
                     <Image Source="Resources/align_left.png" />
                 </Button>
                 <Button x:Name="Center" ToolTip="Выравнять по центру">
@@ -124,7 +124,7 @@
                 </Button>
                 <Separator/>
 
-                <Button x:Name="Top" ToolTip="Выравнять по верхнему краю">
+                <Button x:Name="TopBtn" ToolTip="Выравнять по верхнему краю">
                     <Image Source="Resources/align_top.png" />
                 </Button>
                 <Button x:Name="Middle" ToolTip="Выравнять по центру">
@@ -191,11 +191,9 @@
             </Border>
             <Border Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Bottom" Grid.Column="1">
                 <TabControl>
-                    <TabItem Header="General">
-                        <Label Content="Content goes here..." />
+                    <TabItem Header="Новая диаграмма 1">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
                     </TabItem>
-                    <TabItem Header="Security" />
-                    <TabItem Header="Details" />
                 </TabControl>
             </Border>
         </DockPanel>
