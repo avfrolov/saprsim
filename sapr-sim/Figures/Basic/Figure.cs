@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.ComponentModel;
 
+using sapr_sim.Figures.Custom;
 using sapr_sim.Figures.Basic.Util;
 using sapr_sim.Figures.Basic.Markers;
 

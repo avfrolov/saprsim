@@ -11,6 +11,7 @@ using System.Runtime.Serialization;
 using System.Reflection;
 using System.ComponentModel;
 
+using sapr_sim.Figures.Custom;
 using sapr_sim.Figures.Basic.Lines;
 using sapr_sim.Figures.Basic;
 using sapr_sim.Figures.Basic.Enums;
@@ -195,7 +196,7 @@ namespace sapr_sim.Figures.Basic.Markers
             if (old_to_name != "" && line.From != null)
                 if (line.From.OwnerFigure != null)
                     EndLineMarker.DisconnectBlocks(line.From.OwnerFigure.Name, old_to_name);
-            int param = 0;
+            //int param = 0;
             // incorrect checking
             //if ((old_to_name == "" || old_from_name == "") && line.From != null && line.To != null)
             //    if (line.From.OwnerFigure != null && line.To.OwnerFigure != null)

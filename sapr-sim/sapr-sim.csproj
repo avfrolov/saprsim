@@ -79,7 +79,7 @@
     </Compile>
     <Compile Include="Exceptions\ConnectorException.cs" />
     <Compile Include="Figures\Basic\ComplexFigure.cs" />
-    <Compile Include="Figures\Basic\Diagram.cs" />
+    <Compile Include="Figures\Custom\Diagram.cs" />
     <Compile Include="Figures\Basic\Ellipse.cs" />
     <Compile Include="Figures\Basic\Enums\ConnectorDirection.cs" />
     <Compile Include="Figures\Basic\Enums\ConnectorOrientation.cs" />

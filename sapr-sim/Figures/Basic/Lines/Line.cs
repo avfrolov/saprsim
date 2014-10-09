@@ -3,6 +3,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing;
 using System.Collections.Generic;
 
+using sapr_sim.Figures.Custom;
 using sapr_sim.Figures.Basic;
 using sapr_sim.Figures.Basic.Util;
 using sapr_sim.Figures.Basic.Markers;

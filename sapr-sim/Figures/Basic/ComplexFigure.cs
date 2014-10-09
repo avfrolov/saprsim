@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing;
 
 using sapr_sim.Figures.Basic.Markers;
+using sapr_sim.Figures.Custom;
 
 namespace sapr_sim.Figures.Basic
 {

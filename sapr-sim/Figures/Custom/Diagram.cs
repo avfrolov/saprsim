@@ -11,14 +11,16 @@ using System.Linq;
 using System.ComponentModel;
 
 using sapr_sim.Figures.Basic.Lines;
+using sapr_sim.Figures.Basic;
 
-namespace sapr_sim.Figures.Basic
+
+namespace sapr_sim.Figures.Custom
 {
 
     public class Diagram : ICloneable
     {
 
-        private string Name;
+        private string name;
         private readonly List<Figure> figures = new List<Figure>();
 
         public List<Figure> Figures 
@@ -54,7 +56,7 @@ namespace sapr_sim.Figures.Basic
         {
             //создаем новую диаграмму, куда копируем фигуры из текущей диаграммы
             Diagram d = new Diagram();
-            d.Name = Name;
+            d.name = name;
             int i, j, Q;
             ComplexFigure tmp;
             Line line;

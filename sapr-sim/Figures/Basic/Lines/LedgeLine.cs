@@ -16,6 +16,7 @@ using sapr_sim.Figures.Basic;
 using sapr_sim.Figures.Basic.Enums;
 using sapr_sim.Figures.Basic.Util;
 using sapr_sim.Figures.Basic.Markers;
+using sapr_sim.Figures.Custom;
 
 namespace sapr_sim.Figures.Basic.Lines
 {
