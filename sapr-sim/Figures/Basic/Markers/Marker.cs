@@ -11,6 +11,8 @@ using System.Runtime.Serialization;
 using System.Reflection;
 using System.ComponentModel;
 
+using sapr_sim.Figures.Basic;
+
 namespace sapr_sim.Figures.Basic.Markers
 {
     [Serializable]
@@ -46,9 +48,9 @@ namespace sapr_sim.Figures.Basic.Markers
                 PointF labelP;
                 foreach (SolidFigure fig in CF.SolidFigures)
                 {
-                    if (fig is LabelFigure)
+                    if (fig is Label)
                     {
-                        LabelFigure label = (fig as LabelFigure);
+                        Label label = (fig as Label);
                         //пересчитываем положение рамки, если маркер на нее наехал
                         labelP = label.Location;
                         RectangleF testBounds = (targetFigure as SolidFigure).Bounds;

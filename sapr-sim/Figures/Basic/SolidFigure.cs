@@ -99,11 +99,11 @@ namespace sapr_sim.Figures.Basic
         }
 
         //прямоугольник текста (в абсолютных координатах)
-        public Rectangle TextBounds
+        public System.Drawing.Rectangle TextBounds
         {
             get
             {
-                return new Rectangle((int)textRect.Left + (int)location.X, (int)textRect.Top + (int)location.Y, (int)textRect.Width, (int)textRect.Height);
+                return new System.Drawing.Rectangle((int)textRect.Left + (int)location.X, (int)textRect.Top + (int)location.Y, (int)textRect.Width, (int)textRect.Height);
             }
         }
 

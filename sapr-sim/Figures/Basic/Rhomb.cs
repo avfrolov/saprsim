@@ -5,9 +5,9 @@ using System.Drawing;
 namespace sapr_sim.Figures.Basic
 {
     [Serializable]
-    public partial class RhombFigure : SolidFigure
+    public partial class Rhomb : SolidFigure
     {
-        public RhombFigure()
+        public Rhomb()
         {
             Path.AddPolygon(new PointF[]{
                 new PointF(-defaultSize, 0),

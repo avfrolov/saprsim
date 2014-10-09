@@ -5,9 +5,9 @@ using System.Drawing;
 namespace sapr_sim.Figures.Basic
 {
     [Serializable]
-    public partial class RoundRectFigure : SolidFigure
+    public partial class RoundRectangle : SolidFigure
     {
-        public RoundRectFigure()
+        public RoundRectangle()
         {
             float diameter = 16f;
             SizeF sizeF = new SizeF(diameter, diameter);

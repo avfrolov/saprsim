@@ -59,17 +59,17 @@ namespace sapr_sim.Figures.Basic
             }
         }
 
-        
-        public Rectangle GetTextBounds(int figureIndex)
+
+        public System.Drawing.Rectangle GetTextBounds(int figureIndex)
         {
             return primitives[figureIndex].TextBounds;
         }
 
-        public List<Rectangle> TextBounds
+        public List<System.Drawing.Rectangle> TextBounds
         {
             get
             {
-                List<Rectangle> bounds = new List<Rectangle>();
+                List<System.Drawing.Rectangle> bounds = new List<System.Drawing.Rectangle>();
                 for (int i = 0; i < primitives.Count; i++)
                 {
                     if (primitives[i].TextChangeEnable)
@@ -92,13 +92,13 @@ namespace sapr_sim.Figures.Basic
         public virtual void PlaceFreelyMovedLabels()
         {
             int i;
-            LabelFigure lab;
+            Label lab;
             float d1, d2;
             for (i = 0; i < primitives.Count; i++)
             {
-                if (i != mainFigureIndex && (primitives[i] is LabelFigure))
+                if (i != mainFigureIndex && (primitives[i] is Label))
                 {
-                    lab = (primitives[i] as LabelFigure);
+                    lab = (primitives[i] as Label);
                     if (lab.FreeMoveEnable && lab.Bounds.IntersectsWith(MainFigureBounds))
                     {
                         d1 = Math.Abs(lab.Location.X - MainFigureBounds.Left);
