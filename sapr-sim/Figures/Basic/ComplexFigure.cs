@@ -185,14 +185,12 @@ namespace sapr_sim.Figures.Basic
         
         public virtual void DrawShadow(Graphics gr)
         {
-            Object shadow = Activator.CreateInstance(primitives[mainFigureIndex].GetType());
-            (shadow as SolidFigure).Size = primitives[mainFigureIndex].Size;
-            (shadow as SolidFigure).Location = PointF.Add(primitives[mainFigureIndex].Location,
-                new Size(defaultShadowOffset, defaultShadowOffset));
-            Brush br = new SolidBrush(Color.FromArgb(50, 0, 0, 0));
-            (shadow as SolidFigure).FigureBrush = br;
-            (shadow as SolidFigure).FigurePen = Pens.Transparent;
-            (shadow as SolidFigure).Draw(gr);
+            SolidFigure shadow = (Activator.CreateInstance(primitives[mainFigureIndex].GetType()) as SolidFigure);
+            shadow.Size = primitives[mainFigureIndex].Size;
+            shadow.Location = PointF.Add(primitives[mainFigureIndex].Location, new Size(defaultShadowOffset, defaultShadowOffset));
+            shadow.FigureBrush = new SolidBrush(Color.FromArgb(50, 0, 0, 0));
+            shadow.FigurePen = Pens.Transparent;
+            shadow.Draw(gr);
         }
 
         public Brush FigureBrush
@@ -210,6 +208,18 @@ namespace sapr_sim.Figures.Basic
         public virtual bool CheckConnection()
         {
             return true;
+        }
+
+        public int MainFigureIndex
+        {
+            get { return mainFigureIndex; }
+            set { mainFigureIndex = value; }
+        }
+
+        public int DefaultLabelOffset
+        {
+            get { return defaultLabelOffset; }
+            set { defaultLabelOffset = value; }
         }
 
         public override object Clone()

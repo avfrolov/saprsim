@@ -7,7 +7,7 @@ using sapr_sim.Figures.Basic.Enums;
 namespace sapr_sim.Figures.Basic
 {
     [Serializable]
-    public partial class Label : SolidFigure
+    public class Label : SolidFigure
     {
         //возможность двигать метку независимо от главной фигуры
         protected bool freeMoveEnable = true;
@@ -16,7 +16,19 @@ namespace sapr_sim.Figures.Basic
             get { return freeMoveEnable; }
             set { freeMoveEnable = value; }
         }
+
+        public Label(string text)
+        {
+            this.Text = text;
+            init();
+        }
+
         public Label()
+        {
+            init();
+        }
+
+        private void init()
         {
             Path.AddRectangle(new RectangleF(-defaultSize, -defaultSize / 2, 2 * defaultSize, defaultSize));
             textRect = new RectangleF(-defaultSize - 3, -defaultSize / 2 - 3, 2 * defaultSize + 6, defaultSize + 15);

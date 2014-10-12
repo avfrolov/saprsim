@@ -65,6 +65,21 @@ namespace sapr_sim
             theTabItem.Focus();
         }
 
+        private void ArrowButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentFigure = null;
+        }
+
+        private void BorderButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Вооообщееее не понятно зачем этот инструмент тут...");
+        }
+        
+        private void LabelButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Скорее всего придется переписать этот компонент, т.к. он не ComplexFigure");
+        }
+
         private void ProcedureButton_Click(object sender, RoutedEventArgs e)
         {
             currentFigure = new Procedure();
@@ -75,11 +90,10 @@ namespace sapr_sim
             currentFigure = new Resource();
         }
 
-        private void Border_Click(object sender, RoutedEventArgs e)
+        private void SyncButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Вооообщееее не понятно зачем этот инструмент тут...");
+            currentFigure = new Sync();
         }
-
 
         private void addComplexFigure(Point location)
         {
@@ -100,5 +114,6 @@ namespace sapr_sim
                 diagram.Figures.Insert(i, currentFigure);
             }
         }
+
     }
 }

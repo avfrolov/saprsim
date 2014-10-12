@@ -19,7 +19,7 @@ namespace sapr_sim.Figures.Basic
     public class SolidFigure : Figure, ISolidFigure
     {
         //размер новой фигуры, по умолчанию
-        public int defaultSize = 40;
+        public int defaultSize = 50;
 
         //заливка фигуры
         public Brush FigureBrush
