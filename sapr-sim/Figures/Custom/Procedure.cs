@@ -39,7 +39,6 @@ namespace sapr_sim.Figures.Custom
 
             primitives.Add(bound);
 
-            //down port
             ports = new Port[4];
             ports[0] = new Port(bound, this, ConnectorDirection.Input, ConnectorType.Resource, ConnectorOrientation.BottomToTop);
             (ports[0] as Port).EnableMultipleConnection = true;

@@ -44,8 +44,10 @@ namespace sapr_sim
             {              
                 addComplexFigure(e.GetPosition(this));
                 currentFigure.Draw(gr);
+            }
+            else if (e.ButtonState == e.RightButton)
+            {
                 currentFigure = null;
-                Focus();
             }
             
         }
@@ -67,6 +69,17 @@ namespace sapr_sim
         {
             currentFigure = new Procedure();
         }
+
+        private void ResourceButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentFigure = new Resource();
+        }
+
+        private void Border_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Вооообщееее не понятно зачем этот инструмент тут...");
+        }
+
 
         private void addComplexFigure(Point location)
         {

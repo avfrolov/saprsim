@@ -5,7 +5,7 @@ using System.Drawing;
 namespace sapr_sim.Figures.Basic
 {
     [Serializable]
-    public partial class Rectangle: SolidFigure
+    public class Rectangle: SolidFigure
     {
         public Rectangle()
         {

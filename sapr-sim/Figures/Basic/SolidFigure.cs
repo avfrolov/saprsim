@@ -54,6 +54,11 @@ namespace sapr_sim.Figures.Basic
 
         //направления, в которых может быть изменена фигура
         protected ResizeDirection resizeDirections = ResizeDirection.BothByCornerMarkers;
+        public ResizeDirection ResizeDirection
+        {
+            get { return resizeDirections; }
+            set { resizeDirections = value; }
+        }
         
         //разрешение изменять текст на фигуре
         protected bool textChangeEnable = true;     

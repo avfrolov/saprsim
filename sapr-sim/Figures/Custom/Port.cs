@@ -25,7 +25,6 @@ namespace sapr_sim.Figures.Custom
 
         public override List<Marker> CreateMarkers(Diagram diagram)
         {
-            //âîçâðàùàåì ïóñòîé ìàññèâ - ïîðò íå ìàñøòàáèðóåòñÿ
             List<Marker> markers = new List<Marker>();
             return markers;
         }
