@@ -44,7 +44,8 @@ namespace sapr_sim.Figures.Basic
         private Brush textColor = Brushes.Black;
 
         //ссылка на сложную фигуру, частью которой является эта
-        private Figure ownerFigure = null;
+        protected Figure ownerFigure;
+       
         public Figure OwnerFigure
         {
             get { return ownerFigure; }
@@ -52,10 +53,10 @@ namespace sapr_sim.Figures.Basic
         }
 
         //направления, в которых может быть изменена фигура
-        public ResizeDirection resizeDirections = ResizeDirection.BothByCornerMarkers;
+        protected ResizeDirection resizeDirections = ResizeDirection.BothByCornerMarkers;
         
         //разрешение изменять текст на фигуре
-        private bool textChangeEnable = true;     
+        protected bool textChangeEnable = true;     
         public bool TextChangeEnable
         {
             get { return textChangeEnable; }

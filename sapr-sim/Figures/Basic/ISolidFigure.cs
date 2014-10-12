@@ -12,16 +12,19 @@ namespace sapr_sim.Figures.Basic
             get;
             set;
         }
+
         PointF Location
         {
             get;
             set;
         }
+
         Brush FigureBrush
         {
             get;
             set;
         }
+
         Pen FigurePen
         {
             get;

@@ -11,7 +11,7 @@ using sapr_sim.Figures.Basic.Markers;
 namespace sapr_sim.Figures.Basic.Lines
 {
     [Serializable]
-    public partial class Line : Figure
+    public class Line : Figure
     {
         public IConnectable From;
         public IConnectable To;

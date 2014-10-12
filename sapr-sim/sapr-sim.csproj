@@ -69,6 +69,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Figures\Custom\Port.cs" />
+    <Compile Include="Figures\Custom\Procedure.cs" />
     <Compile Include="Figures\Custom\SchemaElement.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
     <Compile Include="WPFCustomElements\UserControls\ClosableHeader.xaml.cs">

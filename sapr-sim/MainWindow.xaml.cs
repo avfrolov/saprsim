@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using sapr_sim.WPFCustomElements;
+using sapr_sim.Figures.Custom;
+using sapr_sim.Figures.Basic;
 
 namespace sapr_sim
 {
@@ -22,10 +24,30 @@ namespace sapr_sim
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private Diagram diagram;
+        private ComplexFigure currentFigure;
+        private System.Drawing.Graphics gr;
+
         public MainWindow()
         {
             InitializeComponent();
+            gr = System.Drawing.Graphics.FromHwnd(new System.Windows.Interop.WindowInteropHelper(this).Handle);
             createNewTab();
+            diagram = new Diagram();
+        }
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnMouseDown(e);
+            if (currentFigure != null && e.ButtonState == e.LeftButton)
+            {              
+                addComplexFigure(e.GetPosition(this));
+                currentFigure.Draw(gr);
+                currentFigure = null;
+                Focus();
+            }
+            
         }
 
         private void CreateNewTab_Click(object sender, RoutedEventArgs e)
@@ -39,6 +61,31 @@ namespace sapr_sim
             theTabItem.Title = "Новая диаграмма " + (tabs.Items.Count + 1);
             tabs.Items.Add(theTabItem);
             theTabItem.Focus();
+        }
+
+        private void ProcedureButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentFigure = new Procedure();
+        }
+
+        private void addComplexFigure(Point location)
+        {
+            // backward Karimov's capability...
+            System.Drawing.Point convertedPoint = new System.Drawing.Point((int)location.X, (int)location.Y);
+            currentFigure.Location = convertedPoint;
+            if (!(currentFigure is IBackgroundFigure))
+            {
+                diagram.Figures.Add(currentFigure);
+            }
+            else
+            {
+                //поиск более раниих фоновых фигур
+                int i;
+                for (i = 0; i < diagram.Figures.Count; i++)
+                    if (!(diagram.Figures[i] is IBackgroundFigure))
+                        break;
+                diagram.Figures.Insert(i, currentFigure);
+            }
         }
     }
 }

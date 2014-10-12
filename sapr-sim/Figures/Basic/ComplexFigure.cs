@@ -12,13 +12,13 @@ using sapr_sim.Figures.Custom;
 namespace sapr_sim.Figures.Basic
 {
     [Serializable]
-    public abstract partial class ComplexFigure : Figure, ISolidFigure//, ISerializable
-    {
-        private int defaultLabelOffset = 5;
-        private int defaultPortOffset = 6;
-        private int defaultShadowOffset = 4;
+    public abstract class ComplexFigure : Figure, ISolidFigure//, ISerializable
+    {        
         private PointF location;
         private int mainFigureIndex = 0;
+        protected int defaultShadowOffset = 4;
+        protected int defaultLabelOffset = 5;
+        protected int defaultPortOffset = 6;
         protected List<SolidFigure> primitives = new List<SolidFigure>();
 
         public List<SolidFigure> SolidFigures

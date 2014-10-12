@@ -20,6 +20,7 @@ namespace sapr_sim.Figures.Custom
     public class Diagram : SchemaElement, ICloneable
     {
 
+        private string name;
         private readonly List<Figure> figures = new List<Figure>();
 
         public List<Figure> Figures 
@@ -118,6 +119,7 @@ namespace sapr_sim.Figures.Custom
             }
             return d as Object;
         }
+
     }
 
     public delegate bool CheckConnectionDelegate();
