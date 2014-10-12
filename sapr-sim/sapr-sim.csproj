@@ -69,6 +69,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Figures\Custom\SchemaElement.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
     <Compile Include="WPFCustomElements\UserControls\ClosableHeader.xaml.cs">
       <DependentUpon>ClosableHeader.xaml</DependentUpon>

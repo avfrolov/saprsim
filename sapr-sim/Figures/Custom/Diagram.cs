@@ -17,10 +17,9 @@ using sapr_sim.Figures.Basic;
 namespace sapr_sim.Figures.Custom
 {
 
-    public class Diagram : ICloneable
+    public class Diagram : SchemaElement, ICloneable
     {
 
-        private string name;
         private readonly List<Figure> figures = new List<Figure>();
 
         public List<Figure> Figures 
