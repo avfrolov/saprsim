@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using sapr_sim.WPFCustomElements;
+
 namespace sapr_sim
 {
     /// <summary>
@@ -23,6 +25,20 @@ namespace sapr_sim
         public MainWindow()
         {
             InitializeComponent();
+            createNewTab();
+        }
+
+        private void CreateNewTab_Click(object sender, RoutedEventArgs e)
+        {
+            createNewTab();            
+        }
+
+        private void createNewTab()
+        {
+            ClosableTabItem theTabItem = new ClosableTabItem();
+            theTabItem.Title = "Новая диаграмма " + (tabs.Items.Count + 1);
+            tabs.Items.Add(theTabItem);
+            theTabItem.Focus();
         }
     }
 }

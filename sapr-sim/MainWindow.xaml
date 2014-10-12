@@ -80,7 +80,7 @@
 
         <ToolBarPanel Grid.Row="1">
             <ToolBar Height="26" >
-                <Button x:Name="New" ToolTip="Создать новую диаграмму">
+                <Button x:Name="New" ToolTip="Создать новую диаграмму" Click="CreateNewTab_Click">
                     <Image Source="Resources/New_document.png" />
                 </Button>
                 <Button x:Name="Open" ToolTip="Открыть диаграмму">
@@ -190,10 +190,27 @@
                 </DockPanel>
             </Border>
             <Border Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Bottom" Grid.Column="1">
-                <TabControl>
-                    <TabItem Header="Новая диаграмма 1">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
-                    </TabItem>
+                <TabControl Name="tabs">
+                    <TabControl.Template>
+                        <ControlTemplate TargetType="TabControl">
+                            <StackPanel>
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <TabPanel x:Name="HeaderPanel"
+                              Panel.ZIndex ="1" 
+                              KeyboardNavigation.TabIndex="1"
+                              Grid.Column="0"
+                              Grid.Row="0"
+                              Margin="2,2,2,0"
+                              IsItemsHost="true"/>
+                        </ScrollViewer>
+                        <ContentPresenter x:Name="PART_SelectedContentHost"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          Margin="{TemplateBinding Padding}"
+                                          ContentSource="SelectedContent"/>
+                        </StackPanel>
+                        </ControlTemplate>
+                    </TabControl.Template>
+
                 </TabControl>
             </Border>
         </DockPanel>
