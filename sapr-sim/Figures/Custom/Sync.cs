@@ -12,6 +12,7 @@ using sapr_sim.Figures.Basic.Enums;
 
 namespace sapr_sim.Figures.Custom
 {
+    [Serializable]
     public class Sync : ComplexFigure, SchemaElement
     {
 

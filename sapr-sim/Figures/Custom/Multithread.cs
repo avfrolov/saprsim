@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace sapr_sim.Figures.Custom
 {
+    [Serializable]
     public class Multithread : ComplexFigure, SchemaElement
     {
 
