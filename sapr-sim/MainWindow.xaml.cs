@@ -105,6 +105,11 @@ namespace sapr_sim
             currentFigure = new Decision();
         }
 
+        private void CollectorButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentFigure = new Collector();
+        }
+
         private void addComplexFigure(Point location)
         {
             // backward Karimov's capability...
