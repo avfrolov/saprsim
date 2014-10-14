@@ -95,6 +95,11 @@ namespace sapr_sim
             currentFigure = new Sync();
         }
 
+        private void MultithreadButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentFigure = new Multithread();
+        }
+
         private void addComplexFigure(Point location)
         {
             // backward Karimov's capability...

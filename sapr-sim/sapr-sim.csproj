@@ -69,6 +69,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Figures\Custom\Multithread.cs" />
     <Compile Include="Figures\Custom\Port.cs" />
     <Compile Include="Figures\Custom\Procedure.cs" />
     <Compile Include="Figures\Custom\Resource.cs" />

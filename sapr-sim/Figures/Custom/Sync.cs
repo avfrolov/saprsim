@@ -50,7 +50,7 @@ namespace sapr_sim.Figures.Custom
             primitives.Add(ports[2]);
 
             bound.Location = new PointF(label.Location.X, label.Location.Y + (int)label.Size.Height / 2 +
-                DefaultLabelOffset + (int)bound.Size.Height / 2);
+                defaultLabelOffset + (int)bound.Size.Height / 2);
 
             RecalcFigure();
         }
