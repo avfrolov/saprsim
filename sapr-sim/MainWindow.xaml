@@ -179,7 +179,7 @@
                         <Button Grid.Row="1" Grid.Column="3" Content="{StaticResource Multithread}" Click="MultithreadButton_Click" ToolTip="Параллельность"/>
                         <Button Grid.Row="2" Grid.Column="0" Content="{StaticResource If}" Click="DecisionButton_Click" ToolTip="Решение"/>
                         <Button Grid.Row="2" Grid.Column="1" Content="{StaticResource Collector}" Click="CollectorButton_Click" ToolTip="Коллектор"/>
-                        <Button Grid.Row="2" Grid.Column="2" Content="{StaticResource EntitySource}" ToolTip="Исток"/>
+                        <Button Grid.Row="2" Grid.Column="2" Content="{StaticResource EntitySource}" Click="EntitySourceButton_Click" ToolTip="Исток" />
                         <Button Grid.Row="2" Grid.Column="3" Content="{StaticResource EntityDestination}" ToolTip="Сток"/>
 
                         <!--  Lines-->
