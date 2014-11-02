@@ -129,6 +129,10 @@ namespace sapr_sim
 
         private void Shape_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            // clear bitmap effect for previous selected entity
+            if (source != null)
+                source.BitmapEffect = UIEntity.defaultBitmapEffect(source);
+
             source = (UIElement)sender;
             Mouse.Capture(source);
             captured = true;
