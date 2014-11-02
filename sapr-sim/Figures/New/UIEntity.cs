@@ -76,6 +76,10 @@ namespace sapr_sim.Figures.New
             {
                 Size size = RenderSize;
                 Point ofs = new Point(size.Width / 2, size.Height / 2);
+
+                // TODO why ofs with X=0.0 & Y=0.0 doesn't work?
+                if (ofs.X == 0.0 && ofs.Y == 0.0) return;
+
                 AnchorPoint = TransformToVisual(this.canvas).Transform(ofs);
             }
         }
