@@ -71,6 +71,7 @@
     </ApplicationDefinition>
     <Compile Include="Figures\Custom\Collector.cs" />
     <Compile Include="Figures\Custom\Decision.cs" />
+    <Compile Include="Figures\Custom\EntityDestination.cs" />
     <Compile Include="Figures\Custom\EntitySource.cs" />
     <Compile Include="Figures\Custom\Multithread.cs" />
     <Compile Include="Figures\Custom\Port.cs" />

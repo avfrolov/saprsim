@@ -180,7 +180,7 @@
                         <Button Grid.Row="2" Grid.Column="0" Content="{StaticResource If}" Click="DecisionButton_Click" ToolTip="Решение"/>
                         <Button Grid.Row="2" Grid.Column="1" Content="{StaticResource Collector}" Click="CollectorButton_Click" ToolTip="Коллектор"/>
                         <Button Grid.Row="2" Grid.Column="2" Content="{StaticResource EntitySource}" Click="EntitySourceButton_Click" ToolTip="Исток" />
-                        <Button Grid.Row="2" Grid.Column="3" Content="{StaticResource EntityDestination}" ToolTip="Сток"/>
+                        <Button Grid.Row="2" Grid.Column="3" Content="{StaticResource EntityDestination}" Click="EntityDestinationButton_Click" ToolTip="Сток"/>
 
                         <!--  Lines-->
                         <Button Grid.Row="3" Grid.Column="0" Content="{StaticResource Line}" ToolTip="Линия"/>

@@ -115,6 +115,11 @@ namespace sapr_sim
             currentFigure = new EntitySource();
         }
 
+        private void EntityDestinationButton_Click(object sender, RoutedEventArgs e)
+        {
+            currentFigure = new EntityDestination();
+        }
+
         private void addComplexFigure(Point location)
         {
             // backward Karimov's capability...
