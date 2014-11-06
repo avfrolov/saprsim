@@ -8,5 +8,9 @@ namespace Entity.impl
 {
     class Procedure : Entity
     {
+        double manHour { get; set; }
+        List<Resource> resources = new List<Resource>();
+        
+        public override void execute() { }
     }
 }

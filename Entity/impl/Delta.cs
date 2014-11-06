@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entity.impl
 {
-    class StreamMerge : Entity
+    class Delta
     {
     }
 }

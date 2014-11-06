@@ -8,5 +8,6 @@ namespace Entity.impl
 {
     class Synchronization : Entity
     {
+        public override void execute() { }
     }
 }

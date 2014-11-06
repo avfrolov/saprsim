@@ -8,5 +8,8 @@ namespace Entity.impl
 {
     class EntityStart : Entity
     {
+        int projectsCount { get; set; }
+
+        public override void execute() { }
     }
 }

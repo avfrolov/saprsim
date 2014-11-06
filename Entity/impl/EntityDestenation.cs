@@ -8,5 +8,7 @@ namespace Entity.impl
 {
     class EntityDestenation : Entity
     {
+
+        public override void execute() { }
     }
 }

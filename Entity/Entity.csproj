@@ -41,6 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity.cs" />
+    <Compile Include="impl\Diagram.cs" />
+    <Compile Include="impl\EntityDestenation.cs" />
+    <Compile Include="impl\EntityStart.cs" />
+    <Compile Include="impl\Parallel.cs" />
+    <Compile Include="impl\Procedure.cs" />
+    <Compile Include="impl\Resource.cs" />
+    <Compile Include="impl\StreamMerge.cs" />
+    <Compile Include="impl\Synchronization.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

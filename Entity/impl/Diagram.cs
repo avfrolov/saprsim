@@ -8,5 +8,7 @@ namespace Entity.impl
 {
     class Diagram : Entity
     {
+
+        public override void execute() { }
     }
 }

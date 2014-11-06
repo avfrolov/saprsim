@@ -8,5 +8,7 @@ namespace Entity.impl
 {
     class Parallel : Entity
     {
+
+        public override void execute() { }
     }
 }

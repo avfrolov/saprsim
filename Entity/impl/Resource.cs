@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Entity.impl
 {
-    class Resource : Entity
+    class Resource 
     {
+        double efficiency { get; set; }
     }
 }
