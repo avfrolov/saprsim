@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity.impl
+namespace Entities.impl
 {
-    class EntityStart : Entity
+    public class EntityStart : Entity
     {
         int projectsCount { get; set; }
 

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity.impl
+namespace Entities.impl
 {
-    class Synchronization : Entity
+    public class Synchronization : Entity
     {
         public override void execute() { }
     }

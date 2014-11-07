@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity.impl
+namespace Entities.impl
 {
-    class EntityDestenation : Entity
+    public class EntityDestenation : Entity
     {
 
         public override void execute() { }

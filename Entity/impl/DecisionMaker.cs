@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity.impl
+namespace Entities.impl
 {
-    class DecisionMaker : Entity
+    public class DecisionMaker : Entity
     {
         double delta { get; set; }
         public override void execute() { }

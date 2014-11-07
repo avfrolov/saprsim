@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity
+namespace Entities
 {
     public sealed class Model
     {
@@ -22,8 +22,10 @@ namespace Entity
         }
 
 
-        List<Entity> entities = new List<Entity>();
-        List<Project> projects = new List<Project>();
+        private List<Entity> entities = new List<Entity>();
+        private List<Project> projects = new List<Project>();
+
+        public long modelTime { get; set; }
 
         public void addEntity(Entity entity)
         {
@@ -44,6 +46,5 @@ namespace Entity
         {
             return projects;
         }
-
     }
 }

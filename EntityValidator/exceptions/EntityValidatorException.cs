@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.impl
+namespace EntityValidator.exceptions
 {
-    public class Diagram : Entity
+    public class EntityValidatioException : Exception
     {
-
-        public override void execute() { }
     }
 }

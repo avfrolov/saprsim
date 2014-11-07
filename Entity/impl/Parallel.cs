@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity.impl
+namespace Entities.impl
 {
-    class Parallel : Entity
+    public class Parallel : Entity
     {
 
         public override void execute() { }

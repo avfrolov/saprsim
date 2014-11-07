@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity
+namespace Entities
 {
-    public enum state
+    public enum State
     {
         IN_PROGRESS,
         DONE
     };
 
-    class Project
+    public class Project
     {
-        state state { get; set; }
+        public State state { get; set; }
     }
 }

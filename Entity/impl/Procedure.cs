@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entity.impl
+namespace Entities.impl
 {
-    class Procedure : Entity
+    public class Procedure : Entity
     {
         double manHour { get; set; }
         List<Resource> resources = new List<Resource>();
