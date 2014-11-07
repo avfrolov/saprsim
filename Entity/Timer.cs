@@ -8,9 +8,9 @@ namespace Entities
 {
     public class Timer
     {
-        public double DELTA = 0.01; // SOME CONST
+        private const double STEP = 0.01;
 
-        double timer = 0.0;
+        private double timer = 0.0;
 
         private static Timer instance = new Timer();
 
@@ -27,7 +27,7 @@ namespace Entities
 
         public void increment()
         {
-            timer += DELTA;
+            timer += STEP;
         }
 
 
@@ -35,5 +35,11 @@ namespace Entities
         {
             return timer;
         }
+
+        public double getStep()
+        {
+            return STEP;
+        }
+
     }
 }

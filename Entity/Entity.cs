@@ -46,6 +46,33 @@ namespace Entities
             this.inputQueue = inputQueue;
         }
 
+        public Project getProjectFromQueue()
+        {
+            List<Project> prjQueue = getQueue();
+            if (prjQueue != null && prjQueue.Count != 0)
+            {
+                return prjQueue[0];
+            }
+
+            return null;
+        }
+
+        public void removeProjectFromQueue()
+        {
+            List<Project> prjQueue = getQueue();
+            if (prjQueue != null && prjQueue.Count != 0)
+            {
+                prjQueue.RemoveAt(0);
+            }
+        }
+
+        public void addProjectToQueue(Project project)
+        {
+            List<Project> prjQueue = getQueue();
+            prjQueue.Add(project);
+            setQueue(prjQueue);
+        }
+
         public abstract void execute();
     }
 }

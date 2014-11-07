@@ -8,6 +8,6 @@ namespace Entities.impl
 {
     public class Resource 
     {
-        double efficiency { get; set; }
+        public double efficiency { get; set; }
     }
 }

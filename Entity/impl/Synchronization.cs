@@ -8,6 +8,20 @@ namespace Entities.impl
 {
     public class Synchronization : Entity
     {
-        public override void execute() { }
+        public override void execute()
+        {
+            // getting duplicate values 
+            List<Project> projects = getQueue().GroupBy(x => x)
+              .Where(g => g.Count() > 1)
+              .Select(y => y.Key)
+              .ToList();
+
+            if (projects != null && projects.Count != 00)
+            {
+                Project proj = projects[0];
+                Entity outputEntity = getOutputs()[0];
+                outputEntity.addProjectToQueue(proj);
+            }
+        }
     }
 }
