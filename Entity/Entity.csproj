@@ -50,6 +50,7 @@
     <Compile Include="impl\Procedure.cs" />
     <Compile Include="impl\Resource.cs" />
     <Compile Include="impl\Synchronization.cs" />
+    <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
