@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EntityValidator.exeptions
 {
-    class NotOneDestException : Exception
+    public class NotOneDestException : Exception
     {
     }
 }
