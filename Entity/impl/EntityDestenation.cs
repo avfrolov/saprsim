@@ -9,6 +9,12 @@ namespace Entities.impl
     public class EntityDestenation : Entity
     {
 
-        public override void execute() { }
+        public override void execute() {
+            List<Project> projects = getQueue();
+            foreach (Project prj in projects)
+            {
+                prj.state = State.DONE;
+            }
+        }
     }
 }

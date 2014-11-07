@@ -11,6 +11,16 @@ namespace Entities.impl
         double manHour { get; set; }
         List<Resource> resources = new List<Resource>();
         
-        public override void execute() { }
+        public override void execute() {
+            Timer timer = Timer.Instance;
+
+            double time = timer.getTime();
+
+            if (resources.Count != 0)
+            {
+               
+            }
+            
+        }
     }
 }

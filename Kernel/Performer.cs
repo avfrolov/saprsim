@@ -1,6 +1,5 @@
 ﻿using Entities;
 using Entities.impl;
-using EntityValidator.exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +14,7 @@ namespace Kernel
         public static void simulate()
         {
             Model model = Model.Instance;
+            Timer timer = Timer.Instance;
 
             List<Entity> entities =  model.getEntities();
             List<Project> projects = model.getProject();
@@ -25,16 +25,15 @@ namespace Kernel
 
             while (checkForNotReadyProjects(projects))
             {
-
-
-                
-
-
-
-                model.modelTime++;   
+                foreach (Entity entity in entities)
+                {
+                    if (entity.getQueue() != null && entity.getQueue().Count != 0)
+                    {
+                        entity.execute();
+                    }
+                }
+                timer.increment();                 
             }
-            
-
         }
 
         private static bool checkForNotReadyProjects(List<Project> projects)
@@ -56,8 +55,7 @@ namespace Kernel
                     return ent;
                 }
             }
-
-            throw new NoStartEntityException();
+            return null;
         }
         
     }

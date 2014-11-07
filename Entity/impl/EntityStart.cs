@@ -10,6 +10,12 @@ namespace Entities.impl
     {
         int projectsCount { get; set; }
 
-        public override void execute() { }
+        public override void execute() {
+            List<Entity> outputs = getOutputs();
+            if (outputs != null && outputs.Count != 0)
+            {
+                outputs[0].setQueue(getQueue()); 
+            }
+        }
     }
 }

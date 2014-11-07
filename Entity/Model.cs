@@ -25,8 +25,6 @@ namespace Entities
         private List<Entity> entities = new List<Entity>();
         private List<Project> projects = new List<Project>();
 
-        public long modelTime { get; set; }
-
         public void addEntity(Entity entity)
         {
             entities.Add(entity);

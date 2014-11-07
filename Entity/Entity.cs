@@ -23,7 +23,7 @@ namespace Entities
 
         public void setInputs(List<Entity> inputs)
         {
-            input = new List<Entity>(input);
+            input = inputs;
         }
 
         public List<Entity> getOutputs()
@@ -31,9 +31,9 @@ namespace Entities
             return output;
         }
 
-        public void setInputs(List<Entity> output)
+        public void setOutputs(List<Entity> output)
         {
-            this.output = new List<Entity>(output);
+            this.output = output;
         }
 
         public List<Project> getQueue()
@@ -41,9 +41,9 @@ namespace Entities
             return inputQueue;
         }
 
-        public void setInputs(List<Project> inputQueue)
+        public void setQueue(List<Project> inputQueue)
         {
-            this.inputQueue = new List<Project>(inputQueue);
+            this.inputQueue = inputQueue;
         }
 
         public abstract void execute();
