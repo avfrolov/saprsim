@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entity.impl
 {
-    class Delta
+    class DecisionMaker : Entity
     {
+        double delta { get; set; }
+        public override void execute() { }
     }
 }
