@@ -10,7 +10,7 @@ namespace EntityValidator.validator
     public class SystemValidator : IValidator
     {
         List<IRule> rules = new List<IRule>();
-        public SystemValidator()
+        public SystemValidator() //add here new rules for include them into validation
         {
             rules.Add(new OneStartRule());
             rules.Add(new OneDestRule());
