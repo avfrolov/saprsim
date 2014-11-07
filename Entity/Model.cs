@@ -13,7 +13,7 @@ namespace Entity
         static Model() { }
         private Model() { }
 
-        public Model Instance
+        public static Model Instance
         {
             get
             {
