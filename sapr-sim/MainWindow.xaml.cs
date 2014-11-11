@@ -121,7 +121,7 @@ namespace sapr_sim
         
         private void LabelButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Скорее всего придется переписать этот компонент, т.к. он не ComplexFigure");
+            currentEntity = new sapr_sim.Figures.New.Label();
         }
 
         private void ProcedureButton_Click(object sender, RoutedEventArgs e)

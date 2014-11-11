@@ -79,6 +79,7 @@
     <Compile Include="Figures\Custom\Resource.cs" />
     <Compile Include="Figures\Custom\SchemaElement.cs" />
     <Compile Include="Figures\Custom\Sync.cs" />
+    <Compile Include="Figures\New\Label.cs" />
     <Compile Include="Figures\New\Procedure.cs" />
     <Compile Include="Figures\New\UIEntity.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />

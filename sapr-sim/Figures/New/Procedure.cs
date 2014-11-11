@@ -21,6 +21,16 @@ namespace sapr_sim.Figures.New
 
         private const int innerLabelOffset = 20;
 
+        public Procedure()
+        {
+            Fill = Brushes.LemonChiffon;
+
+            bound = new Rect(new Size(90, 60));
+            label = new FormattedText("Процедура",
+                CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
+                new Typeface("Times New Roman"), 12, Brushes.Black);
+        }
+
         public double Size
         {
             get { return (double)this.GetValue(SizeProperty); }
@@ -31,15 +41,6 @@ namespace sapr_sim.Figures.New
         {
             get 
             {
-                StrokeThickness = 2;
-                Stroke = Brushes.Black;
-                Fill = Brushes.LemonChiffon;
-
-                bound = new Rect(new Size(90, 60));
-                label = new FormattedText("Процедура",
-                    CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                    new Typeface("Times New Roman"), 12, Brushes.Black);
-
                 GeometryGroup gg = new GeometryGroup();
                 gg.FillRule = FillRule.EvenOdd;
                 RectangleGeometry rg = new RectangleGeometry(bound, 10, 10);
@@ -49,25 +50,6 @@ namespace sapr_sim.Figures.New
                 gg.Children.Add(geometry);
 
                 return gg;
-
-                //Point p1 = new Point(500.0d, 500.0d);
-                //Point p2 = new Point(this.Size, 500.0d);
-                //Point p3 = new Point(this.Size / 2, this.Size);
-
-                //this.StrokeThickness = 4;
-                //this.Stroke = Brushes.Red;
-                //Fill = Brushes.Black;
-
-                //List<PathSegment> segments = new List<PathSegment>(3);
-                //segments.Add(new LineSegment(p1, true));
-                //segments.Add(new LineSegment(p2, true));
-                //segments.Add(new LineSegment(p3, true));
-
-                //List<PathFigure> figures = new List<PathFigure>(1);
-                //PathFigure pf = new PathFigure(p1, segments, true);
-                //figures.Add(pf);
-
-                //return new PathGeometry(figures, FillRule.EvenOdd, null);
             }
         }
 
