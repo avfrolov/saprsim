@@ -13,43 +13,50 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using sapr_sim.Figures.New;
 using sapr_sim.WPFCustomElements;
-using sapr_sim.Figures.Custom;
 using sapr_sim.Figures.Basic;
 
 namespace sapr_sim
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
 
-        private Diagram diagram;
-        private ComplexFigure currentFigure;
-        private System.Drawing.Graphics gr;
+        //private Diagram diagram;
+        private UIEntity currentEntity;
+
+        // used in moving figure on canvas
+        private bool captured = false;
+        private double xShape, xCanvas, yShape, yCanvas;
+        private UIElement source = null;
 
         public MainWindow()
         {
             InitializeComponent();
-            gr = System.Drawing.Graphics.FromHwnd(new System.Windows.Interop.WindowInteropHelper(this).Handle);
             createNewTab();
-            diagram = new Diagram();
+            //diagram = new Diagram();
         }
 
-        protected override void OnMouseDown(MouseButtonEventArgs e)
+        private void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            base.OnMouseDown(e);
-            if (currentFigure != null && e.ButtonState == e.LeftButton)
-            {              
-                addComplexFigure(e.GetPosition(this));
-                currentFigure.Draw(gr);
-            }
-            else if (e.ButtonState == e.RightButton)
+            if (currentEntity != null && e.LeftButton == MouseButtonState.Pressed)
             {
-                currentFigure = null;
-            }
-            
+                Point position = e.GetPosition(this);
+                attachMovingEvents(currentEntity);
+
+                // dirty... but it's 146%
+                // see MainWindow.createNewTab()
+                Canvas currentCanvas = ((tabs.Items[tabs.SelectedIndex] as ClosableTabItem).Content as ScrollViewer).Content as ScrollableCanvas;
+                             
+                // 200 - width of tool panel (it's a constant in xaml)
+                // 100 - random +- value :)
+                Canvas.SetLeft(currentEntity, position.X - 200);
+                Canvas.SetTop(currentEntity, position.Y - 100);
+
+                currentCanvas.Children.Add(currentEntity);
+
+                currentEntity = null;
+            }            
         }
 
         private void CreateNewTab_Click(object sender, RoutedEventArgs e)
@@ -60,14 +67,56 @@ namespace sapr_sim
         private void createNewTab()
         {
             ClosableTabItem theTabItem = new ClosableTabItem();
+            ScrollViewer scrollViewer = new ScrollViewer();
+            Canvas canvas = new ScrollableCanvas();
+
+            canvas.Background = Brushes.Transparent;
+            canvas.MouseDown += OnMouseDown;
+
+            scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+            scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
+            scrollViewer.Content = canvas;
+
+            theTabItem.Content = scrollViewer;
             theTabItem.Title = "Новая диаграмма " + (tabs.Items.Count + 1);
             tabs.Items.Add(theTabItem);
-            theTabItem.Focus();
+        }
+
+        private void Shape_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            source = (UIElement)sender;
+            Mouse.Capture(source);
+            captured = true;
+            xShape = VisualTreeHelper.GetOffset(source).X;
+            xCanvas = e.GetPosition(this).X;
+            yShape = VisualTreeHelper.GetOffset(source).Y;
+            yCanvas = e.GetPosition(this).Y;
+        }
+
+        private void Shape_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (captured)
+            {
+                double x = e.GetPosition(this).X;
+                double y = e.GetPosition(this).Y;
+                xShape += x - xCanvas;
+                Canvas.SetLeft(source, xShape);
+                xCanvas = x;
+                yShape += y - yCanvas;
+                Canvas.SetTop(source, yShape);
+                yCanvas = y;
+            }
+        }
+
+        private void Shape_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.Capture(null);
+            captured = false;
         }
 
         private void ArrowButton_Click(object sender, RoutedEventArgs e)
         {
-            currentFigure = null;
+            currentEntity = null;
         }
 
         private void BorderButton_Click(object sender, RoutedEventArgs e)
@@ -82,62 +131,49 @@ namespace sapr_sim
 
         private void ProcedureButton_Click(object sender, RoutedEventArgs e)
         {
-            currentFigure = new Procedure();
+            currentEntity = new Procedure();
         }
 
         private void ResourceButton_Click(object sender, RoutedEventArgs e)
         {
-            currentFigure = new Resource();
+            currentEntity = null;
         }
 
         private void SyncButton_Click(object sender, RoutedEventArgs e)
         {
-            currentFigure = new Sync();
+            currentEntity = null;
         }
 
         private void MultithreadButton_Click(object sender, RoutedEventArgs e)
         {
-            currentFigure = new Multithread();
+            currentEntity = null;
         }
 
         private void DecisionButton_Click(object sender, RoutedEventArgs e)
         {
-            currentFigure = new Decision();
+            currentEntity = null;
         }
 
         private void CollectorButton_Click(object sender, RoutedEventArgs e)
         {
-            currentFigure = new Collector();
+            currentEntity = null;
         }
 
         private void EntitySourceButton_Click(object sender, RoutedEventArgs e)
         {
-            currentFigure = new EntitySource();
+            currentEntity = null;
         }
 
         private void EntityDestinationButton_Click(object sender, RoutedEventArgs e)
         {
-            currentFigure = new EntityDestination();
+            currentEntity = null;
         }
 
-        private void addComplexFigure(Point location)
+        private void attachMovingEvents(UIEntity entity)
         {
-            // backward Karimov's capability...
-            System.Drawing.Point convertedPoint = new System.Drawing.Point((int)location.X, (int)location.Y);
-            currentFigure.Location = convertedPoint;
-            if (!(currentFigure is IBackgroundFigure))
-            {
-                diagram.Figures.Add(currentFigure);
-            }
-            else
-            {
-                //поиск более раниих фоновых фигур
-                int i;
-                for (i = 0; i < diagram.Figures.Count; i++)
-                    if (!(diagram.Figures[i] is IBackgroundFigure))
-                        break;
-                diagram.Figures.Insert(i, currentFigure);
-            }
+            entity.MouseLeftButtonDown += Shape_MouseLeftButtonDown;
+            entity.MouseMove += Shape_MouseMove;
+            entity.MouseLeftButtonUp += Shape_MouseLeftButtonUp;
         }
 
     }
