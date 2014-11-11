@@ -118,11 +118,6 @@ namespace sapr_sim
         {
             currentEntity = null;
         }
-
-        private void BorderButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Вооообщееее не понятно зачем этот инструмент тут...");
-        }
         
         private void LabelButton_Click(object sender, RoutedEventArgs e)
         {

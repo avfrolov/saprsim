@@ -170,8 +170,7 @@
                         </Grid.ColumnDefinitions>
                         <!--  Non-functional entities-->
                         <Button Grid.Row="0" Grid.Column="0" Content="{StaticResource Arrow}"  Click="ArrowButton_Click" ToolTip="Указатель"/>
-                        <Button Grid.Row="0" Grid.Column="1" Content="{StaticResource Border}" Click="BorderButton_Click" ToolTip="Рамка"/>
-                        <Button Grid.Row="0" Grid.Column="2" Content="{StaticResource Label}"  Click="LabelButton_Click" ToolTip="Надпись"/>
+                        <Button Grid.Row="0" Grid.Column="1" Content="{StaticResource Label}"  Click="LabelButton_Click" ToolTip="Надпись"/>
 
                         <!--  Functional entities-->
                         <Button Grid.Row="1" Grid.Column="0" Content="{StaticResource Procedure}" Click="ProcedureButton_Click" ToolTip="Процедура"/>
