@@ -48,5 +48,10 @@ namespace Entities.impl
                 }
             }
         }
+
+        public void addResource(Resource res)
+        {
+            resources.Add(res);
+        }
     }
 }

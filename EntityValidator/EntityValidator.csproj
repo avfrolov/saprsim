@@ -41,11 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="exeptions\InputOrOutputNullException.cs" />
+    <Compile Include="exeptions\NotNullEntityDestOutputsException.cs" />
+    <Compile Include="exeptions\NotNullEntityStartImputsException.cs" />
     <Compile Include="exeptions\NotOneDestException.cs" />
     <Compile Include="exeptions\NotOneStartExeption.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rules\InputAndOutputNotNullRule.cs" />
     <Compile Include="rules\IRule.cs" />
+    <Compile Include="rules\NullImputsForEntityStartRule.cs" />
+    <Compile Include="rules\NullOutputsForEntityDestRule.cs" />
     <Compile Include="rules\OneDestRule.cs" />
     <Compile Include="rules\OneStartRule.cs" />
     <Compile Include="validator\IValidator.cs" />

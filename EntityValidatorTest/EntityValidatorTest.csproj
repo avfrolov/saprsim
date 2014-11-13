@@ -51,9 +51,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemValidatorTest_EverythingIsFineTest.cs" />
-    <Compile Include="SystemValidatorTest_shouldThrowNotOneDestExeption.cs" />
-    <Compile Include="SystemValidatorTest_shouldThrowNotOneStartExeption.cs.cs" />
+    <Compile Include="systemValidatorTest\SystemValidatorTest_EverythingIsFineTest.cs" />
+    <Compile Include="systemValidatorTest\SystemValidatorTest_shouldThrowNotOneDestExeption.cs" />
+    <Compile Include="systemValidatorTest\SystemValidatorTest_shouldThrowNotOneStartExeption.cs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EntityValidator\EntityValidator.csproj">

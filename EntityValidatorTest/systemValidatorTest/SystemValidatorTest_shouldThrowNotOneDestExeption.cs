@@ -6,13 +6,13 @@ using EntityValidator;
 using EntityValidator.exeptions;
 using EntityValidator.validator;
 
-namespace EntityValidatorTest
+namespace EntityValidatorTest.systemValidatorTest
 {
     [TestClass]
-    public class SystemValidatorTest_shouldThrowNotOneDestException
+    public class SystemValidatorTest_shouldThrowNotOneDestExeption
     {
         Model instance = Model.Instance;
-
+        
         [TestCleanup]
         public void clean()
         {
@@ -20,16 +20,17 @@ namespace EntityValidatorTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotOneStartExeption))]
-        public void test_shouldThrowNotOneStartExeption()
+        [ExpectedException(typeof(NotOneDestException))]
+        public void test_shouldThrowNotOneDestException()
         {
             instance.addEntity(new EntityStart());
-            instance.addEntity(new EntityStart());
+            instance.addEntity(new EntityDestenation());
             instance.addEntity(new EntityDestenation());
 
             IValidator validator = new SystemValidator();
 
             validator.startValidation();
         }
+
     }
 }

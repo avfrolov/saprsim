@@ -6,10 +6,10 @@ using EntityValidator;
 using EntityValidator.exeptions;
 using EntityValidator.validator;
 
-namespace EntityValidatorTest
+namespace EntityValidatorTest.systemValidatorTest
 {
     [TestClass]
-    public class SystemValidatorTest_EverythingIsFineTest
+    public class SystemValidatorTest_shouldThrowNotOneDestException
     {
         Model instance = Model.Instance;
 
@@ -20,15 +20,16 @@ namespace EntityValidatorTest
         }
 
         [TestMethod]
-        public void test_EverythingIsFineTest()
+        [ExpectedException(typeof(NotOneStartExeption))]
+        public void test_shouldThrowNotOneStartExeption()
         {
+            instance.addEntity(new EntityStart());
             instance.addEntity(new EntityStart());
             instance.addEntity(new EntityDestenation());
 
             IValidator validator = new SystemValidator();
 
-            Assert.IsTrue(validator.startValidation());
-        }   
-        
+            validator.startValidation();
+        }
     }
 }
