@@ -12,9 +12,9 @@ namespace sapr_sim.Figures.New
     public class Source : UIEntity
     {
         private Rect bound;
-        private FormattedText label;
+        protected FormattedText label;
 
-        private const int innerLabelOffsetX = 16;
+        private const int innerLabelOffsetX = 14;
         private const int innerLabelOffsetY = 23;
 
         public Source()
@@ -22,7 +22,7 @@ namespace sapr_sim.Figures.New
             Fill = Brushes.Red;
 
             bound = new Rect(new Size(60, 60));
-            label = new FormattedText("Старт",
+            label = new FormattedText("Начало",
                 CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
                 new Typeface("Times New Roman"), 12, Brushes.Black);
         }

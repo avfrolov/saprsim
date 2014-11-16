@@ -161,7 +161,7 @@ namespace sapr_sim
 
         private void EntityDestinationButton_Click(object sender, RoutedEventArgs e)
         {
-            currentEntity = null;
+            currentEntity = new Destination();
         }
 
         private void attachMovingEvents(UIEntity entity)
