@@ -156,7 +156,7 @@ namespace sapr_sim
 
         private void EntitySourceButton_Click(object sender, RoutedEventArgs e)
         {
-            currentEntity = null;
+            currentEntity = new Source();
         }
 
         private void EntityDestinationButton_Click(object sender, RoutedEventArgs e)

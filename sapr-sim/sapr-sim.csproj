@@ -82,6 +82,7 @@
     <Compile Include="Figures\New\Label.cs" />
     <Compile Include="Figures\New\Procedure.cs" />
     <Compile Include="Figures\New\Resource.cs" />
+    <Compile Include="Figures\New\Source.cs" />
     <Compile Include="Figures\New\UIEntity.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
     <Compile Include="WPFCustomElements\ScrollableCanvas.cs" />
