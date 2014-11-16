@@ -29,11 +29,12 @@ namespace sapr_sim
         // used in moving figure on canvas
         private bool captured = false;
         private double xShape, xCanvas, yShape, yCanvas;
-        private UIElement source = null;
+        private UIEntity source = null;
 
         public MainWindow()
         {
             InitializeComponent();
+            bindHotkeys();
             createNewTab();
         }
 
@@ -133,7 +134,7 @@ namespace sapr_sim
             if (source != null)
                 source.BitmapEffect = UIEntity.defaultBitmapEffect(source);
 
-            source = (UIElement)sender;
+            source = (UIEntity)sender;
             Mouse.Capture(source);
             captured = true;
             xShape = VisualTreeHelper.GetOffset(source).X;

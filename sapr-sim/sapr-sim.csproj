@@ -90,6 +90,8 @@
     <Compile Include="Figures\New\Source.cs" />
     <Compile Include="Figures\New\Sync.cs" />
     <Compile Include="Figures\New\UIEntity.cs" />
+    <Compile Include="MainWindowKeyboardEvents.cs" />
+    <Compile Include="Utils\ConnectorFinder.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
     <Compile Include="WPFCustomElements\ScrollableCanvas.cs" />
     <Compile Include="WPFCustomElements\UserControls\ClosableHeader.xaml.cs">

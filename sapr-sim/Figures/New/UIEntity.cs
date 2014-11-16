@@ -79,8 +79,11 @@ namespace sapr_sim.Figures.New
 
                 // TODO why ofs with X=0.0 & Y=0.0 doesn't work?
                 if (ofs.X == 0.0 && ofs.Y == 0.0) return;
+                
+                // TODO for safety removing shapes from canvas
+                if (this.Parent == null) return;
 
-                AnchorPoint = TransformToVisual(this.canvas).Transform(ofs);
+                AnchorPoint = TransformToVisual(canvas).Transform(ofs);
             }
         }
 
