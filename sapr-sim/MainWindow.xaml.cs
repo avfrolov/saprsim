@@ -44,8 +44,9 @@ namespace sapr_sim
         {
             if (currentEntity != null && e.LeftButton == MouseButtonState.Pressed)
             {
-                if (currentEntity is Connector)
+                if (currentEntity is Connector && source != null)
                 {
+
                     // TODO need refactoring...
                     if (firstConnect)
                     {
@@ -58,18 +59,21 @@ namespace sapr_sim
                     }
                     else
                     {
-                        currentEntity.SetBinding(Connector.DestinationProperty, new Binding()
-                            {
-                                Source = source,
-                                Path = new PropertyPath(UIEntity.AnchorPointProperty)
-                            });
+                        if (!source.Equals(currentEntity.GetBindingExpression(Connector.SourceProperty).DataItem as UIEntity))
+                        {
+                            currentEntity.SetBinding(Connector.DestinationProperty, new Binding()
+                                {
+                                    Source = source,
+                                    Path = new PropertyPath(UIEntity.AnchorPointProperty)
+                                });
 
-                        Canvas currentCanvas = ((tabs.Items[tabs.SelectedIndex] as ClosableTabItem).Content as ScrollViewer).Content as ScrollableCanvas;                       
-                        currentCanvas.Children.Add(currentEntity);
-                        currentEntity = null;
+                            Canvas currentCanvas = ((tabs.Items[tabs.SelectedIndex] as ClosableTabItem).Content as ScrollViewer).Content as ScrollableCanvas;
+                            currentCanvas.Children.Add(currentEntity);
+                            currentEntity = null;
+                        }
                     }
                 }
-                else
+                else if (!(currentEntity is Connector))
                 {
                     Point position = e.GetPosition(this);
                     attachMovingEvents(currentEntity);
