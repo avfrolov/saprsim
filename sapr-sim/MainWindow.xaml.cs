@@ -146,7 +146,7 @@ namespace sapr_sim
 
         private void DecisionButton_Click(object sender, RoutedEventArgs e)
         {
-            currentEntity = null;
+            currentEntity = new Decision();
         }
 
         private void CollectorButton_Click(object sender, RoutedEventArgs e)
