@@ -151,7 +151,7 @@ namespace sapr_sim
 
         private void CollectorButton_Click(object sender, RoutedEventArgs e)
         {
-            currentEntity = null;
+            currentEntity = new Collector();
         }
 
         private void EntitySourceButton_Click(object sender, RoutedEventArgs e)
