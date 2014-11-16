@@ -83,6 +83,7 @@
     <Compile Include="Figures\New\Decision.cs" />
     <Compile Include="Figures\New\Destination.cs" />
     <Compile Include="Figures\New\Label.cs" />
+    <Compile Include="Figures\New\Parallel.cs" />
     <Compile Include="Figures\New\Procedure.cs" />
     <Compile Include="Figures\New\Resource.cs" />
     <Compile Include="Figures\New\Source.cs" />

@@ -9,21 +9,21 @@ using System.Windows.Media;
 
 namespace sapr_sim.Figures.New
 {
-    public class Sync : UIEntity
+    public class Parallel : UIEntity
     {
         private Rect bound;
         private FormattedText label;
 
-        private const int innerLabelOffsetX = -30;
+        private const int innerLabelOffsetX = -45;
         private const int innerLabelOffsetY = -20;
 
-        public Sync()
+        public Parallel()
         {
             Fill = Brushes.Black;
             StrokeThickness = .5;
 
             bound = new Rect(new Size(10, 90));
-            label = new FormattedText("Синхронизация",
+            label = new FormattedText("Распараллеливание",
                 CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
                 new Typeface("Times New Roman"), 12, Brushes.Black);
         }

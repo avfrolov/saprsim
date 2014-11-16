@@ -139,9 +139,9 @@ namespace sapr_sim
             currentEntity = new Sync();
         }
 
-        private void MultithreadButton_Click(object sender, RoutedEventArgs e)
+        private void ParallelButton_Click(object sender, RoutedEventArgs e)
         {
-            currentEntity = null;
+            currentEntity = new sapr_sim.Figures.New.Parallel();
         }
 
         private void DecisionButton_Click(object sender, RoutedEventArgs e)

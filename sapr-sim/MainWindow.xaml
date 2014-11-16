@@ -46,7 +46,7 @@
                 <MenuItem Header="Решение" Click="DecisionButton_Click"/>
                 <MenuItem Header="Коллектор" Click="CollectorButton_Click"/>
                 <MenuItem Header="Синхронизация" Click="SyncButton_Click"/>
-                <MenuItem Header="Параллельность" IsEnabled="False" Click="MultithreadButton_Click"/>
+                <MenuItem Header="Параллельность" Click="ParallelButton_Click"/>
                 <MenuItem Header="Сток" Click="EntitySourceButton_Click"/>
                 <MenuItem Header="Исток" Click="EntityDestinationButton_Click"/>
                 <Separator/>
@@ -174,7 +174,7 @@
                         <Button Grid.Row="1" Grid.Column="0" Content="{StaticResource Procedure}" Click="ProcedureButton_Click" ToolTip="Процедура"/>
                         <Button Grid.Row="1" Grid.Column="1" Content="{StaticResource Resource}" Click="ResourceButton_Click" ToolTip="Ресурс"/>
                         <Button Grid.Row="1" Grid.Column="2" Content="{StaticResource Sync}" Click="SyncButton_Click" ToolTip="Синхронизация"/>
-                        <Button Grid.Row="1" Grid.Column="3" Content="{StaticResource Multithread}" Click="MultithreadButton_Click" ToolTip="Параллельность" IsEnabled="False"/>
+                        <Button Grid.Row="1" Grid.Column="3" Content="{StaticResource Multithread}" Click="ParallelButton_Click" ToolTip="Параллельность"/>
                         <Button Grid.Row="2" Grid.Column="0" Content="{StaticResource If}" Click="DecisionButton_Click" ToolTip="Решение"/>
                         <Button Grid.Row="2" Grid.Column="1" Content="{StaticResource Collector}" Click="CollectorButton_Click" ToolTip="Коллектор"/>
                         <Button Grid.Row="2" Grid.Column="2" Content="{StaticResource EntitySource}" Click="EntitySourceButton_Click" ToolTip="Исток" />
