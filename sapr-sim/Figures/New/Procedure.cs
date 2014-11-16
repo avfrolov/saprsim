@@ -19,7 +19,8 @@ namespace sapr_sim.Figures.New
         private Rect bound;
         private FormattedText label;
 
-        private const int innerLabelOffset = 20;
+        private const int innerLabelOffsetX = 18;
+        private const int innerLabelOffsetY = 22;
 
         public Procedure()
         {
@@ -44,7 +45,7 @@ namespace sapr_sim.Figures.New
                 GeometryGroup gg = new GeometryGroup();
                 gg.FillRule = FillRule.EvenOdd;
                 RectangleGeometry rg = new RectangleGeometry(bound, 10, 10);
-                Geometry geometry = label.BuildGeometry(new Point(innerLabelOffset, innerLabelOffset));
+                Geometry geometry = label.BuildGeometry(new Point(innerLabelOffsetX, innerLabelOffsetY));
 
                 gg.Children.Add(rg);
                 gg.Children.Add(geometry);

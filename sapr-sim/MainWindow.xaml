@@ -18,64 +18,62 @@
 
         <Menu Grid.Row="0">
             <MenuItem Header="Файл">
-                <MenuItem Header="Новый" InputGestureText="Ctrl+N"/>
-                <MenuItem Header="Открыть" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="Новый" InputGestureText="Ctrl+N" IsEnabled="False"/>
+                <MenuItem Header="Открыть" InputGestureText="Ctrl+O" IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Header="Сохранить" InputGestureText="Ctrl+S"/>
-                <MenuItem Header="Сохранить как..."/>
+                <MenuItem Header="Сохранить" InputGestureText="Ctrl+S" IsEnabled="False"/>
+                <MenuItem Header="Сохранить как..." IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Header="Экспорт"/>
+                <MenuItem Header="Экспорт" IsEnabled="False"/>
             </MenuItem>
             <MenuItem Header="Правка">
-                <MenuItem Header="Отменить действие" InputGestureText="Ctrl+Z"/>
-                <MenuItem Header="Вернуть действие" InputGestureText="Ctrl+Y"/>
+                <MenuItem Header="Отменить действие" InputGestureText="Ctrl+Z" IsEnabled="False"/>
+                <MenuItem Header="Вернуть действие" InputGestureText="Ctrl+Y" IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Header="Вырезать" InputGestureText="Ctrl+X"/>
-                <MenuItem Header="Копировать" InputGestureText="Ctrl+C"/>
-                <MenuItem Header="Вставить" InputGestureText="Ctrl+V"/>
+                <MenuItem Header="Вырезать" InputGestureText="Ctrl+X" IsEnabled="False"/>
+                <MenuItem Header="Копировать" InputGestureText="Ctrl+C" IsEnabled="False"/>
+                <MenuItem Header="Вставить" InputGestureText="Ctrl+V" IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Header="Удалить" InputGestureText="Del"/>
-                <MenuItem Header="Выделить все" InputGestureText="Ctrl+A"/>
+                <MenuItem Header="Удалить" InputGestureText="Del" IsEnabled="False"/>
+                <MenuItem Header="Выделить все" InputGestureText="Ctrl+A" IsEnabled="False"/>
             </MenuItem>
             <MenuItem Header="Инструменты">
-                <MenuItem Header="Указатель"/>
+                <MenuItem Header="Указатель" Click="ArrowButton_Click"/>
+                <MenuItem Header="Надпись" Click="LabelButton_Click"/>
                 <Separator/>
-                <MenuItem Header="Активность"/>
-                <MenuItem Header="Ресурс"/>
-                <MenuItem Header="Решение"/>
-                <MenuItem Header="Коллектор"/>
-                <MenuItem Header="Синхронизация"/>
-                <MenuItem Header="Параллельность"/>
-                <MenuItem Header="Сток"/>
-                <MenuItem Header="Исток"/>
-                <MenuItem Header="Рамка"/>
-                <MenuItem Header="Внешний ресурс"/>
-                <MenuItem Header="Надпись"/>
+                <MenuItem Header="Процедура" Click="ProcedureButton_Click"/>
+                <MenuItem Header="Ресурс" Click="ResourceButton_Click"/>
+                <MenuItem Header="Решение" IsEnabled="False" Click="DecisionButton_Click"/>
+                <MenuItem Header="Коллектор" IsEnabled="False" Click="CollectorButton_Click"/>
+                <MenuItem Header="Синхронизация" IsEnabled="False" Click="SyncButton_Click"/>
+                <MenuItem Header="Параллельность" IsEnabled="False" Click="MultithreadButton_Click"/>
+                <MenuItem Header="Сток" Click="EntitySourceButton_Click"/>
+                <MenuItem Header="Исток" Click="EntityDestinationButton_Click"/>
                 <Separator/>
-                <MenuItem Header="Прямая линия"/>
-                <MenuItem Header="Линия с изломом"/>
+                <MenuItem Header="Прямая линия" IsEnabled="False"/>
+                <MenuItem Header="Линия с изломом" IsEnabled="False"/>
             </MenuItem>
             <MenuItem Header="Формат">
                 <MenuItem Header="Выровнять">
-                    <MenuItem Header="По левому краю"/>
-                    <MenuItem Header="По центру по горизонтали"/>
-                    <MenuItem Header="По правому краю"/>
+                    <MenuItem Header="По левому краю" IsEnabled="False"/>
+                    <MenuItem Header="По центру по горизонтали" IsEnabled="False"/>
+                    <MenuItem Header="По правому краю" IsEnabled="False"/>
                     <Separator/>
-                    <MenuItem Header="По верхнему краю"/>
-                    <MenuItem Header="По центру по вертикали"/>
-                    <MenuItem Header="По нижнему краю"/>
+                    <MenuItem Header="По верхнему краю" IsEnabled="False"/>
+                    <MenuItem Header="По центру по вертикали" IsEnabled="False"/>
+                    <MenuItem Header="По нижнему краю" IsEnabled="False"/>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="Порядок">
-                    <MenuItem Header="На задний план"/>
-                    <MenuItem Header="На передний план"/>
+                    <MenuItem Header="На задний план" IsEnabled="False"/>
+                    <MenuItem Header="На передний план" IsEnabled="False"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Модель">
-                <MenuItem Header="Запуск моделиирования" InputGestureText="F5"/>
-                <MenuItem Header="Запуск оптимизации" InputGestureText="F2"/>
+                <MenuItem Header="Запуск моделиирования" InputGestureText="F5" IsEnabled="False"/>
+                <MenuItem Header="Запуск оптимизации" InputGestureText="F2" IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Header="Настройка параметров ресурсов"/>
+                <MenuItem Header="Настройка параметров ресурсов" IsEnabled="False"/>
             </MenuItem>
         </Menu>
 
@@ -84,67 +82,67 @@
                 <Button x:Name="New" ToolTip="Создать новую диаграмму" Click="CreateNewTab_Click">
                     <Image Source="Resources/New_document.png" />
                 </Button>
-                <Button x:Name="Open" ToolTip="Открыть диаграмму">
+                <Button x:Name="Open" ToolTip="Открыть диаграмму" IsEnabled="False">
                     <Image Source="Resources/Folder.png" />
                 </Button>
-                <Button x:Name="Save" ToolTip="Сохранить">
+                <Button x:Name="Save" ToolTip="Сохранить" IsEnabled="False">
                     <Image Source="Resources/Save.png" />
                 </Button>
-                <Button x:Name="Export" ToolTip="Экспорт в качестве изображения">
+                <Button x:Name="Export" ToolTip="Экспорт в качестве изображения" IsEnabled="False">
                     <Image Source="Resources/Export.png" />
                 </Button>
                 <Separator/>
 
-                <Button x:Name="Cut" ToolTip="Вырезать">
+                <Button x:Name="Cut" ToolTip="Вырезать" IsEnabled="False">
                     <Image Source="Resources/Cut.png" />
                 </Button>
-                <Button x:Name="Copy" ToolTip="Копировать">
+                <Button x:Name="Copy" ToolTip="Копировать" IsEnabled="False">
                     <Image Source="Resources/page_copy.png" />
                 </Button>
-                <Button x:Name="Paste" ToolTip="Вставить">
+                <Button x:Name="Paste" ToolTip="Вставить" IsEnabled="False">
                     <Image Source="Resources/page_paste.png" />
                 </Button>
                 <Separator/>
 
-                <Button x:Name="Undo" ToolTip="Отменить последнее действие">
+                <Button x:Name="Undo" ToolTip="Отменить последнее действие" IsEnabled="False">
                     <Image Source="Resources/arrow-undo.png" />
                 </Button>
-                <Button x:Name="Redo" ToolTip="Вернуть последнее действие">
+                <Button x:Name="Redo" ToolTip="Вернуть последнее действие" IsEnabled="False">
                     <Image Source="Resources/arrow-redo.png" />
                 </Button>
                 <Separator/>
 
-                <Button x:Name="LeftBtn" ToolTip="Выравнять по левому краю">
+                <Button x:Name="LeftBtn" ToolTip="Выравнять по левому краю" IsEnabled="False">
                     <Image Source="Resources/align_left.png" />
                 </Button>
-                <Button x:Name="Center" ToolTip="Выравнять по центру">
+                <Button x:Name="Center" ToolTip="Выравнять по центру" IsEnabled="False">
                     <Image Source="Resources/align_center.png" />
                 </Button>
-                <Button x:Name="Right" ToolTip="Выравнять по правому краю">
+                <Button x:Name="Right" ToolTip="Выравнять по правому краю" IsEnabled="False">
                     <Image Source="Resources/align_right.png" />
                 </Button>
                 <Separator/>
 
-                <Button x:Name="TopBtn" ToolTip="Выравнять по верхнему краю">
+                <Button x:Name="TopBtn" ToolTip="Выравнять по верхнему краю" IsEnabled="False">
                     <Image Source="Resources/align_top.png" />
                 </Button>
-                <Button x:Name="Middle" ToolTip="Выравнять по центру">
+                <Button x:Name="Middle" ToolTip="Выравнять по центру" IsEnabled="False">
                     <Image Source="Resources/align_middle.png" />
                 </Button>
-                <Button x:Name="Bottom" ToolTip="Выравнять по нижнему краю">
+                <Button x:Name="Bottom" ToolTip="Выравнять по нижнему краю" IsEnabled="False">
                     <Image Source="Resources/align_bottom.png" />
                 </Button>
                 <Separator/>
 
-                <Button x:Name="MoveFront" ToolTip="На передний план">
+                <Button x:Name="MoveFront" ToolTip="На передний план" IsEnabled="False">
                     <Image Source="Resources/move_front.png" />
                 </Button>
-                <Button x:Name="MoveBack" ToolTip="На задний план">
+                <Button x:Name="MoveBack" ToolTip="На задний план" IsEnabled="False">
                     <Image Source="Resources/move_back.png" />
                 </Button>
                 <Separator/>
 
-                <Button x:Name="Run" ToolTip="Запустить моделирование">
+                <Button x:Name="Run" ToolTip="Запустить моделирование" IsEnabled="False">
                     <Image Source="Resources/Icon_PlaySolid.ico" />
                 </Button>
             </ToolBar>
@@ -175,16 +173,16 @@
                         <!--  Functional entities-->
                         <Button Grid.Row="1" Grid.Column="0" Content="{StaticResource Procedure}" Click="ProcedureButton_Click" ToolTip="Процедура"/>
                         <Button Grid.Row="1" Grid.Column="1" Content="{StaticResource Resource}" Click="ResourceButton_Click" ToolTip="Ресурс"/>
-                        <Button Grid.Row="1" Grid.Column="2" Content="{StaticResource Sync}" Click="SyncButton_Click" ToolTip="Синхронизация"/>
-                        <Button Grid.Row="1" Grid.Column="3" Content="{StaticResource Multithread}" Click="MultithreadButton_Click" ToolTip="Параллельность"/>
-                        <Button Grid.Row="2" Grid.Column="0" Content="{StaticResource If}" Click="DecisionButton_Click" ToolTip="Решение"/>
-                        <Button Grid.Row="2" Grid.Column="1" Content="{StaticResource Collector}" Click="CollectorButton_Click" ToolTip="Коллектор"/>
+                        <Button Grid.Row="1" Grid.Column="2" Content="{StaticResource Sync}" Click="SyncButton_Click" ToolTip="Синхронизация" IsEnabled="False"/>
+                        <Button Grid.Row="1" Grid.Column="3" Content="{StaticResource Multithread}" Click="MultithreadButton_Click" ToolTip="Параллельность" IsEnabled="False"/>
+                        <Button Grid.Row="2" Grid.Column="0" Content="{StaticResource If}" Click="DecisionButton_Click" ToolTip="Решение" IsEnabled="False"/>
+                        <Button Grid.Row="2" Grid.Column="1" Content="{StaticResource Collector}" Click="CollectorButton_Click" ToolTip="Коллектор" IsEnabled="False"/>
                         <Button Grid.Row="2" Grid.Column="2" Content="{StaticResource EntitySource}" Click="EntitySourceButton_Click" ToolTip="Исток" />
                         <Button Grid.Row="2" Grid.Column="3" Content="{StaticResource EntityDestination}" Click="EntityDestinationButton_Click" ToolTip="Сток"/>
 
                         <!--  Lines-->
-                        <Button Grid.Row="3" Grid.Column="0" Content="{StaticResource Line}" ToolTip="Линия"/>
-                        <Button Grid.Row="3" Grid.Column="1" Content="{StaticResource CurveLine}" ToolTip="Линия с изломом"/>
+                        <Button Grid.Row="3" Grid.Column="0" Content="{StaticResource Line}" ToolTip="Линия" IsEnabled="False"/>
+                        <Button Grid.Row="3" Grid.Column="1" Content="{StaticResource CurveLine}" ToolTip="Линия с изломом" IsEnabled="False"/>
                     </Grid>
 
                 </DockPanel>
