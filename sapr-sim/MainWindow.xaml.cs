@@ -136,7 +136,7 @@ namespace sapr_sim
 
         private void SyncButton_Click(object sender, RoutedEventArgs e)
         {
-            currentEntity = null;
+            currentEntity = new Sync();
         }
 
         private void MultithreadButton_Click(object sender, RoutedEventArgs e)
