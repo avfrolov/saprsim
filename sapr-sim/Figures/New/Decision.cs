@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace sapr_sim.Figures.New
@@ -17,7 +18,7 @@ namespace sapr_sim.Figures.New
         private const int innerLabelOffsetX = 20;
         private const int innerLabelOffsetY = 16;
 
-        public Decision()
+        public Decision(Canvas canvas) : base(canvas)
         {
             Fill = Brushes.LemonChiffon;
 

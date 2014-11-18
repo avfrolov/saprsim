@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -18,14 +19,11 @@ namespace sapr_sim.Figures.New
         private Rect bottomExternalBound;
         private FormattedText label;
 
-        // TODO move to struct?
         private const int innerLabelOffsetX = 28;
         private const int innerLabelOffsetY = 22;
 
-        public Resource()
+        public Resource(Canvas canvas) : base(canvas)
         {
-            Fill = Brushes.LemonChiffon;
-
             bound = new Rect(new Size(90, 60));
             topExternalBound = new Rect(new Point(0, 0), new Point(90, 10));
             bottomExternalBound = new Rect(new Point(0, 50), new Point(90, 60));

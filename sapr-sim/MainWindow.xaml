@@ -148,7 +148,7 @@
             </ToolBar>
         </ToolBarPanel>
 
-        <DockPanel Grid.Row="2">
+        <DockPanel Grid.Row="2" FocusManager.IsFocusScope="True">
             <Border Width="200" Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
                 <DockPanel Background="AliceBlue" VerticalAlignment="Top">
                     <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Text="Инструменты" Name="EntitiesNameDock"/>
@@ -181,7 +181,7 @@
                         <Button Grid.Row="2" Grid.Column="3" Content="{StaticResource EntityDestination}" Click="EntityDestinationButton_Click" ToolTip="Сток"/>
 
                         <!--  Lines-->
-                        <Button Grid.Row="3" Grid.Column="0" Content="{StaticResource Line}" ToolTip="Линия" IsEnabled="False"/>
+                        <Button Grid.Row="3" Grid.Column="0" Content="{StaticResource Line}" ToolTip="Линия" Click="LineButton_Click"/>
                         <Button Grid.Row="3" Grid.Column="1" Content="{StaticResource CurveLine}" ToolTip="Линия с изломом" IsEnabled="False"/>
                     </Grid>
 

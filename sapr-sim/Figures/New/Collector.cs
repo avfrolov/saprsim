@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace sapr_sim.Figures.New
@@ -13,10 +14,8 @@ namespace sapr_sim.Figures.New
     {
         private Rect bound;
 
-        public Collector()
+        public Collector(Canvas canvas) : base(canvas)
         {
-            Fill = Brushes.LemonChiffon;
-
             bound = new Rect(new Size(45, 45));
             RenderTransform = new RotateTransform(45, bound.Width / 2, bound.Height / 2);
         }

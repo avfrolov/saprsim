@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace sapr_sim.Figures.New
 {
@@ -13,7 +14,7 @@ namespace sapr_sim.Figures.New
     {
         private FormattedText label;
 
-        public Label()
+        public Label() : base()
         {
             label = new FormattedText("Надпись",
                 CultureInfo.CurrentCulture, FlowDirection.LeftToRight,

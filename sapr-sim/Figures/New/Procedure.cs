@@ -22,7 +22,7 @@ namespace sapr_sim.Figures.New
         private const int innerLabelOffsetX = 18;
         private const int innerLabelOffsetY = 22;
 
-        public Procedure()
+        public Procedure(Canvas canvas) : base(canvas)
         {
             Fill = Brushes.LemonChiffon;
 

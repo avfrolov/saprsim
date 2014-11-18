@@ -80,6 +80,7 @@
     <Compile Include="Figures\Custom\SchemaElement.cs" />
     <Compile Include="Figures\Custom\Sync.cs" />
     <Compile Include="Figures\New\Collector.cs" />
+    <Compile Include="Figures\New\Connector.cs" />
     <Compile Include="Figures\New\Decision.cs" />
     <Compile Include="Figures\New\Destination.cs" />
     <Compile Include="Figures\New\Label.cs" />
