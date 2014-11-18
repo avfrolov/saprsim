@@ -14,7 +14,8 @@ namespace Entities
         private List<Entity> input = new List<Entity>();
         private List<Entity> output = new List<Entity>();
 
-        private List<Project> inputQueue = new List<Project>();
+        private List<Project> notReadyProjectQueue = new List<Project>();
+        private List<Project> readyProjectQueue = new List<Project>();
 
         public List<Entity> getInputs()
         {
@@ -36,19 +37,29 @@ namespace Entities
             this.output = output;
         }
 
-        public List<Project> getQueue()
+        public List<Project> getReadyProjectQueue()
         {
-            return inputQueue;
+            return readyProjectQueue;
         }
 
-        public void setQueue(List<Project> inputQueue)
+        public void setReadyProjectQueue(List<Project> inputQueue)
         {
-            this.inputQueue = inputQueue;
+            this.readyProjectQueue = new List<Project>(inputQueue);
         }
 
-        public Project getProjectFromQueue()
+        public List<Project> getNotReadyProjectQueue()
         {
-            List<Project> prjQueue = getQueue();
+            return notReadyProjectQueue;
+        }
+
+        public void setNotReadyProjectQueue(List<Project> inputQueue)
+        {
+            this.notReadyProjectQueue = new List<Project>(inputQueue);
+        }
+
+        public Project getProjectFromReadyQueue()
+        {
+            List<Project> prjQueue = getReadyProjectQueue();
             if (prjQueue != null && prjQueue.Count != 0)
             {
                 return prjQueue[0];
@@ -57,9 +68,9 @@ namespace Entities
             return null;
         }
 
-        public void removeProjectFromQueue()
+        public void removeProjectFromReadyQueue()
         {
-            List<Project> prjQueue = getQueue();
+            List<Project> prjQueue = getReadyProjectQueue();
             if (prjQueue != null && prjQueue.Count != 0)
             {
                 prjQueue.RemoveAt(0);
@@ -68,9 +79,20 @@ namespace Entities
 
         public void addProjectToQueue(Project project)
         {
-            List<Project> prjQueue = getQueue();
+            List<Project> prjQueue = getNotReadyProjectQueue();
             prjQueue.Add(project);
-            setQueue(prjQueue);
+            setNotReadyProjectQueue(prjQueue);
+        }
+
+        public void proceed()
+        {
+           execute();
+           List<Project> projects = getNotReadyProjectQueue();
+
+           foreach (Project project in projects)
+           {
+               getReadyProjectQueue().Add(project);
+           }
         }
 
         public abstract void execute();

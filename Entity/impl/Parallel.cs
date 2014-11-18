@@ -10,15 +10,19 @@ namespace Entities.impl
     {
 
         public override void execute() {
-            Project project = getProjectFromQueue();
+            Project project = getProjectFromReadyQueue();
 
             if (project != null)
             {
-                Project prj = getProjectFromQueue();
+                Project prj = getProjectFromReadyQueue();
+
                 Entity outputEntity1 = getOutputs()[0];
                 outputEntity1.addProjectToQueue(prj);
+
                 Entity outputEntity2 = getOutputs()[1];
                 outputEntity2.addProjectToQueue(prj);
+
+                this.getReadyProjectQueue().Remove(prj);
             }
         }
     }

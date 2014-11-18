@@ -11,7 +11,7 @@ namespace Entities.impl
         public override void execute()
         {
             // getting duplicate values 
-            List<Project> projects = getQueue().GroupBy(x => x)
+            List<Project> projects = getReadyProjectQueue().GroupBy(x => x)
               .Where(g => g.Count() > 1)
               .Select(y => y.Key)
               .ToList();
@@ -21,6 +21,8 @@ namespace Entities.impl
                 Project proj = projects[0];
                 Entity outputEntity = getOutputs()[0];
                 outputEntity.addProjectToQueue(proj);
+
+                getReadyProjectQueue().Remove(proj);
             }
         }
     }

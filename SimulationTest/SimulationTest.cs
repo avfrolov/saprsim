@@ -1,29 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Entities;
 using Entities.impl;
-using EntityValidator;
-using EntityValidator.exeptions;
-using EntityValidator.validator;
+using System.Collections.Generic;
+using Simulation;
 
-namespace EntityValidatorTest.systemValidatorTest
+namespace SimulationTest
 {
     [TestClass]
-    public class SystemValidatorTest_EverythingIsFineTest
+    public class SimulationTest
     {
+
         Model instance = Model.Instance;
 
-        [TestCleanup]
-        public void clean()
-        {
-            instance.getEntities().Clear();
-        }
 
         [TestMethod]
-        public void test_EverythingIsFineTest()
+        public void test_SimulateSimpleScheme()
         {
-            //creating testModel
             EntityStart start = new EntityStart();
             Project prj = new Project();
 
@@ -34,7 +27,7 @@ namespace EntityValidatorTest.systemValidatorTest
             res.efficiency = 0.8;
 
             procedure.addResource(res);
-            procedure.setInputs(new List<Entity>(){ start });
+            procedure.setInputs(new List<Entity>() { start });
             procedure.setOutputs(new List<Entity>() { finish });
             procedure.manHour = 1;
 
@@ -43,13 +36,13 @@ namespace EntityValidatorTest.systemValidatorTest
 
             instance.addProject(prj);
             instance.addEntity(start);
-            instance.addEntity(finish);
             instance.addEntity(procedure);
-
-            IValidator validator = new SystemValidator();
+            instance.addEntity(finish);
             
-            Assert.IsTrue(validator.startValidation());
-        }   
-        
+
+            Simulation.Simulation.simulate();
+
+            Assert.IsTrue(prj.state == State.DONE);
+        }
     }
 }

@@ -14,7 +14,8 @@ namespace Entities.impl
             List<Entity> outputs = getOutputs();
             if (outputs != null && outputs.Count != 0)
             {
-                outputs[0].setQueue(getQueue()); 
+                outputs[0].setReadyProjectQueue(getReadyProjectQueue());
+                getReadyProjectQueue().Clear();
             }
         }
     }

@@ -14,6 +14,11 @@ namespace Entities
 
     public class Project
     {
+
+        public Project()
+        {
+            state = State.IN_PROGRESS;
+        }
         public State state { get; set; }
     }
 }

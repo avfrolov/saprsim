@@ -10,8 +10,15 @@ namespace Entities.impl
     {
 
         public override void execute() {
-            List<Project> projects = getQueue();
+            List<Project> projects = getReadyProjectQueue();
+            List<Project> projects1 = getNotReadyProjectQueue();
+            
             foreach (Project prj in projects)
+            {
+                prj.state = State.DONE;
+            }
+
+            foreach (Project prj in projects1)
             {
                 prj.state = State.DONE;
             }
