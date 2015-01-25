@@ -41,7 +41,8 @@ namespace sapr_sim
                     BindingOperations.ClearBinding(connector, Connector.DestinationProperty);
                     currentCanvas.Children.Remove(connector);
                 }
-                
+
+                source.removePorts();
                 currentCanvas.Children.Remove(source);
             }
         }

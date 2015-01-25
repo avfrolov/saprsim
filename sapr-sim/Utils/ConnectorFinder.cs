@@ -24,10 +24,10 @@ namespace sapr_sim.Utils
 
                     if (srcExp != null && dstExp != null)
                     {
-                        UIEntity src = srcExp.DataItem as UIEntity;
-                        UIEntity dst = dstExp.DataItem as UIEntity;
+                        Port src = srcExp.DataItem as Port;
+                        Port dst = dstExp.DataItem as Port;
 
-                        if (entity.Equals(src) || entity.Equals(dst)) 
+                        if (entity.Equals(src.Owner) || entity.Equals(dst.Owner)) 
                             return conenctor;
                     }
                 }

@@ -20,6 +20,10 @@ namespace sapr_sim.Figures.New
             RenderTransform = new RotateTransform(45, bound.Width / 2, bound.Height / 2);
         }
 
+        public override void createAndDrawPorts(double x, double y)
+        {
+        }
+
         protected override System.Windows.Media.Geometry DefiningGeometry
         {
             get 

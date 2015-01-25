@@ -44,7 +44,7 @@ namespace sapr_sim
         {
             if (currentEntity != null && e.LeftButton == MouseButtonState.Pressed)
             {
-                if (currentEntity is Connector && source != null)
+                if (currentEntity is Connector && source != null && source is Port)
                 {
 
                     // TODO need refactoring...
@@ -53,37 +53,43 @@ namespace sapr_sim
                         currentEntity.SetBinding(Connector.SourceProperty, new Binding()
                         {
                             Source = source,
-                            Path = new PropertyPath(UIEntity.AnchorPointProperty)
+                            Path = new PropertyPath(Port.AnchorPointProperty)
                         });
                         firstConnect = false;
                     }
-                    else
+                    else if (canConnect())
                     {
-                        if (!source.Equals(currentEntity.GetBindingExpression(Connector.SourceProperty).DataItem as UIEntity))
+                        currentEntity.SetBinding(Connector.DestinationProperty, new Binding()
                         {
-                            currentEntity.SetBinding(Connector.DestinationProperty, new Binding()
-                                {
-                                    Source = source,
-                                    Path = new PropertyPath(UIEntity.AnchorPointProperty)
-                                });
+                            Source = source,
+                            Path = new PropertyPath(Port.AnchorPointProperty)
+                        });
 
-                            Canvas currentCanvas = ((tabs.Items[tabs.SelectedIndex] as ClosableTabItem).Content as ScrollViewer).Content as ScrollableCanvas;
-                            currentCanvas.Children.Add(currentEntity);
-                            currentEntity = null;
-                        }
+                        currentEntity.MouseLeftButtonDown += Shape_MouseLeftButtonDown;
+                        currentEntity.MouseLeftButtonUp += Shape_MouseLeftButtonUp;
+
+                        currentCanvas.Children.Add(currentEntity);
+                        currentEntity = null;                        
                     }
                 }
                 else if (!(currentEntity is Connector))
                 {
                     Point position = e.GetPosition(this);
                     attachMovingEvents(currentEntity);
-                 
+
                     // 200 - width of tool panel (it's a constant in xaml)
                     // 100 - random +- value :)
                     Canvas.SetLeft(currentEntity, position.X - 200);
                     Canvas.SetTop(currentEntity, position.Y - 100);
-
+                    
                     currentCanvas.Children.Add(currentEntity);
+                    currentEntity.createAndDrawPorts(position.X - 200, position.Y - 100);
+
+                    foreach (Port p in currentEntity.getPorts())
+                    {
+                        p.MouseLeftButtonDown += Shape_MouseLeftButtonDown;
+                        p.MouseLeftButtonUp += Shape_MouseLeftButtonUp;
+                    }
 
                     currentEntity = null;
                 }                
@@ -113,6 +119,19 @@ namespace sapr_sim
             theTabItem.Title = "Новая диаграмма " + (tabs.Items.Count + 1);            
             tabs.Items.Add(theTabItem);
             tabs.SelectionChanged += TabControl_SelectionChanged;
+
+            currentCanvas = canvas;
+        }
+
+        private bool canConnect()
+        {
+            BindingExpression srcExp = currentEntity.GetBindingExpression(Connector.SourceProperty);
+            BindingExpression dstExp = currentEntity.GetBindingExpression(Connector.DestinationProperty);
+            if (dstExp == null)
+            {
+                return !(source as Port).Owner.Equals((srcExp.DataItem as Port).Owner);
+            }
+            return !source.Equals(srcExp.DataItem) && !source.Equals(dstExp.DataItem);
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -138,7 +157,7 @@ namespace sapr_sim
             if (source != null)
                 source.BitmapEffect = UIEntity.defaultBitmapEffect(source);
 
-            source = (UIEntity)sender;
+            source = (UIEntity) sender;
             Mouse.Capture(source);
             captured = true;
             xShape = VisualTreeHelper.GetOffset(source).X;
@@ -146,11 +165,17 @@ namespace sapr_sim
             yShape = VisualTreeHelper.GetOffset(source).Y;
             yCanvas = e.GetPosition(this).Y;
 
-            DropShadowBitmapEffect eff = new DropShadowBitmapEffect();
-            eff.ShadowDepth = 0;
-            eff.Color = Colors.Red;
+            foreach (Port p in source.getPorts())
+            {
+                source.putMovingCoordinate(
+                    p,
+                    VisualTreeHelper.GetOffset(p).X,
+                    VisualTreeHelper.GetOffset(p).Y,
+                    xCanvas, yCanvas);
+            }
 
-            source.BitmapEffect = eff;
+            if (!(source is Connector && source is Port))
+                source.BitmapEffect = new DropShadowBitmapEffect() {ShadowDepth = 0, Color = Colors.Red};
         }
 
         private void Shape_MouseMove(object sender, MouseEventArgs e)
@@ -159,11 +184,24 @@ namespace sapr_sim
             {
                 double x = e.GetPosition(this).X;
                 double y = e.GetPosition(this).Y;
+
                 xShape += x - xCanvas;
-                Canvas.SetLeft(source, xShape);
-                xCanvas = x;
                 yShape += y - yCanvas;
+                Canvas.SetLeft(source, xShape);
                 Canvas.SetTop(source, yShape);
+                
+                foreach (Port p in source.getPorts())
+                {
+                    UIEntity.CoordinatesHandler ch = source.getMovingCoordinate(p);
+                    ch.xShape += x - ch.xCanvas;
+                    ch.yShape += y - ch.yCanvas;
+                    Canvas.SetLeft(p, ch.xShape);
+                    Canvas.SetTop(p, ch.yShape);
+                    ch.xCanvas = x;
+                    ch.yCanvas = y;
+                }
+
+                xCanvas = x;
                 yCanvas = y;
             }            
         }

@@ -28,6 +28,10 @@ namespace sapr_sim.Figures.New
                 new Typeface("Times New Roman"), 12, Brushes.Black);
         }
 
+        public override void createAndDrawPorts(double x, double y)
+        {
+        }
+
         protected override Geometry DefiningGeometry
         {
             get

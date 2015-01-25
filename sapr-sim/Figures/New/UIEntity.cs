@@ -12,14 +12,12 @@ using System.Windows.Shapes;
 
 namespace sapr_sim.Figures.New
 {
-    public class UIEntity : Shape
+    public abstract class UIEntity : Shape
     {
 
-        public static readonly DependencyProperty AnchorPointProperty =
-                DependencyProperty.Register(
-                    "AnchorPoint", typeof(Point), typeof(UIEntity),
-                        new FrameworkPropertyMetadata(new Point(100, 100),
-                        FrameworkPropertyMetadataOptions.AffectsMeasure));
+        protected Canvas canvas;
+        protected Dictionary<UIEntity, CoordinatesHandler> coordinates = new Dictionary<UIEntity, CoordinatesHandler>();
+        protected List<Port> ports = new List<Port>();
 
         public static BitmapEffect defaultBitmapEffect(UIElement element)
         {
@@ -48,13 +46,16 @@ namespace sapr_sim.Figures.New
             return myDropShadowEffect;
         }
 
-        public Point AnchorPoint
+        public void putMovingCoordinate(UIEntity entity, double xShape, double yShape, double xCanvas, double yCanvas)
         {
-            get { return (Point)GetValue(AnchorPointProperty); }
-            set { SetValue(AnchorPointProperty, value); }
+            coordinates.Remove(entity);
+            coordinates.Add(entity, new CoordinatesHandler(xShape, yShape, xCanvas, yCanvas));
         }
 
-        protected Canvas canvas;
+        public CoordinatesHandler getMovingCoordinate(UIEntity entity)
+        {
+            return coordinates[entity];
+        }
 
         public UIEntity()
         {
@@ -64,32 +65,41 @@ namespace sapr_sim.Figures.New
             BitmapEffect = defaultBitmapEffect(this);
         }
 
+        public List<Port> getPorts()
+        {
+            return ports;
+        }
+
+        public void removePorts()
+        {
+            foreach (Port p in ports)
+            {
+                if (canvas.Children.Contains(p))
+                    canvas.Children.Remove(p);
+            }
+            ports.Clear();
+        }
+
+        public abstract void createAndDrawPorts(double x, double y);
+
+        
+
         protected UIEntity(Canvas canvas) : this()
         {
             this.canvas = canvas;
-            this.LayoutUpdated += UIEntity_LayoutUpdated;
         }
 
-        protected void UIEntity_LayoutUpdated(object sender, EventArgs e)
+        public struct CoordinatesHandler
         {
-            if (canvas != null)
+            public double xShape, yShape, xCanvas, yCanvas;
+
+            public CoordinatesHandler(double xShape, double yShape, double xCanvas, double yCanvas)
             {
-                Size size = RenderSize;
-                Point ofs = new Point(size.Width / 2, size.Height / 2);
-
-                // TODO why ofs with X=0.0 & Y=0.0 doesn't work?
-                if (ofs.X == 0.0 && ofs.Y == 0.0) return;
-                
-                // TODO for safety removing shapes from canvas
-                if (this.Parent == null) return;
-
-                AnchorPoint = TransformToVisual(canvas).Transform(ofs);
+                this.xShape = xShape;
+                this.yShape = yShape;
+                this.xCanvas = xCanvas;
+                this.yCanvas = yCanvas;
             }
-        }
-
-        protected override System.Windows.Media.Geometry DefiningGeometry
-        {
-            get { throw new NotImplementedException(); }
         }
 
     }
