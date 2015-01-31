@@ -19,7 +19,7 @@ namespace sapr_sim.Figures.New
         private Rect bound;
         private FormattedText label;
 
-        private Port inputPort, outputPort;
+        private Port inputPort, outputPort, resourcePort;
 
         private const int innerLabelOffsetX = 18;
         private const int innerLabelOffsetY = 22;
@@ -44,10 +44,13 @@ namespace sapr_sim.Figures.New
         {
             inputPort = new Port(this, canvas, x-4, y+26.5);
             outputPort = new Port(this, canvas, x+86, y+26.5);
+            resourcePort = new Port(this, canvas, x + 42.5, y + 55.5);
             canvas.Children.Add(inputPort);
             canvas.Children.Add(outputPort);
+            canvas.Children.Add(resourcePort);
             ports.Add(inputPort);
             ports.Add(outputPort);
+            ports.Add(resourcePort);
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry
