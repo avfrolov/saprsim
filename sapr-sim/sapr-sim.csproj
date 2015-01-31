@@ -69,28 +69,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Figures\Custom\Collector.cs" />
-    <Compile Include="Figures\Custom\Decision.cs" />
-    <Compile Include="Figures\Custom\EntityDestination.cs" />
-    <Compile Include="Figures\Custom\EntitySource.cs" />
-    <Compile Include="Figures\Custom\Multithread.cs" />
-    <Compile Include="Figures\Custom\Port.cs" />
-    <Compile Include="Figures\Custom\Procedure.cs" />
-    <Compile Include="Figures\Custom\Resource.cs" />
-    <Compile Include="Figures\Custom\SchemaElement.cs" />
-    <Compile Include="Figures\Custom\Sync.cs" />
-    <Compile Include="Figures\New\Collector.cs" />
-    <Compile Include="Figures\New\Connector.cs" />
-    <Compile Include="Figures\New\Decision.cs" />
-    <Compile Include="Figures\New\Destination.cs" />
-    <Compile Include="Figures\New\Label.cs" />
-    <Compile Include="Figures\New\Parallel.cs" />
-    <Compile Include="Figures\New\Port.cs" />
-    <Compile Include="Figures\New\Procedure.cs" />
-    <Compile Include="Figures\New\Resource.cs" />
-    <Compile Include="Figures\New\Source.cs" />
-    <Compile Include="Figures\New\Sync.cs" />
-    <Compile Include="Figures\New\UIEntity.cs" />
+    <Compile Include="Figures\Collector.cs" />
+    <Compile Include="Figures\Connector.cs" />
+    <Compile Include="Figures\Decision.cs" />
+    <Compile Include="Figures\Destination.cs" />
+    <Compile Include="Figures\Label.cs" />
+    <Compile Include="Figures\Parallel.cs" />
+    <Compile Include="Figures\Port.cs" />
+    <Compile Include="Figures\Procedure.cs" />
+    <Compile Include="Figures\Resource.cs" />
+    <Compile Include="Figures\Source.cs" />
+    <Compile Include="Figures\Sync.cs" />
+    <Compile Include="Figures\UIEntity.cs" />
     <Compile Include="MainWindowKeyboardEvents.cs" />
     <Compile Include="Utils\ConnectorFinder.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
@@ -107,41 +97,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Exceptions\ConnectorException.cs" />
-    <Compile Include="Figures\Basic\ComplexFigure.cs" />
-    <Compile Include="Figures\Custom\Diagram.cs" />
-    <Compile Include="Figures\Basic\Ellipse.cs" />
-    <Compile Include="Figures\Basic\Enums\ConnectorDirection.cs" />
-    <Compile Include="Figures\Basic\Enums\ConnectorOrientation.cs" />
-    <Compile Include="Figures\Basic\Enums\LedgeDirection.cs" />
-    <Compile Include="Figures\Basic\Enums\ResizeDirection.cs" />
-    <Compile Include="Figures\Basic\Figure.cs" />
-    <Compile Include="Figures\Basic\IBackgroundFigure.cs" />
-    <Compile Include="Figures\Basic\IConnectable.cs" />
-    <Compile Include="Figures\Basic\ISolidFigure.cs" />
-    <Compile Include="Figures\Basic\Label.cs" />
-    <Compile Include="Figures\Basic\Markers\BottomHeightMarker.cs" />
-    <Compile Include="Figures\Basic\Markers\BottomLeftMarker.cs" />
-    <Compile Include="Figures\Basic\Markers\BottomRightMarker.cs" />
-    <Compile Include="Figures\Basic\Markers\EndLineMarker.cs" />
-    <Compile Include="Figures\Basic\Markers\HeightMarker.cs" />
-    <Compile Include="Figures\Basic\Markers\LedgeMarker.cs" />
-    <Compile Include="Figures\Basic\Markers\LeftWidthMarker.cs" />
-    <Compile Include="Figures\Basic\Markers\Marker.cs" />
-    <Compile Include="Figures\Basic\Markers\RightWidthMarker.cs" />
-    <Compile Include="Figures\Basic\Markers\TopHeightMarker.cs" />
-    <Compile Include="Figures\Basic\Markers\TopLeftMarker.cs" />
-    <Compile Include="Figures\Basic\Markers\TopRightMarker.cs" />
-    <Compile Include="Figures\Basic\Markers\WidthMarker.cs" />
-    <Compile Include="Figures\Basic\Parallelogram.cs" />
-    <Compile Include="Figures\Basic\Rectangle.cs" />
-    <Compile Include="Figures\Basic\Rhomb.cs" />
-    <Compile Include="Figures\Basic\RoundRectangle.cs" />
-    <Compile Include="Figures\Basic\SolidFigure.cs" />
-    <Compile Include="Figures\Basic\Lines\LedgeLine.cs" />
-    <Compile Include="Figures\Basic\Lines\LedgePoint.cs" />
-    <Compile Include="Figures\Basic\Lines\Line.cs" />
-    <Compile Include="Figures\Basic\Util\SerializableGraphicsPath.cs" />
-    <Compile Include="Figures\Custom\Enum\ConnectorType.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

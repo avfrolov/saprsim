@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace sapr_sim.Figures.New
+namespace sapr_sim.Figures
 {
     public class Port : UIEntity
     {

@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 
-namespace sapr_sim.Figures.New
+namespace sapr_sim.Figures
 {
     public abstract class UIEntity : Shape
     {

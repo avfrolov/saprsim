@@ -1,4 +1,4 @@
-﻿using sapr_sim.Figures.New;
+﻿using sapr_sim.Figures;
 using System;
 using System.Collections.Generic;
 using System.Linq;

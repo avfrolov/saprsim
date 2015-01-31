@@ -13,9 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using sapr_sim.Figures.New;
+using sapr_sim.Figures;
 using sapr_sim.WPFCustomElements;
-using sapr_sim.Figures.Basic;
 using System.Windows.Media.Effects;
 
 namespace sapr_sim
@@ -219,7 +218,7 @@ namespace sapr_sim
         
         private void LabelButton_Click(object sender, RoutedEventArgs e)
         {
-            currentEntity = new sapr_sim.Figures.New.Label();
+            currentEntity = new sapr_sim.Figures.Label();
         }
 
         private void ProcedureButton_Click(object sender, RoutedEventArgs e)
@@ -239,7 +238,7 @@ namespace sapr_sim
 
         private void ParallelButton_Click(object sender, RoutedEventArgs e)
         {
-            currentEntity = new sapr_sim.Figures.New.Parallel(currentCanvas);
+            currentEntity = new sapr_sim.Figures.Parallel(currentCanvas);
         }
 
         private void DecisionButton_Click(object sender, RoutedEventArgs e)

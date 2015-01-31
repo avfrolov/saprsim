@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace sapr_sim.Figures.New
+namespace sapr_sim.Figures
 {
     public class Destination : Source
     {

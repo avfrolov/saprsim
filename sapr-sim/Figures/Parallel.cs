@@ -8,39 +8,40 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace sapr_sim.Figures.New
+namespace sapr_sim.Figures
 {
-    public class Decision : UIEntity
+    public class Parallel : UIEntity
     {
         private Rect bound;
         private FormattedText label;
 
-        private Port inputPort, yesPort, noPort;
+        private Port inputPort, outputPort1, outputPort2;
 
-        private const int innerLabelOffsetX = 20;
-        private const int innerLabelOffsetY = 16;
+        private const int innerLabelOffsetX = -45;
+        private const int innerLabelOffsetY = -20;
 
-        public Decision(Canvas canvas) : base(canvas)
+        public Parallel(Canvas canvas) : base(canvas)
         {
-            Fill = Brushes.LemonChiffon;
+            Fill = Brushes.Black;
+            StrokeThickness = .5;
 
-            bound = new Rect(new Size(45, 45));
-            label = new FormattedText("?",
+            bound = new Rect(new Size(10, 90));
+            label = new FormattedText("Распараллеливание",
                 CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
                 new Typeface("Times New Roman"), 12, Brushes.Black);
         }
 
         public override void createAndDrawPorts(double x, double y)
         {
-            inputPort = new Port(this, canvas, x - 12, y + 19);
-            yesPort = new Port(this, canvas, x + 19, y - 12.5);
-            noPort = new Port(this, canvas, x + 19, y + 47.5);
+            inputPort = new Port(this, canvas, x - 4, y + 45);
+            outputPort1 = new Port(this, canvas, x + 7, y + 22.5);
+            outputPort2 = new Port(this, canvas, x + 7, y + 67.5);
             canvas.Children.Add(inputPort);
-            canvas.Children.Add(yesPort);
-            canvas.Children.Add(noPort);
+            canvas.Children.Add(outputPort1);
+            canvas.Children.Add(outputPort2);
             ports.Add(inputPort);
-            ports.Add(yesPort);
-            ports.Add(noPort);
+            ports.Add(outputPort1);
+            ports.Add(outputPort2);
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry
@@ -50,11 +51,9 @@ namespace sapr_sim.Figures.New
                 GeometryGroup gg = new GeometryGroup();
                 gg.FillRule = FillRule.Nonzero;
 
-                RectangleGeometry rg = new RectangleGeometry(bound);
-                rg.Transform = new RotateTransform(45, bound.Width / 2, bound.Height / 2);
-
-                gg.Children.Add(rg);
+                gg.Children.Add(new RectangleGeometry(bound));
                 gg.Children.Add(label.BuildGeometry(new Point(innerLabelOffsetX, innerLabelOffsetY)));
+
                 return gg;
             }
         }
