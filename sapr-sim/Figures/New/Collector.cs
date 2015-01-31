@@ -14,6 +14,8 @@ namespace sapr_sim.Figures.New
     {
         private Rect bound;
 
+        private Port inputPort, outputPort, backPort;
+
         public Collector(Canvas canvas) : base(canvas)
         {
             bound = new Rect(new Size(45, 45));
@@ -22,6 +24,15 @@ namespace sapr_sim.Figures.New
 
         public override void createAndDrawPorts(double x, double y)
         {
+            inputPort = new Port(this, canvas, x - 12, y + 19);
+            outputPort = new Port(this, canvas, x + 47.5, y + 19);
+            backPort = new Port(this, canvas, x + 19, y - 12.5);
+            canvas.Children.Add(inputPort);
+            canvas.Children.Add(outputPort);
+            canvas.Children.Add(backPort);
+            ports.Add(inputPort);
+            ports.Add(outputPort);
+            ports.Add(backPort);
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

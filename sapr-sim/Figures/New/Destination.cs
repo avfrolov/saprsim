@@ -22,5 +22,12 @@ namespace sapr_sim.Figures.New
                 new Typeface("Times New Roman"), 12, Brushes.Black);
         }
 
+        public override void createAndDrawPorts(double x, double y)
+        {
+            port = new Port(this, canvas, x - 4, y + 26.5);
+            canvas.Children.Add(port);
+            ports.Add(port);
+        }
+
     }
 }
