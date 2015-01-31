@@ -24,7 +24,7 @@ namespace sapr_sim
             }
             catch (Exception err)
             {
-                // TODO
+                // #TODO
                 // enable logger
                 MessageBox.Show(err.Message);
             }
@@ -34,12 +34,12 @@ namespace sapr_sim
         {
             if (source != null)
             {
-                Connector connector = ConnectorFinder.find(currentCanvas.Children, source);
-                if (connector != null)
+                List<Connector> connectors = ConnectorFinder.find(currentCanvas.Children, source);
+                foreach (Connector c in connectors)
                 {
-                    BindingOperations.ClearBinding(connector, Connector.SourceProperty);
-                    BindingOperations.ClearBinding(connector, Connector.DestinationProperty);
-                    currentCanvas.Children.Remove(connector);
+                    BindingOperations.ClearBinding(c, Connector.SourceProperty);
+                    BindingOperations.ClearBinding(c, Connector.DestinationProperty);
+                    currentCanvas.Children.Remove(c);
                 }
 
                 source.removePorts();

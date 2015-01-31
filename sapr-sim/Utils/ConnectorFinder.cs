@@ -12,8 +12,9 @@ namespace sapr_sim.Utils
     public class ConnectorFinder
     {
 
-        public static Connector find(UIElementCollection entities, UIEntity entity)
+        public static List<Connector> find(UIElementCollection entities, UIEntity entity)
         {
+            List<Connector> result = new List<Connector>();
             foreach (UIEntity e in entities)
             {
                 if (e is Connector)
@@ -27,13 +28,13 @@ namespace sapr_sim.Utils
                         Port src = srcExp.DataItem as Port;
                         Port dst = dstExp.DataItem as Port;
 
-                        if (entity.Equals(src.Owner) || entity.Equals(dst.Owner)) 
-                            return conenctor;
+                        if (entity.Equals(src.Owner) || entity.Equals(dst.Owner))
+                            result.Add(conenctor);
                     }
                 }
             }
 
-            return null;
+            return result;
         }
 
     }
