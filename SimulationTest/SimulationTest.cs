@@ -20,7 +20,7 @@ namespace SimulationTest
             EntityStart start = new EntityStart();
             Project prj = new Project();
 
-            EntityDestenation finish = new EntityDestenation();
+            EntityDestination finish = new EntityDestination();
             Procedure procedure = new Procedure();
 
             Resource res = new Resource();

@@ -63,7 +63,7 @@ namespace Simulation
         {
             foreach (Entity ent in entities)
             {
-                if (ent is EntityDestenation)
+                if (ent is EntityDestination)
                 {
                     return ent;
                 }

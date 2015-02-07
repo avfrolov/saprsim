@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities.impl
 {
-    public class EntityDestenation : Entity
+    public class EntityDestination : Entity
     {
 
         public override void execute() {

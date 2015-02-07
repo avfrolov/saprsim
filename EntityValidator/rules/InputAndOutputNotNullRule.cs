@@ -20,7 +20,7 @@ namespace EntityValidator.rules
 
             foreach (Entity entity in allEntities)
             {
-                if (!(entity is EntityStart || entity is EntityDestenation))
+                if (!(entity is EntityStart || entity is EntityDestination))
                 {
                     if (isInputsNull(entity) || isOutputsNull(entity))
                         return false;

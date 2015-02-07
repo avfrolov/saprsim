@@ -24,8 +24,8 @@ namespace EntityValidatorTest.systemValidatorTest
         public void test_shouldThrowNotOneDestException()
         {
             instance.addEntity(new EntityStart());
-            instance.addEntity(new EntityDestenation());
-            instance.addEntity(new EntityDestenation());
+            instance.addEntity(new EntityDestination());
+            instance.addEntity(new EntityDestination());
 
             IValidator validator = new SystemValidator();
 

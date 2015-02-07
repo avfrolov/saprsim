@@ -21,7 +21,7 @@ namespace EntityValidator.rules
 
             foreach (Entity entity in allEntities)
             {
-                if (entity is EntityDestenation)
+                if (entity is EntityDestination)
                     destCount++;
             }
 
