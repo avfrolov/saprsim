@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace sapr_sim.Figures
         protected Canvas canvas;
         protected Dictionary<UIEntity, CoordinatesHandler> coordinates = new Dictionary<UIEntity, CoordinatesHandler>();
         protected List<Port> ports = new List<Port>();
+
+        protected FormattedText label;
 
         public static BitmapEffect defaultBitmapEffect(UIElement element)
         {
@@ -48,6 +51,7 @@ namespace sapr_sim.Figures
 
         public void putMovingCoordinate(UIEntity entity, double xShape, double yShape, double xCanvas, double yCanvas)
         {
+            // avoiding 'System.ArgumentException' for existing key... double facepalm!!!
             coordinates.Remove(entity);
             coordinates.Add(entity, new CoordinatesHandler(xShape, yShape, xCanvas, yCanvas));
         }
@@ -82,7 +86,7 @@ namespace sapr_sim.Figures
 
         public abstract void createAndDrawPorts(double x, double y);
 
-        
+        public abstract List<UIParam> getParams();
 
         protected UIEntity(Canvas canvas) : this()
         {

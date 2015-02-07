@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
+using sapr_sim.Parameters;
 
 namespace sapr_sim.Figures
 {
     public class Label : UIEntity
     {
-        private FormattedText label;
 
         public Label() : base()
         {
@@ -23,6 +23,12 @@ namespace sapr_sim.Figures
 
         public override void createAndDrawPorts(double x, double y)
         {
+        }
+
+        public override List<UIParam> getParams()
+        {
+            List<UIParam> param = new List<UIParam>();
+            return param;
         }
 
         protected override Geometry DefiningGeometry

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,11 @@ namespace sapr_sim.Figures
 
         public override void createAndDrawPorts(double x, double y)
         {
+        }
+
+        public override List<UIParam> getParams()
+        {
+            return null;
         }
 
         protected override Geometry DefiningGeometry

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -17,9 +18,10 @@ namespace sapr_sim.Figures
         private Rect bound;
         private Rect topExternalBound;
         private Rect bottomExternalBound;
-        private FormattedText label;
 
         private Port port;
+
+        private UIParam<Double> efficiency = new UIParam<Double>(0, new DoubleParamValidator(), "Эффективность");
 
         private const int innerLabelOffsetX = 28;
         private const int innerLabelOffsetY = 22;
@@ -39,6 +41,13 @@ namespace sapr_sim.Figures
             port = new Port(this, canvas, x + 42.5, y - 3.5);
             canvas.Children.Add(port);
             ports.Add(port);
+        }
+
+        public override List<UIParam> getParams()
+        {
+            List<UIParam> param = new List<UIParam>();
+            param.Add(efficiency);
+            return param;
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

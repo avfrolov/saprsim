@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -33,6 +34,12 @@ namespace sapr_sim.Figures
             ports.Add(inputPort);
             ports.Add(outputPort);
             ports.Add(backPort);
+        }
+
+        public override List<UIParam> getParams()
+        {
+            List<UIParam> param = new List<UIParam>();
+            return param;
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

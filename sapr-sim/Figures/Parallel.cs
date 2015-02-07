@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,7 +14,6 @@ namespace sapr_sim.Figures
     public class Parallel : UIEntity
     {
         private Rect bound;
-        private FormattedText label;
 
         private Port inputPort, outputPort1, outputPort2;
 
@@ -42,6 +42,12 @@ namespace sapr_sim.Figures
             ports.Add(inputPort);
             ports.Add(outputPort1);
             ports.Add(outputPort2);
+        }
+
+        public override List<UIParam> getParams()
+        {
+            List<UIParam> param = new List<UIParam>();
+            return param;
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

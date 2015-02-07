@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
+using sapr_sim.Parameters;
 
 namespace sapr_sim.Figures
 {
@@ -27,6 +28,12 @@ namespace sapr_sim.Figures
             port = new Port(this, canvas, x - 4, y + 26.5);
             canvas.Children.Add(port);
             ports.Add(port);
+        }
+
+        public override List<UIParam> getParams()
+        {
+            List<UIParam> param = new List<UIParam>();
+            return param;
         }
 
     }

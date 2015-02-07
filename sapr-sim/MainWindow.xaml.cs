@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using sapr_sim.Figures;
 using sapr_sim.WPFCustomElements;
 using System.Windows.Media.Effects;
+using sapr_sim.Parameters;
 
 namespace sapr_sim
 {
@@ -152,29 +153,37 @@ namespace sapr_sim
 
         private void Shape_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            // clear bitmap effect for previous selected entity
-            if (source != null)
-                source.BitmapEffect = UIEntity.defaultBitmapEffect(source);
-
-            source = (UIEntity) sender;
-            Mouse.Capture(source);
-            captured = true;
-            xShape = VisualTreeHelper.GetOffset(source).X;
-            xCanvas = e.GetPosition(this).X;
-            yShape = VisualTreeHelper.GetOffset(source).Y;
-            yCanvas = e.GetPosition(this).Y;
-
-            foreach (Port p in source.getPorts())
+            if (e.ClickCount == 1)
             {
-                source.putMovingCoordinate(
-                    p,
-                    VisualTreeHelper.GetOffset(p).X,
-                    VisualTreeHelper.GetOffset(p).Y,
-                    xCanvas, yCanvas);
-            }
+                // clear bitmap effect for previous selected entity
+                if (source != null)
+                    source.BitmapEffect = UIEntity.defaultBitmapEffect(source);
 
-            if (!(source is Connector && source is Port))
-                source.BitmapEffect = new DropShadowBitmapEffect() {ShadowDepth = 0, Color = Colors.Red};
+                source = (UIEntity)sender;
+                Mouse.Capture(source);
+                captured = true;
+                xShape = VisualTreeHelper.GetOffset(source).X;
+                xCanvas = e.GetPosition(this).X;
+                yShape = VisualTreeHelper.GetOffset(source).Y;
+                yCanvas = e.GetPosition(this).Y;
+
+                foreach (Port p in source.getPorts())
+                {
+                    source.putMovingCoordinate(
+                        p,
+                        VisualTreeHelper.GetOffset(p).X,
+                        VisualTreeHelper.GetOffset(p).Y,
+                        xCanvas, yCanvas);
+                }
+
+                if (!(source is Connector && source is Port))
+                    source.BitmapEffect = new DropShadowBitmapEffect() { ShadowDepth = 0, Color = Colors.Red };
+            }
+            else if (e.ClickCount == 2 && !(sender is Port || sender is Connector))
+            {
+                UIEntity ent = sender as UIEntity;
+                new ParameterDialog(ent.getParams(), ent).ShowDialog();
+            }
         }
 
         private void Shape_MouseMove(object sender, MouseEventArgs e)

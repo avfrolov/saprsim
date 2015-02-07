@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,9 +14,10 @@ namespace sapr_sim.Figures
     public class Decision : UIEntity
     {
         private Rect bound;
-        private FormattedText label;
 
         private Port inputPort, yesPort, noPort;
+
+        private UIParam<String> inputProbabilityParams = new UIParam<String>("", new StringParamValidator(), "Параметры входа");
 
         private const int innerLabelOffsetX = 20;
         private const int innerLabelOffsetY = 16;
@@ -41,6 +43,13 @@ namespace sapr_sim.Figures
             ports.Add(inputPort);
             ports.Add(yesPort);
             ports.Add(noPort);
+        }
+
+        public override List<UIParam> getParams()
+        {
+            List<UIParam> param = new List<UIParam>();
+            param.Add(inputProbabilityParams);
+            return param;
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

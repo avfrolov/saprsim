@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,7 +14,6 @@ namespace sapr_sim.Figures
     public class Sync : UIEntity
     {
         private Rect bound;
-        private FormattedText label;
 
         private Port inputPort1, inputPort2, outputPort;
 
@@ -42,6 +42,12 @@ namespace sapr_sim.Figures
             ports.Add(inputPort1); 
             ports.Add(inputPort2);
             ports.Add(outputPort);
+        }
+
+        public override List<UIParam> getParams()
+        {
+            List<UIParam> param = new List<UIParam>();
+            return param;
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

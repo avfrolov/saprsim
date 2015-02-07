@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -17,9 +18,11 @@ namespace sapr_sim.Figures
         public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size", typeof(Double), typeof(Procedure));
 
         private Rect bound;
-        private FormattedText label;
 
         private Port inputPort, outputPort, resourcePort;
+
+        private UIParam<Double> needTime = new UIParam<Double>(0, new DoubleParamValidator(), "Необходимое время");
+        private UIParam<Double> operationTime = new UIParam<Double>(0, new DoubleParamValidator(), "Операционное время");
 
         private const int innerLabelOffsetX = 18;
         private const int innerLabelOffsetY = 22;
@@ -51,6 +54,14 @@ namespace sapr_sim.Figures
             ports.Add(inputPort);
             ports.Add(outputPort);
             ports.Add(resourcePort);
+        }
+
+        public override List<UIParam> getParams()
+        {
+            List<UIParam> param = new List<UIParam>();
+            param.Add(needTime);
+            param.Add(operationTime);
+            return param;
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.Parameters;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,9 +14,10 @@ namespace sapr_sim.Figures
     public class Source : UIEntity
     {
         private Rect bound;
-        protected FormattedText label;
 
         protected Port port;
+
+        private UIParam<Int32> projectsCount = new UIParam<Int32>(0, new IntegerParamValidator(), "Количество проектов");
 
         private const int innerLabelOffsetX = 14;
         private const int innerLabelOffsetY = 23;
@@ -35,6 +37,13 @@ namespace sapr_sim.Figures
             port = new Port(this, canvas, x + 56, y + 26.5);
             canvas.Children.Add(port);
             ports.Add(port);
+        }
+
+        public override List<UIParam> getParams()
+        {
+            List<UIParam> param = new List<UIParam>();
+            param.Add(projectsCount);
+            return param;
         }
 
         protected override Geometry DefiningGeometry
