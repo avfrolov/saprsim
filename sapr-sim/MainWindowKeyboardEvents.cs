@@ -32,9 +32,9 @@ namespace sapr_sim
 
         private void DeleteShapeCommand(object sender, ExecutedRoutedEventArgs e)
         {
-            if (source != null)
+            if (selected != null)
             {
-                List<Connector> connectors = ConnectorFinder.find(currentCanvas.Children, source);
+                List<Connector> connectors = ConnectorFinder.find(currentCanvas.Children, selected);
                 foreach (Connector c in connectors)
                 {
                     BindingOperations.ClearBinding(c, Connector.SourceProperty);
@@ -42,8 +42,8 @@ namespace sapr_sim
                     currentCanvas.Children.Remove(c);
                 }
 
-                source.removePorts();
-                currentCanvas.Children.Remove(source);
+                selected.removePorts();
+                currentCanvas.Children.Remove(selected);
             }
         }
     }
