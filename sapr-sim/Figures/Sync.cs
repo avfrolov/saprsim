@@ -44,11 +44,6 @@ namespace sapr_sim.Figures
             canvas.Children.Add(label);
         }
 
-        public override List<UIParam> getParams()
-        {
-            return new List<UIParam>();
-        }
-
         protected override System.Windows.Media.Geometry DefiningGeometry
         {
             get 
