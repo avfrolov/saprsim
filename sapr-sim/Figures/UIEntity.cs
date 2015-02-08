@@ -72,6 +72,10 @@ namespace sapr_sim.Figures
                 canvas.Children.Remove(label);
                 CoordinatesHandler ch = getMovingCoordinate(label);
                 label = new Label(this, canvas, ch.xShape, ch.yShape, newText);
+                
+                // dirty hack :(
+                if (this is Label) ((MainWindow)System.Windows.Application.Current.MainWindow).attachMovingEvents(label);
+
                 canvas.Children.Add(label);
             }             
         }

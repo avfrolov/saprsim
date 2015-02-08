@@ -32,6 +32,7 @@ namespace sapr_sim.Figures
                 CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
                 new Typeface("Times New Roman"), 12, Brushes.Black);
             label = this;
+            textParam.Value = text;
                  
             this.canvas = canvas;
             this.owner = owner;

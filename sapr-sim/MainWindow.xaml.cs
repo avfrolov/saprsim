@@ -201,7 +201,7 @@ namespace sapr_sim
             firstConnect = true;
         }
 
-        private void attachMovingEvents(UIEntity entity)
+        public void attachMovingEvents(UIEntity entity)
         {
             entity.MouseLeftButtonDown += Shape_MouseLeftButtonDown;
             entity.MouseMove += Shape_MouseMove;
