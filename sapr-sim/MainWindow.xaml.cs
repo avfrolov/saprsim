@@ -69,6 +69,7 @@ namespace sapr_sim
             scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
             scrollViewer.Content = canvas;
 
+            theTabItem.IsSelected = true;
             theTabItem.Content = scrollViewer;
             theTabItem.Title = "Новая диаграмма " + (tabs.Items.Count + 1);            
             tabs.Items.Add(theTabItem);
