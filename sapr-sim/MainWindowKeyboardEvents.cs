@@ -42,7 +42,7 @@ namespace sapr_sim
                     currentCanvas.Children.Remove(c);
                 }
 
-                selected.removePorts();
+                selected.removeAll();
                 currentCanvas.Children.Remove(selected);
             }
         }

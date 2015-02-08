@@ -47,10 +47,11 @@ namespace sapr_sim
                     {
                         MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
                         return;
-                    }
-                    param.RawValue = tb.Text;                    
+                    }                    
+                    if (sapr_sim.Figures.UIEntity.ENTITY_NAME_PARAM.Equals(param.DisplayedText) && !param.RawValue.Equals(tb.Text))
+                        owner.updateText(tb.Text);
+                    param.RawValue = tb.Text;
                 }
-
             }
 
             this.Close();

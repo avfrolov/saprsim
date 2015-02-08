@@ -23,7 +23,7 @@ namespace sapr_sim.Figures
             RenderTransform = new RotateTransform(45, bound.Width / 2, bound.Height / 2);
         }
 
-        public override void createAndDrawPorts(double x, double y)
+        public override void createAndDraw(double x, double y)
         {
             inputPort = new Port(this, canvas, x - 12, y + 19);
             outputPort = new Port(this, canvas, x + 47.5, y + 19);
@@ -38,8 +38,7 @@ namespace sapr_sim.Figures
 
         public override List<UIParam> getParams()
         {
-            List<UIParam> param = new List<UIParam>();
-            return param;
+            return new List<UIParam>();
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

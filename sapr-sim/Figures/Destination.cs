@@ -17,23 +17,22 @@ namespace sapr_sim.Figures
         public Destination(Canvas canvas) : base(canvas)
         {
             Fill = Brushes.LightGreen;
-
-            label = new FormattedText("Конец",
-                CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface("Times New Roman"), 12, Brushes.Black);
+            textParam.Value = "Конец";
         }
 
-        public override void createAndDrawPorts(double x, double y)
+        public override void createAndDraw(double x, double y)
         {
             port = new Port(this, canvas, x - 4, y + 26.5);
             canvas.Children.Add(port);
             ports.Add(port);
+
+            label = new Label(this, canvas, x + 14, y + 23, textParam.Value);
+            canvas.Children.Add(label);
         }
 
         public override List<UIParam> getParams()
         {
-            List<UIParam> param = new List<UIParam>();
-            return param;
+            return new List<UIParam>();
         }
 
     }

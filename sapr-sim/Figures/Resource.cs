@@ -31,21 +31,22 @@ namespace sapr_sim.Figures
             bound = new Rect(new Size(90, 60));
             topExternalBound = new Rect(new Point(0, 0), new Point(90, 10));
             bottomExternalBound = new Rect(new Point(0, 50), new Point(90, 60));
-            label = new FormattedText("Ресурс",
-                CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface("Times New Roman"), 12, Brushes.Black);
+            textParam.Value = "Ресурс";
         }
 
-        public override void createAndDrawPorts(double x, double y)
+        public override void createAndDraw(double x, double y)
         {
             port = new Port(this, canvas, x + 42.5, y - 3.5);
             canvas.Children.Add(port);
             ports.Add(port);
+
+            label = new Label(this, canvas, x + 28, y + 22, textParam.Value);
+            canvas.Children.Add(label);
         }
 
         public override List<UIParam> getParams()
         {
-            List<UIParam> param = new List<UIParam>();
+            List<UIParam> param = base.getParams();
             param.Add(efficiency);
             return param;
         }
@@ -56,12 +57,9 @@ namespace sapr_sim.Figures
             {
                 GeometryGroup gg = new GeometryGroup();
                 gg.FillRule = FillRule.Nonzero;
-
                 gg.Children.Add(new RectangleGeometry(bound));
-                gg.Children.Add(label.BuildGeometry(new Point(innerLabelOffsetX, innerLabelOffsetY)));
                 gg.Children.Add(new RectangleGeometry(topExternalBound));
                 gg.Children.Add(new RectangleGeometry(bottomExternalBound));
-
                 return gg;
             }
         }

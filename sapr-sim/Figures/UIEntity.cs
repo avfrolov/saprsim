@@ -16,11 +16,15 @@ namespace sapr_sim.Figures
     public abstract class UIEntity : Shape
     {
 
+        public static readonly string ENTITY_NAME_PARAM = "Имя";
+
         protected Canvas canvas;
         protected Dictionary<UIEntity, CoordinatesHandler> coordinates = new Dictionary<UIEntity, CoordinatesHandler>();
         protected List<Port> ports = new List<Port>();
 
-        protected FormattedText label;
+        protected Label label;
+
+        protected UIParam<String> textParam = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM);
 
         public static BitmapEffect defaultBitmapEffect(UIElement element)
         {
@@ -61,6 +65,22 @@ namespace sapr_sim.Figures
             return coordinates[entity];
         }
 
+        public void updateText(string newText)
+        {
+            if (label != null)
+            {
+                canvas.Children.Remove(label);
+                CoordinatesHandler ch = getMovingCoordinate(label);
+                label = new Label(this, canvas, ch.xShape, ch.yShape, newText);
+                canvas.Children.Add(label);
+            }             
+        }
+
+        public Label Label
+        {
+            get { return label; }
+        }
+
         public UIEntity()
         {
             StrokeThickness = 1;
@@ -74,7 +94,7 @@ namespace sapr_sim.Figures
             return ports;
         }
 
-        public void removePorts()
+        public void removeAll()
         {
             foreach (Port p in ports)
             {
@@ -82,11 +102,18 @@ namespace sapr_sim.Figures
                     canvas.Children.Remove(p);
             }
             ports.Clear();
+
+            canvas.Children.Remove(label);
         }
 
-        public abstract void createAndDrawPorts(double x, double y);
+        public abstract void createAndDraw(double x, double y);
 
-        public abstract List<UIParam> getParams();
+        public virtual List<UIParam> getParams()
+        {
+            List<UIParam> param = new List<UIParam>();
+            param.Add(textParam);
+            return param;
+        }
 
         protected UIEntity(Canvas canvas) : this()
         {

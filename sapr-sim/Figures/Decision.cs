@@ -19,20 +19,14 @@ namespace sapr_sim.Figures
 
         private UIParam<String> inputProbabilityParams = new UIParam<String>("", new StringParamValidator(), "Параметры входа");
 
-        private const int innerLabelOffsetX = 20;
-        private const int innerLabelOffsetY = 16;
-
         public Decision(Canvas canvas) : base(canvas)
         {
             Fill = Brushes.LemonChiffon;
-
             bound = new Rect(new Size(45, 45));
-            label = new FormattedText("?",
-                CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface("Times New Roman"), 12, Brushes.Black);
+            textParam.Value = "?";
         }
 
-        public override void createAndDrawPorts(double x, double y)
+        public override void createAndDraw(double x, double y)
         {
             inputPort = new Port(this, canvas, x - 12, y + 19);
             yesPort = new Port(this, canvas, x + 19, y - 12.5);
@@ -43,11 +37,14 @@ namespace sapr_sim.Figures
             ports.Add(inputPort);
             ports.Add(yesPort);
             ports.Add(noPort);
+
+            label = new Label(this, canvas, x + 20, y + 16, textParam.Value);
+            canvas.Children.Add(label);
         }
 
         public override List<UIParam> getParams()
         {
-            List<UIParam> param = new List<UIParam>();
+            List<UIParam> param = base.getParams();
             param.Add(inputProbabilityParams);
             return param;
         }
@@ -63,7 +60,6 @@ namespace sapr_sim.Figures
                 rg.Transform = new RotateTransform(45, bound.Width / 2, bound.Height / 2);
 
                 gg.Children.Add(rg);
-                gg.Children.Add(label.BuildGeometry(new Point(innerLabelOffsetX, innerLabelOffsetY)));
                 return gg;
             }
         }

@@ -126,7 +126,7 @@ namespace sapr_sim
             Canvas.SetTop(currentEntity, position.Y - 100);
 
             currentCanvas.Children.Add(currentEntity);
-            currentEntity.createAndDrawPorts(position.X - 200, position.Y - 100);
+            currentEntity.createAndDraw(position.X - 200, position.Y - 100);
 
             foreach (Port p in currentEntity.getPorts())
             {
@@ -152,7 +152,7 @@ namespace sapr_sim
         
         private void LabelButton_Click(object sender, RoutedEventArgs e)
         {
-            currentEntity = new sapr_sim.Figures.Label();
+            currentEntity = new sapr_sim.Figures.Label(currentCanvas);
         }
 
         private void ProcedureButton_Click(object sender, RoutedEventArgs e)

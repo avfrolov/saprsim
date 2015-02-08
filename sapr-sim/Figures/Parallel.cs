@@ -17,21 +17,15 @@ namespace sapr_sim.Figures
 
         private Port inputPort, outputPort1, outputPort2;
 
-        private const int innerLabelOffsetX = -45;
-        private const int innerLabelOffsetY = -20;
-
         public Parallel(Canvas canvas) : base(canvas)
         {
             Fill = Brushes.Black;
             StrokeThickness = .5;
-
             bound = new Rect(new Size(10, 90));
-            label = new FormattedText("Распараллеливание",
-                CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface("Times New Roman"), 12, Brushes.Black);
+            textParam.Value = "Распараллеливание";
         }
 
-        public override void createAndDrawPorts(double x, double y)
+        public override void createAndDraw(double x, double y)
         {
             inputPort = new Port(this, canvas, x - 4, y + 45);
             outputPort1 = new Port(this, canvas, x + 7, y + 22.5);
@@ -42,12 +36,14 @@ namespace sapr_sim.Figures
             ports.Add(inputPort);
             ports.Add(outputPort1);
             ports.Add(outputPort2);
+
+            label = new Label(this, canvas, x - 45, y - 20, textParam.Value);
+            canvas.Children.Add(label);
         }
 
         public override List<UIParam> getParams()
         {
-            List<UIParam> param = new List<UIParam>();
-            return param;
+            return new List<UIParam>();
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry
@@ -56,10 +52,7 @@ namespace sapr_sim.Figures
             {
                 GeometryGroup gg = new GeometryGroup();
                 gg.FillRule = FillRule.Nonzero;
-
                 gg.Children.Add(new RectangleGeometry(bound));
-                gg.Children.Add(label.BuildGeometry(new Point(innerLabelOffsetX, innerLabelOffsetY)));
-
                 return gg;
             }
         }

@@ -48,6 +48,14 @@ namespace sapr_sim
                     VisualTreeHelper.GetOffset(selected).Y,
                     xCanvas, yCanvas);
 
+                if (selected.Label != null)
+                {
+                    selected.putMovingCoordinate(selected.Label,
+                        VisualTreeHelper.GetOffset(selected.Label).X,
+                        VisualTreeHelper.GetOffset(selected.Label).Y,
+                        xCanvas, yCanvas);
+                }
+
                 foreach (Port p in selected.getPorts())
                 {
                     selected.putMovingCoordinate(
@@ -74,25 +82,13 @@ namespace sapr_sim
                 double x = e.GetPosition(this).X;
                 double y = e.GetPosition(this).Y;
 
-                UIEntity.CoordinatesHandler sch = selected.getMovingCoordinate(selected);
-                sch.xShape += x - sch.xCanvas;
-                sch.yShape += y - sch.yCanvas;
-                Canvas.SetLeft(selected, sch.xShape);
-                Canvas.SetTop(selected, sch.yShape);                
+                processCoordinatesHandler(selected, x, y);
+                if (selected.Label != null) processCoordinatesHandler(selected.Label, x, y);                
 
                 foreach (Port p in selected.getPorts())
                 {
-                    UIEntity.CoordinatesHandler ch = selected.getMovingCoordinate(p);
-                    ch.xShape += x - ch.xCanvas;
-                    ch.yShape += y - ch.yCanvas;
-                    Canvas.SetLeft(p, ch.xShape);
-                    Canvas.SetTop(p, ch.yShape);
-                    ch.xCanvas = x;
-                    ch.yCanvas = y;
+                    processCoordinatesHandler(p, x, y);
                 }
-
-                sch.xCanvas = x;
-                sch.yCanvas = y;
             }
         }
 
@@ -102,5 +98,15 @@ namespace sapr_sim
             captured = false;
         }
 
+        private void processCoordinatesHandler(UIEntity ent, double x, double y)
+        {
+            UIEntity.CoordinatesHandler ch = selected.getMovingCoordinate(ent);
+            ch.xShape += x - ch.xCanvas;
+            ch.yShape += y - ch.yCanvas;
+            Canvas.SetLeft(ent, ch.xShape);
+            Canvas.SetTop(ent, ch.yShape);
+            ch.xCanvas = x;
+            ch.yCanvas = y;
+        }
     }
 }

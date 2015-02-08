@@ -19,29 +19,26 @@ namespace sapr_sim.Figures
 
         private UIParam<Int32> projectsCount = new UIParam<Int32>(0, new IntegerParamValidator(), "Количество проектов");
 
-        private const int innerLabelOffsetX = 14;
-        private const int innerLabelOffsetY = 23;
-
         public Source(Canvas canvas) : base(canvas)
         {
             Fill = Brushes.Red;
-
             bound = new Rect(new Size(60, 60));
-            label = new FormattedText("Начало",
-                CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface("Times New Roman"), 12, Brushes.Black);
+            textParam.Value = "Начало";
         }
 
-        public override void createAndDrawPorts(double x, double y)
+        public override void createAndDraw(double x, double y)
         {
             port = new Port(this, canvas, x + 56, y + 26.5);
             canvas.Children.Add(port);
             ports.Add(port);
+
+            label = new Label(this, canvas, x + 14, y + 23, textParam.Value);
+            canvas.Children.Add(label);
         }
 
         public override List<UIParam> getParams()
         {
-            List<UIParam> param = new List<UIParam>();
+            List<UIParam> param = base.getParams();
             param.Add(projectsCount);
             return param;
         }
@@ -53,11 +50,7 @@ namespace sapr_sim.Figures
                 GeometryGroup gg = new GeometryGroup();
                 gg.FillRule = FillRule.EvenOdd;
                 EllipseGeometry eg = new EllipseGeometry(bound);
-                Geometry geometry = label.BuildGeometry(new Point(innerLabelOffsetX, innerLabelOffsetY));
-
                 gg.Children.Add(eg);
-                gg.Children.Add(geometry);
-
                 return gg;
             }
         }

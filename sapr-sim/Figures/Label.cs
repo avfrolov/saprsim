@@ -4,40 +4,60 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
-using sapr_sim.Parameters;
+using System.Windows.Media;
 
 namespace sapr_sim.Figures
 {
     public class Label : UIEntity
     {
 
-        public Label() : base()
+        private UIEntity owner;
+        private string text;
+        private FormattedText ft;
+
+        public Label(Canvas canvas) : base(canvas)
         {
-            label = new FormattedText("Надпись",
+            textParam.Value = "Надпись";
+            ft = new FormattedText(textParam.Value,
                 CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
                 new Typeface("Times New Roman"), 12, Brushes.Black);
+            label = this;
         }
 
-        public override void createAndDrawPorts(double x, double y)
+        public Label(UIEntity owner, Canvas canvas, double xPos, double yPos, string text) : base(canvas)
         {
+            ft = new FormattedText(text,
+                CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
+                new Typeface("Times New Roman"), 12, Brushes.Black);
+            label = this;
+                 
+            this.canvas = canvas;
+            this.owner = owner;
+            this.text = text;
+
+            Canvas.SetLeft(this, xPos);
+            Canvas.SetTop(this, yPos);
         }
 
-        public override List<UIParam> getParams()
+        public string Text
         {
-            List<UIParam> param = new List<UIParam>();
-            return param;
+            get { return text; }
+            set { text = value; }
         }
 
-        protected override Geometry DefiningGeometry
+        public override void createAndDraw(double x, double y)
+        {            
+        }
+
+        protected override System.Windows.Media.Geometry DefiningGeometry
         {
             get
             {
                 GeometryGroup gg = new GeometryGroup();
                 gg.FillRule = FillRule.EvenOdd;
-                gg.Children.Add(label.BuildGeometry(new Point()));
+                gg.Children.Add(ft.BuildGeometry(new Point()));
                 return gg;
             }
         }

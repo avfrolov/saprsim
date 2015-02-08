@@ -24,14 +24,11 @@ namespace sapr_sim.Figures
         {
             Fill = Brushes.Black;
             StrokeThickness = .5;
-
             bound = new Rect(new Size(10, 90));
-            label = new FormattedText("Синхронизация",
-                CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface("Times New Roman"), 12, Brushes.Black);
+            textParam.Value = "Синхронизация";
         }
 
-        public override void createAndDrawPorts(double x, double y)
+        public override void createAndDraw(double x, double y)
         {
             inputPort1 = new Port(this, canvas, x - 4, y + 22.5);
             inputPort2 = new Port(this, canvas, x - 4, y + 67.5);
@@ -42,12 +39,14 @@ namespace sapr_sim.Figures
             ports.Add(inputPort1); 
             ports.Add(inputPort2);
             ports.Add(outputPort);
+
+            label = new Label(this, canvas, x - 30, y - 20, textParam.Value);
+            canvas.Children.Add(label);
         }
 
         public override List<UIParam> getParams()
         {
-            List<UIParam> param = new List<UIParam>();
-            return param;
+            return new List<UIParam>();
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry
@@ -56,10 +55,7 @@ namespace sapr_sim.Figures
             {
                 GeometryGroup gg = new GeometryGroup();
                 gg.FillRule = FillRule.Nonzero;
-
                 gg.Children.Add(new RectangleGeometry(bound));
-                gg.Children.Add(label.BuildGeometry(new Point(innerLabelOffsetX, innerLabelOffsetY)));
-
                 return gg;
             }
         }

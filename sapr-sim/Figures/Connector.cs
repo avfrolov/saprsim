@@ -41,7 +41,7 @@ namespace sapr_sim.Figures
             set { this.SetValue(DestinationProperty, value); }
         }
 
-        public override void createAndDrawPorts(double x, double y)
+        public override void createAndDraw(double x, double y)
         {
         }
 
