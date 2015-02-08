@@ -63,15 +63,20 @@ namespace sapr_sim
                 
                 DockPanel sprow = new DockPanel() { LastChildFill = true, Margin = new Thickness(2, 2, 2, 5) };
                 Label l = new Label() { Content = entry.DisplayedText };
-                TextBox tb = new TextBox() 
-                { 
-                    Text = entry.RawValue.ToString(),
-                    HorizontalAlignment = System.Windows.HorizontalAlignment.Right, 
-                    MaxWidth = 100, MinWidth = 100 
-                };
+                UIElement control = entry.ContentControl;
+                if (control == null)
+                {
+                    control = new TextBox()
+                    {
+                        Text = entry.RawValue.ToString(),
+                        HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
+                        MaxWidth = 100,
+                        MinWidth = 100
+                    }; ;
+                }
 
                 sprow.Children.Add(l);
-                sprow.Children.Add(tb);
+                sprow.Children.Add(control);
                 sp.Children.Add(sprow);
             }
         }

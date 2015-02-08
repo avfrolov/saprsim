@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace sapr_sim.Parameters
 {
@@ -14,6 +16,9 @@ namespace sapr_sim.Parameters
         protected ParamValidator validator;
         protected string displayedText;
 
+        // default - textbox
+        protected UIElement control;
+
         public ParamValidator Validator
         {
             get { return validator; }
@@ -22,7 +27,11 @@ namespace sapr_sim.Parameters
         public string DisplayedText
         {
             get { return displayedText; }
-            set { displayedText = value; }
+        }
+
+        public UIElement ContentControl
+        {
+            get { return control; }
         }
 
         public abstract IConvertible RawValue { get; set; }
@@ -51,6 +60,11 @@ namespace sapr_sim.Parameters
             this.value = value;
             this.validator = validator;
             this.displayedText = displayedText;
+        }
+
+        public UIParam(T value, ParamValidator validator, string displayedText, UIElement cc) : this(value, validator, displayedText)
+        {
+            this.control = cc;
         }
 
         public T Value
