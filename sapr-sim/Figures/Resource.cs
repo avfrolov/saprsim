@@ -51,6 +51,12 @@ namespace sapr_sim.Figures
             return param;
         }
 
+        public double Efficiency
+        {
+            get { return efficiency.Value; }
+            set { efficiency.Value = value; }
+        }
+
         protected override System.Windows.Media.Geometry DefiningGeometry
         {
             get 

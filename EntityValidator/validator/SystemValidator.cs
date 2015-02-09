@@ -15,7 +15,7 @@ namespace EntityValidator.validator
             rules.Add(new OneStartRule());
             rules.Add(new OneDestRule());
             rules.Add(new InputAndOutputNotNullRule());
-            rules.Add(new NullImputsForEntityStartRule());
+            rules.Add(new NullInputsForEntityStartRule());
             rules.Add(new NullOutputsForEntityDestRule());
         }      
 

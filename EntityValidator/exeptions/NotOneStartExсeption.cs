@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace EntityValidator.exeptions
 {
-    public class NotOneDestException : Exception
+    public class NotOneStartException : Exception
     {
-        public NotOneDestException() : base("Сущность 'Конец' не найдена")
+
+        public NotOneStartException() : base("Сущность 'Начало' не найдена")
         {            
         }
+
     }
 }

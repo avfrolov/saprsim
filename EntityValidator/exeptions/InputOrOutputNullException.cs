@@ -8,5 +8,8 @@ namespace EntityValidator.exeptions
 {
     public class InputOrOutputNullException : Exception
     {
+        public InputOrOutputNullException() : base("Что-то пошло не так...")
+        {            
+        }
     }
 }

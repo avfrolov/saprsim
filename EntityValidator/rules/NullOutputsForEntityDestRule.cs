@@ -29,7 +29,7 @@ namespace EntityValidator.rules
 
         public void throwException()
         {
-            throw new NotNullEntityDestOutputsException();
+            throw new NullEntityDestOutputsException();
         }
     }
 }

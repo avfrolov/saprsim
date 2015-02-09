@@ -20,7 +20,7 @@ namespace EntityValidatorTest.systemValidatorTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotOneStartExeption))]
+        [ExpectedException(typeof(NotOneStartException))]
         public void test_shouldThrowNotOneStartExeption()
         {
             instance.addEntity(new EntityStart());

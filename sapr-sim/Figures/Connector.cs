@@ -41,6 +41,24 @@ namespace sapr_sim.Figures
             set { this.SetValue(DestinationProperty, value); }
         }
 
+        public Port SourcePort
+        { 
+            get 
+            {
+                BindingExpression be = GetBindingExpression(SourceProperty);
+                return be != null ? be.DataItem as Port : null;
+            } 
+        }
+
+        public Port DestinationPort
+        {
+            get
+            {
+                BindingExpression be = GetBindingExpression(DestinationProperty);
+                return be != null ? be.DataItem as Port : null;
+            }
+        }
+
         public override void createAndDraw(double x, double y)
         {
         }

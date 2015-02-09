@@ -16,10 +16,12 @@ namespace Simulation
             Timer timer = Timer.Instance;
 
             List<Entity> entities = model.getEntities();
+
+            EntityStart start = getSchemaStart(entities) as EntityStart;
+            for (int i = 0; i < start.projectsCount; i++)
+                model.addProject(new Project());
             List<Project> projects = model.getProject();
 
-
-            Entity start = getSchemaStart(entities);
             start.setReadyProjectQueue(projects);
 
             while (projects.Count != 0 && checkForNotReadyProjects(projects))

@@ -27,6 +27,11 @@ namespace Entities
             input = inputs;
         }
 
+        public void addInput(Entity input)
+        {
+            this.input.Add(input);
+        }
+
         public List<Entity> getOutputs()
         {
             return output;
@@ -35,6 +40,11 @@ namespace Entities
         public void setOutputs(List<Entity> output)
         {
             this.output = output;
+        }
+
+        public void addOutput(Entity output)
+        {
+            this.output.Add(output);
         }
 
         public List<Project> getReadyProjectQueue()

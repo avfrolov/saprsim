@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EntityValidator.exeptions
 {
-    public class NotOneDestException : Exception
+    public class NullEntityDestOutputsException : Exception
     {
-        public NotOneDestException() : base("Сущность 'Конец' не найдена")
+        public NullEntityDestOutputsException() : base("Входной порт сущности 'Конец' не задан")
         {            
         }
     }

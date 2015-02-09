@@ -8,7 +8,7 @@ namespace Entities.impl
 {
     public class EntityStart : Entity
     {
-        int projectsCount { get; set; }
+        public int projectsCount { get; set; }
 
         public override void execute() {
             List<Entity> outputs = getOutputs();

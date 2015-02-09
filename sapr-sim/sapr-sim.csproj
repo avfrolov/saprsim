@@ -82,12 +82,23 @@
     <Compile Include="Figures\Sync.cs" />
     <Compile Include="Figures\UIEntity.cs" />
     <Compile Include="MainWindowKeyboardEvents.cs" />
+    <Compile Include="MainWindowLogicEvents.cs" />
     <Compile Include="MainWindowMouseEvents.cs" />
     <Compile Include="ParametersDialog.xaml.cs">
       <DependentUpon>ParametersDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Parameters\Validators\ParamValidator.cs" />
     <Compile Include="Parameters\UIParam.cs" />
+    <Compile Include="Transformers\TransformerFactory.cs" />
+    <Compile Include="Transformers\TransformerService.cs" />
+    <Compile Include="Transformers\CollectorTransformer.cs" />
+    <Compile Include="Transformers\DecisionTransformer.cs" />
+    <Compile Include="Transformers\DestinationTransformer.cs" />
+    <Compile Include="Transformers\ParallelTransformer.cs" />
+    <Compile Include="Transformers\ProcedureTransformer.cs" />
+    <Compile Include="Transformers\SourceTransformer.cs" />
+    <Compile Include="Transformers\SynchronizationTransformer.cs" />
+    <Compile Include="Transformers\Transformer.cs" />
     <Compile Include="Utils\ConnectorFinder.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
     <Compile Include="WPFCustomElements\ScrollableCanvas.cs" />
@@ -369,7 +380,16 @@
     <Resource Include="Resources\small_resources.png" />
     <Resource Include="Resources\Undo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{122ea07b-0a59-477a-a2bb-26c85461235d}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kernel\Kernel.csproj">
+      <Project>{256f2ae7-a9d0-4a21-855a-66838771c731}</Project>
+      <Name>Kernel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

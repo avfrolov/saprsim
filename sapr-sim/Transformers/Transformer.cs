@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Entities;
+using sapr_sim.Figures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace EntityTransformator
 {
-    class Program
+
+    public interface Transformer
     {
-        static void Main(string[] args)
-        {
-        }
+        Entity transform(UIEntity entity);
     }
+
 }

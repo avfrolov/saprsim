@@ -59,6 +59,12 @@ namespace sapr_sim.Figures
             return param;
         }
 
+        public double ManHour
+        {
+            get { return manHour.Value; }
+            set { manHour.Value = value; }
+        }
+
         protected override System.Windows.Media.Geometry DefiningGeometry
         {
             get 

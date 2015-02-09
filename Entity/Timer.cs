@@ -30,6 +30,10 @@ namespace Entities
             timer += STEP;
         }
 
+        public void resetTime()
+        {
+            timer = 0;
+        }
 
         public double getTime()
         {

@@ -43,6 +43,12 @@ namespace sapr_sim.Figures
             return param;
         }
 
+        public int ProjectsCount
+        {
+            get { return projectsCount.Value; }
+            set { projectsCount.Value = value; }
+        }
+
         protected override Geometry DefiningGeometry
         {
             get

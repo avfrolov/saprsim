@@ -9,7 +9,7 @@ using EntityValidator.exeptions;
 
 namespace EntityValidator.rules
 {
-    class NullImputsForEntityStartRule : IRule
+    class NullInputsForEntityStartRule : IRule
     {
         List<Entity> allEntities = Model.Instance.getEntities();
 
@@ -29,7 +29,7 @@ namespace EntityValidator.rules
 
         public void throwException()
         {
-            throw new NotNullEntityStartImputsException();
+            throw new NullEntityStartInputsException();
         }
     }
 }

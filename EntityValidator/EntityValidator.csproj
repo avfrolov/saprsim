@@ -42,10 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="exeptions\InputOrOutputNullException.cs" />
-    <Compile Include="exeptions\NotNullEntityDestOutputsException.cs" />
-    <Compile Include="exeptions\NotNullEntityStartImputsException.cs" />
+    <Compile Include="exeptions\NullEntityDestOutputsException.cs" />
+    <Compile Include="exeptions\NullEntityStartInputsException.cs" />
     <Compile Include="exeptions\NotOneDestException.cs" />
-    <Compile Include="exeptions\NotOneStartExeption.cs" />
+    <Compile Include="exeptions\NotOneStartExсeption.cs" />
+    <Compile Include="exeptions\ValidationException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rules\InputAndOutputNotNullRule.cs" />

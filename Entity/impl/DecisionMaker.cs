@@ -16,7 +16,7 @@ namespace Entities.impl
     public class DecisionMaker : Entity
     {
         static Random rand = new Random();
-        String imputProbabilityParams {get; set; }
+        public String inputProbabilityParams {get; set; }
         List<Double> probabilities = new List<Double>();
 
         double delta { get; set; }
@@ -37,7 +37,7 @@ namespace Entities.impl
         //ololo govnocod here. Should be refactor as soon as possible
         private void parseImpurtParams()
         {
-            String[] imputStrs = imputProbabilityParams.Split('=');
+            String[] imputStrs = inputProbabilityParams.Split('=');
 
             switch (imputStrs[0])
             {

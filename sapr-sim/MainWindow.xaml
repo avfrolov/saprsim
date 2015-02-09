@@ -70,7 +70,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Модель">
-                <MenuItem Header="Запуск моделиирования" InputGestureText="F5" IsEnabled="False"/>
+                <MenuItem Header="Запуск моделиирования" InputGestureText="F5" Click="SimulateButton_Click"/>
                 <MenuItem Header="Запуск оптимизации" InputGestureText="F2" IsEnabled="False"/>
                 <Separator/>
                 <MenuItem Header="Настройка параметров ресурсов" IsEnabled="False"/>
@@ -142,7 +142,7 @@
                 </Button>
                 <Separator/>
 
-                <Button x:Name="Run" ToolTip="Запустить моделирование" IsEnabled="False">
+                <Button x:Name="Run" ToolTip="Запустить моделирование" Click="SimulateButton_Click">
                     <Image Source="Resources/Icon_PlaySolid.ico" />
                 </Button>
             </ToolBar>

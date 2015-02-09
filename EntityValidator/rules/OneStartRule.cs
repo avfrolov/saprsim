@@ -32,7 +32,7 @@ namespace EntityValidator.rules
 
         public void throwException()
         {
-            throw new NotOneStartExeption();
+            throw new NotOneStartException();
         }
     }
 }

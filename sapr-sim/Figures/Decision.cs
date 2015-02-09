@@ -49,6 +49,12 @@ namespace sapr_sim.Figures
             return param;
         }
 
+        public string InputProbabilityParams
+        {
+            get { return inputProbabilityParams.Value; }
+            set { inputProbabilityParams.Value = value; }
+        }
+
         protected override System.Windows.Media.Geometry DefiningGeometry
         {
             get 
