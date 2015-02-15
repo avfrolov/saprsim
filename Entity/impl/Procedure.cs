@@ -19,29 +19,40 @@ namespace Entities.impl
 
             double overallEfficiency = 0.0000001; //  some inaccuracy 
 
-            needTime = getNeedTime(overallEfficiency);
+            Project prj = getProjectFromReadyQueue();
+
+            needTime = getNeedTime(overallEfficiency, prj.complexity);
 
             operationTime += timer.getStep(); 
 
             if (operationTime >= needTime)
             {
                 operationTime = 0;
-                Project prj = getProjectFromReadyQueue();
                 Entity outputEntity = getOutputs()[0];
                 outputEntity.addProjectToQueue(prj);
-
                 getReadyProjectQueue().Remove(prj);
             }
         }
 
-        private double getNeedTime(double overallEfficiency)
+        private double getNeedTime(double overallEfficiency, int complexity)
         {
             foreach (Resource res in resources)
             {
                 overallEfficiency += res.efficiency;
             }
 
-            return needTime = (1 / overallEfficiency) * manHour;
+            return needTime = (1 / overallEfficiency) * manHour * complexity;
+        }
+
+        private void calculatePerformanse(Project project, double needTime)
+        {
+            double sumPrice = 0.0;
+            foreach (Resource res in resources)
+            {
+                sumPrice += res.price;
+            }
+
+            project.performance += needTime / sumPrice;
         }
 
         public void addResource(Resource res)

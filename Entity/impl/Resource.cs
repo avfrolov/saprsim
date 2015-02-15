@@ -9,5 +9,6 @@ namespace Entities.impl
     public class Resource 
     {
         public double efficiency { get; set; }
+        public double price { get; set; }
     }
 }

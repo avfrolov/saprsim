@@ -14,11 +14,15 @@ namespace Entities
 
     public class Project
     {
-
         public Project()
         {
             state = State.IN_PROGRESS;
         }
         public State state { get; set; }
+        public double startTime { get; set; }
+        public double overallTime { get; set; }
+        public int complexity { get; set; }
+        public double performance { get; set;}
+
     }
 }
