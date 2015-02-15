@@ -15,11 +15,13 @@ namespace Entities.impl
             
             foreach (Project prj in projects)
             {
+                prj.overallTime = Timer.Instance.getTime() - prj.startTime;
                 prj.state = State.DONE;
             }
 
             foreach (Project prj in projects1)
             {
+                prj.overallTime = Timer.Instance.getTime() - prj.startTime;
                 prj.state = State.DONE;
             }
         }
