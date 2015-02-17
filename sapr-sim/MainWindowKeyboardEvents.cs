@@ -21,6 +21,10 @@ namespace sapr_sim
                 RoutedCommand deleteBinding = new RoutedCommand();
                 deleteBinding.InputGestures.Add(new KeyGesture(Key.Delete));
                 CommandBindings.Add(new CommandBinding(deleteBinding, DeleteShapeCommand));
+
+                RoutedCommand newTabBinding = new RoutedCommand();
+                newTabBinding.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(newTabBinding, CreateNewTabCommand));
             }
             catch (Exception err)
             {
@@ -45,6 +49,11 @@ namespace sapr_sim
                 selected.removeAll();
                 currentCanvas.Children.Remove(selected);
             }
+        }
+
+        private void CreateNewTabCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            createNewTab();
         }
     }
 }
