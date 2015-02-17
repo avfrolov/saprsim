@@ -9,6 +9,7 @@ namespace Entities.impl
     public class EntityStart : Entity
     {
         public int projectsCount { get; set; }
+        public int Complexity { get; set; }
 
         public override void execute() {
             List<Entity> outputs = getOutputs();

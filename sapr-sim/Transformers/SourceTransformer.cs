@@ -14,7 +14,7 @@ namespace EntityTransformator.Transformers
         public Entities.Entity transform(UIEntity entity)
         {
             Source s = entity as Source;
-            return new EntityStart() { projectsCount = s.ProjectsCount };
+            return new EntityStart() { projectsCount = s.ProjectsCount, Complexity = s.Complexity };
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Simulation
 
             EntityStart start = getSchemaStart(entities) as EntityStart;
             for (int i = 0; i < start.projectsCount; i++)
-                model.addProject(new Project());
+                model.addProject(new Project() { complexity = start.Complexity });
             List<Project> projects = model.getProject();
 
             start.setReadyProjectQueue(projects);

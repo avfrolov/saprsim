@@ -21,16 +21,19 @@ namespace Entities.impl
 
             Project prj = getProjectFromReadyQueue();
 
-            needTime = getNeedTime(overallEfficiency, prj.complexity);
-
-            operationTime += timer.getStep(); 
-
-            if (operationTime >= needTime)
+            if (prj != null)
             {
-                operationTime = 0;
-                Entity outputEntity = getOutputs()[0];
-                outputEntity.addProjectToQueue(prj);
-                getReadyProjectQueue().Remove(prj);
+                needTime = getNeedTime(overallEfficiency, prj.complexity);
+
+                operationTime += timer.getStep();
+
+                if (operationTime >= needTime)
+                {
+                    operationTime = 0;
+                    Entity outputEntity = getOutputs()[0];
+                    outputEntity.addProjectToQueue(prj);
+                    getReadyProjectQueue().Remove(prj);
+                }
             }
         }
 

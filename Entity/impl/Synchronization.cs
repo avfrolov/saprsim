@@ -16,7 +16,7 @@ namespace Entities.impl
               .Select(y => y.Key)
               .ToList();
 
-            if (projects != null && projects.Count != 00)
+            if (projects != null && projects.Count != 0)
             {
                 Project proj = projects[0];
                 Entity outputEntity = getOutputs()[0];

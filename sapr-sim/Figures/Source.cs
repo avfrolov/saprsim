@@ -18,6 +18,7 @@ namespace sapr_sim.Figures
         protected Port port;
 
         private UIParam<Int32> projectsCount = new UIParam<Int32>(0, new IntegerParamValidator(), "Количество проектов");
+        private UIParam<Int32> complexity = new UIParam<Int32>(1, new IntegerParamValidator(), "Сложность проектов");
 
         public Source(Canvas canvas) : base(canvas)
         {
@@ -40,6 +41,7 @@ namespace sapr_sim.Figures
         {
             List<UIParam> param = base.getParams();
             param.Add(projectsCount);
+            param.Add(complexity);
             return param;
         }
 
@@ -48,6 +50,13 @@ namespace sapr_sim.Figures
             get { return projectsCount.Value; }
             set { projectsCount.Value = value; }
         }
+
+        public int Complexity
+        {
+            get { return complexity.Value; }
+            set { complexity.Value = value; }
+        }
+
 
         protected override Geometry DefiningGeometry
         {
