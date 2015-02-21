@@ -10,6 +10,7 @@ namespace EntityValidator.validator
     public class SystemValidator : IValidator
     {
         List<IRule> rules = new List<IRule>();
+
         public SystemValidator() //add here new rules for include them into validation
         {
             rules.Add(new OneStartRule());
@@ -19,18 +20,20 @@ namespace EntityValidator.validator
             rules.Add(new NullOutputsForEntityDestRule());
         }      
 
-        public Boolean startValidation()
+        public ValidationResult startValidation()
         {
+            ValidationResult result = new ValidationResult();
+
             foreach (IRule rule in rules)
             {
                 if (!rule.validate())
                 {
-                    rule.throwException();
-                    return false;
+                    result.addError(rule.explain());
                 }
             }
 
-            return true;
+            return result;
         }
+
     }
 }

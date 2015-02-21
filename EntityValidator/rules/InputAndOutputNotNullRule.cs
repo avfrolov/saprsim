@@ -39,9 +39,9 @@ namespace EntityValidator.rules
             return (entity.getOutputs() == null || entity.getOutputs().Count() == 0);
         }
 
-        public void throwException()
+        public ValidationError explain()
         {
-            throw new InputOrOutputNullException();
+            return new ValidationError("что-то не так(");
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Entities;
+using EntityValidator;
+using EntityValidator.exeptions;
 using EntityValidator.validator;
 using Simulation;
 using System;
@@ -9,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Kernel
 {
-    public class Performer
+    public class Controller
     {
 
         private List<Entity> entities;
 
-        public Performer(List<Entity> entities)
+        public Controller(List<Entity> entities)
         {
             this.entities = entities;
         }
@@ -33,9 +35,21 @@ namespace Kernel
                 model.addEntity(ent);
 
             SystemValidator validator = new SystemValidator();
-            validator.startValidation();
-           
-            Simulation.Simulation.simulate();
+            ValidationResult result = validator.startValidation();
+
+            if (result.Success)
+            {
+                Simulation.Simulation.simulate();
+            } 
+            else
+            {
+                ValidationException ex = new ValidationException();
+                foreach(ValidationError err in result.Errors)
+                {
+                    ex.addError(err.Message, err.FailedEntity);
+                }
+                throw ex;
+            }
         }
 
         public double SimulationTime

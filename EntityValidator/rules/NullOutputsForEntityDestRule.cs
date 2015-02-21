@@ -27,9 +27,9 @@ namespace EntityValidator.rules
             return false;
         }
 
-        public void throwException()
+        public ValidationError explain()
         {
-            throw new NullEntityDestOutputsException();
+            return new ValidationError("Входной порт сущности 'Конец' не задан");
         }
     }
 }

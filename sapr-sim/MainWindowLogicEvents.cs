@@ -16,13 +16,13 @@ namespace sapr_sim
         {            
             TransformerService ts = new TransformerService();
             List<Entity> entities = ts.transform(currentCanvas.Children);
-            Performer performer = new Performer(entities);
+            Controller controller = new Controller(entities);
             try
             {
-                performer.simulate();
-                MessageBox.Show("Результат выполнения моделирования - " + performer.SimulationTime + " условных единиц времени");
+                controller.simulate();
+                MessageBox.Show("Результат выполнения моделирования - " + controller.SimulationTime + " условных единиц времени");
             } 
-            catch(Exception ex)
+            catch(ValidationException ex)
             {
                 MessageBox.Show(ex.Message, "Ошибка валидации");
             }

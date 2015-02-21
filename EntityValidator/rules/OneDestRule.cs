@@ -30,9 +30,9 @@ namespace EntityValidator.rules
             else return false;
         }
 
-        public void throwException()
+        public ValidationError explain()
         {
-            throw new NotOneDestException();
+            return new ValidationError("Сущность 'Конец' не найдена");
         }
     }
 }

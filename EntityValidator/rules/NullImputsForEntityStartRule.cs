@@ -27,9 +27,9 @@ namespace EntityValidator.rules
             return false;
         }
 
-        public void throwException()
+        public ValidationError explain()
         {
-            throw new NullEntityStartInputsException();
+            return new ValidationError("Выходной порт сущности 'Старт' не задан");
         }
     }
 }
