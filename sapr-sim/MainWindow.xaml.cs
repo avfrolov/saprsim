@@ -55,6 +55,11 @@ namespace sapr_sim
             createNewTab();            
         }
 
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteShapeCommand(selected, null);
+        }
+
         private void createNewTab()
         {
             ClosableTabItem theTabItem = new ClosableTabItem();

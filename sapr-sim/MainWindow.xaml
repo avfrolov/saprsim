@@ -34,7 +34,7 @@
                 <MenuItem Header="Копировать" InputGestureText="Ctrl+C" IsEnabled="False"/>
                 <MenuItem Header="Вставить" InputGestureText="Ctrl+V" IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Header="Удалить" InputGestureText="Del" IsEnabled="False"/>
+                <MenuItem Header="Удалить" InputGestureText="Del" Click="Delete_Click"/>
                 <MenuItem Header="Выделить все" InputGestureText="Ctrl+A" IsEnabled="False"/>
             </MenuItem>
             <MenuItem Header="Инструменты">
