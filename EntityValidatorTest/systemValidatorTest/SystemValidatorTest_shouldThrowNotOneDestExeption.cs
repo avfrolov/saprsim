@@ -20,7 +20,6 @@ namespace EntityValidatorTest.systemValidatorTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotOneDestException))]
         public void test_shouldThrowNotOneDestException()
         {
             instance.addEntity(new EntityStart());
@@ -29,7 +28,7 @@ namespace EntityValidatorTest.systemValidatorTest
 
             IValidator validator = new SystemValidator();
 
-            validator.startValidation();
+            Assert.IsFalse(validator.startValidation().Success);
         }
 
     }

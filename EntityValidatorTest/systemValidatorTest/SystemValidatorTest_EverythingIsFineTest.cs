@@ -48,7 +48,7 @@ namespace EntityValidatorTest.systemValidatorTest
 
             IValidator validator = new SystemValidator();
             
-            Assert.IsTrue(validator.startValidation());
+            Assert.IsTrue(validator.startValidation().Success);
         }   
         
     }
