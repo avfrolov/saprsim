@@ -106,5 +106,11 @@ namespace Entities
         }
 
         public abstract void execute();
+
+        public abstract bool canUseAsInput(Entity entity);
+
+        public abstract bool canUseAsOutput(Entity entity);
+
+
     }
 }

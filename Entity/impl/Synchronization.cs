@@ -25,5 +25,15 @@ namespace Entities.impl
                 getReadyProjectQueue().Remove(proj);
             }
         }
+
+        public override bool canUseAsInput(Entity entity)
+        {
+            return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityStart;
+        }
+
+        public override bool canUseAsOutput(Entity entity)
+        {
+            return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityDestination;
+        }
     }
 }

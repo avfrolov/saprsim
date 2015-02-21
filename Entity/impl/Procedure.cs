@@ -37,6 +37,21 @@ namespace Entities.impl
             }
         }
 
+        public override bool canUseAsInput(Entity entity)
+        {
+            return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityStart;
+        }
+
+        public override bool canUseAsOutput(Entity entity)
+        {
+            return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityDestination;
+        }
+
+        public void addResource(Resource res)
+        {
+            resources.Add(res);
+        }
+
         private double getNeedTime(double overallEfficiency, int complexity)
         {
             foreach (Resource res in resources)
@@ -58,9 +73,5 @@ namespace Entities.impl
             project.performance += needTime / sumPrice;
         }
 
-        public void addResource(Resource res)
-        {
-            resources.Add(res);
-        }
     }
 }

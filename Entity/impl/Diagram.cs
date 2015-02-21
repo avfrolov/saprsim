@@ -10,5 +10,15 @@ namespace Entities.impl
     {
 
         public override void execute() { }
+
+        public override bool canUseAsInput(Entity entity)
+        {
+            return true;
+        }
+
+        public override bool canUseAsOutput(Entity entity)
+        {
+            return true;
+        }
     }
 }

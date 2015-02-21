@@ -1,5 +1,4 @@
-﻿
-using Entities;
+﻿using Entities;
 using EntityValidator.validator;
 using Simulation;
 using System;
@@ -12,8 +11,17 @@ namespace Kernel
 {
     public class Performer
     {
-        public void simulate(List<Entity> entities)
+
+        private List<Entity> entities;
+
+        public Performer(List<Entity> entities)
         {
+            this.entities = entities;
+        }
+
+        public void simulate()
+        {
+            
             Model model = Model.Instance;
 
             // clear everything
@@ -28,6 +36,11 @@ namespace Kernel
             validator.startValidation();
            
             Simulation.Simulation.simulate();
+        }
+
+        public double SimulationTime
+        {
+            get { return Timer.Instance.getTime(); }
         }
     }
 }

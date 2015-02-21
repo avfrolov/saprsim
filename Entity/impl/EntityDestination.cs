@@ -25,5 +25,15 @@ namespace Entities.impl
                 prj.state = State.DONE;
             }
         }
+
+        public override bool canUseAsInput(Entity entity)
+        {
+            return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityStart || entity is DecisionMaker;
+        }
+
+        public override bool canUseAsOutput(Entity entity)
+        {
+            return false;
+        }
     }
 }

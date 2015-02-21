@@ -34,6 +34,16 @@ namespace Entities.impl
             changeProbs(output);
         }
 
+        public override bool canUseAsInput(Entity entity)
+        {
+            return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityStart;
+        }
+
+        public override bool canUseAsOutput(Entity entity)
+        {
+            return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityDestination;
+        }
+
         //ololo govnocod here. Should be refactor as soon as possible
         private void parseImpurtParams()
         {

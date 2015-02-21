@@ -22,7 +22,7 @@ namespace EntityTransformator
             
             foreach(UIElement e in elements)
             {
-                // skip no logic ui entity
+                // skip no logic ui entities
                 if (e is sapr_sim.Figures.Label || e is Port || e is Connector || e is Resource) continue;
                 
                 Transformer transformer = TransformerFactory.getTransformer(e.GetType());
@@ -46,9 +46,18 @@ namespace EntityTransformator
                     {
                         Entity realSrc = map[src];
                         Entity realDest = map[dest];
-
-                        realSrc.addOutput(realDest);
-                        realDest.addInput(realSrc);
+                        
+                        // protection for random line connection
+                        if (realSrc.canUseAsOutput(realDest) && realDest.canUseAsInput(realSrc))
+                        {
+                            realSrc.addOutput(realDest);
+                            realDest.addInput(realSrc);
+                        } 
+                        else
+                        {
+                            realSrc.addInput(realDest);
+                            realDest.addOutput(realSrc);
+                        }
                     }
                 }
                 else if (e is Resource)
@@ -56,8 +65,20 @@ namespace EntityTransformator
                     Resource resource = e as Resource;
                     List<Connector> connectors = ConnectorFinder.find(elements, resource);
 
-                    UIEntity procedure = connectors[0].SourcePort != null ? connectors[0].SourcePort.Owner : connectors[0].DestinationPort.Owner;
-                    addAdditionalRelations(map[procedure], new Entities.impl.Resource() { efficiency = resource.Efficiency });
+                    if (connectors.Count > 0)
+                    {
+                        UIEntity procedure = null;
+                        if (connectors[0].SourcePort != null)
+                        {
+                            if (connectors[0].SourcePort.Owner is Procedure)
+                                procedure = connectors[0].SourcePort.Owner;
+                            else if (connectors[0].DestinationPort.Owner is Procedure)
+                                procedure = connectors[0].DestinationPort.Owner;
+                        }
+                        
+                        if (procedure != null)
+                            addAdditionalRelations(map[procedure], new Entities.impl.Resource() { efficiency = resource.Efficiency });
+                    }
                 }
             }
 
