@@ -11,7 +11,7 @@ namespace EntityTransformator.Transformers
 
         public Entities.Entity transform(sapr_sim.Figures.UIEntity entity)
         {
-            return new Entities.impl.Synchronization();
+            return new Entities.impl.Synchronization() { name = entity.EntityName };
         }
     }
 }

@@ -13,7 +13,17 @@ namespace Kernel
 
         public void addError(string message, List<Entity> entities)
         {
-            errors.Add(message, entities);
+            if (errors.ContainsKey(message))
+            {
+                List<Entity> failed = errors[message];
+                failed.AddRange(entities);
+                errors.Remove(message);
+                errors.Add(message, failed);
+            }
+            else
+            {
+                errors.Add(message, entities);
+            }
         }
 
         public void addError(string message, Entity entity)
@@ -21,6 +31,11 @@ namespace Kernel
             List<Entity> entities = new List<Entity>();
             entities.Add(entity);
             addError(message, entities);
+        }
+
+        public Dictionary<string, List<Entity>> Errors
+        {
+            get { return errors; }
         }
 
     }

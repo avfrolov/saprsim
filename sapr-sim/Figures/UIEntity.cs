@@ -26,7 +26,7 @@ namespace sapr_sim.Figures
 
         protected UIParam<String> textParam = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM);
 
-        public static BitmapEffect defaultBitmapEffect(UIElement element)
+        public void defaultBitmapEffect()
         {
             // http://stackoverflow.com/questions/4022746/wpf-add-a-dropshadow-effect-to-an-element-from-code-behind
             DropShadowBitmapEffect myDropShadowEffect = new DropShadowBitmapEffect();
@@ -50,7 +50,17 @@ namespace sapr_sim.Figures
             // The range is 0-1.
             myDropShadowEffect.Opacity = 0.5;
 
-            return myDropShadowEffect;
+            BitmapEffect = myDropShadowEffect;
+        }
+
+        public void errorBitmapEffect()
+        {
+            BitmapEffect = new DropShadowBitmapEffect() { ShadowDepth = 10, Color = Colors.Red };
+        }
+
+        public void selectedBitmapEffect()
+        {
+            BitmapEffect = new DropShadowBitmapEffect() { ShadowDepth = 0, Color = Colors.Gray };
         }
 
         public void putMovingCoordinate(UIEntity entity, double xShape, double yShape, double xCanvas, double yCanvas)
@@ -85,12 +95,17 @@ namespace sapr_sim.Figures
             get { return label; }
         }
 
+        public string EntityName
+        {
+            get { return textParam.Value; }
+        }
+
         public UIEntity()
         {
             StrokeThickness = 1;
             Stroke = Brushes.Black;
             Fill = Brushes.LemonChiffon;
-            BitmapEffect = defaultBitmapEffect(this);
+            defaultBitmapEffect();
         }
 
         public List<Port> getPorts()

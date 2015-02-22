@@ -35,5 +35,15 @@ namespace Entities.impl
         {
             return false;
         }
+
+        public override bool correctInputCount()
+        {
+            return input.Count == 1;
+        }
+
+        public override bool correctOutputCount()
+        {
+            return output.Count == 0;
+        }
     }
 }

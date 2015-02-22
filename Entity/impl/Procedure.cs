@@ -52,6 +52,16 @@ namespace Entities.impl
             resources.Add(res);
         }
 
+        public override bool correctInputCount()
+        {
+            return input.Count == 1;
+        }
+
+        public override bool correctOutputCount()
+        {
+            return output.Count == 1;
+        }
+
         private double getNeedTime(double overallEfficiency, int complexity)
         {
             foreach (Resource res in resources)

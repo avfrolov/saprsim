@@ -8,11 +8,11 @@ namespace Entities
 {
     public abstract class Entity
     {
-        String name {get; set;}
+        public String name {get; set;}
         long id {get; set;}
 
-        private List<Entity> input = new List<Entity>();
-        private List<Entity> output = new List<Entity>();
+        protected List<Entity> input = new List<Entity>();
+        protected List<Entity> output = new List<Entity>();
 
         private List<Project> notReadyProjectQueue = new List<Project>();
         private List<Project> readyProjectQueue = new List<Project>();
@@ -32,6 +32,11 @@ namespace Entities
             this.input.Add(input);
         }
 
+        public bool hasInputs()
+        {
+            return input.Count > 0;
+        }
+
         public List<Entity> getOutputs()
         {
             return output;
@@ -45,6 +50,11 @@ namespace Entities
         public void addOutput(Entity output)
         {
             this.output.Add(output);
+        }
+
+        public bool hasOutputs()
+        {
+            return output.Count > 0;
         }
 
         public List<Project> getReadyProjectQueue()
@@ -111,6 +121,14 @@ namespace Entities
 
         public abstract bool canUseAsOutput(Entity entity);
 
+        public abstract bool correctInputCount();
+
+        public abstract bool correctOutputCount();
+
+        public override string ToString()
+        {
+            return name;
+        }
 
     }
 }

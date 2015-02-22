@@ -13,7 +13,7 @@ namespace EntityTransformator.Transformers
 
         public Entities.Entity transform(UIEntity entity)
         {
-            return new EntityDestination();
+            return new EntityDestination() { name = entity.EntityName };
         }
     }
 }

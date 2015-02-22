@@ -9,9 +9,9 @@ using EntityValidator.exeptions;
 
 namespace EntityValidator.rules
 {
-    public class OneStartRule : IRule
+    class OneDestinationRule : IRule
     {
-        private List<Entity> starts = new List<Entity>();
+        private List<Entity> destinations = new List<Entity>();
         private List<Entity> allEntities = Model.Instance.getEntities();
 
         public Boolean validate()
@@ -21,25 +21,25 @@ namespace EntityValidator.rules
 
             foreach (Entity entity in allEntities)
             {
-                if (entity is EntityStart)
-                    starts.Add(entity);
+                if (entity is EntityDestination)
+                    destinations.Add(entity);
             }
 
-            return starts.Count == 1;
+            return destinations.Count == 1;                
         }
 
         public List<ValidationError> explain()
         {
             List<ValidationError> errors = new List<ValidationError>();
-            if (starts.Count == 0)
+            if (destinations.Count == 0)
             {
-                errors.Add(new ValidationError("Сущность 'Старт' не найдена"));
+                errors.Add(new ValidationError("Сущность 'Конец' не найдена"));
             }
-            else if (starts.Count > 1)
+            else if (destinations.Count > 1)
             {
-                foreach (Entity start in starts)
+                foreach(Entity dest in destinations)
                 {
-                    errors.Add(new ValidationError("Лишняя сущность 'Старт'", start));
+                    errors.Add(new ValidationError("Лишняя сущность 'Конец'", dest));
                 }
             }
             return errors;

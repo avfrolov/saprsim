@@ -13,7 +13,7 @@ namespace EntityTransformator.Transformers
         public Entities.Entity transform(sapr_sim.Figures.UIEntity entity)
         {
             Procedure p = entity as Procedure;
-            return new Entities.impl.Procedure() { manHour = p.ManHour };
+            return new Entities.impl.Procedure() { manHour = p.ManHour, name = p.EntityName };
         }
     }
 }

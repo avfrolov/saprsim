@@ -101,6 +101,7 @@
     <Compile Include="Transformers\Transformer.cs" />
     <Compile Include="Utils\ConnectorFinder.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
+    <Compile Include="WPFCustomElements\ListBoxItemError.cs" />
     <Compile Include="WPFCustomElements\ScrollableCanvas.cs" />
     <Compile Include="WPFCustomElements\UserControls\ClosableHeader.xaml.cs">
       <DependentUpon>ClosableHeader.xaml</DependentUpon>

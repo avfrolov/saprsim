@@ -11,7 +11,7 @@ namespace EntityTransformator.Transformers
 
         public Entities.Entity transform(sapr_sim.Figures.UIEntity entity)
         {
-            return new Entities.impl.Parallel();
+            return new Entities.impl.Parallel() { name = entity.EntityName };
         }
     }
 }

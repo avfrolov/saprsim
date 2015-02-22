@@ -14,10 +14,10 @@ namespace EntityValidator.validator
         public SystemValidator() //add here new rules for include them into validation
         {
             rules.Add(new OneStartRule());
-            rules.Add(new OneDestRule());
-            rules.Add(new InputAndOutputNotNullRule());
-            rules.Add(new NullInputsForEntityStartRule());
-            rules.Add(new NullOutputsForEntityDestRule());
+            rules.Add(new OneDestinationRule());
+            rules.Add(new InputAndOutputNotEmptyRule());
+            rules.Add(new EntityHasCorrectInputsAndOutputsRule());
+            rules.Add(new ResourceConnectedToProcedureRule());
         }      
 
         public ValidationResult startValidation()
@@ -28,7 +28,7 @@ namespace EntityValidator.validator
             {
                 if (!rule.validate())
                 {
-                    result.addError(rule.explain());
+                    result.addErrors(rule.explain());
                 }
             }
 

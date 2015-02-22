@@ -23,7 +23,7 @@ namespace sapr_sim
         {
             if (selected != null && !captured)
             {
-                selected.BitmapEffect = UIEntity.defaultBitmapEffect(selected);
+                selected.defaultBitmapEffect();
                 selected = null;
             }
         }
@@ -34,7 +34,7 @@ namespace sapr_sim
             {
                 // clear bitmap effect for previous selected entity
                 if (selected != null)
-                    selected.BitmapEffect = UIEntity.defaultBitmapEffect(selected);
+                    selected.defaultBitmapEffect();
 
                 selected = (UIEntity)sender;
                 Mouse.Capture(selected);
@@ -66,7 +66,7 @@ namespace sapr_sim
                 }
 
                 if (!(selected is Connector && selected is Port))
-                    selected.BitmapEffect = new DropShadowBitmapEffect() { ShadowDepth = 0, Color = Colors.Red };
+                    selected.selectedBitmapEffect();
             }
             else if (e.ClickCount == 2 && !(sender is Port || sender is Connector))
             {

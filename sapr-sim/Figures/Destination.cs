@@ -35,6 +35,8 @@ namespace sapr_sim.Figures
             List<UIParam> param = base.getParams();
             // removing inheireted property 'projectsCount'
             param.RemoveAt(1);
+            // removing inheireted property 'complexity'
+            param.RemoveAt(1);
             return param;
         }
 

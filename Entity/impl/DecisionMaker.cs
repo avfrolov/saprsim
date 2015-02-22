@@ -20,7 +20,9 @@ namespace Entities.impl
         List<Double> probabilities = new List<Double>();
 
         double delta { get; set; }
+
         public ProbabilityChangeRule changeRule { get; set; }
+
         public override void execute() 
         {
             parseImpurtParams();
@@ -42,6 +44,17 @@ namespace Entities.impl
         public override bool canUseAsOutput(Entity entity)
         {
             return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityDestination;
+        }
+
+        public override bool correctInputCount()
+        {
+            return input.Count == 1;
+        }
+
+        public override bool correctOutputCount()
+        {
+            // hz
+            return true;
         }
 
         //ololo govnocod here. Should be refactor as soon as possible
@@ -122,5 +135,6 @@ namespace Entities.impl
                     probabilities[i] -= delta;
             }
         }
+
     }
 }

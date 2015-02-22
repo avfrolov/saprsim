@@ -20,5 +20,15 @@ namespace Entities.impl
         {
             return true;
         }
+
+        public override bool correctInputCount()
+        {
+            return true;
+        }
+
+        public override bool correctOutputCount()
+        {
+            return true;
+        }
     }
 }

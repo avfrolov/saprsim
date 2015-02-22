@@ -35,5 +35,15 @@ namespace Entities.impl
         {
             return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityDestination;
         }
+
+        public override bool correctInputCount()
+        {
+            return input.Count == 1;
+        }
+
+        public override bool correctOutputCount()
+        {
+            return output.Count == 2;
+        }
     }
 }

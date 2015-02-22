@@ -10,6 +10,7 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -188,9 +189,24 @@
                 </DockPanel>
             </Border>
             <Border Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Bottom" Grid.Column="1">
-                <TabControl Name="tabs"/>
-            </Border>
+                <TabControl Name="tabs"/>                
+            </Border>            
         </DockPanel>
 
+        <DockPanel Grid.Row="3">           
+            <TabControl>
+                <TabItem Name="errorsTab" Header="Ошибки">
+                    <ListBox Name="errorsListBox" MouseDoubleClick="errorsListBox_MouseLeftButtonDown"/>
+
+
+                </TabItem>
+                <TabItem Name="infoTab" Header="Информация">
+                    <TextBlock Name="infoTextBlock">
+                        Здесь будем выводить какую-нибудь отладочную информацию... <LineBreak/>
+                        Пока это можно сделать только из UI с помощью метода printInformation(string info)
+                    </TextBlock>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
     </Grid>
 </Window>

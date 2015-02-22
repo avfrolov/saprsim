@@ -53,7 +53,7 @@ namespace EntityTransformator
                             realSrc.addOutput(realDest);
                             realDest.addInput(realSrc);
                         } 
-                        else
+                        else if (realSrc.canUseAsInput(realDest) && realDest.canUseAsOutput(realSrc))
                         {
                             realSrc.addInput(realDest);
                             realDest.addOutput(realSrc);
@@ -83,6 +83,22 @@ namespace EntityTransformator
             }
 
             return realEntities;
+        }
+
+        public List<UIEntity> transform(List<Entity> elements)
+        {
+            List<UIEntity> uiEntities = new List<UIEntity>(elements.Count);
+
+            foreach(Entity e in elements)
+            { 
+                if (map.ContainsValue(e))
+                {
+                    UIEntity uie = map.FirstOrDefault(x => x.Value.Equals(e)).Key;
+                    if (uie != null)
+                        uiEntities.Add(uie);
+                }
+            }
+            return uiEntities;
         }
 
         // TODO create additional map service

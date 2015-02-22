@@ -214,5 +214,29 @@ namespace sapr_sim
             entity.MouseLeftButtonUp += Shape_MouseLeftButtonUp;
         }
 
+        private void printInformation(string info)
+        {
+            infoTextBlock.Text += info + Environment.NewLine;
+        }
+
+        private void errorsListBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            object selected = (sender as ListBox).SelectedItem;
+
+            // WTF? avoiding click for empty listbox
+            if (selected != null)
+            {
+                resetUIShadows(currentCanvas.Children);
+                ListBoxItemError error = selected as ListBoxItemError;
+                if (error.FailedEntities != null)
+                {
+                    foreach(UIEntity ent in error.FailedEntities)
+                    {
+                        ent.errorBitmapEffect();
+                    }
+                }
+            }
+        }
+
     }
 }

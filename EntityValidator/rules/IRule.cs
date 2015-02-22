@@ -10,6 +10,6 @@ namespace EntityValidator.rules
     public interface IRule
     {
         Boolean validate();
-        ValidationError explain();
+        List<ValidationError> explain();
     }
 }
