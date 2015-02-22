@@ -15,6 +15,7 @@ namespace EntityTransformator
     {
 
         private Dictionary<UIEntity, Entity> map = new Dictionary<UIEntity, Entity>();
+        private List<Entities.Resource> resources = new List<Entities.Resource>();
         
         public List<Entity> transform(UIElementCollection elements)
         {
@@ -23,7 +24,7 @@ namespace EntityTransformator
             foreach(UIElement e in elements)
             {
                 // skip no logic ui entities
-                if (e is sapr_sim.Figures.Label || e is Port || e is Connector || e is Resource) continue;
+                if (e is sapr_sim.Figures.Label || e is Port || e is Connector || e is sapr_sim.Figures.Resource) continue;
                 
                 Transformer transformer = TransformerFactory.getTransformer(e.GetType());
                 Entity re = transformer.transform(e as UIEntity);
@@ -60,24 +61,27 @@ namespace EntityTransformator
                         }
                     }
                 }
-                else if (e is Resource)
+                else if (e is sapr_sim.Figures.Resource)
                 {
-                    Resource resource = e as Resource;
+                    sapr_sim.Figures.Resource resource = e as sapr_sim.Figures.Resource;
                     List<Connector> connectors = ConnectorFinder.find(elements, resource);
+
+                    Entities.Resource res = new Entities.Resource() { efficiency = resource.Efficiency };
+                    resources.Add(res);
 
                     if (connectors.Count > 0)
                     {
                         UIEntity procedure = null;
                         if (connectors[0].SourcePort != null)
                         {
-                            if (connectors[0].SourcePort.Owner is Procedure)
-                                procedure = connectors[0].SourcePort.Owner;
-                            else if (connectors[0].DestinationPort.Owner is Procedure)
-                                procedure = connectors[0].DestinationPort.Owner;
-                        }
-                        
-                        if (procedure != null)
-                            addAdditionalRelations(map[procedure], new Entities.impl.Resource() { efficiency = resource.Efficiency });
+                            UIEntity src = connectors[0].SourcePort.Owner;
+                            UIEntity dst = connectors[0].DestinationPort.Owner;
+                            procedure = src is Procedure ? src : dst is Procedure ? dst : null;
+                            if (procedure != null)
+                            {
+                                addAdditionalRelations(map[procedure], res);
+                            }                                
+                        }                         
                     }
                 }
             }
@@ -101,8 +105,13 @@ namespace EntityTransformator
             return uiEntities;
         }
 
+        public List<Entities.Resource> getResources()
+        {
+            return resources;
+        }
+
         // TODO create additional map service
-        private void addAdditionalRelations(Entity src, Entities.impl.Resource dst)
+        private void addAdditionalRelations(Entity src, Entities.Resource dst)
         {
             if (src is Entities.impl.Procedure)
             {

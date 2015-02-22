@@ -48,7 +48,7 @@
     <Compile Include="impl\EntityStart.cs" />
     <Compile Include="impl\Parallel.cs" />
     <Compile Include="impl\Procedure.cs" />
-    <Compile Include="impl\Resource.cs" />
+    <Compile Include="Resource.cs" />
     <Compile Include="impl\Synchronization.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />

@@ -52,6 +52,11 @@ namespace Entities.impl
             resources.Add(res);
         }
 
+        public List<Resource> getResources()
+        {
+            return resources;
+        }
+
         public override bool correctInputCount()
         {
             return input.Count == 1;

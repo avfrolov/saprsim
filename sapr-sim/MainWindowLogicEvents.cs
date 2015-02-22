@@ -20,7 +20,7 @@ namespace sapr_sim
             resetUIShadows(currentCanvas.Children);
             TransformerService ts = new TransformerService();
             List<Entity> entities = ts.transform(currentCanvas.Children);
-            Controller controller = new Controller(entities);
+            Controller controller = new Controller(entities, ts.getResources());
             errorsListBox.Items.Clear();
             try
             {

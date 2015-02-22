@@ -17,7 +17,7 @@ namespace EntityValidator.validator
             rules.Add(new OneDestinationRule());
             rules.Add(new InputAndOutputNotEmptyRule());
             rules.Add(new EntityHasCorrectInputsAndOutputsRule());
-            rules.Add(new ResourceConnectedToProcedureRule());
+            rules.Add(new ResourceConnectedCorrectRule());
         }      
 
         public ValidationResult startValidation()

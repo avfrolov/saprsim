@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.impl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,6 @@ namespace Entities
     {
         private static Model instance = new Model();
 
-        static Model() { }
         private Model() { }
 
         public static Model Instance
@@ -26,6 +26,7 @@ namespace Entities
 
         private List<Entity> entities = new List<Entity>();
         private List<Project> projects = new List<Project>();
+        private List<Resource> resources = new List<Resource>();
 
         public void addEntity(Entity entity)
         {
@@ -42,9 +43,24 @@ namespace Entities
             projects.Add(project);
         }
 
-        public List<Project> getProject()
+        public List<Project> getProjects()
         {
             return projects;
+        }
+
+        public void addResource(Resource resource)
+        {
+            resources.Add(resource);
+        }
+
+        public List<Resource> getResources()
+        {
+            return resources;
+        }
+
+        public void setResources(List<Resource> resources)
+        {
+            this.resources = resources;
         }
     }
 }

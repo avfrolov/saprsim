@@ -15,22 +15,22 @@ namespace Kernel
     {
 
         private List<Entity> entities;
+        private Model model = Model.Instance;
 
-        public Controller(List<Entity> entities)
+        public Controller(List<Entity> entities, List<Resource> resources)
         {
+            // clear everything
+            model.getEntities().Clear();
+            model.getProjects().Clear();
+            model.getResources().Clear();
+            Timer.Instance.resetTime();
+
             this.entities = entities;
+            model.setResources(resources);
         }
 
         public void simulate()
         {
-            
-            Model model = Model.Instance;
-
-            // clear everything
-            model.getEntities().Clear();
-            model.getProject().Clear();
-            Timer.Instance.resetTime();
-
             foreach (Entity ent in entities)
                 model.addEntity(ent);
 
