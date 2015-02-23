@@ -28,6 +28,11 @@ namespace sapr_sim
        
         private bool firstConnect;
 
+        // 300 - width of left panel (it's a constant in xaml)
+        // 100 - random +- value :)
+        private const int X_OFFSET = -300;
+        private const int Y_OFFSET = -100;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -126,13 +131,11 @@ namespace sapr_sim
         {
             attachMovingEvents(currentEntity);
 
-            // 200 - width of tool panel (it's a constant in xaml)
-            // 100 - random +- value :)
-            Canvas.SetLeft(currentEntity, position.X - 200);
-            Canvas.SetTop(currentEntity, position.Y - 100);
+            Canvas.SetLeft(currentEntity, position.X + X_OFFSET);
+            Canvas.SetTop(currentEntity, position.Y + Y_OFFSET);
 
             currentCanvas.Children.Add(currentEntity);
-            currentEntity.createAndDraw(position.X - 200, position.Y - 100);
+            currentEntity.createAndDraw(position.X + X_OFFSET, position.Y + Y_OFFSET);
 
             foreach (Port p in currentEntity.getPorts())
             {

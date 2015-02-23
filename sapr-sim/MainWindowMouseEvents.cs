@@ -1,4 +1,5 @@
 ﻿using sapr_sim.Figures;
+using sapr_sim.Parameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace sapr_sim
                 if (selected != null)
                     selected.defaultBitmapEffect();
 
-                selected = (UIEntity)sender;
+                selected = sender as UIEntity;
                 Mouse.Capture(selected);
                 captured = true;
 
@@ -67,6 +68,8 @@ namespace sapr_sim
 
                 if (!(selected is Connector && selected is Port))
                     selected.selectedBitmapEffect();
+
+                ParameterProccesor.drawParameters(selected.getParams(), propertiesPanel, false);
             }
             else if (e.ClickCount == 2 && !(sender is Port || sender is Connector))
             {

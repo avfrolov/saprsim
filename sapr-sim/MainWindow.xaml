@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:sapr_sim="clr-namespace:sapr_sim.WPFCustomElements;assembly="
-        Title="SAPR-SIM v. 0.1" Height="350" Width="525" WindowState="Maximized" Icon="Resources/Icon_PlaySolid.ico">
+        Title="SAPR-SIM v. 0.1" Height="768" Width="1024" MinHeight="768" MinWidth="1024" WindowState="Maximized" Icon="Resources/Icon_PlaySolid.ico">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -150,60 +150,97 @@
         </ToolBarPanel>
 
         <DockPanel Grid.Row="2" FocusManager.IsFocusScope="True">
-            <Border Width="200" Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
-                <DockPanel Background="AliceBlue" VerticalAlignment="Top">
-                    <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Center" Text="Инструменты" Name="EntitiesNameDock"/>
-                    <Grid DockPanel.Dock="Bottom" Width="200" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Left">
+                    <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <!--  Non-functional entities-->
-                        <Button Grid.Row="0" Grid.Column="0" Content="{StaticResource Arrow}"  Click="ArrowButton_Click" ToolTip="Указатель"/>
-                        <Button Grid.Row="0" Grid.Column="1" Content="{StaticResource Label}"  Click="LabelButton_Click" ToolTip="Надпись"/>
 
-                        <!--  Functional entities-->
-                        <Button Grid.Row="1" Grid.Column="0" Content="{StaticResource Procedure}" Click="ProcedureButton_Click" ToolTip="Процедура"/>
-                        <Button Grid.Row="1" Grid.Column="1" Content="{StaticResource Resource}" Click="ResourceButton_Click" ToolTip="Ресурс"/>
-                        <Button Grid.Row="1" Grid.Column="2" Content="{StaticResource Sync}" Click="SyncButton_Click" ToolTip="Синхронизация"/>
-                        <Button Grid.Row="1" Grid.Column="3" Content="{StaticResource Multithread}" Click="ParallelButton_Click" ToolTip="Параллельность"/>
-                        <Button Grid.Row="2" Grid.Column="0" Content="{StaticResource If}" Click="DecisionButton_Click" ToolTip="Решение"/>
-                        <Button Grid.Row="2" Grid.Column="1" Content="{StaticResource Collector}" Click="CollectorButton_Click" ToolTip="Коллектор"/>
-                        <Button Grid.Row="2" Grid.Column="2" Content="{StaticResource EntitySource}" Click="EntitySourceButton_Click" ToolTip="Исток" />
-                        <Button Grid.Row="2" Grid.Column="3" Content="{StaticResource EntityDestination}" Click="EntityDestinationButton_Click" ToolTip="Сток"/>
+                        <Border Grid.Row="0" Background="Transparent" BorderBrush="Black" BorderThickness="1">
+                            <TreeView  HorizontalAlignment="Left" Width="250">
+                                <TreeViewItem Header="Имя Открытого Проекта" IsExpanded="True">
+                                    <TreeViewItem Header="Модель 1"></TreeViewItem>
+                                    <TreeViewItem Header="Модель 2"></TreeViewItem>
+                                    <TreeViewItem Header="Модель 3"></TreeViewItem>
+                                </TreeViewItem>
+                            </TreeView>
+                        </Border>
 
-                        <!--  Lines-->
-                        <Button Grid.Row="3" Grid.Column="0" Content="{StaticResource Line}" ToolTip="Линия" Click="LineButton_Click"/>
-                        <Button Grid.Row="3" Grid.Column="1" Content="{StaticResource CurveLine}" ToolTip="Линия с изломом" IsEnabled="False"/>
-                    </Grid>
+                        <Border Grid.Row="1" Background="White" BorderBrush="Black" BorderThickness="1">
+                            <StackPanel Name="propertiesPanel"/>
+                        </Border>
+                    </Grid>                    
+                </Border>
+                <Border Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top" Grid.Column="1">
+                    <TabControl Name="tabs"/>                
+                </Border>
+                <Border Grid.Column="2" Width="50" Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Right">
+                    <DockPanel Background="AliceBlue" VerticalAlignment="Top">
+                        <Grid DockPanel.Dock="Bottom" Width="50" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <!--  Non-functional entities-->
+                            <Button Grid.Row="0" Content="{StaticResource Arrow}"  Click="ArrowButton_Click" ToolTip="Указатель"/>
+                            <Button Grid.Row="1" Content="{StaticResource Label}"  Click="LabelButton_Click" ToolTip="Надпись"/>
 
-                </DockPanel>
-            </Border>
-            <Border Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Bottom" Grid.Column="1">
-                <TabControl Name="tabs"/>                
-            </Border>            
+                            <!--  Functional entities-->
+                            <Button Grid.Row="2" Content="{StaticResource Procedure}" Click="ProcedureButton_Click" ToolTip="Процедура"/>
+                            <Button Grid.Row="3" Content="{StaticResource Resource}" Click="ResourceButton_Click" ToolTip="Ресурс"/>
+                            <Button Grid.Row="4" Content="{StaticResource Sync}" Click="SyncButton_Click" ToolTip="Синхронизация"/>
+                            <Button Grid.Row="5" Content="{StaticResource Multithread}" Click="ParallelButton_Click" ToolTip="Параллельность"/>
+                            <Button Grid.Row="6" Content="{StaticResource If}" Click="DecisionButton_Click" ToolTip="Блок принятия решений"/>
+                            <Button Grid.Row="7" Content="{StaticResource Collector}" Click="CollectorButton_Click" ToolTip="Коллектор"/>
+                            <Button Grid.Row="8" Content="{StaticResource EntitySource}" Click="EntitySourceButton_Click" ToolTip="Старт" />
+                            <Button Grid.Row="9" Content="{StaticResource EntityDestination}" Click="EntityDestinationButton_Click" ToolTip="Конец"/>
+
+                            <!--  Lines-->
+                            <Button Grid.Row="10" Content="{StaticResource Line}" ToolTip="Линия" Click="LineButton_Click"/>
+                            <Button Grid.Row="11" Content="{StaticResource CurveLine}" ToolTip="Линия с изломом" IsEnabled="False"/>
+                        </Grid>
+
+                    </DockPanel>
+                </Border>
+            </Grid>
         </DockPanel>
 
         <DockPanel Grid.Row="3">           
             <TabControl>
                 <TabItem Name="errorsTab" Header="Ошибки">
                     <ListBox Name="errorsListBox" MouseDoubleClick="errorsListBox_MouseLeftButtonDown"/>
-
-
                 </TabItem>
                 <TabItem Name="infoTab" Header="Информация">
                     <TextBlock Name="infoTextBlock">
                         Здесь будем выводить какую-нибудь отладочную информацию... <LineBreak/>
-                        Пока это можно сделать только из UI с помощью метода printInformation(string info)
+                        Пока это можно сделать только из UI с помощью метода printInformation(string info) <LineBreak/>
+                        Но стоит что-то поискать на тему event'ов...
                     </TextBlock>
                 </TabItem>
             </TabControl>

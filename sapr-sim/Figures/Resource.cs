@@ -24,9 +24,6 @@ namespace sapr_sim.Figures
 
         private UIParam<Double> efficiency = new UIParam<Double>(0, new BetweenDoubleParamValidator(0.0, 1.0), "Эффективность");
 
-        private const int innerLabelOffsetX = 28;
-        private const int innerLabelOffsetY = 22;
-
         public Resource(Canvas canvas) : base(canvas)
         {
             bound = new Rect(new Size(90, 60));

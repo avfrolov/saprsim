@@ -29,7 +29,7 @@ namespace sapr_sim
             this.parameters = param;
             this.owner = owner;
 
-            processParams();
+            ParameterProccesor.drawParameters(parameters, sp, true);
             addButtons();
         }
 
@@ -57,11 +57,26 @@ namespace sapr_sim
             this.Close();
         }
 
-        private void processParams()
+        private void addButtons()
         {
+            WrapPanel wp = new WrapPanel() { HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 15, 0, 0) };
+            Button ok = new Button() { IsDefault = true, Name = "btnDialogOk", MinWidth = 60, Margin = new Thickness(0, 0, 10, 0), Content = "Ок" };
+            Button cancel = new Button() { IsCancel = true, MinWidth = 60, Content = "Отмена" };
+            ok.Click += btnDialogOk_Click;
+            wp.Children.Add(ok);
+            wp.Children.Add(cancel);
+            sp.Children.Add(wp);
+        }
+    }
+
+    public static class ParameterProccesor
+    {
+        public static void drawParameters(List<UIParam> parameters, StackPanel drawPanel, bool paramsEnabled)
+        {
+            drawPanel.Children.Clear();
             foreach (UIParam entry in parameters)
             {
-                
+
                 DockPanel sprow = new DockPanel() { LastChildFill = true, Margin = new Thickness(2, 2, 2, 5) };
                 Label l = new Label() { Content = entry.DisplayedText };
                 UIElement control = entry.ContentControl;
@@ -72,25 +87,15 @@ namespace sapr_sim
                         Text = entry.RawValue.ToString(),
                         HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                         MaxWidth = 100,
-                        MinWidth = 100
+                        MinWidth = 100,
+                        IsEnabled = paramsEnabled
                     }; ;
                 }
 
                 sprow.Children.Add(l);
                 sprow.Children.Add(control);
-                sp.Children.Add(sprow);
+                drawPanel.Children.Add(sprow);
             }
-        }
-
-        private void addButtons()
-        {
-            WrapPanel wp = new WrapPanel() { HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 15, 0, 0) };
-            Button ok = new Button() { IsDefault = true, Name = "btnDialogOk", MinWidth = 60, Margin = new Thickness(0, 0, 10, 0), Content = "Ок" };
-            Button cancel = new Button() { IsCancel = true, MinWidth = 60, Content = "Отмена" };
-            ok.Click += btnDialogOk_Click;
-            wp.Children.Add(ok);
-            wp.Children.Add(cancel);
-            sp.Children.Add(wp);
         }
     }
 }
