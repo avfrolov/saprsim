@@ -234,7 +234,7 @@
         <DockPanel Grid.Row="3">           
             <TabControl>
                 <TabItem Name="errorsTab" Header="Ошибки">
-                    <ListBox Name="errorsListBox" MouseDoubleClick="errorsListBox_MouseLeftButtonDown"/>
+                    <ListBox Name="errorsListBox" MouseDoubleClick="errorsListBox_MouseLeftButtonDown" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
                 </TabItem>
                 <TabItem Name="infoTab" Header="Информация">
                     <TextBlock Name="infoTextBlock">

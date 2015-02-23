@@ -25,6 +25,7 @@ namespace sapr_sim
             if (selected != null && !captured)
             {
                 selected.defaultBitmapEffect();
+                propertiesPanel.Children.Clear();
                 selected = null;
             }
         }
