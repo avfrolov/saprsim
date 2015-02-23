@@ -87,8 +87,11 @@
     <Compile Include="ParametersDialog.xaml.cs">
       <DependentUpon>ParametersDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Parameters\Validators\BetweenDoubleParamValidator.cs" />
     <Compile Include="Parameters\Validators\ParamValidator.cs" />
     <Compile Include="Parameters\UIParam.cs" />
+    <Compile Include="Parameters\Validators\PositiveDoubleParamValidator.cs" />
+    <Compile Include="Parameters\Validators\PositiveIntegerParamValidator.cs" />
     <Compile Include="Transformers\TransformerFactory.cs" />
     <Compile Include="Transformers\TransformerService.cs" />
     <Compile Include="Transformers\CollectorTransformer.cs" />

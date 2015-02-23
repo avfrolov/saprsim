@@ -1,4 +1,5 @@
 ﻿using sapr_sim.Parameters;
+using sapr_sim.Parameters.Validators;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -21,7 +22,7 @@ namespace sapr_sim.Figures
 
         private Port port;
 
-        private UIParam<Double> efficiency = new UIParam<Double>(0, new DoubleParamValidator(), "Эффективность");
+        private UIParam<Double> efficiency = new UIParam<Double>(0, new BetweenDoubleParamValidator(0.0, 1.0), "Эффективность");
 
         private const int innerLabelOffsetX = 28;
         private const int innerLabelOffsetY = 22;

@@ -1,4 +1,5 @@
 ﻿using sapr_sim.Parameters;
+using sapr_sim.Parameters.Validators;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -17,8 +18,8 @@ namespace sapr_sim.Figures
 
         protected Port port;
 
-        private UIParam<Int32> projectsCount = new UIParam<Int32>(0, new IntegerParamValidator(), "Количество проектов");
-        private UIParam<Int32> complexity = new UIParam<Int32>(1, new IntegerParamValidator(), "Сложность проектов");
+        private UIParam<Int32> projectsCount = new UIParam<Int32>(1, new PositiveIntegerParamValidator(), "Количество проектов");
+        private UIParam<Int32> complexity = new UIParam<Int32>(1, new PositiveIntegerParamValidator(), "Сложность проектов");
 
         public Source(Canvas canvas) : base(canvas)
         {

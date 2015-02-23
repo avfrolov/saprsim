@@ -1,4 +1,5 @@
 ﻿using sapr_sim.Parameters;
+using sapr_sim.Parameters.Validators;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -21,7 +22,7 @@ namespace sapr_sim.Figures
 
         private Port inputPort, outputPort, resourcePort;
         
-        private UIParam<Double> manHour = new UIParam<Double>(0, new DoubleParamValidator(), "Человекочасы");        
+        private UIParam<Double> manHour = new UIParam<Double>(0.0, new PositiveDoubleParamValidator(), "Продолжительность");        
 
         public Procedure(Canvas canvas) : base(canvas)
         {

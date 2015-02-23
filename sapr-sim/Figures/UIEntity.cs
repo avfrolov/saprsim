@@ -60,7 +60,7 @@ namespace sapr_sim.Figures
 
         public void selectedBitmapEffect()
         {
-            BitmapEffect = new DropShadowBitmapEffect() { ShadowDepth = 0, Color = Colors.Gray };
+            BitmapEffect = new DropShadowBitmapEffect() { ShadowDepth = 5, Color = Colors.Blue };
         }
 
         public void putMovingCoordinate(UIEntity entity, double xShape, double yShape, double xCanvas, double yCanvas)

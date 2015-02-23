@@ -28,7 +28,8 @@ namespace sapr_sim
                 MessageBox.Show("Результат выполнения моделирования - " + controller.SimulationTime + " условных единиц времени");
             } 
             catch(ValidationException ex)
-            {                
+            {
+                errorsTab.IsSelected = true;
                 foreach(var err in ex.Errors)
                 {
                     errorsListBox.Items.Add(new ListBoxItemError(err.Key, ts.transform(err.Value)));
