@@ -73,28 +73,31 @@ namespace sapr_sim
     {
         public static void drawParameters(List<UIParam> parameters, StackPanel drawPanel, bool paramsEnabled)
         {
-            drawPanel.Children.Clear();
-            foreach (UIParam entry in parameters)
+            if (parameters != null)
             {
-
-                DockPanel sprow = new DockPanel() { LastChildFill = true, Margin = new Thickness(2, 2, 2, 5) };
-                Label l = new Label() { Content = entry.DisplayedText };
-                UIElement control = entry.ContentControl;
-                if (control == null)
+                drawPanel.Children.Clear();
+                foreach (UIParam entry in parameters)
                 {
-                    control = new TextBox()
-                    {
-                        Text = entry.RawValue.ToString(),
-                        HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
-                        MaxWidth = 100,
-                        MinWidth = 100,
-                        IsEnabled = paramsEnabled
-                    }; ;
-                }
 
-                sprow.Children.Add(l);
-                sprow.Children.Add(control);
-                drawPanel.Children.Add(sprow);
+                    DockPanel sprow = new DockPanel() { LastChildFill = true, Margin = new Thickness(2, 2, 2, 5) };
+                    Label l = new Label() { Content = entry.DisplayedText };
+                    UIElement control = entry.ContentControl;
+                    if (control == null)
+                    {
+                        control = new TextBox()
+                        {
+                            Text = entry.RawValue.ToString(),
+                            HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
+                            MaxWidth = 100,
+                            MinWidth = 100,
+                            IsEnabled = paramsEnabled
+                        }; ;
+                    }
+
+                    sprow.Children.Add(l);
+                    sprow.Children.Add(control);
+                    drawPanel.Children.Add(sprow);
+                }
             }
         }
     }
