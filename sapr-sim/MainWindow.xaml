@@ -213,9 +213,9 @@
 
                             <!--  Functional entities-->
                             <Button Grid.Row="2" Content="{StaticResource Procedure}" Click="ProcedureButton_Click" ToolTip="Процедура"/>
-                            <Button Grid.Row="3" Content="{StaticResource Resource}" Click="ResourceButton_Click" ToolTip="Ресурс"/>
-                            <Button Grid.Row="4" Content="{StaticResource Sync}" Click="SyncButton_Click" ToolTip="Синхронизация"/>
-                            <Button Grid.Row="5" Content="{StaticResource Multithread}" Click="ParallelButton_Click" ToolTip="Параллельность"/>
+                            <Button Grid.Row="3" Content="{StaticResource Resource}" Click="ResourceButton_Click" ToolTip="Ресурс"/>                            
+                            <Button Grid.Row="4" Content="{StaticResource Multithread}" Click="ParallelButton_Click" ToolTip="Параллельность"/>
+                            <Button Grid.Row="5" Content="{StaticResource Sync}" Click="SyncButton_Click" ToolTip="Синхронизация"/>
                             <Button Grid.Row="6" Content="{StaticResource If}" Click="DecisionButton_Click" ToolTip="Блок принятия решений"/>
                             <Button Grid.Row="7" Content="{StaticResource Collector}" Click="CollectorButton_Click" ToolTip="Коллектор"/>
                             <Button Grid.Row="8" Content="{StaticResource EntitySource}" Click="EntitySourceButton_Click" ToolTip="Старт" />

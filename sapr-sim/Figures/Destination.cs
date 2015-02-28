@@ -20,7 +20,7 @@ namespace sapr_sim.Figures
 
         public Destination(Canvas canvas) : base(canvas)
         {
-            Fill = Brushes.LightGreen;
+            Fill = Brushes.Red;
             textParam.Value = DEFAULT_NAME;
         }
 
@@ -28,7 +28,7 @@ namespace sapr_sim.Figures
         {
             this.port = info.GetValue("port", typeof(Port)) as Port;
             ports.Add(port);
-            Fill = Brushes.LightGreen;
+            Fill = Brushes.Red;
         }
 
         public override void createAndDraw(double x, double y)
@@ -37,7 +37,7 @@ namespace sapr_sim.Figures
             canvas.Children.Add(port);
             ports.Add(port);
 
-            label = new Label(this, canvas, x + 14, y + 23, textParam.Value);
+            label = new Label(this, canvas, x + 13, y + 23, textParam.Value);
             canvas.Children.Add(label);
         }
 

@@ -41,19 +41,13 @@ namespace sapr_sim.Figures
             textParam.Value = DEFAULT_NAME;
         }
 
-        private void init()
-        {
-            Fill = Brushes.Red;
-            bound = new Rect(new Size(60, 60));
-        }
-
         public override void createAndDraw(double x, double y)
         {
             port = new Port(this, canvas, x + 56, y + 26.5);
             canvas.Children.Add(port);
             ports.Add(port);
 
-            label = new Label(this, canvas, x + 14, y + 23, textParam.Value);
+            label = new Label(this, canvas, x + 12, y + 23, textParam.Value);
             canvas.Children.Add(label);
         }
 
@@ -95,6 +89,12 @@ namespace sapr_sim.Figures
                 gg.Children.Add(eg);
                 return gg;
             }
+        }
+
+        private void init()
+        {
+            Fill = Brushes.LightGreen;
+            bound = new Rect(new Size(60, 60));
         }
     }
 }
