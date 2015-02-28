@@ -53,7 +53,7 @@ namespace sapr_sim
 
         private void CreateNewTabCommand(object sender, ExecutedRoutedEventArgs e)
         {
-            createNewTab();
+            createNewTab(null);
         }
     }
 }

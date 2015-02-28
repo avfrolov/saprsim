@@ -84,6 +84,7 @@
     <Compile Include="MainWindowKeyboardEvents.cs" />
     <Compile Include="MainWindowLogicEvents.cs" />
     <Compile Include="MainWindowMouseEvents.cs" />
+    <Compile Include="MainWindowToolBarEvents.cs" />
     <Compile Include="ParametersDialog.xaml.cs">
       <DependentUpon>ParametersDialog.xaml</DependentUpon>
     </Compile>

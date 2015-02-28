@@ -37,7 +37,6 @@ namespace sapr_sim
         {
             InitializeComponent();
             bindHotkeys();
-            createNewTab();
         }
 
         private void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -55,21 +54,12 @@ namespace sapr_sim
             }
         }
 
-        private void CreateNewTab_Click(object sender, RoutedEventArgs e)
+        private void createNewTab(Canvas canvas)
         {
-            createNewTab();            
-        }
+            if (canvas == null) canvas = new ScrollableCanvas();
 
-        private void Delete_Click(object sender, RoutedEventArgs e)
-        {
-            DeleteShapeCommand(selected, null);
-        }
-
-        private void createNewTab()
-        {
             ClosableTabItem theTabItem = new ClosableTabItem();
-            ScrollViewer scrollViewer = new ScrollViewer();
-            Canvas canvas = new ScrollableCanvas();
+            ScrollViewer scrollViewer = new ScrollViewer();            
 
             canvas.Background = Brushes.Transparent;
             canvas.MouseDown += OnMouseDown;
@@ -239,6 +229,11 @@ namespace sapr_sim
                     }
                 }
             }
+        }
+
+        private void Open_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
     }

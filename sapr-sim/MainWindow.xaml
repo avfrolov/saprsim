@@ -20,9 +20,9 @@
         <Menu Grid.Row="0">
             <MenuItem Header="Файл">
                 <MenuItem Header="Новый" InputGestureText="Ctrl+N" Click="CreateNewTab_Click"/>
-                <MenuItem Header="Открыть" InputGestureText="Ctrl+O" IsEnabled="False"/>
+                <MenuItem Header="Открыть" InputGestureText="Ctrl+O" Click="OpenFromFile_Click"/>
                 <Separator/>
-                <MenuItem Header="Сохранить" InputGestureText="Ctrl+S" IsEnabled="False"/>
+                <MenuItem Header="Сохранить" InputGestureText="Ctrl+S" Click="SaveToFile_Click"/>
                 <MenuItem Header="Сохранить как..." IsEnabled="False"/>
                 <Separator/>
                 <MenuItem Header="Экспорт" IsEnabled="False"/>
@@ -83,10 +83,10 @@
                 <Button x:Name="New" ToolTip="Создать новую диаграмму" Click="CreateNewTab_Click">
                     <Image Source="Resources/New_document.png" />
                 </Button>
-                <Button x:Name="Open" ToolTip="Открыть диаграмму" IsEnabled="False">
+                <Button x:Name="Open" ToolTip="Открыть диаграмму" Click="OpenFromFile_Click">
                     <Image Source="Resources/Folder.png" />
                 </Button>
-                <Button x:Name="Save" ToolTip="Сохранить" IsEnabled="False">
+                <Button x:Name="Save" ToolTip="Сохранить" Click="SaveToFile_Click">
                     <Image Source="Resources/Save.png" />
                 </Button>
                 <Button x:Name="Export" ToolTip="Экспорт в качестве изображения" IsEnabled="False">
@@ -237,11 +237,7 @@
                     <ListBox Name="errorsListBox" MouseDoubleClick="errorsListBox_MouseLeftButtonDown" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
                 </TabItem>
                 <TabItem Name="infoTab" Header="Информация">
-                    <TextBlock Name="infoTextBlock">
-                        Здесь будем выводить какую-нибудь отладочную информацию... <LineBreak/>
-                        Пока это можно сделать только из UI с помощью метода printInformation(string info) <LineBreak/>
-                        Но стоит что-то поискать на тему event'ов...
-                    </TextBlock>
+                    <TextBlock Name="infoTextBlock"/>
                 </TabItem>
             </TabControl>
         </DockPanel>
