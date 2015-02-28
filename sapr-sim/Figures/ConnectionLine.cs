@@ -14,18 +14,18 @@ using System.Windows.Shapes;
 namespace sapr_sim.Figures
 {
     [Serializable]
-    public sealed class Connector : UIEntity, ISerializable
+    public sealed class ConnectionLine : UIEntity, ISerializable
     {
 
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register("Source", typeof(Point), typeof(Connector),
+            DependencyProperty.Register("Source", typeof(Point), typeof(ConnectionLine),
                 new FrameworkPropertyMetadata(default(Point)));
 
-        public Connector(Canvas cancas) : base(cancas)
+        public ConnectionLine(Canvas cancas) : base(cancas)
         {
         }
 
-        public Connector(SerializationInfo info, StreamingContext context) : base(info, context)
+        public ConnectionLine(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             SetBinding(SourceProperty, new Binding()
             {
@@ -44,7 +44,7 @@ namespace sapr_sim.Figures
 
         public static readonly DependencyProperty DestinationProperty =
             DependencyProperty.Register(
-                "Destination", typeof(Point), typeof(Connector),
+                "Destination", typeof(Point), typeof(ConnectionLine),
                     new FrameworkPropertyMetadata(default(Point)));
 
         public Port SourcePort

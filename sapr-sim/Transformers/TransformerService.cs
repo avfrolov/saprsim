@@ -24,7 +24,7 @@ namespace EntityTransformator
             foreach(UIElement e in elements)
             {
                 // skip no logic ui entities
-                if (e is sapr_sim.Figures.Label || e is Port || e is Connector || e is sapr_sim.Figures.Resource) continue;
+                if (e is sapr_sim.Figures.Label || e is Port || e is ConnectionLine || e is sapr_sim.Figures.Resource) continue;
                 
                 Transformer transformer = TransformerFactory.getTransformer(e.GetType());
                 Entity re = transformer.transform(e as UIEntity);
@@ -37,9 +37,9 @@ namespace EntityTransformator
 
             foreach (UIElement e in elements)
             {
-                if (e is Connector)
+                if (e is ConnectionLine)
                 {
-                    Connector c = e as Connector;
+                    ConnectionLine c = e as ConnectionLine;
                     UIEntity src = c.SourcePort.Owner;
                     UIEntity dest = c.DestinationPort.Owner;
 
@@ -64,7 +64,7 @@ namespace EntityTransformator
                 else if (e is sapr_sim.Figures.Resource)
                 {
                     sapr_sim.Figures.Resource resource = e as sapr_sim.Figures.Resource;
-                    List<Connector> connectors = ConnectorFinder.find(elements, resource);
+                    List<ConnectionLine> connectors = ConnectorFinder.find(elements, resource);
 
                     Entities.Resource res = new Entities.Resource() { efficiency = resource.Efficiency };
                     resources.Add(res);

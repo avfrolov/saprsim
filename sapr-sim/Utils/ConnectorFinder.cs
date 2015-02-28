@@ -12,16 +12,16 @@ namespace sapr_sim.Utils
     public class ConnectorFinder
     {
 
-        public static List<Connector> find(UIElementCollection entities, UIEntity entity)
+        public static List<ConnectionLine> find(UIElementCollection entities, UIEntity entity)
         {
-            List<Connector> result = new List<Connector>();
+            List<ConnectionLine> result = new List<ConnectionLine>();
             foreach (UIEntity e in entities)
             {
-                if (e is Connector)
+                if (e is ConnectionLine)
                 {
-                    Connector conenctor = e as Connector;
-                    BindingExpression srcExp = conenctor.GetBindingExpression(Connector.SourceProperty);
-                    BindingExpression dstExp = conenctor.GetBindingExpression(Connector.DestinationProperty);
+                    ConnectionLine conenctor = e as ConnectionLine;
+                    BindingExpression srcExp = conenctor.GetBindingExpression(ConnectionLine.SourceProperty);
+                    BindingExpression dstExp = conenctor.GetBindingExpression(ConnectionLine.DestinationProperty);
 
                     if (srcExp != null && dstExp != null)
                     {

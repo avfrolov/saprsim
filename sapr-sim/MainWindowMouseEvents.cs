@@ -67,12 +67,12 @@ namespace sapr_sim
                         xCanvas, yCanvas);
                 }
 
-                if (!(selected is Connector && selected is Port))
+                if (!(selected is ConnectionLine && selected is Port))
                     selected.selectedBitmapEffect();
 
                 ParameterProccesor.drawParameters(selected.getParams(), propertiesPanel, false);
             }
-            else if (e.ClickCount == 2 && !(sender is Port || sender is Connector))
+            else if (e.ClickCount == 2 && !(sender is Port || sender is ConnectionLine))
             {
                 UIEntity ent = sender as UIEntity;
                 new ParameterDialog(ent.getParams(), ent).ShowDialog();

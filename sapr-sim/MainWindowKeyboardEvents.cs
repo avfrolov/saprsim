@@ -38,11 +38,11 @@ namespace sapr_sim
         {
             if (selected != null && !(selected is Port))
             {
-                List<Connector> connectors = ConnectorFinder.find(currentCanvas.Children, selected);
-                foreach (Connector c in connectors)
+                List<ConnectionLine> connectors = ConnectorFinder.find(currentCanvas.Children, selected);
+                foreach (ConnectionLine c in connectors)
                 {
-                    BindingOperations.ClearBinding(c, Connector.SourceProperty);
-                    BindingOperations.ClearBinding(c, Connector.DestinationProperty);
+                    BindingOperations.ClearBinding(c, ConnectionLine.SourceProperty);
+                    BindingOperations.ClearBinding(c, ConnectionLine.DestinationProperty);
                     currentCanvas.Children.Remove(c);
                 }
 

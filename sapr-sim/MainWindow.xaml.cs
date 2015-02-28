@@ -43,11 +43,11 @@ namespace sapr_sim
         {
             if (currentEntity != null && e.LeftButton == MouseButtonState.Pressed)
             {
-                if (currentEntity is Connector && selected != null && selected is Port)
+                if (currentEntity is ConnectionLine && selected != null && selected is Port)
                 {
                     connect();
                 }
-                else if (!(currentEntity is Connector))
+                else if (!(currentEntity is ConnectionLine))
                 {
                     drawOnCanvas(e.GetPosition(this));
                 }                
@@ -80,8 +80,8 @@ namespace sapr_sim
 
         private bool canConnect()
         {
-            BindingExpression srcExp = currentEntity.GetBindingExpression(Connector.SourceProperty);
-            BindingExpression dstExp = currentEntity.GetBindingExpression(Connector.DestinationProperty);
+            BindingExpression srcExp = currentEntity.GetBindingExpression(ConnectionLine.SourceProperty);
+            BindingExpression dstExp = currentEntity.GetBindingExpression(ConnectionLine.DestinationProperty);
             if (dstExp == null)
             {
                 return !(selected as Port).Owner.Equals((srcExp.DataItem as Port).Owner);
@@ -93,12 +93,12 @@ namespace sapr_sim
         {
             if (firstConnect)
             {
-                setBinding(Connector.SourceProperty);
+                setBinding(ConnectionLine.SourceProperty);
                 firstConnect = false;
             }
             else if (canConnect())
             {
-                setBinding(Connector.DestinationProperty);
+                setBinding(ConnectionLine.DestinationProperty);
 
                 currentEntity.MouseLeftButtonDown += Shape_MouseLeftButtonDown;
                 currentEntity.MouseLeftButtonUp += Shape_MouseLeftButtonUp;
@@ -196,7 +196,7 @@ namespace sapr_sim
 
         private void LineButton_Click(object sender, RoutedEventArgs e)
         {
-            currentEntity = new Connector(currentCanvas);
+            currentEntity = new ConnectionLine(currentCanvas);
             firstConnect = true;
         }
 
