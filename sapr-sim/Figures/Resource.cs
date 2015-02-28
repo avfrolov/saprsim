@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,7 +14,8 @@ using System.Windows.Shapes;
 
 namespace sapr_sim.Figures
 {
-    public class Resource : UIEntity
+    [Serializable]
+    public class Resource : UIEntity, ISerializable
     {
 
         private Rect bound;
@@ -24,12 +26,22 @@ namespace sapr_sim.Figures
 
         private UIParam<Double> efficiency = new UIParam<Double>(0, new BetweenDoubleParamValidator(0.0, 1.0), "Эффективность");
 
+        private static readonly string DEFAULT_NAME = "Ресурс";
+
         public Resource(Canvas canvas) : base(canvas)
         {
-            bound = new Rect(new Size(90, 60));
-            topExternalBound = new Rect(new Point(0, 0), new Point(90, 10));
-            bottomExternalBound = new Rect(new Point(0, 50), new Point(90, 60));
-            textParam.Value = "Ресурс";
+            init();
+            textParam.Value = DEFAULT_NAME;
+        }
+
+        public Resource(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            this.port = info.GetValue("port", typeof(Port)) as Port;
+            ports.Add(port);
+
+            efficiency = info.GetValue("efficiency", typeof(UIParam<Double>)) as UIParam<Double>;
+
+            init();
         }
 
         public override void createAndDraw(double x, double y)
@@ -55,6 +67,13 @@ namespace sapr_sim.Figures
             set { efficiency.Value = value; }
         }
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("port", port);
+            info.AddValue("efficiency", efficiency);
+        }
+
         protected override System.Windows.Media.Geometry DefiningGeometry
         {
             get 
@@ -66,6 +85,13 @@ namespace sapr_sim.Figures
                 gg.Children.Add(new RectangleGeometry(bottomExternalBound));
                 return gg;
             }
+        }
+
+        private void init()
+        {
+            bound = new Rect(new Size(90, 60));
+            topExternalBound = new Rect(new Point(0, 0), new Point(90, 10));
+            bottomExternalBound = new Rect(new Point(0, 50), new Point(90, 60));
         }
     }
 }

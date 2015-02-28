@@ -30,7 +30,7 @@ namespace sapr_sim
             }
         }
 
-        private void Shape_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void Shape_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 1)
             {
@@ -79,7 +79,7 @@ namespace sapr_sim
             }
         }
 
-        private void Shape_MouseMove(object sender, MouseEventArgs e)
+        public void Shape_MouseMove(object sender, MouseEventArgs e)
         {
             if (captured)
             {
@@ -96,7 +96,7 @@ namespace sapr_sim
             }
         }
 
-        private void Shape_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        public void Shape_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Mouse.Capture(null);
             captured = false;

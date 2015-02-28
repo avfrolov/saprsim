@@ -6,14 +6,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Runtime.Serialization;
+using sapr_sim.Figures;
 
 namespace sapr_sim.WPFCustomElements
 {
-    class ScrollableCanvas: Canvas
+    [Serializable]
+    public class ScrollableCanvas: Canvas, ISerializable
     {
         static ScrollableCanvas()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ScrollableCanvas), new FrameworkPropertyMetadata(typeof(ScrollableCanvas)));
+        }
+
+        public ScrollableCanvas(SerializationInfo info, StreamingContext context)
+        {
+            for (int i = 0; i < info.MemberCount; i++)
+            {
+                UIEntity ent = info.GetValue("Child" + i, typeof(UIEntity)) as UIEntity;
+                Children.Add(ent);
+            }
+        }
+
+        public ScrollableCanvas()
+        {
+
         }
 
         protected override Size MeasureOverride(Size constraint)
@@ -33,6 +50,16 @@ namespace sapr_sim.WPFCustomElements
                 }
             }
             return new Size(rightMost, bottomMost);
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            for (int i = 0; i < Children.Count; i++)
+            {
+                UIEntity ent = Children[i] as UIEntity;
+                info.AddValue("Child" + i, ent);
+            }
+            
         }
     }
 }

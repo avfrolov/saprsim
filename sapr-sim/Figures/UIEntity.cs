@@ -1,7 +1,9 @@
 ﻿using sapr_sim.Parameters;
+using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,7 +15,8 @@ using System.Windows.Shapes;
 
 namespace sapr_sim.Figures
 {
-    public abstract class UIEntity : Shape
+    [Serializable]
+    public abstract class UIEntity : Shape, ISerializable
     {
 
         public static readonly string ENTITY_NAME_PARAM = "Имя";
@@ -25,6 +28,29 @@ namespace sapr_sim.Figures
         protected Label label;
 
         protected UIParam<String> textParam = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM);
+
+        public UIEntity(SerializationInfo info, StreamingContext context)
+        {                      
+            try
+            {
+                init(info.GetValue("canvas", typeof(ScrollableCanvas)) as Canvas);
+
+                this.textParam = info.GetValue("textParam", typeof(UIParam<String>)) as UIParam<String>;
+                Canvas.SetLeft(this, info.GetDouble("x"));
+                Canvas.SetTop(this, info.GetDouble("y"));
+
+                ((MainWindow)System.Windows.Application.Current.MainWindow).attachMovingEvents(this);
+
+                // label can be not found - it's normal behavior
+                this.label = info.GetValue("label", typeof(Label)) as Label;
+            }
+            catch (SerializationException e) { }
+        }
+
+        protected UIEntity(Canvas canvas)
+        {
+            init(canvas);
+        }
 
         public void defaultBitmapEffect()
         {
@@ -100,14 +126,6 @@ namespace sapr_sim.Figures
             get { return textParam.Value; }
         }
 
-        public UIEntity()
-        {
-            StrokeThickness = 1;
-            Stroke = Brushes.Black;
-            Fill = Brushes.LemonChiffon;
-            defaultBitmapEffect();
-        }
-
         public List<Port> getPorts()
         {
             return ports;
@@ -134,9 +152,22 @@ namespace sapr_sim.Figures
             return param;
         }
 
-        protected UIEntity(Canvas canvas) : this()
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("canvas", canvas);
+            info.AddValue("label", label);
+            info.AddValue("x", VisualTreeHelper.GetOffset(this).X);
+            info.AddValue("y", VisualTreeHelper.GetOffset(this).Y);
+            info.AddValue("textParam", textParam);
+        }
+
+        private void init(Canvas canvas)
         {
             this.canvas = canvas;
+            StrokeThickness = 1;
+            Stroke = Brushes.Black;
+            Fill = Brushes.LemonChiffon;
+            defaultBitmapEffect();
         }
 
         public struct CoordinatesHandler

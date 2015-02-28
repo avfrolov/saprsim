@@ -8,16 +8,27 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
 using sapr_sim.Parameters;
+using System.Runtime.Serialization;
 
 namespace sapr_sim.Figures
 {
-    public class Destination : Source
+    [Serializable]
+    public class Destination : Source, ISerializable
     {
+
+        private static readonly string DEFAULT_NAME = "Конец";
 
         public Destination(Canvas canvas) : base(canvas)
         {
             Fill = Brushes.LightGreen;
-            textParam.Value = "Конец";
+            textParam.Value = DEFAULT_NAME;
+        }
+
+        public Destination(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            this.port = info.GetValue("port", typeof(Port)) as Port;
+            ports.Add(port);
+            Fill = Brushes.LightGreen;
         }
 
         public override void createAndDraw(double x, double y)

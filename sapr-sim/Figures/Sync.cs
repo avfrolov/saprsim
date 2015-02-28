@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,21 +12,31 @@ using System.Windows.Media;
 
 namespace sapr_sim.Figures
 {
-    public class Sync : UIEntity
+    [Serializable]
+    public class Sync : UIEntity, ISerializable
     {
         private Rect bound;
 
         private Port inputPort1, inputPort2, outputPort;
 
-        private const int innerLabelOffsetX = -30;
-        private const int innerLabelOffsetY = -20;
+        private static readonly string DEFAULT_NAME = "Синхронизация";
 
         public Sync(Canvas canvas) : base(canvas)
         {
-            Fill = Brushes.Black;
-            StrokeThickness = .5;
-            bound = new Rect(new Size(10, 90));
-            textParam.Value = "Синхронизация";
+            init();
+            textParam.Value = DEFAULT_NAME;
+        }
+
+        public Sync(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            this.inputPort1 = info.GetValue("inputPort1", typeof(Port)) as Port;
+            this.inputPort2 = info.GetValue("inputPort2", typeof(Port)) as Port;
+            this.outputPort = info.GetValue("outputPort", typeof(Port)) as Port;
+            ports.Add(inputPort1);
+            ports.Add(inputPort2);
+            ports.Add(outputPort);
+            
+            init();
         }
 
         public override void createAndDraw(double x, double y)
@@ -44,6 +55,14 @@ namespace sapr_sim.Figures
             canvas.Children.Add(label);
         }
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("inputPort1", inputPort1);
+            info.AddValue("inputPort2", inputPort2);
+            info.AddValue("outputPort", outputPort);
+        }
+
         protected override System.Windows.Media.Geometry DefiningGeometry
         {
             get 
@@ -53,6 +72,13 @@ namespace sapr_sim.Figures
                 gg.Children.Add(new RectangleGeometry(bound));
                 return gg;
             }
+        }
+
+        private void init()
+        {
+            Fill = Brushes.Black;
+            StrokeThickness = .5;
+            bound = new Rect(new Size(10, 90));
         }
     }
 }

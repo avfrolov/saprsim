@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace sapr_sim.Parameters.Validators
 {
+    [Serializable]
     public class PositiveDoubleParamValidator : ParamValidator
     {
         public bool validate(string value)

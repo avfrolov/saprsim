@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,22 +14,37 @@ using System.Windows.Shapes;
 
 namespace sapr_sim.Figures
 {
-    public class Procedure : UIEntity
+    [Serializable]
+    public class Procedure : UIEntity, ISerializable
     {
         // not used in current version...
         public static readonly DependencyProperty SizeProperty = DependencyProperty.Register("Size", typeof(Double), typeof(Procedure));
 
         private Rect bound;
-
         private Port inputPort, outputPort, resourcePort;
         
-        private UIParam<Double> manHour = new UIParam<Double>(0.0, new PositiveDoubleParamValidator(), "Продолжительность");        
+        private UIParam<Double> manHour = new UIParam<Double>(0.0, new PositiveDoubleParamValidator(), "Продолжительность");
+
+        private static readonly string DEFAULT_NAME = "Процедура";
 
         public Procedure(Canvas canvas) : base(canvas)
         {
-            Fill = Brushes.LemonChiffon;
-            bound = new Rect(new Size(90, 60));
-            textParam.Value = "Процедура";
+            init();
+            textParam.Value = DEFAULT_NAME;
+        }
+
+        public Procedure(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            this.inputPort = info.GetValue("inputPort", typeof(Port)) as Port;
+            this.outputPort = info.GetValue("outputPort", typeof(Port)) as Port;
+            this.resourcePort = info.GetValue("resourcePort", typeof(Port)) as Port;
+            ports.Add(inputPort);
+            ports.Add(outputPort);
+            ports.Add(resourcePort);
+
+            manHour = info.GetValue("manHour", typeof(UIParam<Double>)) as UIParam<Double>;
+
+            init();
         }
 
         public double Size
@@ -66,6 +82,15 @@ namespace sapr_sim.Figures
             set { manHour.Value = value; }
         }
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("inputPort", inputPort);
+            info.AddValue("outputPort", outputPort);
+            info.AddValue("resourcePort", resourcePort);
+            info.AddValue("manHour", manHour);
+        }
+
         protected override System.Windows.Media.Geometry DefiningGeometry
         {
             get 
@@ -78,5 +103,10 @@ namespace sapr_sim.Figures
             }
         }
 
+        private void init()
+        {
+            Fill = Brushes.LemonChiffon;
+            bound = new Rect(new Size(90, 60));
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,8 +13,8 @@ using System.Windows.Shapes;
 
 namespace sapr_sim.Figures
 {
-
-    public sealed class Connector : UIEntity
+    [Serializable]
+    public sealed class Connector : UIEntity, ISerializable
     {
 
         public static readonly DependencyProperty SourceProperty =
@@ -24,22 +25,27 @@ namespace sapr_sim.Figures
         {
         }
 
-        public Point Source
+        public Connector(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            get { return (Point)this.GetValue(SourceProperty); }
-            set { this.SetValue(SourceProperty, value); }
+            SetBinding(SourceProperty, new Binding()
+            {
+                Source = info.GetValue("SourcePort", typeof(Port)) as Port,
+                Path = new PropertyPath(Port.AnchorPointProperty)
+            });
+
+            SetBinding(DestinationProperty, new Binding()
+            {
+                Source = info.GetValue("DestinationPort", typeof(Port)) as Port,
+                Path = new PropertyPath(Port.AnchorPointProperty)
+            });
+
+            this.MouseMove -= ((MainWindow)System.Windows.Application.Current.MainWindow).Shape_MouseMove; 
         }
 
         public static readonly DependencyProperty DestinationProperty =
             DependencyProperty.Register(
                 "Destination", typeof(Point), typeof(Connector),
                     new FrameworkPropertyMetadata(default(Point)));
-
-        public Point Destination
-        {
-            get { return (Point)this.GetValue(DestinationProperty); }
-            set { this.SetValue(DestinationProperty, value); }
-        }
 
         public Port SourcePort
         { 
@@ -66,6 +72,13 @@ namespace sapr_sim.Figures
         public override List<UIParam> getParams()
         {
             return null;
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("SourcePort", SourcePort);
+            info.AddValue("DestinationPort", DestinationPort);
         }
 
         protected override Geometry DefiningGeometry

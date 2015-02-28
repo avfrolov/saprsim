@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,12 +12,14 @@ namespace sapr_sim.Parameters
 
     // Are C# generics better than Java generics? hmm...
     // http://stackoverflow.com/questions/353126/c-sharp-multiple-generic-types-in-one-list    
-    public abstract class UIParam 
+    [Serializable]
+    public abstract class UIParam
     {
         protected ParamValidator validator;
         protected string displayedText;
 
         // default - textbox
+        [NonSerialized]
         protected UIElement control;
 
         public ParamValidator Validator
@@ -50,7 +53,8 @@ namespace sapr_sim.Parameters
     //      String
     //      UInt (16, 32 and 64-bit)
     // http://stackoverflow.com/questions/8745444/c-sharp-generic-constraints-to-include-value-types-and-strings
-    public class UIParam<T> : UIParam where T : IConvertible
+    [Serializable]
+    public class UIParam<T> : UIParam where T : IConvertible 
     {
         
         private T value;

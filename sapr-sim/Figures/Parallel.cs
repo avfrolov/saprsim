@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,18 +12,30 @@ using System.Windows.Media;
 
 namespace sapr_sim.Figures
 {
-    public class Parallel : UIEntity
+    [Serializable]
+    public class Parallel : UIEntity, ISerializable
     {
         private Rect bound;
-
         private Port inputPort, outputPort1, outputPort2;
+
+        private static readonly string DEFAULT_NAME = "Распараллеливание";
 
         public Parallel(Canvas canvas) : base(canvas)
         {
-            Fill = Brushes.Black;
-            StrokeThickness = .5;
-            bound = new Rect(new Size(10, 90));
-            textParam.Value = "Распараллеливание";
+            init();
+            textParam.Value = DEFAULT_NAME;
+        }
+
+        public Parallel(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            this.inputPort = info.GetValue("inputPort", typeof(Port)) as Port;
+            this.outputPort1 = info.GetValue("outputPort1", typeof(Port)) as Port;
+            this.outputPort2 = info.GetValue("outputPort2", typeof(Port)) as Port;
+            ports.Add(inputPort);
+            ports.Add(outputPort1);
+            ports.Add(outputPort2);
+            
+            init();
         }
 
         public override void createAndDraw(double x, double y)
@@ -41,6 +54,14 @@ namespace sapr_sim.Figures
             canvas.Children.Add(label);
         }
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("inputPort", inputPort);
+            info.AddValue("outputPort1", outputPort1);
+            info.AddValue("outputPort2", outputPort2);
+        }
+
         protected override System.Windows.Media.Geometry DefiningGeometry
         {
             get 
@@ -50,6 +71,13 @@ namespace sapr_sim.Figures
                 gg.Children.Add(new RectangleGeometry(bound));
                 return gg;
             }
+        }
+
+        private void init()
+        {
+            Fill = Brushes.Black;
+            StrokeThickness = .5;
+            bound = new Rect(new Size(10, 90));
         }
     }
 }

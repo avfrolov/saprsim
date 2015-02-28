@@ -11,6 +11,7 @@ namespace sapr_sim.Parameters
         bool validate(string value);
     }
 
+    [Serializable]
     public class StringParamValidator : ParamValidator
     {
         public bool validate(string value)
@@ -19,6 +20,7 @@ namespace sapr_sim.Parameters
         }
     }
 
+    [Serializable]
     public class IntegerParamValidator : ParamValidator
     {
         public bool validate(string value)
@@ -28,6 +30,7 @@ namespace sapr_sim.Parameters
         }
     }
 
+    [Serializable]
     public class DoubleParamValidator : ParamValidator
     {
         public bool validate(string value)

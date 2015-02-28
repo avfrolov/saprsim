@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,33 +11,39 @@ using System.Windows.Media;
 
 namespace sapr_sim.Figures
 {
-    public class Label : UIEntity
+    [Serializable]
+    public class Label : UIEntity, ISerializable
     {
 
         private UIEntity owner;
-        private string text;
         private FormattedText ft;
 
-        public Label(Canvas canvas) : base(canvas)
+        private static readonly string DEFAULT_NAME = "Надпись";
+
+        public Label(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            textParam.Value = "Надпись";
-            ft = new FormattedText(textParam.Value,
-                CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface("Times New Roman"), 12, Brushes.Black);
-            label = this;
+            init(info.GetValue("owner", typeof(UIEntity)) as UIEntity, info.GetString("text"));
+
+            if (owner != null)
+            {
+                this.MouseLeftButtonDown -= ((MainWindow)System.Windows.Application.Current.MainWindow).Shape_MouseLeftButtonDown;
+                this.MouseMove -= ((MainWindow)System.Windows.Application.Current.MainWindow).Shape_MouseMove;
+                this.MouseLeftButtonUp -= ((MainWindow)System.Windows.Application.Current.MainWindow).Shape_MouseLeftButtonUp;
+            }
+        }
+
+        public Label(Canvas canvas) : base(canvas)
+        { 
+            textParam.Value = DEFAULT_NAME;
+            init(null, DEFAULT_NAME);
         }
 
         public Label(UIEntity owner, Canvas canvas, double xPos, double yPos, string text) : base(canvas)
         {
-            ft = new FormattedText(text,
-                CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                new Typeface("Times New Roman"), 12, Brushes.Black);
-            label = this;
-            textParam.Value = text;
-                 
+            init(owner, text);
+
+            textParam.Value = text;                 
             this.canvas = canvas;
-            this.owner = owner;
-            this.text = text;
 
             Canvas.SetLeft(this, xPos);
             Canvas.SetTop(this, yPos);
@@ -44,12 +51,18 @@ namespace sapr_sim.Figures
 
         public string Text
         {
-            get { return text; }
-            set { text = value; }
+            get { return textParam.Value; }
         }
 
         public override void createAndDraw(double x, double y)
         {            
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("text", textParam.Value);
+            info.AddValue("owner", owner);
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry
@@ -61,6 +74,15 @@ namespace sapr_sim.Figures
                 gg.Children.Add(ft.BuildGeometry(new Point()));
                 return gg;
             }
+        }
+
+        private void init(UIEntity owner, string text)
+        {
+            ft = new FormattedText(text,
+                CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
+                new Typeface("Times New Roman"), 12, Brushes.Black);
+            label = this;
+            this.owner = owner;
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,7 +12,8 @@ using System.Windows.Media;
 
 namespace sapr_sim.Figures
 {
-    public class Decision : UIEntity
+    [Serializable]
+    public class Decision : UIEntity, ISerializable
     {
         private Rect bound;
 
@@ -19,11 +21,24 @@ namespace sapr_sim.Figures
 
         private UIParam<String> inputProbabilityParams = new UIParam<String>("", new StringParamValidator(), "Параметры входа");
 
+        private static readonly string DEFAULT_NAME = "?";
+
         public Decision(Canvas canvas) : base(canvas)
         {
-            Fill = Brushes.LemonChiffon;
-            bound = new Rect(new Size(45, 45));
-            textParam.Value = "?";
+            init();
+            textParam.Value = DEFAULT_NAME;
+        }
+
+        public Decision(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            this.inputPort = info.GetValue("inputPort", typeof(Port)) as Port;
+            this.yesPort = info.GetValue("yesPort", typeof(Port)) as Port;
+            this.noPort = info.GetValue("noPort", typeof(Port)) as Port;
+            ports.Add(inputPort);
+            ports.Add(yesPort);
+            ports.Add(noPort);
+            
+            init();
         }
 
         public override void createAndDraw(double x, double y)
@@ -55,6 +70,14 @@ namespace sapr_sim.Figures
             set { inputProbabilityParams.Value = value; }
         }
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("inputPort", inputPort);
+            info.AddValue("yesPort", yesPort);
+            info.AddValue("noPort", noPort);
+        }
+
         protected override System.Windows.Media.Geometry DefiningGeometry
         {
             get 
@@ -68,6 +91,12 @@ namespace sapr_sim.Figures
                 gg.Children.Add(rg);
                 return gg;
             }
+        }
+
+        private void init()
+        {
+            Fill = Brushes.LemonChiffon;
+            bound = new Rect(new Size(45, 45));
         }
     }
 }

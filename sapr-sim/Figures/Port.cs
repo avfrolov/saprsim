@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,7 +11,8 @@ using System.Windows.Media;
 
 namespace sapr_sim.Figures
 {
-    public class Port : UIEntity
+    [Serializable]
+    public class Port : UIEntity, ISerializable
     {
         public static readonly DependencyProperty AnchorPointProperty =
                 DependencyProperty.Register(
@@ -21,18 +23,19 @@ namespace sapr_sim.Figures
         private Rect bound;
         private UIEntity owner;
 
+        public Port(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            init(info.GetValue("owner", typeof(UIEntity)) as UIEntity);
+            this.MouseMove -= ((MainWindow)System.Windows.Application.Current.MainWindow).Shape_MouseMove;            
+        }
+
         public Port(UIEntity owner, Canvas canvas, double xPos, double yPos) : base(canvas)
         {
-            Fill = Brushes.Red;
-            bound = new Rect(new Size(7.5, 7.5));
-                 
+            init(owner);
             this.canvas = canvas;
-            this.owner = owner;
 
             Canvas.SetLeft(this, xPos);
             Canvas.SetTop(this, yPos);
-
-            this.LayoutUpdated += UIEntity_LayoutUpdated;
         }
 
         public override void createAndDraw(double x, double y)
@@ -47,6 +50,12 @@ namespace sapr_sim.Figures
         public UIEntity Owner
         {
             get { return owner; }
+        }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("owner", owner);
         }
 
         protected override Geometry DefiningGeometry
@@ -72,6 +81,14 @@ namespace sapr_sim.Figures
 
                 SetValue(AnchorPointProperty, TransformToVisual(canvas).Transform(ofs));
             }
+        }
+
+        private void init(UIEntity owner)
+        {
+            Fill = Brushes.Red;
+            bound = new Rect(new Size(7.5, 7.5));
+            this.owner = owner;
+            this.LayoutUpdated += UIEntity_LayoutUpdated;
         }
 
     }

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,20 +13,38 @@ using System.Windows.Media;
 
 namespace sapr_sim.Figures
 {
-    public class Source : UIEntity
+    [Serializable]
+    public class Source : UIEntity, ISerializable
     {
-        private Rect bound;
-
         protected Port port;
+        private Rect bound;
 
         private UIParam<Int32> projectsCount = new UIParam<Int32>(1, new PositiveIntegerParamValidator(), "Количество проектов");
         private UIParam<Int32> complexity = new UIParam<Int32>(1, new PositiveIntegerParamValidator(), "Сложность проектов");
 
+        private static readonly string DEFAULT_NAME = "Начало";
+
+        public Source(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+            this.port = info.GetValue("port", typeof(Port)) as Port;
+            ports.Add(port);
+
+            projectsCount = info.GetValue("projectsCount", typeof(UIParam<Int32>)) as UIParam<Int32>;
+            complexity = info.GetValue("complexity", typeof(UIParam<Int32>)) as UIParam<Int32>;
+
+            init();
+        }
+
         public Source(Canvas canvas) : base(canvas)
+        {
+            init();
+            textParam.Value = DEFAULT_NAME;
+        }
+
+        private void init()
         {
             Fill = Brushes.Red;
             bound = new Rect(new Size(60, 60));
-            textParam.Value = "Начало";
         }
 
         public override void createAndDraw(double x, double y)
@@ -58,6 +77,13 @@ namespace sapr_sim.Figures
             set { complexity.Value = value; }
         }
 
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("port", port);
+            info.AddValue("projectsCount", projectsCount);
+            info.AddValue("complexity", complexity);
+        }
 
         protected override Geometry DefiningGeometry
         {
