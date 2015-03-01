@@ -38,10 +38,8 @@ namespace sapr_sim.WPFCustomElements
 
         public string Title
         {
-            set
-            {
-                ((ClosableHeader)this.Header).label_TabTitle.Content = value;
-            }
+            get { return ((ClosableHeader)this.Header).label_TabTitle.Content.ToString(); }
+            set { ((ClosableHeader)this.Header).label_TabTitle.Content = value; }
         }
 
         protected override void OnSelected(RoutedEventArgs e)

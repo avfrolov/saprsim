@@ -100,6 +100,7 @@ namespace sapr_sim
         {
             Mouse.Capture(null);
             captured = false;
+            canvasChanged();
         }
 
         private void processCoordinatesHandler(UIEntity ent, double x, double y)

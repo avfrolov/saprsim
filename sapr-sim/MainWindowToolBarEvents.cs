@@ -52,26 +52,14 @@ namespace sapr_sim
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            // Configure save file dialog box
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // Default directory
-            dlg.FileName = "Model"; // Default file name
-            dlg.DefaultExt = ".ssm"; // Default file extension
-            dlg.Filter = "SAPR-SIM models (.ssm)|*.ssm"; // Filter files by extension
-
-            // Show save file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Process save file dialog box results
-            if (result.Value)
-            {
-                using (FileStream filestream = new FileStream(dlg.FileName, FileMode.OpenOrCreate))
-                {
-                    new BinaryFormatter().Serialize(filestream, currentCanvas);
-                }
-                printInformation("Сохранение прошло успешно");
-                printInformation("Сохранен файл " + dlg.FileName);
-            }
+            MessageBox.Show("Будет сделано после поддержки проектной структуры", "Не имплементировано");
+            //using (FileStream filestream = new FileStream(dlg.FileName, FileMode.OpenOrCreate))
+            //{
+            //    new BinaryFormatter().Serialize(filestream, currentCanvas);
+            //}
+            //printInformation("Сохранение прошло успешно");
+            //printInformation("Сохранен файл " + dlg.FileName);
+            //canvasChanged(true);
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)
