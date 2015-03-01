@@ -84,7 +84,7 @@ namespace sapr_sim.WPFCustomElements
 
         // Button Close Click - Remove the Tab - (or raise
         // an event indicating a "CloseTab" event has occurred)
-        void button_close_Click(object sender, RoutedEventArgs e)
+        public void button_close_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = (MainWindow) System.Windows.Application.Current.MainWindow;
             if (main.IsModelChanged())

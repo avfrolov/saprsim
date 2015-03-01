@@ -26,6 +26,10 @@ namespace sapr_sim
                 newTabBinding.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(newTabBinding, CreateNewTabCommand));
 
+                RoutedCommand closeTabBinding = new RoutedCommand();
+                closeTabBinding.InputGestures.Add(new KeyGesture(Key.W, ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(closeTabBinding, CloseTabCommand));
+
                 RoutedCommand openFromFileBinding = new RoutedCommand();
                 openFromFileBinding.InputGestures.Add(new KeyGesture(Key.O, ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(openFromFileBinding, OpenFromFileCommand));
@@ -62,6 +66,11 @@ namespace sapr_sim
         private void CreateNewTabCommand(object sender, ExecutedRoutedEventArgs e)
         {
             createNewTab(null);
+        }
+
+        private void CloseTabCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            (tabs.SelectedItem as sapr_sim.WPFCustomElements.ClosableTabItem).button_close_Click(null, null);
         }
 
         private void OpenFromFileCommand(object sender, ExecutedRoutedEventArgs e)
