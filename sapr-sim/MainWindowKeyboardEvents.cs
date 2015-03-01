@@ -25,6 +25,14 @@ namespace sapr_sim
                 RoutedCommand newTabBinding = new RoutedCommand();
                 newTabBinding.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(newTabBinding, CreateNewTabCommand));
+
+                RoutedCommand openFromFileBinding = new RoutedCommand();
+                openFromFileBinding.InputGestures.Add(new KeyGesture(Key.O, ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(openFromFileBinding, OpenFromFileCommand));
+
+                RoutedCommand saveBinding = new RoutedCommand();
+                saveBinding.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(saveBinding, SaveCommand));
             }
             catch (Exception err)
             {
@@ -54,6 +62,16 @@ namespace sapr_sim
         private void CreateNewTabCommand(object sender, ExecutedRoutedEventArgs e)
         {
             createNewTab(null);
+        }
+
+        private void OpenFromFileCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            OpenFromFile_Click(null, null);
+        }
+
+        private void SaveCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            SaveToFile_Click(null, null);
         }
     }
 }
