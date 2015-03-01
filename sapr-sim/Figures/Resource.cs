@@ -24,7 +24,7 @@ namespace sapr_sim.Figures
 
         private Port port;
 
-        private UIParam<Double> efficiency = new UIParam<Double>(0, new BetweenDoubleParamValidator(0.0, 1.0), "Эффективность");
+        private UIParam<Double> efficiency = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1.0), "Эффективность");
 
         private static readonly string DEFAULT_NAME = "Ресурс";
 

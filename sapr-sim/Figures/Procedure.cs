@@ -23,7 +23,7 @@ namespace sapr_sim.Figures
         private Rect bound;
         private Port inputPort, outputPort, resourcePort;
         
-        private UIParam<Double> manHour = new UIParam<Double>(0.0, new PositiveDoubleParamValidator(), "Продолжительность");
+        private UIParam<Double> manHour = new UIParam<Double>(1, new PositiveDoubleParamValidator(), "Продолжительность");
 
         private static readonly string DEFAULT_NAME = "Процедура";
 
