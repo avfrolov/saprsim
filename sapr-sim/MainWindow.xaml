@@ -19,8 +19,14 @@
 
         <Menu Grid.Row="0">
             <MenuItem Header="Файл">
-                <MenuItem Header="Новый" InputGestureText="Ctrl+N" Click="CreateNewTab_Click"/>
-                <MenuItem Header="Открыть" InputGestureText="Ctrl+O" Click="Open_Click"/>
+                <MenuItem Header="Новый">
+                    <MenuItem Header="Проект" Click="CreateNewProject_Click"/>
+                    <MenuItem Header="Файл" InputGestureText="Ctrl+N" Click="CreateNewTab_Click"/>
+                </MenuItem>
+                <MenuItem Header="Открыть">
+                    <MenuItem Header="Проект" IsEnabled="False"/>
+                    <MenuItem Header="Файл" InputGestureText="Ctrl+O" Click="Open_Click"/>
+                </MenuItem>
                 <Separator/>
                 <MenuItem Header="Сохранить" InputGestureText="Ctrl+S" Click="Save_Click"/>
                 <MenuItem Header="Сохранить как..." Click="SaveAs_Click"/>
@@ -171,13 +177,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Grid.Row="0" Background="Transparent" BorderBrush="Black" BorderThickness="1">
-                            <TreeView  HorizontalAlignment="Left" Width="250">
-                                <TreeViewItem Header="Имя Открытого Проекта" IsExpanded="True">
-                                    <TreeViewItem Header="Модель 1"></TreeViewItem>
-                                    <TreeViewItem Header="Модель 2"></TreeViewItem>
-                                    <TreeViewItem Header="Модель 3"></TreeViewItem>
-                                </TreeViewItem>
-                            </TreeView>
+                            <TreeView  HorizontalAlignment="Left" Width="250" Name="projectStructure"/>
                         </Border>
 
                         <Border Grid.Row="1" Background="White" BorderBrush="Black" BorderThickness="1">

@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Xml.Serialization;
 
 namespace sapr_sim.Utils
 {
@@ -28,5 +29,19 @@ namespace sapr_sim.Utils
             }
         }
 
+        public void saveProject()
+        {
+            Project prj = Project.Instance;
+            string pathToProject = prj.FullPath;
+            if (!Directory.Exists(pathToProject))
+                Directory.CreateDirectory(pathToProject);
+
+            string projectFile = pathToProject + "\\" + prj.ProjectName + ".ssp";
+            XmlSerializer serializer = new XmlSerializer(typeof(Project));
+            using (var writer = new StreamWriter(projectFile))
+            {
+                serializer.Serialize(writer, Project.Instance);
+            }
+        }
     }
 }

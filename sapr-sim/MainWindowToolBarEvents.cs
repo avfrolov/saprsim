@@ -22,6 +22,35 @@ namespace sapr_sim
 
         private FileService fs = new FileService();
 
+        private void CreateNewProject_Click(object sender, RoutedEventArgs e)
+        {
+            CreateProject cp = new CreateProject();
+            Nullable<bool> result = cp.ShowDialog();
+            if (result.Value)
+            {
+                Project prj = Project.Instance;
+
+                TreeViewItem projectItem = new TreeViewItem() { Header = prj.ProjectName };
+                projectStructure.Items.Add(projectItem);
+
+                if (prj.Items.Count > 0)
+                {                    
+                    ProjectItem item = prj.Items[0];
+                    createNewTab(null, item.Name);
+
+                    fs.saveProject();
+                    fs.save(currentCanvas, prj.FullPath + "\\" + item.Name + ".ssm");
+
+                    TreeViewItem newModel = new TreeViewItem() { Header = item.Name };
+                    projectItem.Items.Add(newModel);
+                    projectItem.IsExpanded = true;
+                }
+                else
+                    fs.saveProject();
+                
+            }
+        }
+
         private void CreateNewTab_Click(object sender, RoutedEventArgs e)
         {
             createNewTab(null);

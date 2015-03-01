@@ -55,12 +55,12 @@ namespace sapr_sim
             }
         }
 
-        private void createNewTab(Canvas canvas)
+        private void createNewTab(Canvas canvas, string tabName)
         {
             if (canvas == null) canvas = new ScrollableCanvas();
 
             ClosableTabItem theTabItem = new ClosableTabItem();
-            ScrollViewer scrollViewer = new ScrollViewer();            
+            ScrollViewer scrollViewer = new ScrollViewer();
 
             canvas.Background = Brushes.Transparent;
             canvas.MouseDown += OnMouseDown;
@@ -72,11 +72,16 @@ namespace sapr_sim
 
             theTabItem.IsSelected = true;
             theTabItem.Content = scrollViewer;
-            theTabItem.Title = "Новая диаграмма " + (tabs.Items.Count + 1);            
+            theTabItem.Title = tabName;
             tabs.Items.Add(theTabItem);
             tabs.SelectionChanged += TabControl_SelectionChanged;
 
             currentCanvas = canvas;
+        }
+
+        private void createNewTab(Canvas canvas)
+        {
+            createNewTab(canvas, "Новая диаграмма " + (tabs.Items.Count + 1));
         }
 
         private bool canConnect()
