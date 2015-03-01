@@ -1,4 +1,5 @@
 ﻿using sapr_sim.Figures;
+using sapr_sim.Utils;
 using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
@@ -18,14 +19,15 @@ namespace sapr_sim
 {
     public partial class MainWindow : Window
     {
+
+        private FileService fs = new FileService();
+
         private void CreateNewTab_Click(object sender, RoutedEventArgs e)
         {
             createNewTab(null);
         }
 
-
-
-        private void SaveAs_Click(object sender, RoutedEventArgs e)
+        public void SaveAs_Click(object sender, RoutedEventArgs e)
         {
             // Configure save file dialog box
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
@@ -40,10 +42,7 @@ namespace sapr_sim
             // Process save file dialog box results
             if (result.Value)
             {
-                using (FileStream filestream = new FileStream(dlg.FileName, FileMode.OpenOrCreate))
-                {
-                    new BinaryFormatter().Serialize(filestream, currentCanvas);
-                }
+                fs.save(currentCanvas, dlg.FileName);
                 printInformation("Сохранение прошло успешно");
                 printInformation("Сохранен файл " + dlg.FileName);
                 changeTabName(Path.GetFileName(dlg.FileName));
@@ -52,14 +51,13 @@ namespace sapr_sim
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Будет сделано после поддержки проектной структуры", "Не имплементировано");
+            MessageBox.Show("Будет сделано после поддержки проектной структуры. Пока пользуйся 'Сохранить как...'", "Не имплементировано");
             //using (FileStream filestream = new FileStream(dlg.FileName, FileMode.OpenOrCreate))
             //{
             //    new BinaryFormatter().Serialize(filestream, currentCanvas);
             //}
             //printInformation("Сохранение прошло успешно");
             //printInformation("Сохранен файл " + dlg.FileName);
-            //canvasChanged(true);
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)
@@ -76,10 +74,7 @@ namespace sapr_sim
             // Process open file dialog box results
             if (result.Value)
             {
-                using (FileStream fs = new FileStream(dlg.FileName, FileMode.Open))
-                {
-                    createNewTab((ScrollableCanvas)new BinaryFormatter().Deserialize(fs));
-                }
+                createNewTab(fs.open(dlg.FileName));
                 printInformation("Открыт файл " + dlg.FileName);
                 changeTabName(Path.GetFileName(dlg.FileName));
             }            

@@ -108,7 +108,7 @@ namespace sapr_sim
 
                 currentCanvas.Children.Add(currentEntity);
                 currentEntity = null;
-                canvasChanged();
+                ModelChanged();
             }
         }
 
@@ -140,7 +140,7 @@ namespace sapr_sim
             }
 
             currentEntity = null;
-            canvasChanged();
+            ModelChanged();
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -225,11 +225,17 @@ namespace sapr_sim
             ti.Title = newName;
         }
 
-        private void canvasChanged()
+        public void ModelChanged()
         {
             ClosableTabItem ti = tabs.SelectedItem as ClosableTabItem;
             if (!ti.Title.Contains("* "))
                 changeTabName("* " + ti.Title);
+        }
+
+        public bool IsModelChanged()
+        {
+            ClosableTabItem ti = tabs.SelectedItem as ClosableTabItem;
+            return ti.Title.Contains("* ");
         }
 
         private void errorsListBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

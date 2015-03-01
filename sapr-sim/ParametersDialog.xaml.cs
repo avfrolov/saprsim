@@ -55,6 +55,7 @@ namespace sapr_sim
             }
 
             this.Close();
+            ((MainWindow)System.Windows.Application.Current.MainWindow).ModelChanged();
         }
 
         private void addButtons()

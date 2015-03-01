@@ -85,7 +85,31 @@ namespace sapr_sim.WPFCustomElements
         // an event indicating a "CloseTab" event has occurred)
         void button_close_Click(object sender, RoutedEventArgs e)
         {
-            ((TabControl)this.Parent).Items.Remove(this);
+            MainWindow main = (MainWindow) System.Windows.Application.Current.MainWindow;
+            if (main.IsModelChanged())
+            {
+                MessageBoxResult result = MessageBox.Show("Модель изменилась. Сохранить изменения перед закрытием?", 
+                    "Предупреждение", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        // TODO change to FileService#Save after implementation project structure
+                        main.SaveAs_Click(null, null);
+                        ((TabControl)this.Parent).Items.Remove(this);
+                        break;
+                    case MessageBoxResult.No:                        
+                        ((TabControl)this.Parent).Items.Remove(this);
+                        break;
+                    case MessageBoxResult.Cancel:                        
+                        break;
+                }
+            }
+            else
+            {
+                ((TabControl)this.Parent).Items.Remove(this);
+            }
+            
         }
 
         // Label SizeChanged - When the Size of the Label changes

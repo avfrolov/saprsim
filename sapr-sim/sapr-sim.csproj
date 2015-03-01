@@ -104,6 +104,7 @@
     <Compile Include="Transformers\SynchronizationTransformer.cs" />
     <Compile Include="Transformers\Transformer.cs" />
     <Compile Include="Utils\ConnectorFinder.cs" />
+    <Compile Include="Utils\FileService.cs" />
     <Compile Include="Utils\ZIndexUtil.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
     <Compile Include="WPFCustomElements\ListBoxItemError.cs" />
