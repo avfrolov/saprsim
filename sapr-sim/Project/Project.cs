@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace sapr_sim
 {
@@ -54,6 +55,11 @@ namespace sapr_sim
         public void removeProjectItem(ProjectItem item)
         {
             items.Remove(item);
+        }
+
+        public ProjectItem byCanvas(Canvas canvas)
+        {
+            return items.Where(i => i.Canvas.Equals(canvas)).First();
         }
     }
 }

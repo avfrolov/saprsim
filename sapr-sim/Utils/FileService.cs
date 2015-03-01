@@ -13,6 +13,10 @@ namespace sapr_sim.Utils
 {
     public class FileService
     {
+
+        public static readonly string PROJECT_EXTENSION = ".ssp";
+        public static readonly string PROJECT_ITEM_EXTENSION = ".ssm";
+
         public ScrollableCanvas open(string filepath)
         {
             using (FileStream fs = new FileStream(filepath, FileMode.Open))
@@ -36,7 +40,7 @@ namespace sapr_sim.Utils
             if (!Directory.Exists(pathToProject))
                 Directory.CreateDirectory(pathToProject);
 
-            string projectFile = pathToProject + "\\" + prj.ProjectName + ".ssp";
+            string projectFile = pathToProject + "\\" + prj.ProjectName + PROJECT_EXTENSION;
             XmlSerializer serializer = new XmlSerializer(typeof(Project));
             using (var writer = new StreamWriter(projectFile))
             {

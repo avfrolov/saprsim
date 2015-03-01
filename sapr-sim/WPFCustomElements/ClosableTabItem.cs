@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 
 using sapr_sim.WPFCustomElements.UserControls;
+using sapr_sim.Utils;
 
 namespace sapr_sim.WPFCustomElements
 {
@@ -94,8 +95,9 @@ namespace sapr_sim.WPFCustomElements
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        // TODO change to FileService#Save after implementation project structure
-                        main.SaveAs_Click(null, null);
+                        Canvas canvas = (Content as ScrollViewer).Content as Canvas;
+                        ProjectItem item = Project.Instance.byCanvas(canvas);
+                        new FileService().save(canvas, item.FullPath);
                         ((TabControl)this.Parent).Items.Remove(this);
                         break;
                     case MessageBoxResult.No:                        

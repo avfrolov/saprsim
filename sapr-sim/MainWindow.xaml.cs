@@ -34,6 +34,9 @@ namespace sapr_sim
         private const int X_OFFSET = -300;
         private const int Y_OFFSET = -100;
 
+        private readonly string defaultTabName = "Новая диаграмма ";
+        private readonly string modelChangedPostfix = "* "; 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -81,7 +84,7 @@ namespace sapr_sim
 
         private void createNewTab(Canvas canvas)
         {
-            createNewTab(canvas, "Новая диаграмма " + (tabs.Items.Count + 1));
+            createNewTab(canvas, defaultTabName + (tabs.Items.Count + 1));
         }
 
         private bool canConnect()
@@ -233,14 +236,14 @@ namespace sapr_sim
         public void ModelChanged()
         {
             ClosableTabItem ti = tabs.SelectedItem as ClosableTabItem;
-            if (!ti.Title.Contains("* "))
-                changeTabName("* " + ti.Title);
+            if (!ti.Title.Contains(modelChangedPostfix))
+                changeTabName(modelChangedPostfix + ti.Title);
         }
 
         public bool IsModelChanged()
         {
             ClosableTabItem ti = tabs.SelectedItem as ClosableTabItem;
-            return ti.Title.Contains("* ");
+            return ti.Title.Contains(modelChangedPostfix);
         }
 
         private void errorsListBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

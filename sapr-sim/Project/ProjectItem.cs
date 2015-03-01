@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,11 @@ namespace sapr_sim
         {
             get { return name; }
             set { name = value; }
+        }
+
+        public string FullPath
+        {
+            get { return Project.Instance.FullPath + "\\" + name + FileService.PROJECT_ITEM_EXTENSION; }
         }
     }
 }

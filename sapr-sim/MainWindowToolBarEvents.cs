@@ -37,9 +37,10 @@ namespace sapr_sim
                 {                    
                     ProjectItem item = prj.Items[0];
                     createNewTab(null, item.Name);
+                    item.Canvas = currentCanvas;
 
                     fs.saveProject();
-                    fs.save(currentCanvas, prj.FullPath + "\\" + item.Name + ".ssm");
+                    fs.save(currentCanvas, prj.FullPath + "\\" + item.Name + FileService.PROJECT_ITEM_EXTENSION);
 
                     TreeViewItem newModel = new TreeViewItem() { Header = item.Name };
                     projectItem.Items.Add(newModel);
@@ -56,13 +57,12 @@ namespace sapr_sim
             createNewTab(null);
         }
 
-        public void SaveAs_Click(object sender, RoutedEventArgs e)
+        private void SaveAs_Click(object sender, RoutedEventArgs e)
         {
             // Configure save file dialog box
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // Default directory
-            dlg.FileName = "Model"; // Default file name
-            dlg.DefaultExt = ".ssm"; // Default file extension
+            dlg.InitialDirectory = Project.Instance.FullPath; // Default directory
+            dlg.DefaultExt = FileService.PROJECT_ITEM_EXTENSION; // Default file extension
             dlg.Filter = "SAPR-SIM models (.ssm)|*.ssm"; // Filter files by extension
 
             // Show save file dialog box
@@ -80,13 +80,11 @@ namespace sapr_sim
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Будет сделано после поддержки проектной структуры. Пока пользуйся 'Сохранить как...'", "Не имплементировано");
-            //using (FileStream filestream = new FileStream(dlg.FileName, FileMode.OpenOrCreate))
-            //{
-            //    new BinaryFormatter().Serialize(filestream, currentCanvas);
-            //}
-            //printInformation("Сохранение прошло успешно");
-            //printInformation("Сохранен файл " + dlg.FileName);
+            ProjectItem item = Project.Instance.byCanvas(currentCanvas);
+            fs.save(currentCanvas, item.FullPath);
+            printInformation("Сохранение прошло успешно");
+            printInformation("Сохранен файл " + item.FullPath);
+            changeTabName(item.Name);
         }
 
         private void Open_Click(object sender, RoutedEventArgs e)
@@ -94,7 +92,7 @@ namespace sapr_sim
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // Default directory
             dlg.FileName = "Model"; // Default file name
-            dlg.DefaultExt = ".ssm"; // Default file extension
+            dlg.DefaultExt = FileService.PROJECT_ITEM_EXTENSION; // Default file extension
             dlg.Filter = "SAPR-SIM models (.ssm)|*.ssm"; // Filter files by extension
 
             // Show open file dialog box
