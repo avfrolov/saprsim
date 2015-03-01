@@ -23,7 +23,34 @@ namespace sapr_sim
             createNewTab(null);
         }
 
-        private void SaveToFile_Click(object sender, RoutedEventArgs e)
+
+
+        private void SaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            // Configure save file dialog box
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // Default directory
+            dlg.FileName = "Model"; // Default file name
+            dlg.DefaultExt = ".ssm"; // Default file extension
+            dlg.Filter = "SAPR-SIM models (.ssm)|*.ssm"; // Filter files by extension
+
+            // Show save file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process save file dialog box results
+            if (result.Value)
+            {
+                using (FileStream filestream = new FileStream(dlg.FileName, FileMode.OpenOrCreate))
+                {
+                    new BinaryFormatter().Serialize(filestream, currentCanvas);
+                }
+                printInformation("Сохранение прошло успешно");
+                printInformation("Сохранен файл " + dlg.FileName);
+                changeTabName(Path.GetFileName(dlg.FileName));
+            }
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
         {
             // Configure save file dialog box
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
@@ -45,11 +72,9 @@ namespace sapr_sim
                 printInformation("Сохранение прошло успешно");
                 printInformation("Сохранен файл " + dlg.FileName);
             }
-
-            
         }
 
-        private void OpenFromFile_Click(object sender, RoutedEventArgs e)
+        private void Open_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // Default directory
@@ -68,8 +93,8 @@ namespace sapr_sim
                     createNewTab((ScrollableCanvas)new BinaryFormatter().Deserialize(fs));
                 }
                 printInformation("Открыт файл " + dlg.FileName);
-            }
-            
+                changeTabName(Path.GetFileName(dlg.FileName));
+            }            
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

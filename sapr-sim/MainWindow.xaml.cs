@@ -233,6 +233,12 @@ namespace sapr_sim
             infoTextBlock.Text += info + Environment.NewLine;
         }
 
+        private void changeTabName(string newName)
+        {
+            ClosableTabItem ti = tabs.SelectedItem as ClosableTabItem;
+            ti.Title = newName;
+        }
+
         private void errorsListBox_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             object selected = (sender as ListBox).SelectedItem;

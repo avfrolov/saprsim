@@ -20,10 +20,11 @@
         <Menu Grid.Row="0">
             <MenuItem Header="Файл">
                 <MenuItem Header="Новый" InputGestureText="Ctrl+N" Click="CreateNewTab_Click"/>
-                <MenuItem Header="Открыть" InputGestureText="Ctrl+O" Click="OpenFromFile_Click"/>
+                <MenuItem Header="Открыть" InputGestureText="Ctrl+O" Click="Open_Click"/>
                 <Separator/>
-                <MenuItem Header="Сохранить" InputGestureText="Ctrl+S" Click="SaveToFile_Click"/>
-                <MenuItem Header="Сохранить как..." IsEnabled="False"/>
+                <MenuItem Header="Сохранить" InputGestureText="Ctrl+S" Click="Save_Click"/>
+                <MenuItem Header="Сохранить как..." Click="SaveAs_Click"/>
+                <MenuItem Header="Сохранить все" InputGestureText="Ctrl+Shift+S" IsEnabled="False"/>
                 <Separator/>
                 <MenuItem Header="Экспорт" IsEnabled="False"/>
             </MenuItem>
@@ -83,10 +84,10 @@
                 <Button x:Name="New" ToolTip="Создать новую диаграмму" Click="CreateNewTab_Click">
                     <Image Source="Resources/New_document.png" />
                 </Button>
-                <Button x:Name="Open" ToolTip="Открыть диаграмму" Click="OpenFromFile_Click">
+                <Button x:Name="Open" ToolTip="Открыть диаграмму" Click="Open_Click">
                     <Image Source="Resources/Folder.png" />
                 </Button>
-                <Button x:Name="Save" ToolTip="Сохранить" Click="SaveToFile_Click">
+                <Button x:Name="Save" ToolTip="Сохранить" Click="Save_Click">
                     <Image Source="Resources/Save.png" />
                 </Button>
                 <Button x:Name="Export" ToolTip="Экспорт в качестве изображения" IsEnabled="False">

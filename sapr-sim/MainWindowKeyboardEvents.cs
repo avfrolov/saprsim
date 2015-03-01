@@ -66,12 +66,12 @@ namespace sapr_sim
 
         private void OpenFromFileCommand(object sender, ExecutedRoutedEventArgs e)
         {
-            OpenFromFile_Click(null, null);
+            Open_Click(null, null);
         }
 
         private void SaveCommand(object sender, ExecutedRoutedEventArgs e)
         {
-            SaveToFile_Click(null, null);
+            Save_Click(null, null);
         }
     }
 }
