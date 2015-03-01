@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Runtime.Serialization;
 using sapr_sim.Figures;
+using sapr_sim.Utils;
 
 namespace sapr_sim.WPFCustomElements
 {
@@ -23,8 +24,9 @@ namespace sapr_sim.WPFCustomElements
         {
             for (int i = 0; i < info.MemberCount; i++)
             {
-                UIEntity ent = info.GetValue("Child" + i, typeof(UIEntity)) as UIEntity;
+                UIEntity ent = info.GetValue("Child" + i, typeof(UIEntity)) as UIEntity;                
                 Children.Add(ent);
+                ZIndexUtil.setCorrectZIndex(this, ent);
             }
         }
 

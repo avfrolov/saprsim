@@ -17,6 +17,7 @@ using sapr_sim.Figures;
 using sapr_sim.WPFCustomElements;
 using System.Windows.Media.Effects;
 using sapr_sim.Parameters;
+using sapr_sim.Utils;
 
 namespace sapr_sim
 {
@@ -103,7 +104,7 @@ namespace sapr_sim
                 currentEntity.MouseLeftButtonDown += Shape_MouseLeftButtonDown;
                 currentEntity.MouseLeftButtonUp += Shape_MouseLeftButtonUp;
 
-                currentEntity.SetValue(Canvas.ZIndexProperty, 0);
+                ZIndexUtil.setCorrectZIndex(currentCanvas, currentEntity);
 
                 currentCanvas.Children.Add(currentEntity);
                 currentEntity = null;
@@ -130,7 +131,7 @@ namespace sapr_sim
             currentCanvas.Children.Add(currentEntity);
             currentEntity.createAndDraw(position.X + X_OFFSET, position.Y + Y_OFFSET);
 
-            setCorrectZIndex();
+            ZIndexUtil.setCorrectZIndex(currentCanvas, currentEntity);
 
             foreach (Port p in currentEntity.getPorts())
             {
@@ -211,24 +212,7 @@ namespace sapr_sim
             entity.MouseLeftButtonDown += Shape_MouseLeftButtonDown;
             entity.MouseMove += Shape_MouseMove;
             entity.MouseLeftButtonUp += Shape_MouseLeftButtonUp;
-        }
-
-        private void setCorrectZIndex()
-        {
-            var maxZ = currentCanvas.Children.OfType<UIElement>()
-                            .Where(x => x != currentEntity)
-                            .Select(x => Panel.GetZIndex(x))
-                            .Max();
-            maxZ = maxZ == 0 ? 1 : maxZ;
-
-            foreach (Port port in currentEntity.getPorts())
-                port.SetValue(Canvas.ZIndexProperty, maxZ + 2);
-
-            if (currentEntity.Label != null)
-                currentEntity.Label.SetValue(Canvas.ZIndexProperty, maxZ + 1);
-
-            currentEntity.SetValue(Canvas.ZIndexProperty, maxZ);
-        }
+        }        
 
         private void printInformation(string info)
         {
