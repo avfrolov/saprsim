@@ -265,5 +265,16 @@ namespace sapr_sim
             }
         }
 
+        // TODO think about button activition design
+        private void EnableOnProjectCreating()
+        {
+            newDiagramButton.IsEnabled = true;
+            openDiagramButton.IsEnabled = true;
+            saveButton.IsEnabled = true;
+            saveAsButton.IsEnabled = true;
+            runSimulationButton.IsEnabled = true;
+            runSimulationToolButton.IsEnabled = true;
+        }
+
     }
 }

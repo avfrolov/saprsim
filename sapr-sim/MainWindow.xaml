@@ -21,15 +21,15 @@
             <MenuItem Header="Файл">
                 <MenuItem Header="Новый">
                     <MenuItem Header="Проект" Click="CreateNewProject_Click"/>
-                    <MenuItem Header="Файл" InputGestureText="Ctrl+N" Click="CreateNewTab_Click"/>
+                    <MenuItem Name="newDiagramButton"  Header="Диаграмма" InputGestureText="Ctrl+N" Click="CreateNewTab_Click" IsEnabled="False"/>
                 </MenuItem>
                 <MenuItem Header="Открыть">
-                    <MenuItem Header="Проект" IsEnabled="False"/>
-                    <MenuItem Header="Файл" InputGestureText="Ctrl+O" Click="Open_Click"/>
+                    <MenuItem Header="Проект" Click="OpenProject_Click"/>
+                    <MenuItem Name="openDiagramButton" Header="Диаграмма" InputGestureText="Ctrl+O" Click="Open_Click" IsEnabled="False"/>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Header="Сохранить" InputGestureText="Ctrl+S" Click="Save_Click"/>
-                <MenuItem Header="Сохранить как..." Click="SaveAs_Click"/>
+                <MenuItem Name="saveButton" Header="Сохранить" InputGestureText="Ctrl+S" Click="Save_Click" IsEnabled="False"/>
+                <MenuItem Name="saveAsButton" Header="Сохранить как..." Click="SaveAs_Click" IsEnabled="False"/>
                 <MenuItem Header="Сохранить все" InputGestureText="Ctrl+Shift+S" IsEnabled="False"/>
                 <Separator/>
                 <MenuItem Header="Экспорт" IsEnabled="False"/>
@@ -78,7 +78,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Модель">
-                <MenuItem Header="Запуск моделиирования" InputGestureText="F5" Click="SimulateButton_Click"/>
+                <MenuItem Name="runSimulationButton" Header="Запуск моделиирования" InputGestureText="F5" Click="SimulateButton_Click" IsEnabled="False"/>
                 <MenuItem Header="Запуск оптимизации" InputGestureText="F2" IsEnabled="False"/>
                 <Separator/>
                 <MenuItem Header="Настройка параметров ресурсов" IsEnabled="False"/>
@@ -150,7 +150,7 @@
                 </Button>
                 <Separator/>
 
-                <Button x:Name="Run" ToolTip="Запустить моделирование" Click="SimulateButton_Click">
+                <Button x:Name="runSimulationToolButton" ToolTip="Запустить моделирование" Click="SimulateButton_Click" IsEnabled="False">
                     <Image Source="Resources/Icon_PlaySolid.ico" />
                 </Button>
             </ToolBar>

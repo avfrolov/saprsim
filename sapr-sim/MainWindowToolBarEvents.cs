@@ -48,8 +48,46 @@ namespace sapr_sim
                 }
                 else
                     fs.saveProject();
-                
+
+                EnableOnProjectCreating();
             }
+        }
+
+        private void OpenProject_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // Default directory
+            dlg.DefaultExt = FileService.PROJECT_EXTENSION; // Default file extension
+            dlg.Filter = "SAPR-SIM project (.ssp)|*.ssp"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result.Value)
+            {
+                printInformation("Открыт проект " + dlg.FileName);
+                fs.openProject(dlg.FileName);
+
+                Project prj = Project.Instance;
+
+                TreeViewItem projectItem = new TreeViewItem() { Header = prj.ProjectName };
+                projectStructure.Items.Add(projectItem);
+
+                if (prj.Items.Count > 0)
+                {
+                    printInformation("Количество диаграмм в проекте: " + prj.Items.Count);
+                    foreach (ProjectItem item in prj.Items)
+                    {
+                        createNewTab(item.Canvas, item.Name);
+                        item.Canvas = currentCanvas;
+                        projectItem.Items.Add(new TreeViewItem() { Header = item.Name });
+                        printInformation("Открыта диаграмма : " + item.Name);
+                    }
+                    projectItem.IsExpanded = true;
+                }
+            }   
+            EnableOnProjectCreating();
         }
 
         private void CreateNewTab_Click(object sender, RoutedEventArgs e)
@@ -91,7 +129,6 @@ namespace sapr_sim
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // Default directory
-            dlg.FileName = "Model"; // Default file name
             dlg.DefaultExt = FileService.PROJECT_ITEM_EXTENSION; // Default file extension
             dlg.Filter = "SAPR-SIM models (.ssm)|*.ssm"; // Filter files by extension
 

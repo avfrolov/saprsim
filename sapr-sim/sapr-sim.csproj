@@ -98,6 +98,7 @@
     <Compile Include="Parameters\Validators\PositiveDoubleParamValidator.cs" />
     <Compile Include="Parameters\Validators\PositiveIntegerParamValidator.cs" />
     <Compile Include="Project\Project.cs" />
+    <Compile Include="Project\ProjectException.cs" />
     <Compile Include="Project\ProjectItem.cs" />
     <Compile Include="Transformers\TransformerFactory.cs" />
     <Compile Include="Transformers\TransformerService.cs" />

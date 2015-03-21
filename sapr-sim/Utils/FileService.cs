@@ -1,4 +1,5 @@
-﻿using sapr_sim.WPFCustomElements;
+﻿
+using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace sapr_sim.Utils
@@ -45,6 +47,30 @@ namespace sapr_sim.Utils
             using (var writer = new StreamWriter(projectFile))
             {
                 serializer.Serialize(writer, Project.Instance);
+            }
+        }
+
+        public void openProject(string filepath)
+        {
+            if (String.IsNullOrWhiteSpace(filepath))
+                throw new ArgumentException();
+            if (!File.Exists(filepath) || !filepath.Contains(PROJECT_EXTENSION))
+                throw new ProjectException("Указана неверная директория");
+
+            XmlSerializer serializer = new XmlSerializer(typeof(Project));
+            using (XmlReader reader = new XmlTextReader(filepath))
+            {
+                Project openedProject = (Project) serializer.Deserialize(reader);                
+                reader.Close();
+
+                // we must set all properties from opened project to our project singletone
+                Project.Instance.ProjectName = openedProject.ProjectName;
+                Project.Instance.ProjectPath = openedProject.ProjectPath;
+                foreach (ProjectItem item in openedProject.Items)
+                {
+                    item.Canvas = open(item.FullPath);
+                    Project.Instance.addProjectItem(item);
+                }
             }
         }
     }

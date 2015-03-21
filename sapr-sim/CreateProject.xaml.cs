@@ -43,6 +43,11 @@ namespace sapr_sim
 
                 if (createNewModel.IsChecked.Value)
                 {
+                    if (String.IsNullOrWhiteSpace(modelName.Text))
+                    {
+                        MessageBox.Show("Заполните все параметры", "Ошибка");
+                        return;
+                    }
                     project.addProjectItem(new ProjectItem(modelName.Text));
                 }
 
