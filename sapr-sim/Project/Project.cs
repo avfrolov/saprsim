@@ -61,5 +61,12 @@ namespace sapr_sim
         {
             return items.Where(i => i.Canvas.Equals(canvas)).First();
         }
+
+        public void Close()
+        {
+            items.Clear();
+            projectName = "";
+            projectPath = "";
+        }
     }
 }

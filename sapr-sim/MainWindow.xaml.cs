@@ -242,7 +242,11 @@ namespace sapr_sim
 
         public bool IsModelChanged()
         {
-            ClosableTabItem ti = tabs.SelectedItem as ClosableTabItem;
+            return IsModelChanged(tabs.SelectedItem as ClosableTabItem);
+        }
+
+        public bool IsModelChanged(ClosableTabItem ti)
+        {
             return ti.Title.Contains(modelChangedPostfix);
         }
 
@@ -266,14 +270,15 @@ namespace sapr_sim
         }
 
         // TODO think about button activition design
-        private void EnableOnProjectCreating()
+        private void ButtonsActivation(bool activate)
         {
-            newDiagramButton.IsEnabled = true;
-            openDiagramButton.IsEnabled = true;
-            saveButton.IsEnabled = true;
-            saveAsButton.IsEnabled = true;
-            runSimulationButton.IsEnabled = true;
-            runSimulationToolButton.IsEnabled = true;
+            newDiagramButton.IsEnabled = activate;
+            openDiagramButton.IsEnabled = activate;
+            saveButton.IsEnabled = activate;
+            saveAsButton.IsEnabled = activate;
+            runSimulationButton.IsEnabled = activate;
+            runSimulationToolButton.IsEnabled = activate;
+            closeProjectButton.IsEnabled = activate;
         }
 
     }

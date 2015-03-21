@@ -21,12 +21,13 @@
             <MenuItem Header="Файл">
                 <MenuItem Header="Новый">
                     <MenuItem Header="Проект" Click="CreateNewProject_Click"/>
-                    <MenuItem Name="newDiagramButton"  Header="Диаграмма" InputGestureText="Ctrl+N" Click="CreateNewTab_Click" IsEnabled="False"/>
+                    <MenuItem Name="newDiagramButton" Header="Диаграмма" InputGestureText="Ctrl+N" Click="CreateNewTab_Click" IsEnabled="False"/>
                 </MenuItem>
                 <MenuItem Header="Открыть">
                     <MenuItem Header="Проект" Click="OpenProject_Click"/>
                     <MenuItem Name="openDiagramButton" Header="Диаграмма" InputGestureText="Ctrl+O" Click="Open_Click" IsEnabled="False"/>
                 </MenuItem>
+                <MenuItem Name="closeProjectButton"  Header="Закрыть проект" Click="CloseProject_Click" IsEnabled="False"/>
                 <Separator/>
                 <MenuItem Name="saveButton" Header="Сохранить" InputGestureText="Ctrl+S" Click="Save_Click" IsEnabled="False"/>
                 <MenuItem Name="saveAsButton" Header="Сохранить как..." Click="SaveAs_Click" IsEnabled="False"/>

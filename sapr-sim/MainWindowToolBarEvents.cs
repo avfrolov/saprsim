@@ -49,7 +49,7 @@ namespace sapr_sim
                 else
                     fs.saveProject();
 
-                EnableOnProjectCreating();
+                ButtonsActivation(true);
             }
         }
 
@@ -86,13 +86,47 @@ namespace sapr_sim
                     }
                     projectItem.IsExpanded = true;
                 }
-            }   
-            EnableOnProjectCreating();
+            }
+            ButtonsActivation(true);
         }
 
         private void CreateNewTab_Click(object sender, RoutedEventArgs e)
         {
             createNewTab(null);
+        }
+
+        private void CloseProject_Click(object sender, RoutedEventArgs e)
+        {
+            bool needSave = false;
+            foreach (ClosableTabItem i in tabs.Items)
+            {
+                needSave = IsModelChanged(i);
+                if (needSave) break;
+            }
+
+            if (needSave)
+            {
+                MessageBoxResult result = MessageBox.Show("Имеются не сохраненные данные. Сохранить изменения перед закрытием?",
+                    "Предупреждение", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        // saveAll
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                    case MessageBoxResult.Cancel:
+                        return;
+                }
+            }
+
+            Project.Instance.Close();
+            tabs.Items.Clear();
+            propertiesPanel.Children.Clear();
+            selected = null;
+            projectStructure.Items.Clear();
+            ButtonsActivation(false);
         }
 
         private void SaveAs_Click(object sender, RoutedEventArgs e)

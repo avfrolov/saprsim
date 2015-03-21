@@ -14,7 +14,7 @@ using sapr_sim.Utils;
 namespace sapr_sim.WPFCustomElements
 {
     // http://www.codeproject.com/Articles/84213/How-to-add-a-Close-button-to-a-WPF-TabItem
-    class ClosableTabItem : TabItem
+    public class ClosableTabItem : TabItem
     {
 
         private ClosableHeader closableTabHeader;
@@ -89,7 +89,7 @@ namespace sapr_sim.WPFCustomElements
             MainWindow main = (MainWindow) System.Windows.Application.Current.MainWindow;
             if (main.IsModelChanged())
             {
-                MessageBoxResult result = MessageBox.Show("Модель изменилась. Сохранить изменения перед закрытием?", 
+                MessageBoxResult result = MessageBox.Show("Диаграмма изменилась. Сохранить изменения перед закрытием?", 
                     "Предупреждение", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
 
                 switch (result)
