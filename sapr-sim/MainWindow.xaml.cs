@@ -58,7 +58,7 @@ namespace sapr_sim
             }
         }
 
-        private void createNewTab(Canvas canvas, string tabName)
+        private void createNewDiagram(Canvas canvas, string tabName)
         {
             if (canvas == null) canvas = new ScrollableCanvas();
 
@@ -82,9 +82,9 @@ namespace sapr_sim
             currentCanvas = canvas;
         }
 
-        private void createNewTab(Canvas canvas)
+        private void createNewDiagram(Canvas canvas)
         {
-            createNewTab(canvas, defaultTabName + (tabs.Items.Count + 1));
+            createNewDiagram(canvas, defaultTabName + (tabs.Items.Count + 1));
         }
 
         private bool canConnect()

@@ -36,7 +36,7 @@ namespace sapr_sim
                 if (prj.Items.Count > 0)
                 {                    
                     ProjectItem item = prj.Items[0];
-                    createNewTab(null, item.Name);
+                    createNewDiagram(null, item.Name);
                     item.Canvas = currentCanvas;
 
                     fs.saveProject();
@@ -79,7 +79,7 @@ namespace sapr_sim
                     printInformation("Количество диаграмм в проекте: " + prj.Items.Count);
                     foreach (ProjectItem item in prj.Items)
                     {
-                        createNewTab(item.Canvas, item.Name);
+                        createNewDiagram(item.Canvas, item.Name);
                         item.Canvas = currentCanvas;
                         projectItem.Items.Add(new TreeViewItem() { Header = item.Name });
                         printInformation("Открыта диаграмма : " + item.Name);
@@ -90,9 +90,9 @@ namespace sapr_sim
             ButtonsActivation(true);
         }
 
-        private void CreateNewTab_Click(object sender, RoutedEventArgs e)
+        private void CreateNewDiagram_Click(object sender, RoutedEventArgs e)
         {
-            createNewTab(null);
+            createNewDiagram(null);
         }
 
         private void CloseProject_Click(object sender, RoutedEventArgs e)
@@ -182,7 +182,7 @@ namespace sapr_sim
             // Process open file dialog box results
             if (result.Value)
             {
-                createNewTab(fs.open(dlg.FileName));
+                createNewDiagram(fs.open(dlg.FileName));
                 printInformation("Открыт файл " + dlg.FileName);
                 changeTabName(Path.GetFileName(dlg.FileName));
             }            
