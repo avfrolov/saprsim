@@ -227,10 +227,14 @@ namespace sapr_sim
             infoTextBlock.Text += info + Environment.NewLine;
         }
 
+        private void changeTabName(ClosableTabItem ti, string newName)
+        {
+            ti.Title = newName;
+        }
+
         private void changeTabName(string newName)
         {
-            ClosableTabItem ti = tabs.SelectedItem as ClosableTabItem;
-            ti.Title = newName;
+            changeTabName(tabs.SelectedItem as ClosableTabItem, newName);
         }
 
         public void ModelChanged()
@@ -277,9 +281,14 @@ namespace sapr_sim
             saveButton.IsEnabled = activate;
             saveAsButton.IsEnabled = activate;
             saveAllButton.IsEnabled = activate;
-            runSimulationButton.IsEnabled = activate;
-            runSimulationToolButton.IsEnabled = activate;
+            runSimulationButton.IsEnabled = activate;            
             closeProjectButton.IsEnabled = activate;
+
+            // tool buttons
+            NewDiagram.IsEnabled = activate;
+            OpenDiagram.IsEnabled = activate;
+            SaveDiagram.IsEnabled = activate;
+            runSimulationToolButton.IsEnabled = activate;
         }
 
     }

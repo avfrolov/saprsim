@@ -86,13 +86,19 @@ namespace sapr_sim
                     }
                     projectItem.IsExpanded = true;
                 }
-            }
-            ButtonsActivation(true);
+                ButtonsActivation(true);
+            }            
         }
 
         private void CreateNewDiagram_Click(object sender, RoutedEventArgs e)
         {
             createNewDiagram(null);
+            ProjectItem newItem = new ProjectItem(currentCanvas, (tabs.SelectedItem as ClosableTabItem).Title);
+            Project.Instance.addProjectItem(newItem);
+            TreeViewItem root = projectStructure.Items[0] as TreeViewItem;
+            root.Items.Add(new TreeViewItem() { Header = newItem.Name });
+            fs.save(newItem.Canvas, newItem.FullPath);
+            fs.saveProject();
         }
 
         private void CloseProject_Click(object sender, RoutedEventArgs e)
@@ -163,11 +169,23 @@ namespace sapr_sim
         {
             foreach(ProjectItem item in Project.Instance.Items)
             {
-                fs.save(item.Canvas, item.FullPath);
-                changeTabName(item.Name);
+                fs.save(item.Canvas, item.FullPath);                
+                changeTabName(findTabItem(item), item.Name);
             }
             printInformation("Все измененные файлы сохранены");
-        }        
+        }
+
+        private ClosableTabItem findTabItem(ProjectItem item)
+        {
+            foreach(ClosableTabItem ti in tabs.Items)
+            {
+                ScrollableCanvas sc = (ti.Content as ScrollViewer).Content as ScrollableCanvas;
+                ProjectItem pi = Project.Instance.byCanvas(sc);
+                if (pi.Equals(item))
+                    return ti;
+            }
+            return null;
+        }
 
         private void Open_Click(object sender, RoutedEventArgs e)
         {
@@ -184,7 +202,15 @@ namespace sapr_sim
             {
                 createNewDiagram(fs.open(dlg.FileName));
                 printInformation("Открыт файл " + dlg.FileName);
-                changeTabName(Path.GetFileName(dlg.FileName));
+                string filename = Path.GetFileNameWithoutExtension(dlg.FileName);
+                changeTabName(filename);
+
+                ProjectItem newItem = new ProjectItem(currentCanvas, filename);
+                Project.Instance.addProjectItem(newItem);
+                TreeViewItem root = projectStructure.Items[0] as TreeViewItem;
+                root.Items.Add(new TreeViewItem() { Header = newItem.Name });
+                fs.save(newItem.Canvas, newItem.FullPath);
+                fs.saveProject();
             }            
         }
 

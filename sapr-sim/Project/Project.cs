@@ -41,6 +41,11 @@ namespace sapr_sim
             get { return projectPath + "\\" + projectName; }
         }
 
+        public bool IsLoaded
+        {
+            get { return !String.IsNullOrEmpty(projectPath) && !String.IsNullOrEmpty(projectName); }
+        }
+
         public List<ProjectItem> Items
         {
             get { return items; }

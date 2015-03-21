@@ -88,13 +88,13 @@
 
         <ToolBarPanel Grid.Row="1">
             <ToolBar Height="26" >
-                <Button x:Name="New" ToolTip="Создать новую диаграмму" Click="CreateNewDiagram_Click">
+                <Button x:Name="NewDiagram" ToolTip="Создать новую диаграмму" Click="CreateNewDiagram_Click" IsEnabled="False">
                     <Image Source="Resources/New_document.png" />
                 </Button>
-                <Button x:Name="Open" ToolTip="Открыть диаграмму" Click="Open_Click">
+                <Button x:Name="OpenDiagram" ToolTip="Открыть диаграмму" Click="Open_Click" IsEnabled="False">
                     <Image Source="Resources/Folder.png" />
                 </Button>
-                <Button x:Name="Save" ToolTip="Сохранить" Click="Save_Click">
+                <Button x:Name="SaveDiagram" ToolTip="Сохранить" Click="Save_Click" IsEnabled="False">
                     <Image Source="Resources/Save.png" />
                 </Button>
                 <Button x:Name="Export" ToolTip="Экспорт в качестве изображения" IsEnabled="False">
