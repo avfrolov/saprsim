@@ -18,17 +18,11 @@ namespace sapr_sim
         {
             try
             {
-                RoutedCommand deleteBinding = new RoutedCommand();
-                deleteBinding.InputGestures.Add(new KeyGesture(Key.Delete));
-                CommandBindings.Add(new CommandBinding(deleteBinding, DeleteShapeCommand));
-
+                // ****************************************************************************************************
+                // File Commands
                 RoutedCommand newTabBinding = new RoutedCommand();
                 newTabBinding.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(newTabBinding, CreateNewTabCommand));
-
-                RoutedCommand closeTabBinding = new RoutedCommand();
-                closeTabBinding.InputGestures.Add(new KeyGesture(Key.W, ModifierKeys.Control));
-                CommandBindings.Add(new CommandBinding(closeTabBinding, CloseTabCommand));
 
                 RoutedCommand openFromFileBinding = new RoutedCommand();
                 openFromFileBinding.InputGestures.Add(new KeyGesture(Key.O, ModifierKeys.Control));
@@ -37,6 +31,22 @@ namespace sapr_sim
                 RoutedCommand saveBinding = new RoutedCommand();
                 saveBinding.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(saveBinding, SaveCommand));
+
+                RoutedCommand saveAllBinding = new RoutedCommand();
+                saveAllBinding.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Shift | ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(saveAllBinding, SaveAllCommand));
+
+                // ****************************************************************************************************
+                // Other Commands
+
+                RoutedCommand closeTabBinding = new RoutedCommand();
+                closeTabBinding.InputGestures.Add(new KeyGesture(Key.W, ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(closeTabBinding, CloseTabCommand));
+
+                RoutedCommand deleteBinding = new RoutedCommand();
+                deleteBinding.InputGestures.Add(new KeyGesture(Key.Delete));
+                CommandBindings.Add(new CommandBinding(deleteBinding, DeleteShapeCommand));
+
             }
             catch (Exception err)
             {
@@ -81,6 +91,11 @@ namespace sapr_sim
         private void SaveCommand(object sender, ExecutedRoutedEventArgs e)
         {
             Save_Click(null, null);
+        }
+
+        private void SaveAllCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            SaveAll_Click(null, null);
         }
     }
 }

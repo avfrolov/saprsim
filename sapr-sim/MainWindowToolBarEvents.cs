@@ -112,7 +112,7 @@ namespace sapr_sim
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        // saveAll
+                        SaveAll_Click(null, null);
                         break;
                     case MessageBoxResult.No:
                         break;
@@ -158,6 +158,16 @@ namespace sapr_sim
             printInformation("Сохранен файл " + item.FullPath);
             changeTabName(item.Name);
         }
+
+        private void SaveAll_Click(object sender, RoutedEventArgs e)
+        {
+            foreach(ProjectItem item in Project.Instance.Items)
+            {
+                fs.save(item.Canvas, item.FullPath);
+                changeTabName(item.Name);
+            }
+            printInformation("Все измененные файлы сохранены");
+        }        
 
         private void Open_Click(object sender, RoutedEventArgs e)
         {

@@ -276,6 +276,7 @@ namespace sapr_sim
             openDiagramButton.IsEnabled = activate;
             saveButton.IsEnabled = activate;
             saveAsButton.IsEnabled = activate;
+            saveAllButton.IsEnabled = activate;
             runSimulationButton.IsEnabled = activate;
             runSimulationToolButton.IsEnabled = activate;
             closeProjectButton.IsEnabled = activate;

@@ -31,7 +31,7 @@
                 <Separator/>
                 <MenuItem Name="saveButton" Header="Сохранить" InputGestureText="Ctrl+S" Click="Save_Click" IsEnabled="False"/>
                 <MenuItem Name="saveAsButton" Header="Сохранить как..." Click="SaveAs_Click" IsEnabled="False"/>
-                <MenuItem Header="Сохранить все" InputGestureText="Ctrl+Shift+S" IsEnabled="False"/>
+                <MenuItem Name="saveAllButton" Header="Сохранить все" InputGestureText="Ctrl+Shift+S" Click="SaveAll_Click" IsEnabled="False"/>
                 <Separator/>
                 <MenuItem Header="Экспорт" IsEnabled="False"/>
             </MenuItem>
