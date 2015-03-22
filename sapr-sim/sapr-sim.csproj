@@ -70,6 +70,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreateDiagramDialog.xaml.cs">
+      <DependentUpon>CreateDiagramDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateProject.xaml.cs">
       <DependentUpon>CreateProject.xaml</DependentUpon>
     </Compile>
@@ -123,6 +126,10 @@
     <Compile Include="WPFCustomElements\UserControls\ClosableHeader.xaml.cs">
       <DependentUpon>ClosableHeader.xaml</DependentUpon>
     </Compile>
+    <Page Include="CreateDiagramDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateProject.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

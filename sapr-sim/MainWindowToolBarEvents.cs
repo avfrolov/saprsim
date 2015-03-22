@@ -106,15 +106,20 @@ namespace sapr_sim
 
         private void CreateNewDiagram_Click(object sender, RoutedEventArgs e)
         {
-            createNewDiagram(null);
-            ProjectItem newItem = new ProjectItem(currentCanvas, (tabs.SelectedItem as ClosableTabItem).Title);
-            Project.Instance.addProjectItem(newItem);
-            TreeViewItem root = projectStructure.Items[0] as TreeViewItem;
-            ProjectTreeViewItem ptvi = new ProjectTreeViewItem() { Header = ProjectTreeViewItem.packProjectItem(newItem.Name, false), ProjectItem = newItem };
-            attachProjectItemEvents(ptvi);
-            root.Items.Add(ptvi);
-            fs.save(newItem.Canvas, newItem.FullPath);
-            fs.saveProject();
+            CreateDiagramDialog cdd = new CreateDiagramDialog();
+            Nullable<bool> result = cdd.ShowDialog();
+            if (result.Value)
+            {
+                createNewDiagram(null, cdd.Name);
+                ProjectItem newItem = new ProjectItem(currentCanvas, cdd.Name);
+                Project.Instance.addProjectItem(newItem);
+                TreeViewItem root = projectStructure.Items[0] as TreeViewItem;
+                ProjectTreeViewItem ptvi = new ProjectTreeViewItem() { Header = ProjectTreeViewItem.packProjectItem(newItem.Name, false), ProjectItem = newItem };
+                attachProjectItemEvents(ptvi);
+                root.Items.Add(ptvi);
+                fs.save(newItem.Canvas, newItem.FullPath);
+                fs.saveProject();
+            }
         }
 
         private void CloseProject_Click(object sender, RoutedEventArgs e)
