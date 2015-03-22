@@ -66,16 +66,16 @@ namespace sapr_sim.WPFCustomElements
         public bool Equals(ScrollableCanvas x, ScrollableCanvas y)
         {
             if (x == null || y == null) return false;
-            if (!(x is ScrollableCanvas) || !(y is ScrollableCanvas)) return false;
+            if (x.Children.Count == 0 && y.Children.Count == 0) return true;
             
             bool result = false;
             for (int i = 0; i < x.Children.Count; i++)
             {
-                UIEntity ent1 = Children[i] as UIEntity;
+                UIEntity ent1 = x.Children[i] as UIEntity;
                 bool localResult = false;
                 for (int j = 0; j < y.Children.Count; j++)
                 {
-                    UIEntity ent2 = Children[j] as UIEntity;
+                    UIEntity ent2 = y.Children[j] as UIEntity;
                     if (ent1.Equals(ent1, ent2))
                         localResult = true;
                 }
