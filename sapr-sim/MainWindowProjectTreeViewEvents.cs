@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 
 namespace sapr_sim
@@ -23,21 +24,58 @@ namespace sapr_sim
 
             ContextMenu menu = new ContextMenu();
 
-            MenuItem addNewDgm = new MenuItem() { Header = "Добавить новую диаграмму" };
+            MenuItem addNewDgm = new MenuItem()
+            {
+                Header = "Добавить новую диаграмму",
+                Icon = new Image()
+                {
+                    Source = new BitmapImage(new Uri("pack://application:,,/Resources/add_diagram.png"))
+                }
+            };
             addNewDgm.Click += AddNewDiagram_RootMenuClick;
             menu.Items.Add(addNewDgm);
 
-            MenuItem openDgm = new MenuItem() { Header = "Открыть диаграмму" };
+            MenuItem openDgm = new MenuItem()
+            {
+                Header = "Открыть диаграмму",
+                Icon = new Image()
+                {
+                    Source = new BitmapImage(new Uri("pack://application:,,/Resources/folder.png"))
+                }
+            };
             openDgm.Click += OpenDiagram_RootMenuClick;
             menu.Items.Add(openDgm);
 
-            menu.Items.Add(new MenuItem() { Header = "Запустить моделирование", IsEnabled = false });
+            MenuItem runSimulationItem = new MenuItem() 
+            { 
+                Header = "Запустить моделирование", 
+                IsEnabled = false, 
+                Icon = new Image()
+                {
+                    Source = new BitmapImage(new Uri("pack://application:,,/Resources/play-circle.png"))
+                }
+            };
+            menu.Items.Add(runSimulationItem);
 
-            MenuItem renameRoot = new MenuItem() { Header = "Переименовать" };
+            MenuItem renameRoot = new MenuItem()
+            {
+                Header = "Переименовать",
+                Icon = new Image()
+                {
+                    Source = new BitmapImage(new Uri("pack://application:,,/Resources/rename.png"))
+                }
+            };
             renameRoot.Click += Rename_RootMenuClick;
             menu.Items.Add(renameRoot);
 
-            menu.Items.Add(new MenuItem() { Header = "Свойства", IsEnabled = false });
+            menu.Items.Add(new MenuItem()
+            {
+                Header = "Свойства", IsEnabled = false,
+                Icon = new Image()
+                {
+                    Source = new BitmapImage(new Uri("pack://application:,,/Resources/settings.png"))
+                }
+            });
             root.ContextMenu = menu;
         }
 
@@ -47,21 +85,53 @@ namespace sapr_sim
             item.PreviewMouseRightButtonDown += OnPreviewMouseRightButtonDown;
 
             ContextMenu menu = new ContextMenu();
-            menu.Items.Add(new MenuItem() { Header = "Добавить на диаграмму", IsEnabled = false });
+            menu.Items.Add(new MenuItem() 
+            { 
+                Header = "Добавить на диаграмму", IsEnabled = false,
+                Icon = new Image()
+                {
+                    Source = new BitmapImage(new Uri("pack://application:,,/Resources/add_diagram.png"))
+                }
+            });
 
-            MenuItem runSimulationItem = new MenuItem() { Header = "Запустить моделирование" };
+            MenuItem runSimulationItem = new MenuItem() { Header = "Запустить моделирование", Icon = new Image() 
+            {
+                Source = new BitmapImage(new Uri("pack://application:,,/Resources/play-circle.png"))
+            } 
+            };
             runSimulationItem.Click += RunSimulation_MenuClick;
             menu.Items.Add(runSimulationItem);
 
-            MenuItem removeItem = new MenuItem() { Header = "Убрать из проекта" };
+            MenuItem removeItem = new MenuItem() 
+            { 
+                Header = "Убрать из проекта", 
+                Icon = new Image() 
+                {
+                    Source = new BitmapImage(new Uri("pack://application:,,/Resources/delete.png"))
+                } 
+            };
             removeItem.Click += RemoveItem_MenuClick;
             menu.Items.Add(removeItem);
 
-            MenuItem renameItem = new MenuItem() { Header = "Переименовать" };
+            MenuItem renameItem = new MenuItem()
+            {
+                Header = "Переименовать",
+                Icon = new Image()
+                {
+                    Source = new BitmapImage(new Uri("pack://application:,,/Resources/rename.png"))
+                }
+            };
             renameItem.Click += Rename_RootMenuClick;
             menu.Items.Add(renameItem);
 
-            menu.Items.Add(new MenuItem() { Header = "Свойства", IsEnabled = false });
+            menu.Items.Add(new MenuItem() 
+            { 
+                Header = "Свойства", IsEnabled = false,
+                Icon = new Image()
+                {
+                    Source = new BitmapImage(new Uri("pack://application:,,/Resources/settings.png"))
+                }
+            });
             item.ContextMenu = menu;
         }
 
