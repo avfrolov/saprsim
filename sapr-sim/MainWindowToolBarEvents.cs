@@ -22,6 +22,7 @@ namespace sapr_sim
 
         private FileService fs = new FileService();
 
+        // TODO refactor CreateNewProject_Click && OpenProject_Click
         private void CreateNewProject_Click(object sender, RoutedEventArgs e)
         {
             CreateProject cp = new CreateProject();
@@ -42,14 +43,17 @@ namespace sapr_sim
                     fs.saveProject();
                     fs.save(currentCanvas, prj.FullPath + "\\" + item.Name + FileService.PROJECT_ITEM_EXTENSION);
 
-                    TreeViewItem newModel = new TreeViewItem() { Header = item.Name };
+                    ProjectTreeViewItem newModel = new ProjectTreeViewItem() { Header = item.Name };
+                    newModel.ProjectItem = item;
                     projectItem.Items.Add(newModel);
                     projectItem.IsExpanded = true;
+                    attachProjectItemEvents(newModel);
                 }
                 else
                     fs.saveProject();
 
                 ButtonsActivation(true);
+                attachProjectEvents(projectItem);
             }
         }
 
@@ -81,10 +85,14 @@ namespace sapr_sim
                     {
                         createNewDiagram(item.Canvas, item.Name);
                         item.Canvas = currentCanvas;
-                        projectItem.Items.Add(new TreeViewItem() { Header = item.Name });
+                        ProjectTreeViewItem tvi = new ProjectTreeViewItem() { Header = item.Name };
+                        tvi.ProjectItem = item;
+                        attachProjectItemEvents(tvi);
+                        projectItem.Items.Add(tvi);
                         printInformation("Открыта диаграмма : " + item.Name);
                     }
                     projectItem.IsExpanded = true;
+                    attachProjectEvents(projectItem);
                 }
                 ButtonsActivation(true);
             }            
@@ -96,7 +104,9 @@ namespace sapr_sim
             ProjectItem newItem = new ProjectItem(currentCanvas, (tabs.SelectedItem as ClosableTabItem).Title);
             Project.Instance.addProjectItem(newItem);
             TreeViewItem root = projectStructure.Items[0] as TreeViewItem;
-            root.Items.Add(new TreeViewItem() { Header = newItem.Name });
+            ProjectTreeViewItem ptvi = new ProjectTreeViewItem() { Header = newItem.Name, ProjectItem = newItem };
+            attachProjectItemEvents(ptvi);
+            root.Items.Add(ptvi);
             fs.save(newItem.Canvas, newItem.FullPath);
             fs.saveProject();
         }
@@ -190,7 +200,7 @@ namespace sapr_sim
         private void Open_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // Default directory
+            dlg.InitialDirectory = Project.Instance.FullPath; // Default directory
             dlg.DefaultExt = FileService.PROJECT_ITEM_EXTENSION; // Default file extension
             dlg.Filter = "SAPR-SIM models (.ssm)|*.ssm"; // Filter files by extension
 
@@ -200,17 +210,27 @@ namespace sapr_sim
             // Process open file dialog box results
             if (result.Value)
             {
-                createNewDiagram(fs.open(dlg.FileName));
-                printInformation("Открыт файл " + dlg.FileName);
                 string filename = Path.GetFileNameWithoutExtension(dlg.FileName);
-                changeTabName(filename);
+                bool piExist = Project.Instance.Items.Find(x => x.Name == filename) != null;
+                if (!piExist)
+                {
+                    createNewDiagram(fs.open(dlg.FileName));
+                    printInformation("Открыт файл " + dlg.FileName);
+                    changeTabName(filename);
 
-                ProjectItem newItem = new ProjectItem(currentCanvas, filename);
-                Project.Instance.addProjectItem(newItem);
-                TreeViewItem root = projectStructure.Items[0] as TreeViewItem;
-                root.Items.Add(new TreeViewItem() { Header = newItem.Name });
-                fs.save(newItem.Canvas, newItem.FullPath);
-                fs.saveProject();
+                    ProjectItem newItem = new ProjectItem(currentCanvas, filename);
+                    Project.Instance.addProjectItem(newItem);
+                    TreeViewItem root = projectStructure.Items[0] as TreeViewItem;
+
+                    ProjectTreeViewItem ptvi = new ProjectTreeViewItem() { Header = newItem.Name, ProjectItem = newItem };
+                    attachProjectItemEvents(ptvi);
+                    root.Items.Add(ptvi);
+
+                    fs.save(newItem.Canvas, newItem.FullPath);
+                    fs.saveProject();
+                }
+                else
+                    MessageBox.Show("Файл уже есть в проекте");
             }            
         }
 

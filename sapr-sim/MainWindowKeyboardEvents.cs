@@ -84,7 +84,7 @@ namespace sapr_sim
 
         private void CreateNewTabCommand(object sender, ExecutedRoutedEventArgs e)
         {
-            createNewDiagram(null);
+            CreateNewDiagram_Click(null, null);
         }
 
         private void CloseTabCommand(object sender, ExecutedRoutedEventArgs e)

@@ -73,5 +73,27 @@ namespace sapr_sim.Utils
                 }
             }
         }
+
+        public void renameProject(string newName)
+        {
+            File.Move(Project.Instance.FullName, Project.Instance.FullPath + "\\" + newName + PROJECT_EXTENSION);
+            Directory.Move(Project.Instance.FullPath, Project.Instance.ProjectPath + "\\" + newName);
+            Project.Instance.ProjectName = newName;
+            saveProject();
+        }
+
+        public void renameProjectItem(ProjectItem pi, string newName)
+        {
+            string newPath = Project.Instance.FullPath + "\\" + newName + PROJECT_ITEM_EXTENSION;
+            if (!File.Exists(newPath))
+                File.Move(pi.FullPath, newPath);
+            else
+            {
+                File.Delete(pi.FullPath);
+            }
+            pi.Name = newName;
+            save(pi.Canvas, pi.FullPath);
+            saveProject();
+        }
     }
 }

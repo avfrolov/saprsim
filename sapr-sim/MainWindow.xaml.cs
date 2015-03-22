@@ -229,7 +229,8 @@ namespace sapr_sim
 
         private void changeTabName(ClosableTabItem ti, string newName)
         {
-            ti.Title = newName;
+            if (ti != null)           
+                ti.Title = newName;
         }
 
         private void changeTabName(string newName)

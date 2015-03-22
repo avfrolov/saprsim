@@ -88,6 +88,7 @@
     <Compile Include="MainWindowKeyboardEvents.cs" />
     <Compile Include="MainWindowLogicEvents.cs" />
     <Compile Include="MainWindowMouseEvents.cs" />
+    <Compile Include="MainWindowProjectTreeViewEvents.cs" />
     <Compile Include="MainWindowToolBarEvents.cs" />
     <Compile Include="ParametersDialog.xaml.cs">
       <DependentUpon>ParametersDialog.xaml</DependentUpon>
@@ -115,6 +116,7 @@
     <Compile Include="Utils\ZIndexUtil.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
     <Compile Include="WPFCustomElements\ListBoxItemError.cs" />
+    <Compile Include="WPFCustomElements\ProjectTreeViewItem.cs" />
     <Compile Include="WPFCustomElements\ScrollableCanvas.cs" />
     <Compile Include="WPFCustomElements\UserControls\ClosableHeader.xaml.cs">
       <DependentUpon>ClosableHeader.xaml</DependentUpon>
