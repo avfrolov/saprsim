@@ -53,8 +53,8 @@
                 <Separator/>
                 <MenuItem Header="Процедура" Click="ProcedureButton_Click"/>
                 <MenuItem Header="Ресурс" Click="ResourceButton_Click"/>
-                <MenuItem Header="Решение" Click="DecisionButton_Click"/>
-                <MenuItem Header="Коллектор" Click="CollectorButton_Click"/>
+                <MenuItem Header="Решение" Click="DecisionButton_Click" IsEnabled="False"/>
+                <MenuItem Header="Коллектор" Click="CollectorButton_Click" IsEnabled="False"/>
                 <MenuItem Header="Синхронизация" Click="SyncButton_Click"/>
                 <MenuItem Header="Параллельность" Click="ParallelButton_Click"/>
                 <MenuItem Header="Сток" Click="EntitySourceButton_Click"/>
@@ -219,8 +219,8 @@
                             <Button Grid.Row="3" Content="{StaticResource Resource}" Click="ResourceButton_Click" ToolTip="Ресурс"/>                            
                             <Button Grid.Row="4" Content="{StaticResource Multithread}" Click="ParallelButton_Click" ToolTip="Параллельность"/>
                             <Button Grid.Row="5" Content="{StaticResource Sync}" Click="SyncButton_Click" ToolTip="Синхронизация"/>
-                            <Button Grid.Row="6" Content="{StaticResource If}" Click="DecisionButton_Click" ToolTip="Блок принятия решений"/>
-                            <Button Grid.Row="7" Content="{StaticResource Collector}" Click="CollectorButton_Click" ToolTip="Коллектор"/>
+                            <Button Grid.Row="6" Content="{StaticResource If}" Click="DecisionButton_Click" ToolTip="Блок принятия решений" IsEnabled="False"/>
+                            <Button Grid.Row="7" Content="{StaticResource Collector}" Click="CollectorButton_Click" ToolTip="Коллектор" IsEnabled="False"/>
                             <Button Grid.Row="8" Content="{StaticResource EntitySource}" Click="EntitySourceButton_Click" ToolTip="Старт" />
                             <Button Grid.Row="9" Content="{StaticResource EntityDestination}" Click="EntityDestinationButton_Click" ToolTip="Конец"/>
 

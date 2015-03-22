@@ -43,7 +43,7 @@ namespace sapr_sim.Figures
                 Canvas.SetLeft(this, info.GetDouble("x"));
                 Canvas.SetTop(this, info.GetDouble("y"));
                 this.id = info.GetInt32("id");
-                nextId = Math.Max(id, nextId);
+                nextId = Math.Max(id, nextId) == id ? id + 1 : Math.Max(id, nextId);
 
                 ((MainWindow)System.Windows.Application.Current.MainWindow).attachMovingEvents(this);
 

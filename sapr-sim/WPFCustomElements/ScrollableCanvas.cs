@@ -26,7 +26,7 @@ namespace sapr_sim.WPFCustomElements
         public ScrollableCanvas(SerializationInfo info, StreamingContext context)
         {
             this.id = info.GetInt32("id");
-            nextId = Math.Max(id, nextId);
+            nextId = Math.Max(id, nextId) == id ? id + 1 : Math.Max(id, nextId);
             for (int i = 0; i < info.MemberCount - 1; i++)
             {
                 UIEntity ent = info.GetValue("Child" + i, typeof(UIEntity)) as UIEntity;                
