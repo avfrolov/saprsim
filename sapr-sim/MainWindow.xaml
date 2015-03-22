@@ -239,7 +239,9 @@
                     <ListBox Name="errorsListBox" MouseDoubleClick="errorsListBox_MouseLeftButtonDown" ScrollViewer.VerticalScrollBarVisibility="Visible"/>
                 </TabItem>
                 <TabItem Name="infoTab" Header="Информация">
-                    <TextBlock Name="infoTextBlock"/>
+                    <ScrollViewer>
+                        <TextBlock Name="infoTextBlock"/>
+                    </ScrollViewer>
                 </TabItem>
             </TabControl>
         </DockPanel>
