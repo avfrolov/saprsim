@@ -25,77 +25,83 @@ namespace sapr_sim
         // TODO refactor CreateNewProject_Click && OpenProject_Click
         private void CreateNewProject_Click(object sender, RoutedEventArgs e)
         {
-            CreateProject cp = new CreateProject();
-            Nullable<bool> result = cp.ShowDialog();
-            if (result.Value)
+            if (checkOnceProject())
             {
-                Project prj = Project.Instance;
+                CreateProject cp = new CreateProject();
+                Nullable<bool> result = cp.ShowDialog();
+                if (result.Value)
+                {
+                    Project prj = Project.Instance;
 
-                TreeViewItem projectItem = new TreeViewItem() { Header = prj.ProjectName };
-                projectStructure.Items.Add(projectItem);
+                    TreeViewItem projectItem = new TreeViewItem() { Header = prj.ProjectName };
+                    projectStructure.Items.Add(projectItem);
 
-                if (prj.Items.Count > 0)
-                {                    
-                    ProjectItem item = prj.Items[0];
-                    createNewDiagram(null, item.Name);
-                    item.Canvas = currentCanvas;
+                    if (prj.Items.Count > 0)
+                    {
+                        ProjectItem item = prj.Items[0];
+                        createNewDiagram(null, item.Name);
+                        item.Canvas = currentCanvas;
 
-                    fs.saveProject();
-                    fs.save(currentCanvas, prj.FullPath + "\\" + item.Name + FileService.PROJECT_ITEM_EXTENSION);
+                        fs.saveProject();
+                        fs.save(currentCanvas, prj.FullPath + "\\" + item.Name + FileService.PROJECT_ITEM_EXTENSION);
 
-                    ProjectTreeViewItem newModel = new ProjectTreeViewItem() { Header = item.Name };
-                    newModel.ProjectItem = item;
-                    projectItem.Items.Add(newModel);
-                    projectItem.IsExpanded = true;
-                    attachProjectItemEvents(newModel);
+                        ProjectTreeViewItem newModel = new ProjectTreeViewItem() { Header = item.Name };
+                        newModel.ProjectItem = item;
+                        projectItem.Items.Add(newModel);
+                        projectItem.IsExpanded = true;
+                        attachProjectItemEvents(newModel);
+                    }
+                    else
+                        fs.saveProject();
+
+                    ButtonsActivation(true);
+                    attachProjectEvents(projectItem);
                 }
-                else
-                    fs.saveProject();
-
-                ButtonsActivation(true);
-                attachProjectEvents(projectItem);
             }
         }
 
         private void OpenProject_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // Default directory
-            dlg.DefaultExt = FileService.PROJECT_EXTENSION; // Default file extension
-            dlg.Filter = "SAPR-SIM project (.ssp)|*.ssp"; // Filter files by extension
-
-            // Show open file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Process open file dialog box results
-            if (result.Value)
+            if (checkOnceProject())
             {
-                printInformation("Открыт проект " + dlg.FileName);
-                fs.openProject(dlg.FileName);
+                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+                dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments); // Default directory
+                dlg.DefaultExt = FileService.PROJECT_EXTENSION; // Default file extension
+                dlg.Filter = "SAPR-SIM project (.ssp)|*.ssp"; // Filter files by extension
 
-                Project prj = Project.Instance;
+                // Show open file dialog box
+                Nullable<bool> result = dlg.ShowDialog();
 
-                TreeViewItem projectItem = new TreeViewItem() { Header = prj.ProjectName };
-                projectStructure.Items.Add(projectItem);
-
-                if (prj.Items.Count > 0)
+                // Process open file dialog box results
+                if (result.Value)
                 {
-                    printInformation("Количество диаграмм в проекте: " + prj.Items.Count);
-                    foreach (ProjectItem item in prj.Items)
+                    printInformation("Открыт проект " + dlg.FileName);
+                    fs.openProject(dlg.FileName);
+
+                    Project prj = Project.Instance;
+
+                    TreeViewItem projectItem = new TreeViewItem() { Header = prj.ProjectName };
+                    projectStructure.Items.Add(projectItem);
+
+                    if (prj.Items.Count > 0)
                     {
-                        createNewDiagram(item.Canvas, item.Name);
-                        item.Canvas = currentCanvas;
-                        ProjectTreeViewItem tvi = new ProjectTreeViewItem() { Header = item.Name };
-                        tvi.ProjectItem = item;
-                        attachProjectItemEvents(tvi);
-                        projectItem.Items.Add(tvi);
-                        printInformation("Открыта диаграмма : " + item.Name);
+                        printInformation("Количество диаграмм в проекте: " + prj.Items.Count);
+                        foreach (ProjectItem item in prj.Items)
+                        {
+                            createNewDiagram(item.Canvas, item.Name);
+                            item.Canvas = currentCanvas;
+                            ProjectTreeViewItem tvi = new ProjectTreeViewItem() { Header = item.Name };
+                            tvi.ProjectItem = item;
+                            attachProjectItemEvents(tvi);
+                            projectItem.Items.Add(tvi);
+                            printInformation("Открыта диаграмма : " + item.Name);
+                        }
+                        projectItem.IsExpanded = true;
+                        attachProjectEvents(projectItem);
                     }
-                    projectItem.IsExpanded = true;
-                    attachProjectEvents(projectItem);
+                    ButtonsActivation(true);
                 }
-                ButtonsActivation(true);
-            }            
+            }
         }
 
         private void CreateNewDiagram_Click(object sender, RoutedEventArgs e)
@@ -237,6 +243,19 @@ namespace sapr_sim
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             DeleteShapeCommand(selected, null);
+        }
+
+        private bool checkOnceProject()
+        {
+            if (projectStructure.Items.Count > 0)
+            {
+                MessageBoxResult result = MessageBox.Show("Закрыть проект?",
+                    "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes) CloseProject_Click(null, null);
+                if (result == MessageBoxResult.No) return false;
+            }
+            return true;
         }
 
     }
