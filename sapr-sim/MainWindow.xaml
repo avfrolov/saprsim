@@ -179,11 +179,23 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Grid.Row="0" Background="Transparent" BorderBrush="Black" BorderThickness="1">
-                            <TreeView  HorizontalAlignment="Left" Width="250" Name="projectStructure"/>
+                            <TabControl>
+                                <TabItem Header="Структура проекта">
+                                    <TreeView  HorizontalAlignment="Left" Width="250" Name="projectStructure"/>
+                                </TabItem>
+                            </TabControl>                            
                         </Border>
 
                         <Border Grid.Row="1" Background="White" BorderBrush="Black" BorderThickness="1">
-                            <StackPanel Name="propertiesPanel"/>
+                            <TabControl>
+                                <TabItem Header="Свойства">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" IsEnabled="False">Свойства выделенного объекта в режиме чтения</TextBlock>
+                                        <GridSplitter Height="5" BorderBrush="Black" HorizontalAlignment="Stretch" />
+                                        <StackPanel Name="propertiesPanel"/>
+                                    </StackPanel>
+                                </TabItem>
+                            </TabControl>                            
                         </Border>
                     </Grid>                    
                 </Border>
