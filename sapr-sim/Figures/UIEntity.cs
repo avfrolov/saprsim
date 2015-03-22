@@ -1,4 +1,5 @@
 ﻿using sapr_sim.Parameters;
+using sapr_sim.Utils;
 using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
@@ -113,6 +114,7 @@ namespace sapr_sim.Figures
                 if (this is Label) ((MainWindow)System.Windows.Application.Current.MainWindow).attachMovingEvents(label);
 
                 canvas.Children.Add(label);
+                ZIndexUtil.setCorrectZIndex(canvas, this);
             }             
         }
 
