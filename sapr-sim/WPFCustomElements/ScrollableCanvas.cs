@@ -20,9 +20,14 @@ namespace sapr_sim.WPFCustomElements
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ScrollableCanvas), new FrameworkPropertyMetadata(typeof(ScrollableCanvas)));
         }
 
+        private int id = 0;
+        private static int nextId = 1;
+
         public ScrollableCanvas(SerializationInfo info, StreamingContext context)
         {
-            for (int i = 0; i < info.MemberCount; i++)
+            this.id = info.GetInt32("id");
+            nextId = Math.Max(id, nextId);
+            for (int i = 0; i < info.MemberCount - 1; i++)
             {
                 UIEntity ent = info.GetValue("Child" + i, typeof(UIEntity)) as UIEntity;                
                 Children.Add(ent);
@@ -32,7 +37,8 @@ namespace sapr_sim.WPFCustomElements
 
         public ScrollableCanvas()
         {
-
+            id = nextId;
+            nextId++;
         }
 
         protected override Size MeasureOverride(Size constraint)
@@ -56,6 +62,7 @@ namespace sapr_sim.WPFCustomElements
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
+            info.AddValue("id", id);
             for (int i = 0; i < Children.Count; i++)
             {
                 UIEntity ent = Children[i] as UIEntity;
@@ -66,27 +73,12 @@ namespace sapr_sim.WPFCustomElements
         public bool Equals(ScrollableCanvas x, ScrollableCanvas y)
         {
             if (x == null || y == null) return false;
-            if (x.Children.Count == 0 && y.Children.Count == 0) return true;
-            
-            bool result = false;
-            for (int i = 0; i < x.Children.Count; i++)
-            {
-                UIEntity ent1 = x.Children[i] as UIEntity;
-                bool localResult = false;
-                for (int j = 0; j < y.Children.Count; j++)
-                {
-                    UIEntity ent2 = y.Children[j] as UIEntity;
-                    if (ent1.Equals(ent1, ent2))
-                        localResult = true;
-                }
-                result = localResult;
-            }   
-            return result;
+            return x.id == y.id;
         }
 
         public int GetHashCode(ScrollableCanvas obj)
         {
-            return obj.GetHashCode();
+            return id.GetHashCode();
         }
     }
 }
