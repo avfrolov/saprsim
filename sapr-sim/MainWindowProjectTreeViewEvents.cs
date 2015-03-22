@@ -70,7 +70,7 @@ namespace sapr_sim
             ProjectTreeViewItem tvi = sender as ProjectTreeViewItem;
             ClosableTabItem cti = findTabItem(tvi.ProjectItem);
             if (cti == null)
-                createNewDiagram(tvi.ProjectItem.Canvas, tvi.ProjectItem.Name);
+                createNewDiagram(fs.open(tvi.ProjectItem.FullPath), tvi.ProjectItem.Name);
             else
                 cti.IsSelected = true;
         }
@@ -204,14 +204,14 @@ namespace sapr_sim
         // http://www.codeproject.com/Tips/478376/Setting-focus-to-a-control-inside-a-usercontrol-in
         private void TextBox_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if ((bool)e.NewValue == true)
+            if ((bool)e.NewValue)
             {
-                Dispatcher.BeginInvoke(
-                DispatcherPriority.ContextIdle,
-                new Action(delegate()
-                {
-                    (sender as TextBox).Focus();
-                }));
+                Dispatcher.BeginInvoke(DispatcherPriority.ContextIdle, new Action(
+                    delegate()
+                    {
+                        (sender as TextBox).Focus();
+                    }
+                ));
             }
         }  
     }

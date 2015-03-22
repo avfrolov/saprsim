@@ -28,7 +28,8 @@ namespace sapr_sim.Utils
                         Port src = srcExp.DataItem as Port;
                         Port dst = dstExp.DataItem as Port;
 
-                        if (entity.Equals(src.Owner) || entity.Equals(dst.Owner))
+                        //if (entity.Equals(src.Owner) || entity.Equals(dst.Owner))
+                        if (entity.Equals(entity, src.Owner) || entity.Equals(entity, dst.Owner))                        
                             result.Add(conenctor);
                     }
                 }

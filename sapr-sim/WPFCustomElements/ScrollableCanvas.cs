@@ -13,7 +13,7 @@ using sapr_sim.Utils;
 namespace sapr_sim.WPFCustomElements
 {
     [Serializable]
-    public class ScrollableCanvas: Canvas, ISerializable
+    public class ScrollableCanvas : Canvas, ISerializable, IEqualityComparer<ScrollableCanvas>
     {
         static ScrollableCanvas()
         {
@@ -60,8 +60,33 @@ namespace sapr_sim.WPFCustomElements
             {
                 UIEntity ent = Children[i] as UIEntity;
                 info.AddValue("Child" + i, ent);
-            }
+            }            
+        }
+
+        public bool Equals(ScrollableCanvas x, ScrollableCanvas y)
+        {
+            if (x == null || y == null) return false;
+            if (!(x is ScrollableCanvas) || !(y is ScrollableCanvas)) return false;
             
+            bool result = false;
+            for (int i = 0; i < x.Children.Count; i++)
+            {
+                UIEntity ent1 = Children[i] as UIEntity;
+                bool localResult = false;
+                for (int j = 0; j < y.Children.Count; j++)
+                {
+                    UIEntity ent2 = Children[j] as UIEntity;
+                    if (ent1.Equals(ent1, ent2))
+                        localResult = true;
+                }
+                result = localResult;
+            }   
+            return result;
+        }
+
+        public int GetHashCode(ScrollableCanvas obj)
+        {
+            return obj.GetHashCode();
         }
     }
 }

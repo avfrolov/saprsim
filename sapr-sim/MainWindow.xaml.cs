@@ -114,9 +114,11 @@ namespace sapr_sim
             BindingExpression dstExp = currentEntity.GetBindingExpression(ConnectionLine.DestinationProperty);
             if (dstExp == null)
             {
-                return !(selected as Port).Owner.Equals((srcExp.DataItem as Port).Owner);
+                //return !(selected as Port).Owner.Equals((srcExp.DataItem as Port).Owner);
+                return selected.Equals((selected as Port).Owner, (srcExp.DataItem as Port).Owner);
             }
-            return !selected.Equals(srcExp.DataItem) && !selected.Equals(dstExp.DataItem);
+            return !selected.Equals(selected, srcExp.DataItem as UIEntity) && !selected.Equals(selected, dstExp.DataItem as UIEntity);
+            //return !selected.Equals(srcExp.DataItem) && !selected.Equals(dstExp.DataItem);
         }
 
         private void connect()

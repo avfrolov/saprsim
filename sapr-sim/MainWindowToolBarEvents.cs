@@ -46,6 +46,7 @@ namespace sapr_sim
                         fs.save(currentCanvas, prj.FullPath + "\\" + item.Name + FileService.PROJECT_ITEM_EXTENSION);
 
                         ProjectTreeViewItem newModel = new ProjectTreeViewItem() { Header = item.Name };
+                        attachProjectItemEvents(newModel);
                         newModel.ProjectItem = item;
                         projectItem.Items.Add(newModel);
                         projectItem.IsExpanded = true;
@@ -167,7 +168,7 @@ namespace sapr_sim
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            ProjectItem item = Project.Instance.byCanvas(currentCanvas);
+            ProjectItem item = Project.Instance.byCanvas(currentCanvas as ScrollableCanvas);
             fs.save(currentCanvas, item.FullPath);
             printInformation("Сохранение прошло успешно");
             printInformation("Сохранен файл " + item.FullPath);

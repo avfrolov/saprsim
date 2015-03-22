@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace sapr_sim.Figures
 {
     [Serializable]
-    public abstract class UIEntity : Shape, ISerializable
+    public abstract class UIEntity : Shape, ISerializable, IEqualityComparer<UIEntity>
     {
 
         public static readonly string ENTITY_NAME_PARAM = "Имя";
@@ -30,6 +30,9 @@ namespace sapr_sim.Figures
 
         protected UIParam<String> textParam = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM);
 
+        protected int id = 0;
+        protected static int nextId = 1;
+
         public UIEntity(SerializationInfo info, StreamingContext context)
         {                      
             try
@@ -39,6 +42,8 @@ namespace sapr_sim.Figures
                 this.textParam = info.GetValue("textParam", typeof(UIParam<String>)) as UIParam<String>;
                 Canvas.SetLeft(this, info.GetDouble("x"));
                 Canvas.SetTop(this, info.GetDouble("y"));
+                this.id = info.GetInt32("id");
+                nextId = Math.Max(id, nextId);
 
                 ((MainWindow)System.Windows.Application.Current.MainWindow).attachMovingEvents(this);
 
@@ -160,6 +165,7 @@ namespace sapr_sim.Figures
             info.AddValue("label", label);
             info.AddValue("x", VisualTreeHelper.GetOffset(this).X);
             info.AddValue("y", VisualTreeHelper.GetOffset(this).Y);
+            info.AddValue("id", id);
             info.AddValue("textParam", textParam);
         }
 
@@ -170,6 +176,8 @@ namespace sapr_sim.Figures
             Stroke = Brushes.Black;
             Fill = Brushes.LemonChiffon;
             defaultBitmapEffect();
+            id = nextId;
+            nextId++;
         }
 
         public struct CoordinatesHandler
@@ -185,5 +193,14 @@ namespace sapr_sim.Figures
             }
         }
 
+        public bool Equals(UIEntity x, UIEntity y)
+        {
+            return x.id == y.id;
+        }
+
+        public int GetHashCode(UIEntity obj)
+        {
+            return obj.GetHashCode();
+        }
     }
 }

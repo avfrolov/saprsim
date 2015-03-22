@@ -95,7 +95,7 @@ namespace sapr_sim.WPFCustomElements
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        Canvas canvas = (Content as ScrollViewer).Content as Canvas;
+                        ScrollableCanvas canvas = (Content as ScrollViewer).Content as ScrollableCanvas;
                         ProjectItem item = Project.Instance.byCanvas(canvas);
                         new FileService().save(canvas, item.FullPath);
                         ((TabControl)this.Parent).Items.Remove(this);

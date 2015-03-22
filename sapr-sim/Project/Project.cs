@@ -1,4 +1,5 @@
 ﻿using sapr_sim.Utils;
+using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,9 +69,9 @@ namespace sapr_sim
             items.Remove(item);
         }
 
-        public ProjectItem byCanvas(Canvas canvas)
+        public ProjectItem byCanvas(ScrollableCanvas canvas)
         {
-            return items.Where(i => i.Canvas.Equals(canvas)).First();
+            return items.Where(i => canvas.Equals(i.Canvas as ScrollableCanvas, canvas)).First();
         }
 
         public void Close()
