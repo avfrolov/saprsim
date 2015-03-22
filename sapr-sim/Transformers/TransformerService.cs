@@ -48,17 +48,27 @@ namespace EntityTransformator
                         Entity realSrc = map[src];
                         Entity realDest = map[dest];
                         
-                        // protection for random line connection
-                        if (realSrc.canUseAsOutput(realDest) && realDest.canUseAsInput(realSrc))
+                        if (c.SourcePort.PortType == PortType.OUTPUT && c.DestinationPort.PortType == PortType.INPUT)
                         {
                             realSrc.addOutput(realDest);
                             realDest.addInput(realSrc);
-                        } 
-                        else if (realSrc.canUseAsInput(realDest) && realDest.canUseAsOutput(realSrc))
+                        }
+                        else if (c.SourcePort.PortType == PortType.INPUT && c.DestinationPort.PortType == PortType.OUTPUT)
                         {
                             realSrc.addInput(realDest);
                             realDest.addOutput(realSrc);
                         }
+                        // protection for random line connection
+                        //if (realSrc.canUseAsOutput(realDest) && realDest.canUseAsInput(realSrc))
+                        //{
+                        //    realSrc.addOutput(realDest);
+                        //    realDest.addInput(realSrc);
+                        //} 
+                        //else if (realSrc.canUseAsInput(realDest) && realDest.canUseAsOutput(realSrc))
+                        //{
+                        //    realSrc.addInput(realDest);
+                        //    realDest.addOutput(realSrc);
+                        //}
                     }
                 }
                 else if (e is sapr_sim.Figures.Resource)
@@ -72,7 +82,7 @@ namespace EntityTransformator
                     if (connectors.Count > 0)
                     {
                         UIEntity procedure = null;
-                        if (connectors[0].SourcePort != null)
+                        if (connectors[0].SourcePort != null && connectors[0].SourcePort.PortType == PortType.RESOURCE)
                         {
                             UIEntity src = connectors[0].SourcePort.Owner;
                             UIEntity dst = connectors[0].DestinationPort.Owner;

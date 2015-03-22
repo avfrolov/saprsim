@@ -12,8 +12,18 @@ using System.Windows.Media;
 namespace sapr_sim.Figures
 {
     [Serializable]
+    public enum PortType
+    {
+        INPUT,
+        OUTPUT,
+        RESOURCE,
+        UNDEFINED
+    }
+
+    [Serializable]
     public class Port : UIEntity, ISerializable
     {
+
         public static readonly DependencyProperty AnchorPointProperty =
                 DependencyProperty.Register(
                     "AnchorPoint", typeof(Point), typeof(Port),
@@ -22,17 +32,20 @@ namespace sapr_sim.Figures
 
         private Rect bound;
         private UIEntity owner;
+        private PortType portType;
 
         public Port(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             init(info.GetValue("owner", typeof(UIEntity)) as UIEntity);
+            this.portType = (PortType) info.GetValue("portType", typeof(PortType));
             this.MouseMove -= ((MainWindow)System.Windows.Application.Current.MainWindow).Shape_MouseMove;            
         }
 
-        public Port(UIEntity owner, Canvas canvas, double xPos, double yPos) : base(canvas)
+        public Port(UIEntity owner, Canvas canvas, PortType portType, double xPos, double yPos) : base(canvas)
         {
             init(owner);
             this.canvas = canvas;
+            this.portType = portType;
 
             Canvas.SetLeft(this, xPos);
             Canvas.SetTop(this, yPos);
@@ -52,10 +65,16 @@ namespace sapr_sim.Figures
             get { return owner; }
         }
 
+        public PortType PortType
+        {
+            get { return portType; }
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
             info.AddValue("owner", owner);
+            info.AddValue("portType", portType);
         }
 
         protected override Geometry DefiningGeometry

@@ -43,7 +43,7 @@ namespace sapr_sim.Figures
 
         public override void createAndDraw(double x, double y)
         {
-            port = new Port(this, canvas, x + 56, y + 26.5);
+            port = new Port(this, canvas, PortType.OUTPUT, x + 56, y + 26.5);
             canvas.Children.Add(port);
             ports.Add(port);
 
