@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Xml;
 
 namespace sapr_sim
@@ -33,7 +34,7 @@ namespace sapr_sim
                 {
                     Project prj = Project.Instance;
 
-                    TreeViewItem projectItem = new TreeViewItem() { Header = prj.ProjectName };
+                    TreeViewItem projectItem = new TreeViewItem() { Header = ProjectTreeViewItem.packProject(prj.ProjectName, false) };
                     projectStructure.Items.Add(projectItem);
 
                     if (prj.Items.Count > 0)
@@ -45,9 +46,8 @@ namespace sapr_sim
                         fs.saveProject();
                         fs.save(currentCanvas, prj.FullPath + "\\" + item.Name + FileService.PROJECT_ITEM_EXTENSION);
 
-                        ProjectTreeViewItem newModel = new ProjectTreeViewItem() { Header = item.Name };
+                        ProjectTreeViewItem newModel = new ProjectTreeViewItem() { Header = ProjectTreeViewItem.packProjectItem(item.Name, false), ProjectItem = item };
                         attachProjectItemEvents(newModel);
-                        newModel.ProjectItem = item;
                         projectItem.Items.Add(newModel);
                         projectItem.IsExpanded = true;
                         attachProjectItemEvents(newModel);
@@ -81,7 +81,7 @@ namespace sapr_sim
 
                     Project prj = Project.Instance;
 
-                    TreeViewItem projectItem = new TreeViewItem() { Header = prj.ProjectName };
+                    TreeViewItem projectItem = new TreeViewItem() { Header = ProjectTreeViewItem.packProject(prj.ProjectName, false) };
                     projectStructure.Items.Add(projectItem);
 
                     if (prj.Items.Count > 0)
@@ -91,8 +91,7 @@ namespace sapr_sim
                         {
                             createNewDiagram(item.Canvas, item.Name);
                             item.Canvas = currentCanvas;
-                            ProjectTreeViewItem tvi = new ProjectTreeViewItem() { Header = item.Name };
-                            tvi.ProjectItem = item;
+                            ProjectTreeViewItem tvi = new ProjectTreeViewItem() { Header = ProjectTreeViewItem.packProjectItem(item.Name, false), ProjectItem = item };
                             attachProjectItemEvents(tvi);
                             projectItem.Items.Add(tvi);
                             printInformation("Открыта диаграмма : " + item.Name);
@@ -111,7 +110,7 @@ namespace sapr_sim
             ProjectItem newItem = new ProjectItem(currentCanvas, (tabs.SelectedItem as ClosableTabItem).Title);
             Project.Instance.addProjectItem(newItem);
             TreeViewItem root = projectStructure.Items[0] as TreeViewItem;
-            ProjectTreeViewItem ptvi = new ProjectTreeViewItem() { Header = newItem.Name, ProjectItem = newItem };
+            ProjectTreeViewItem ptvi = new ProjectTreeViewItem() { Header = ProjectTreeViewItem.packProjectItem(newItem.Name, false), ProjectItem = newItem };
             attachProjectItemEvents(ptvi);
             root.Items.Add(ptvi);
             fs.save(newItem.Canvas, newItem.FullPath);
@@ -222,7 +221,7 @@ namespace sapr_sim
                     Project.Instance.addProjectItem(newItem);
                     TreeViewItem root = projectStructure.Items[0] as TreeViewItem;
 
-                    ProjectTreeViewItem ptvi = new ProjectTreeViewItem() { Header = newItem.Name, ProjectItem = newItem };
+                    ProjectTreeViewItem ptvi = new ProjectTreeViewItem() { Header = ProjectTreeViewItem.packProjectItem(newItem.Name, false), ProjectItem = newItem };
                     attachProjectItemEvents(ptvi);
                     root.Items.Add(ptvi);
 

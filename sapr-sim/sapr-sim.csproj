@@ -116,6 +116,8 @@
     <Compile Include="Utils\ZIndexUtil.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
     <Compile Include="WPFCustomElements\ListBoxItemError.cs" />
+    <Compile Include="WPFCustomElements\ProjectItemLabel.cs" />
+    <Compile Include="WPFCustomElements\ProjectItemTextBox.cs" />
     <Compile Include="WPFCustomElements\ProjectTreeViewItem.cs" />
     <Compile Include="WPFCustomElements\ScrollableCanvas.cs" />
     <Compile Include="WPFCustomElements\UserControls\ClosableHeader.xaml.cs">
@@ -408,6 +410,12 @@
       <Project>{256f2ae7-a9d0-4a21-855a-66838771c731}</Project>
       <Name>Kernel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\diagram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\project.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -111,21 +111,28 @@ namespace sapr_sim
         private void Rename_RootMenuClick(object sender, RoutedEventArgs e)
         {
             TreeViewItem item = projectStructure.SelectedItem as TreeViewItem;
-            string name = item.Header as string;
-            TextBox tb = new TextBox() { Text = name };
+            string name = ProjectTreeViewItem.unpack(item.Header as StackPanel);
+
+            StackPanel sp = null;
+            if (item is ProjectTreeViewItem)
+                sp = ProjectTreeViewItem.packProjectItem(name, true);
+            else
+                sp = ProjectTreeViewItem.packProject(name, true);
+
+            TextBox tb = sp.Children[1] as TextBox;
             tb.KeyDown += TextBox_KeyUp;
             tb.LostFocus += TextBox_LostFocus;
 
             tb.IsVisibleChanged += new DependencyPropertyChangedEventHandler(TextBox_IsVisibleChanged);
 
             tb.CaretIndex = tb.Text.Length;
-            item.Header = tb;
+            item.Header = sp;
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             TreeViewItem item = projectStructure.SelectedItem as TreeViewItem;
-            if (item.Header is TextBox)
+            if (item != null && item.Header is TextBox)
                 renameTreeViewItem(sender);
         }
 
@@ -170,7 +177,7 @@ namespace sapr_sim
             {
                 // true = avoiding NOT Renaming (when user clicked "Rename" and name not changed)
                 if (selected is ProjectTreeViewItem && (selected as ProjectTreeViewItem).ProjectItem.Equals(pi))
-                    selected.Header = newName;
+                    selected.Header = ProjectTreeViewItem.packProjectItem(newName, false);
                 else
                     MessageBox.Show("Диаграмма с таким именем уже подключена");
                 return;
@@ -188,14 +195,14 @@ namespace sapr_sim
             if (selected is ProjectTreeViewItem)
             {
                 ProjectTreeViewItem item = selected as ProjectTreeViewItem;
-                item.Header = newName;
+                item.Header = ProjectTreeViewItem.packProjectItem(newName, false);
                 fs.renameProjectItem(item.ProjectItem, newName);
                 changeTabName(findTabItem(item.ProjectItem), newName);
             }
             else 
             {
                 TreeViewItem root = projectStructure.Items[0] as TreeViewItem;
-                root.Header = newName;
+                root.Header = ProjectTreeViewItem.packProject(newName, false);
                 fs.renameProject(newName);
             }            
         }
