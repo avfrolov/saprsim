@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:sapr_sim="clr-namespace:sapr_sim.WPFCustomElements;assembly="
-        Title="SAPR-SIM v. 0.1" Height="768" Width="1024" MinHeight="768" MinWidth="1024" WindowState="Maximized" Icon="Resources/Icon_PlaySolid.ico">
+        Title="SAPR-SIM v. 0.1" Height="768" Width="1024" MinHeight="768" MinWidth="1024" WindowState="Maximized" Icon="Resources/Icon_PlaySolid.ico"
+        Closing="Application_ClosingEvent">
 
     <Grid>
         <Grid.RowDefinitions>

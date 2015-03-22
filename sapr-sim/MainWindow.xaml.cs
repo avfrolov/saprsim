@@ -43,6 +43,27 @@ namespace sapr_sim
             bindHotkeys();
         }
 
+        private void Application_ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (needSave())
+            {
+                MessageBoxResult result = MessageBox.Show("Имеются не сохраненные данные. Сохранить изменения перед закрытием?",
+                        "Предупреждение", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        SaveAll_Click(null, null);
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                    case MessageBoxResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                }
+            }
+        }
+
         private void OnMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (currentEntity != null && e.LeftButton == MouseButtonState.Pressed)
@@ -290,6 +311,13 @@ namespace sapr_sim
             OpenDiagram.IsEnabled = activate;
             SaveDiagram.IsEnabled = activate;
             runSimulationToolButton.IsEnabled = activate;
+        }
+
+        private bool needSave()
+        {
+            foreach (ClosableTabItem i in tabs.Items)
+                if (IsModelChanged(i)) return true;
+            return false;
         }
 
     }

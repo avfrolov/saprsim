@@ -119,14 +119,7 @@ namespace sapr_sim
 
         private void CloseProject_Click(object sender, RoutedEventArgs e)
         {
-            bool needSave = false;
-            foreach (ClosableTabItem i in tabs.Items)
-            {
-                needSave = IsModelChanged(i);
-                if (needSave) break;
-            }
-
-            if (needSave)
+            if (needSave())
             {
                 MessageBoxResult result = MessageBox.Show("Имеются не сохраненные данные. Сохранить изменения перед закрытием?",
                     "Предупреждение", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
