@@ -1,4 +1,5 @@
 ﻿using sapr_sim.Utils;
+using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using System.Xml.Serialization;
 
 namespace sapr_sim
 {
+    [Serializable]
     public class ProjectItem
     {
 
@@ -47,6 +49,25 @@ namespace sapr_sim
         public string FullPath
         {
             get { return Project.Instance.FullPath + "\\" + name + FileService.PROJECT_ITEM_EXTENSION; }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (obj.GetType() != typeof(ProjectItem)) return false;
+
+            ProjectItem another = obj as ProjectItem;
+
+            // C#... 
+            ScrollableCanvas thisCanvas = canvas as ScrollableCanvas;
+            ScrollableCanvas anotherCanvas = another.Canvas as ScrollableCanvas;
+
+            return thisCanvas.Equals(thisCanvas, anotherCanvas);
+        }
+
+        public override int GetHashCode()
+        {
+            return canvas.GetHashCode();
         }
     }
 }

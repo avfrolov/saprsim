@@ -261,6 +261,15 @@ namespace sapr_sim
             changeTabName(tabs.SelectedItem as ClosableTabItem, newName);
         }
 
+        private void findAndOpenRelatedTab(ProjectItem pi)
+        {
+            ClosableTabItem cti = findTabItem(pi);
+            if (cti == null)
+                createNewDiagram(fs.open(pi.FullPath), pi.Name);
+            else
+                cti.IsSelected = true;
+        }
+
         public void ModelChanged()
         {
             ClosableTabItem ti = tabs.SelectedItem as ClosableTabItem;

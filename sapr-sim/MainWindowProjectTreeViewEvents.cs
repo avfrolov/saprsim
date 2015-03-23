@@ -1,4 +1,5 @@
-﻿using sapr_sim.Utils;
+﻿using sapr_sim.Figures;
+using sapr_sim.Utils;
 using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
@@ -85,14 +86,17 @@ namespace sapr_sim
             item.PreviewMouseRightButtonDown += OnPreviewMouseRightButtonDown;
 
             ContextMenu menu = new ContextMenu();
-            menu.Items.Add(new MenuItem() 
+
+            MenuItem addToDiagram = new MenuItem() 
             { 
-                Header = "Добавить на диаграмму", IsEnabled = false,
+                Header = "Добавить на диаграмму",
                 Icon = new Image()
                 {
                     Source = new BitmapImage(new Uri("pack://application:,,/Resources/add_diagram.png"))
                 }
-            });
+            };
+            addToDiagram.Click += AddToDiagram_MenuClick;
+            menu.Items.Add(addToDiagram);
 
             MenuItem runSimulationItem = new MenuItem() { Header = "Запустить моделирование", Icon = new Image() 
             {
@@ -138,11 +142,7 @@ namespace sapr_sim
         private void OnProjectItemMouseDoubleClick(object sender, MouseButtonEventArgs args)
         {
             ProjectTreeViewItem tvi = sender as ProjectTreeViewItem;
-            ClosableTabItem cti = findTabItem(tvi.ProjectItem);
-            if (cti == null)
-                createNewDiagram(fs.open(tvi.ProjectItem.FullPath), tvi.ProjectItem.Name);
-            else
-                cti.IsSelected = true;
+            findAndOpenRelatedTab(tvi.ProjectItem);
         }
 
         private void AddNewDiagram_RootMenuClick(object sender, RoutedEventArgs e)
@@ -153,6 +153,12 @@ namespace sapr_sim
         private void OpenDiagram_RootMenuClick(object sender, RoutedEventArgs e)
         {
             Open_Click(null, null);
+        }
+
+        private void AddToDiagram_MenuClick(object sender, RoutedEventArgs e)
+        {
+            ProjectTreeViewItem item = projectStructure.SelectedItem as ProjectTreeViewItem;
+            currentEntity = new SubDiagram(currentCanvas, item.ProjectItem);
         }
 
         private void RunSimulation_MenuClick(object sender, RoutedEventArgs e)

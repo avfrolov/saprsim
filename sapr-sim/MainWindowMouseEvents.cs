@@ -75,7 +75,13 @@ namespace sapr_sim
             else if (e.ClickCount == 2 && !(sender is Port || sender is ConnectionLine))
             {
                 UIEntity ent = sender as UIEntity;
-                new ParameterDialog(ent.getParams(), ent).ShowDialog();
+                if (!(ent is SubDiagram))
+                    new ParameterDialog(ent.getParams(), ent).ShowDialog();
+                else
+                {
+                    SubDiagram sd = ent as SubDiagram;
+                    findAndOpenRelatedTab(sd.ProjectItem);
+                }
             }
         }
 

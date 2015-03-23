@@ -86,6 +86,7 @@
     <Compile Include="Figures\Procedure.cs" />
     <Compile Include="Figures\Resource.cs" />
     <Compile Include="Figures\Source.cs" />
+    <Compile Include="Figures\SubDiagram.cs" />
     <Compile Include="Figures\Sync.cs" />
     <Compile Include="Figures\UIEntity.cs" />
     <Compile Include="MainWindowKeyboardEvents.cs" />

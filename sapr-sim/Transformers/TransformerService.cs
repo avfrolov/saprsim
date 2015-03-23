@@ -25,6 +25,8 @@ namespace EntityTransformator
             {
                 // skip no logic ui entities
                 if (e is sapr_sim.Figures.Label || e is Port || e is ConnectionLine || e is sapr_sim.Figures.Resource) continue;
+
+                if (e is SubDiagram) continue;
                 
                 Transformer transformer = TransformerFactory.getTransformer(e.GetType());
                 Entity re = transformer.transform(e as UIEntity);
