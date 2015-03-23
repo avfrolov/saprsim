@@ -87,7 +87,7 @@ namespace sapr_sim.WPFCustomElements
         public void button_close_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = (MainWindow) System.Windows.Application.Current.MainWindow;
-            if (main.IsModelChanged())
+            if (main.IsModelChanged(this))
             {
                 MessageBoxResult result = MessageBox.Show("Диаграмма изменилась. Сохранить изменения перед закрытием?", 
                     "Предупреждение", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
