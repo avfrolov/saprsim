@@ -114,6 +114,9 @@ namespace sapr_sim
                     {
                         control = new CheckBox()
                         {
+                            HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
+                            MaxWidth = 100,
+                            MinWidth = 100, 
                             IsEnabled = paramsEnabled,
                             IsChecked = Convert.ToBoolean(entry.RawValue)//RawValue.ToBoolean ? true : false
                         };
