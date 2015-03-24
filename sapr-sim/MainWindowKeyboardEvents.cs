@@ -2,12 +2,16 @@
 using sapr_sim.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Markup;
+using System.Windows.Shapes;
+using System.Xml;
 
 namespace sapr_sim
 {
@@ -20,6 +24,11 @@ namespace sapr_sim
             {                
                 // ****************************************************************************************************
                 // File Commands
+                
+                RoutedCommand deleteBinding = new RoutedCommand();
+                deleteBinding.InputGestures.Add(new KeyGesture(Key.Delete));
+                CommandBindings.Add(new CommandBinding(deleteBinding, DeleteShapeCommand));
+
                 RoutedCommand newTabBinding = new RoutedCommand();
                 newTabBinding.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(newTabBinding, CreateNewTabCommand, Hotkeys_CanExecute));
@@ -32,18 +41,23 @@ namespace sapr_sim
                 saveBinding.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(saveBinding, SaveCommand, Hotkeys_CanExecute));
 
+                
                 RoutedCommand saveAllBinding = new RoutedCommand();
                 saveAllBinding.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Shift | ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(saveAllBinding, SaveAllCommand, Hotkeys_CanExecute));
 
-                // ****************************************************************************************************
-                // Other Commands
-                RoutedCommand closeTabBinding = new RoutedCommand();
-                closeTabBinding.InputGestures.Add(new KeyGesture(Key.W, ModifierKeys.Control));
-                CommandBindings.Add(new CommandBinding(closeTabBinding, CloseTabCommand, Hotkeys_CanExecute));
+                
 
-                RoutedCommand deleteBinding = new RoutedCommand();
-                deleteBinding.InputGestures.Add(new KeyGesture(Key.Delete));
+                RoutedCommand pasteBinding = new RoutedCommand();
+                pasteBinding.InputGestures.Add(new KeyGesture(Key.V, ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(pasteBinding, PasteComand));
+
+
+                RoutedCommand copyBinding = new RoutedCommand();
+                copyBinding.InputGestures.Add(new KeyGesture(Key.C, ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(copyBinding, CopyComand));
+                
+
                 CommandBindings.Add(new CommandBinding(deleteBinding, DeleteShapeCommand, Hotkeys_CanExecute));
             }
             catch (Exception err)
@@ -100,6 +114,190 @@ namespace sapr_sim
         private void SaveCommand(object sender, ExecutedRoutedEventArgs e)
         {
             Save_Click(null, null);
+        }
+
+
+
+        private void CopyComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (sender != null)
+            {
+                IDataObject dataObj = new DataObject();
+                dataObj.SetData(DataFormats.Serializable, selected, false);
+                Clipboard.SetDataObject(dataObj, false);
+            }
+        }
+
+        private void PasteComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            IDataObject dataObj = Clipboard.GetDataObject();
+            string format = typeof(UIEntity).FullName;
+            format = DataFormats.Serializable;
+
+            if (dataObj.GetDataPresent(format))
+            {
+                try
+                {
+                    UIEntity obj = (UIEntity)dataObj.GetData(format);
+                    obj.canvas.Children.Clear();
+                    obj.canvas = currentCanvas;
+
+                    foreach (Port p in obj.getPorts()){
+                        p.canvas = currentCanvas;
+                        currentCanvas.Children.Add(p);
+                    }
+
+                    
+                    currentCanvas.Children.Add(obj);
+                    ZIndexUtil.setCorrectZIndex(currentCanvas, obj);
+                    
+                    obj.putMovingCoordinate(obj, 100, 100, 100, 100);
+                    //processCoordinatesHandler(obj, 100, 100);
+                }
+                catch (Exception ex)
+                {
+                    Console.Out.WriteLine(ex);
+                }
+
+            }
+        }
+
+
+
+        private void CopyComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (sender != null)
+            {
+                IDataObject dataObj = new DataObject();
+                dataObj.SetData(DataFormats.Serializable, selected, false);
+                Clipboard.SetDataObject(dataObj, false);
+            }
+        }
+
+        private void PasteComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            IDataObject dataObj = Clipboard.GetDataObject();
+            string format = typeof(UIEntity).FullName;
+            format = DataFormats.Serializable;
+
+            if (dataObj.GetDataPresent(format))
+            {
+                try
+                {
+                    UIEntity obj = (UIEntity)dataObj.GetData(format);
+                    obj.canvas.Children.Clear();
+                    obj.canvas = currentCanvas;
+
+                    foreach (Port p in obj.getPorts()){
+                        p.canvas = currentCanvas;
+                        currentCanvas.Children.Add(p);
+                    }
+
+                    
+                    currentCanvas.Children.Add(obj);
+                    ZIndexUtil.setCorrectZIndex(currentCanvas, obj);
+                    
+                    obj.putMovingCoordinate(obj, 100, 100, 100, 100);
+                    //processCoordinatesHandler(obj, 100, 100);
+                }
+                catch (Exception ex)
+                {
+                    Console.Out.WriteLine(ex);
+                }
+
+            }
+        }
+
+
+
+        private void CopyComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (sender != null)
+            {
+                IDataObject dataObj = new DataObject();
+                dataObj.SetData(DataFormats.Serializable, selected, false);
+                Clipboard.SetDataObject(dataObj, false);
+            }
+        }
+
+        private void PasteComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            IDataObject dataObj = Clipboard.GetDataObject();
+            string format = typeof(UIEntity).FullName;
+            format = DataFormats.Serializable;
+
+            if (dataObj.GetDataPresent(format))
+            {
+                try
+                {
+                    UIEntity obj = (UIEntity)dataObj.GetData(format);
+                    obj.canvas.Children.Clear();
+                    obj.canvas = currentCanvas;
+
+                    foreach (Port p in obj.getPorts()){
+                        p.canvas = currentCanvas;
+                        currentCanvas.Children.Add(p);
+                    }
+
+                    
+                    currentCanvas.Children.Add(obj);
+                    ZIndexUtil.setCorrectZIndex(currentCanvas, obj);
+                    
+                    obj.putMovingCoordinate(obj, 100, 100, 100, 100);
+                    //processCoordinatesHandler(obj, 100, 100);
+                }
+                catch (Exception ex)
+                {
+                    Console.Out.WriteLine(ex);
+                }
+
+            }
+        }
+
+
+
+        private void CopyComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (sender != null)
+            {
+                IDataObject dataObj = new DataObject();
+                dataObj.SetData(DataFormats.Serializable, selected, false);
+                Clipboard.SetDataObject(dataObj, false);
+            }
+        }
+
+        private void PasteComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            IDataObject dataObj = Clipboard.GetDataObject();
+            string format = typeof(UIEntity).FullName;
+            format = DataFormats.Serializable;
+
+            if (dataObj.GetDataPresent(format))
+            {
+                try
+                {
+                    UIEntity obj = (UIEntity)dataObj.GetData(format);
+                    obj.canvas.Children.Clear();
+                    obj.canvas = currentCanvas;
+
+                    foreach (Port p in obj.getPorts()){
+                        p.canvas = currentCanvas;
+                        currentCanvas.Children.Add(p);
+                    }
+
+                    
+                    currentCanvas.Children.Add(obj);
+                    ZIndexUtil.setCorrectZIndex(currentCanvas, obj);
+                    
+                    obj.putMovingCoordinate(obj, 100, 100, 100, 100);
+                    //processCoordinatesHandler(obj, 100, 100);
+                }
+                catch (Exception ex)
+                {
+                    Console.Out.WriteLine(ex);
+                }
+
+            }
         }
 
         private void SaveAllCommand(object sender, ExecutedRoutedEventArgs e)

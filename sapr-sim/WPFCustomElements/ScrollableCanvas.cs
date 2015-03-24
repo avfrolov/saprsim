@@ -13,8 +13,10 @@ using sapr_sim.Utils;
 namespace sapr_sim.WPFCustomElements
 {
     [Serializable]
-    public class ScrollableCanvas : Canvas, ISerializable, IEqualityComparer<ScrollableCanvas>
-    {
+   public class ScrollableCanvas : Canvas, ISerializable, IEqualityComparer<ScrollableCanvas>  
+   {
+        string state = "original";
+
         static ScrollableCanvas()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ScrollableCanvas), new FrameworkPropertyMetadata(typeof(ScrollableCanvas)));
@@ -29,14 +31,25 @@ namespace sapr_sim.WPFCustomElements
             nextId = Math.Max(id, nextId) == id ? id + 1 : Math.Max(id, nextId);
             for (int i = 0; i < info.MemberCount - 1; i++)
             {
-                UIEntity ent = info.GetValue("Child" + i, typeof(UIEntity)) as UIEntity;                
-                Children.Add(ent);
-                ZIndexUtil.setCorrectZIndex(this, ent);
+                UIEntity ent = info.GetValue("Child" + i, typeof(UIEntity)) as UIEntity;
+                try
+                {
+                    if (ent.EntityName != null)
+                    {
+
+                        Children.Add(ent);
+                        ZIndexUtil.setCorrectZIndex(this, ent);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+                state = "copyed";
             }
         }
 
         public ScrollableCanvas()
-        {
+        { 
             id = nextId;
             nextId++;
         }

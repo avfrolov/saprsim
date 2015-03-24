@@ -13,6 +13,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace sapr_sim.Figures
 {
@@ -22,11 +23,14 @@ namespace sapr_sim.Figures
 
         public static readonly string ENTITY_NAME_PARAM = "Имя";
 
-        protected Canvas canvas;
+        public Canvas canvas;
+
         protected Dictionary<UIEntity, CoordinatesHandler> coordinates = new Dictionary<UIEntity, CoordinatesHandler>();
         protected List<Port> ports = new List<Port>();
 
         protected Label label;
+
+        private string state = "original";
 
         protected UIParam<String> textParam = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM);
 
@@ -49,8 +53,12 @@ namespace sapr_sim.Figures
 
                 // label can be not found - it's normal behavior
                 this.label = info.GetValue("label", typeof(Label)) as Label;
+
+                this.state = "copyed";
             }
-            catch (SerializationException e) { }
+            catch (SerializationException e) {
+                Console.Out.Write(e.StackTrace);
+            }
         }
 
         protected UIEntity(Canvas canvas)
@@ -157,6 +165,16 @@ namespace sapr_sim.Figures
             List<UIParam> param = new List<UIParam>();
             param.Add(textParam);
             return param;
+        }
+
+        public Double getX()
+        {
+            return VisualTreeHelper.GetOffset(this).X;
+        }
+
+        public Double getY()
+        {
+            return VisualTreeHelper.GetOffset(this).Y;
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
