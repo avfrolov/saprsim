@@ -125,7 +125,7 @@ namespace sapr_sim
 
         private void CopyComand(object sender, ExecutedRoutedEventArgs e)
         {
-            if (sender != null)
+            if (sender != null && selected != null)
             {
                 IDataObject dataObj = new DataObject();
                 dataObj.SetData(DataFormats.Serializable, selected, false);
