@@ -34,9 +34,10 @@ namespace sapr_sim.WPFCustomElements
                 UIEntity ent = info.GetValue("Child" + i, typeof(UIEntity)) as UIEntity;
                 try
                 {
+
+                    // hack for copy paste serialization
                     if (ent.EntityName != null)
                     {
-
                         Children.Add(ent);
                         ZIndexUtil.setCorrectZIndex(this, ent);
                     }
