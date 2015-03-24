@@ -45,7 +45,6 @@ namespace sapr_sim
                 RoutedCommand saveAllBinding = new RoutedCommand();
                 saveAllBinding.InputGestures.Add(new KeyGesture(Key.S, ModifierKeys.Shift | ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(saveAllBinding, SaveAllCommand, Hotkeys_CanExecute));
-
                 
 
                 RoutedCommand pasteBinding = new RoutedCommand();
@@ -117,192 +116,52 @@ namespace sapr_sim
         }
 
 
-
-        private void CopyComand(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (sender != null)
-            {
-                IDataObject dataObj = new DataObject();
-                dataObj.SetData(DataFormats.Serializable, selected, false);
-                Clipboard.SetDataObject(dataObj, false);
-            }
-        }
-
-        private void PasteComand(object sender, ExecutedRoutedEventArgs e)
-        {
-            IDataObject dataObj = Clipboard.GetDataObject();
-            string format = typeof(UIEntity).FullName;
-            format = DataFormats.Serializable;
-
-            if (dataObj.GetDataPresent(format))
-            {
-                try
-                {
-                    UIEntity obj = (UIEntity)dataObj.GetData(format);
-                    obj.canvas.Children.Clear();
-                    obj.canvas = currentCanvas;
-
-                    foreach (Port p in obj.getPorts()){
-                        p.canvas = currentCanvas;
-                        currentCanvas.Children.Add(p);
-                    }
-
-                    
-                    currentCanvas.Children.Add(obj);
-                    ZIndexUtil.setCorrectZIndex(currentCanvas, obj);
-                    
-                    obj.putMovingCoordinate(obj, 100, 100, 100, 100);
-                    //processCoordinatesHandler(obj, 100, 100);
-                }
-                catch (Exception ex)
-                {
-                    Console.Out.WriteLine(ex);
-                }
-
-            }
-        }
-
-
-
-        private void CopyComand(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (sender != null)
-            {
-                IDataObject dataObj = new DataObject();
-                dataObj.SetData(DataFormats.Serializable, selected, false);
-                Clipboard.SetDataObject(dataObj, false);
-            }
-        }
-
-        private void PasteComand(object sender, ExecutedRoutedEventArgs e)
-        {
-            IDataObject dataObj = Clipboard.GetDataObject();
-            string format = typeof(UIEntity).FullName;
-            format = DataFormats.Serializable;
-
-            if (dataObj.GetDataPresent(format))
-            {
-                try
-                {
-                    UIEntity obj = (UIEntity)dataObj.GetData(format);
-                    obj.canvas.Children.Clear();
-                    obj.canvas = currentCanvas;
-
-                    foreach (Port p in obj.getPorts()){
-                        p.canvas = currentCanvas;
-                        currentCanvas.Children.Add(p);
-                    }
-
-                    
-                    currentCanvas.Children.Add(obj);
-                    ZIndexUtil.setCorrectZIndex(currentCanvas, obj);
-                    
-                    obj.putMovingCoordinate(obj, 100, 100, 100, 100);
-                    //processCoordinatesHandler(obj, 100, 100);
-                }
-                catch (Exception ex)
-                {
-                    Console.Out.WriteLine(ex);
-                }
-
-            }
-        }
-
-
-
-        private void CopyComand(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (sender != null)
-            {
-                IDataObject dataObj = new DataObject();
-                dataObj.SetData(DataFormats.Serializable, selected, false);
-                Clipboard.SetDataObject(dataObj, false);
-            }
-        }
-
-        private void PasteComand(object sender, ExecutedRoutedEventArgs e)
-        {
-            IDataObject dataObj = Clipboard.GetDataObject();
-            string format = typeof(UIEntity).FullName;
-            format = DataFormats.Serializable;
-
-            if (dataObj.GetDataPresent(format))
-            {
-                try
-                {
-                    UIEntity obj = (UIEntity)dataObj.GetData(format);
-                    obj.canvas.Children.Clear();
-                    obj.canvas = currentCanvas;
-
-                    foreach (Port p in obj.getPorts()){
-                        p.canvas = currentCanvas;
-                        currentCanvas.Children.Add(p);
-                    }
-
-                    
-                    currentCanvas.Children.Add(obj);
-                    ZIndexUtil.setCorrectZIndex(currentCanvas, obj);
-                    
-                    obj.putMovingCoordinate(obj, 100, 100, 100, 100);
-                    //processCoordinatesHandler(obj, 100, 100);
-                }
-                catch (Exception ex)
-                {
-                    Console.Out.WriteLine(ex);
-                }
-
-            }
-        }
-
-
-
-        private void CopyComand(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (sender != null)
-            {
-                IDataObject dataObj = new DataObject();
-                dataObj.SetData(DataFormats.Serializable, selected, false);
-                Clipboard.SetDataObject(dataObj, false);
-            }
-        }
-
-        private void PasteComand(object sender, ExecutedRoutedEventArgs e)
-        {
-            IDataObject dataObj = Clipboard.GetDataObject();
-            string format = typeof(UIEntity).FullName;
-            format = DataFormats.Serializable;
-
-            if (dataObj.GetDataPresent(format))
-            {
-                try
-                {
-                    UIEntity obj = (UIEntity)dataObj.GetData(format);
-                    obj.canvas.Children.Clear();
-                    obj.canvas = currentCanvas;
-
-                    foreach (Port p in obj.getPorts()){
-                        p.canvas = currentCanvas;
-                        currentCanvas.Children.Add(p);
-                    }
-
-                    
-                    currentCanvas.Children.Add(obj);
-                    ZIndexUtil.setCorrectZIndex(currentCanvas, obj);
-                    
-                    obj.putMovingCoordinate(obj, 100, 100, 100, 100);
-                    //processCoordinatesHandler(obj, 100, 100);
-                }
-                catch (Exception ex)
-                {
-                    Console.Out.WriteLine(ex);
-                }
-
-            }
-        }
-
         private void SaveAllCommand(object sender, ExecutedRoutedEventArgs e)
         {
             SaveAll_Click(null, null);
+        }
+
+
+        private void CopyComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (sender != null)
+            {
+                IDataObject dataObj = new DataObject();
+                dataObj.SetData(DataFormats.Serializable, selected, false);
+                Clipboard.SetDataObject(dataObj, false);
+            }
+        }
+
+        private void PasteComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            IDataObject dataObj = Clipboard.GetDataObject();
+            string format = typeof(UIEntity).FullName;
+            format = DataFormats.Serializable;
+
+            if (dataObj.GetDataPresent(format))
+            {
+                try
+                {
+                    UIEntity obj = (UIEntity)dataObj.GetData(format);
+                    obj.canvas.Children.Clear();
+                    obj.canvas = currentCanvas;
+
+                    foreach (Port p in obj.getPorts())
+                    {
+                        p.canvas = currentCanvas;
+                    }
+
+                    currentEntity = obj;
+                    drawOnCanvas(new Point(320, 120));
+
+                    ZIndexUtil.setCorrectZIndex(currentCanvas, obj);
+                }
+                catch (Exception ex)
+                {
+                    Console.Out.WriteLine(ex);
+                }
+
+            }
         }
 
     }

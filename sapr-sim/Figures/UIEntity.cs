@@ -23,7 +23,7 @@ namespace sapr_sim.Figures
 
         public static readonly string ENTITY_NAME_PARAM = "Имя";
 
-        public Canvas canvas;
+        public Canvas canvas { get; set; }
 
         protected Dictionary<UIEntity, CoordinatesHandler> coordinates = new Dictionary<UIEntity, CoordinatesHandler>();
         protected List<Port> ports = new List<Port>();
