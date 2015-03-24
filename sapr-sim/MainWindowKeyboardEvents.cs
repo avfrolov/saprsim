@@ -55,6 +55,10 @@ namespace sapr_sim
                 copyBinding.InputGestures.Add(new KeyGesture(Key.C, ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(copyBinding, CopyComand));
 
+                RoutedCommand cutBinding = new RoutedCommand();
+                cutBinding.InputGestures.Add(new KeyGesture(Key.X, ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(cutBinding, CutComand));
+
                 RoutedCommand pasteBinding = new RoutedCommand();
                 pasteBinding.InputGestures.Add(new KeyGesture(Key.V, ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(pasteBinding, PasteComand));
@@ -69,6 +73,11 @@ namespace sapr_sim
         }
 
         private void DeleteShapeCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            deleteEntity();
+        }
+
+        private void deleteEntity()
         {
             if (selected != null && !(selected is Port))
             {
@@ -130,6 +139,18 @@ namespace sapr_sim
                 IDataObject dataObj = new DataObject();
                 dataObj.SetData(DataFormats.Serializable, selected, false);
                 Clipboard.SetDataObject(dataObj, false);
+            }
+        }
+
+        private void CutComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (sender != null && selected != null)
+            {
+                IDataObject dataObj = new DataObject();
+                dataObj.SetData(DataFormats.Serializable, selected, false);
+                Clipboard.SetDataObject(dataObj, false);
+
+                deleteEntity();
             }
         }
 

@@ -40,9 +40,9 @@
                 <MenuItem Header="Отменить действие" InputGestureText="Ctrl+Z" IsEnabled="False"/>
                 <MenuItem Header="Вернуть действие" InputGestureText="Ctrl+Y" IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Header="Вырезать" InputGestureText="Ctrl+X" IsEnabled="False"/>
-                <MenuItem Header="Копировать" InputGestureText="Ctrl+C" IsEnabled="False"/>
-                <MenuItem Header="Вставить" InputGestureText="Ctrl+V" IsEnabled="False"/>
+                <MenuItem Header="Вырезать" InputGestureText="Ctrl+X" Click="Cut_Click"/>
+                <MenuItem Header="Копировать" InputGestureText="Ctrl+C" Click="Copy_Click"/>
+                <MenuItem Header="Вставить" InputGestureText="Ctrl+V" Click="Paste_Click"/>
                 <Separator/>
                 <MenuItem Header="Удалить" InputGestureText="Del" Click="Delete_Click"/>
                 <MenuItem Header="Выделить все" InputGestureText="Ctrl+A" IsEnabled="False"/>

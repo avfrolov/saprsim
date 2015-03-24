@@ -220,5 +220,7 @@ namespace sapr_sim.Figures
         {
             return obj.GetHashCode();
         }
+        
+
     }
 }

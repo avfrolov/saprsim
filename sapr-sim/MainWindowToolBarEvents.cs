@@ -243,6 +243,21 @@ namespace sapr_sim
             DeleteShapeCommand(selected, null);
         }
 
+        private void Copy_Click(object sender, RoutedEventArgs e)
+        {
+            CopyComand(selected, null);
+        }
+
+        private void Paste_Click(object sender, RoutedEventArgs e)
+        {
+            PasteComand(selected, null);
+        }
+
+        private void Cut_Click(object sender, RoutedEventArgs e)
+        {
+            CutComand(selected, null);
+        }
+
         private bool checkOnceProject()
         {
             if (projectStructure.Items.Count > 0)
