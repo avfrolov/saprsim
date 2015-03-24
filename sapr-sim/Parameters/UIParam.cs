@@ -35,6 +35,7 @@ namespace sapr_sim.Parameters
         public UIElement ContentControl
         {
             get { return control; }
+            set { this.control = value; }
         }
 
         public abstract IConvertible RawValue { get; set; }

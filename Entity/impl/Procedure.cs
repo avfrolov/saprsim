@@ -13,7 +13,7 @@ namespace Entities.impl
         private double needTime;
         private double operationTime;
         List<Resource> resources = new List<Resource>();
-        
+
         public override void execute() {
             Timer timer = Timer.Instance;
 
@@ -33,6 +33,12 @@ namespace Entities.impl
                     Entity outputEntity = getOutputs()[0];
                     outputEntity.addProjectToQueue(prj);
                     getReadyProjectQueue().Remove(prj);
+
+                    foreach (Resource res in getResources()) 
+                    {
+                        res.users.Remove(this.id);
+                        res.isBuisy = false;
+                    }
                 }
             }
         }
@@ -71,7 +77,32 @@ namespace Entities.impl
         {
             foreach (Resource res in resources)
             {
-                overallEfficiency += res.efficiency;
+                if (res.users.Count == 0)
+                    res.isBuisy = false;
+
+                if (res.isBuisy && !res.isShared)
+                    return Double.MaxValue; //need refactor
+
+                if (res.isBuisy && res.isShared)                     
+                {
+                    overallEfficiency += res.efficiency * res.count / (res.users.Count > 0 ? res.users.Count : 1);
+
+                    if (!res.users.Contains(this.id))
+                    {
+                        res.users.Add(this.id);
+                    }
+                }
+
+                if (!res.isBuisy)
+                {
+                    overallEfficiency += res.efficiency * res.count;
+                    if (!res.users.Contains(this.id))
+                    {
+                        res.users.Add(this.id);
+                        res.isBuisy = true;
+                    }
+                }
+
             }
 
             return needTime = (1 / overallEfficiency) * manHour * complexity;

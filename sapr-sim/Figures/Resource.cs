@@ -24,7 +24,10 @@ namespace sapr_sim.Figures
 
         private Port port;
 
-        private UIParam<Double> efficiency = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1.0), "Эффективность");
+        private UIParam<Double> efficiency = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1.0), "Производительность");
+        private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Цена");
+        private UIParam<int> count = new UIParam<int>(1, new IntegerParamValidator(), "Кол-во");
+        private UIParam<Boolean> isShared = new UIParam<Boolean>(true, new BooleanParamValidator(), "Разделяемый", new CheckBox());
 
         private static readonly string DEFAULT_NAME = "Ресурс";
 
@@ -40,6 +43,10 @@ namespace sapr_sim.Figures
             ports.Add(port);
 
             efficiency = info.GetValue("efficiency", typeof(UIParam<Double>)) as UIParam<Double>;
+            price = info.GetValue("price", typeof(UIParam<Double>)) as UIParam<Double>;
+            isShared = info.GetValue("isShared", typeof(UIParam<Boolean>)) as UIParam<bool>;
+            isShared.ContentControl = new CheckBox();
+            count = info.GetValue("count", typeof(UIParam<int>)) as UIParam<int>;
 
             init();
         }
@@ -58,6 +65,9 @@ namespace sapr_sim.Figures
         {
             List<UIParam> param = base.getParams();
             param.Add(efficiency);
+            param.Add(price);
+            param.Add(isShared);
+            param.Add(count);
             return param;
         }
 
@@ -67,11 +77,33 @@ namespace sapr_sim.Figures
             set { efficiency.Value = value; }
         }
 
+        public double Price
+        {
+            get { return price.Value; }
+            set { price.Value = value; }
+        }
+
+        public Boolean IsShared
+        {
+            get { return isShared.Value; }
+            set { isShared.Value = value; }
+        }
+
+        public int Count
+        {
+            get { return count.Value; }
+            set { count.Value = value; }
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
             info.AddValue("port", port);
             info.AddValue("efficiency", efficiency);
+            info.AddValue("price", price);
+            info.AddValue("isShared", isShared);
+            info.AddValue("count", count);
+
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

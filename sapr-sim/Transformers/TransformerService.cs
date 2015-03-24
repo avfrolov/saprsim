@@ -76,7 +76,7 @@ namespace EntityTransformator
                     sapr_sim.Figures.Resource resource = e as sapr_sim.Figures.Resource;
                     List<ConnectionLine> connectors = ConnectorFinder.find(elements, resource);
 
-                    Entities.Resource res = new Entities.Resource() { efficiency = resource.Efficiency };
+                    Entities.Resource res = new Entities.Resource() { efficiency = resource.Efficiency , price = resource.Price, count = resource.Count ,isShared = resource.IsShared};
                     resources.Add(res);
 
                     if (connectors.Count > 0)

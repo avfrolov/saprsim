@@ -10,5 +10,9 @@ namespace Entities
     {
         public double efficiency { get; set; }
         public double price { get; set; }
+        public int count { get; set; }
+        public bool isShared { get; set; }
+        public bool isBuisy { get; set; }
+        public HashSet<long> users = new HashSet<long>();
     }
 }

@@ -9,7 +9,7 @@ namespace Entities
     public abstract class Entity
     {
         public String name {get; set;}
-        long id {get; set;}
+        public long id {get; set;}
 
         protected List<Entity> input = new List<Entity>();
         protected List<Entity> output = new List<Entity>();

@@ -41,16 +41,31 @@ namespace sapr_sim
                 {
                     DockPanel dp = el as DockPanel;
                     Label l = dp.Children[0] as Label;
-                    TextBox tb = dp.Children[1] as TextBox;
-                    UIParam param = parameters.Find(p => p.DisplayedText == l.Content.ToString());
-                    if (!param.Validator.validate(tb.Text)) 
+                    if (dp.Children[1] is TextBox)
                     {
-                        MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
-                        return;
-                    }                    
-                    if (sapr_sim.Figures.UIEntity.ENTITY_NAME_PARAM.Equals(param.DisplayedText) && !param.RawValue.Equals(tb.Text))
-                        owner.updateText(tb.Text);
-                    param.RawValue = tb.Text;
+                        TextBox tb = dp.Children[1] as TextBox;
+                        UIParam param = parameters.Find(p => p.DisplayedText == l.Content.ToString());
+                        if (!param.Validator.validate(tb.Text)) 
+                        {
+                            MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
+                            return;
+                        }                    
+                        if (sapr_sim.Figures.UIEntity.ENTITY_NAME_PARAM.Equals(param.DisplayedText) && !param.RawValue.Equals(tb.Text))
+                            owner.updateText(tb.Text);
+                        param.RawValue = tb.Text;
+                    }
+
+                    if (dp.Children[1] is CheckBox)
+                    {
+                        CheckBox cb = dp.Children[1] as CheckBox;
+                        UIParam param = parameters.Find(p => p.DisplayedText == l.Content.ToString());
+                        if (!param.Validator.validate(""))
+                        {
+                            MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
+                            return;
+                        }
+                        param.RawValue = cb.IsChecked;
+                    }
                 }
             }
 
@@ -90,11 +105,19 @@ namespace sapr_sim
                             Text = entry.RawValue.ToString(),
                             HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
                             MaxWidth = 100,
-                            MinWidth = 100,
+                            MinWidth = 100, 
                             IsEnabled = paramsEnabled
                         }; ;
                     }
 
+                    if (control != null && control is CheckBox)
+                    {
+                        control = new CheckBox()
+                        {
+                            IsEnabled = paramsEnabled,
+                            IsChecked = Convert.ToBoolean(entry.RawValue)//RawValue.ToBoolean ? true : false
+                        };
+                    }
                     sprow.Children.Add(l);
                     sprow.Children.Add(control);
                     drawPanel.Children.Add(sprow);

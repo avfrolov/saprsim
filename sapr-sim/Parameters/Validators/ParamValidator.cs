@@ -40,4 +40,12 @@ namespace sapr_sim.Parameters
         }
     }
 
+    [Serializable]
+    public class BooleanParamValidator : ParamValidator
+    {
+        public bool validate(string value)
+        {
+            return true;
+        }
+    }
 }
