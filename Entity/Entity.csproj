@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Entity.cs" />
     <Compile Include="impl\DecisionMaker.cs" />
-    <Compile Include="impl\Diagram.cs" />
+    <Compile Include="impl\Submodel.cs" />
     <Compile Include="impl\EntityDestination.cs" />
     <Compile Include="impl\EntityStart.cs" />
     <Compile Include="impl\Parallel.cs" />
