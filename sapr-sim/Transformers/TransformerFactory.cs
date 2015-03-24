@@ -33,6 +33,8 @@ namespace EntityTransformator
                 transformer = new SourceTransformer();
             else if (type == typeof(Sync))
                 transformer = new SynchronizationTransformer();
+            else if (type == typeof(SubDiagram))
+                transformer = new SubdiagramTransformer();
 
             return transformer;
         }

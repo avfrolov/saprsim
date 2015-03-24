@@ -27,7 +27,7 @@ namespace Entities.impl
 
         public override bool canUseAsOutput(Entity entity)
         {
-            return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityDestination || entity is DecisionMaker;
+            return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityDestination || entity is DecisionMaker || entity is Submodel;
         }
 
         public override bool correctInputCount()
