@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="rules\EntityHasCorrectInputsAndOutputsRule.cs" />
     <Compile Include="rules\ResourceConnectedCorrectRule.cs" />
+    <Compile Include="rules\SubmodelRule.cs" />
     <Compile Include="ValidationError.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

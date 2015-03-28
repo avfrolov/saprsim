@@ -10,6 +10,8 @@ namespace Entities.impl
     {
 
         private List<Entity> entities = new List<Entity>();
+        private List<Entity> pseudoInput = new List<Entity>();
+        private List<Entity> pseudoOutput = new List<Entity>();
 
         public void setEntites(List<Entity> entities)
         {
@@ -37,6 +39,11 @@ namespace Entities.impl
             entities.Add(entity);
         }
 
+        public List<Entity> Entities
+        {
+            get { return entities; }
+        }
+
         public override bool canUseAsInput(Entity entity)
         {
             return true;
@@ -49,34 +56,76 @@ namespace Entities.impl
 
         public override bool correctInputCount()
         {
-            return input.Count == 1;
+            return pseudoInput.Count == 1;
         }
 
         public override bool correctOutputCount()
         {
-            return output.Count == 1;
+            return pseudoOutput.Count == 1;
         }
 
-        public void setInputs(List<Entity> inputs)
+        public override void addInput(Entity input)
         {
             foreach (Entity entity in entities)
             {
                 if (entity is EntityStart)
                 {
-                    entity.getOutputs()[0].setInputs(inputs);
-                    return;
+                    if (entity.getOutputs().Count > 0)
+                    {
+                        entity.getOutputs()[0].getInputs().Clear();
+                        entity.getOutputs()[0].addInput(input);
+                        this.pseudoInput.Add(input);
+                        return;
+                    }
                 }
             }
         }
 
-        public void setOutputs(List<Entity> outputs)
+        public override void setInputs(List<Entity> inputs)
+        {
+            foreach (Entity entity in entities)
+            {
+                if (entity is EntityStart)
+                {
+                    if (entity.getOutputs().Count > 0)
+                    {
+                        entity.getOutputs()[0].setInputs(inputs);
+                        this.pseudoInput.AddRange(inputs);
+                        return;
+                    }
+                }
+            }
+        }
+
+        public override void addOutput(Entity output)
         {
             foreach (Entity entity in entities)
             {
                 if (entity is EntityDestination)
                 {
-                    entity.getInputs()[0].setOutputs(outputs);
-                    return;
+                    if (entity.getInputs().Count > 0)
+                    {
+                        entity.getInputs()[0].getOutputs().Clear();
+                        entity.getInputs()[0].addOutput(output);
+                        this.pseudoOutput.Add(output);
+                        return;
+                    }
+                }
+            }
+        }
+
+        public override void setOutputs(List<Entity> outputs)
+        {
+            foreach (Entity entity in entities)
+            {
+                if (entity is EntityDestination)
+                {
+                    if (entity.getInputs().Count > 0)
+                    {
+                        entity.getInputs()[0].setOutputs(outputs);
+                        this.pseudoOutput.AddRange(outputs);
+                        return;
+                    }
                 }
             }
         }

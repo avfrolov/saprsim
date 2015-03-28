@@ -22,12 +22,12 @@ namespace Entities
             return input;
         }
 
-        public void setInputs(List<Entity> inputs)
+        public virtual void setInputs(List<Entity> inputs)
         {
             input = inputs;
         }
 
-        public void addInput(Entity input)
+        public virtual void addInput(Entity input)
         {
             this.input.Add(input);
         }
@@ -42,12 +42,12 @@ namespace Entities
             return output;
         }
 
-        public void setOutputs(List<Entity> output)
+        public virtual void setOutputs(List<Entity> output)
         {
             this.output = output;
         }
 
-        public void addOutput(Entity output)
+        public virtual void addOutput(Entity output)
         {
             this.output.Add(output);
         }

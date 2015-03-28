@@ -1,6 +1,7 @@
 ﻿using Entities.impl;
 using EntityTransformator;
 using sapr_sim.Figures;
+using sapr_sim.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace EntityTransformator.Transformers
             TransformerService ts = new TransformerService();
             SubDiagram sd = entity as SubDiagram;
             Submodel submodel = new Submodel() { name = entity.EntityName };
-            submodel.setEntites(ts.transform(sd.ProjectItem.Canvas.Children));
+            submodel.setEntites(ts.transform(new FileService().open(sd.ProjectItem.FullPath).Children));
             return submodel;
         }
     }

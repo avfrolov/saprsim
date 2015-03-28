@@ -43,6 +43,8 @@ namespace EntityTransformator
                     UIEntity src = c.SourcePort.Owner;
                     UIEntity dest = c.DestinationPort.Owner;
 
+                    if (src is SubDiagram || dest is SubDiagram) continue; 
+
                     if (map.ContainsKey(src) && map.ContainsKey(dest))
                     {
                         Entity realSrc = map[src];
@@ -58,17 +60,6 @@ namespace EntityTransformator
                             realSrc.addInput(realDest);
                             realDest.addOutput(realSrc);
                         }
-                        // protection for random line connection
-                        //if (realSrc.canUseAsOutput(realDest) && realDest.canUseAsInput(realSrc))
-                        //{
-                        //    realSrc.addOutput(realDest);
-                        //    realDest.addInput(realSrc);
-                        //} 
-                        //else if (realSrc.canUseAsInput(realDest) && realDest.canUseAsOutput(realSrc))
-                        //{
-                        //    realSrc.addInput(realDest);
-                        //    realDest.addOutput(realSrc);
-                        //}
                     }
                 }
                 else if (e is sapr_sim.Figures.Resource)
@@ -92,6 +83,37 @@ namespace EntityTransformator
                                 addAdditionalRelations(map[procedure], res);
                             }                                
                         }                         
+                    }
+                }
+            }
+
+            foreach (UIElement e in elements)
+            {
+                if (e is SubDiagram)
+                {
+                    SubDiagram sd = e as SubDiagram;
+                    List<ConnectionLine> connectors = ConnectorFinder.find(elements, sd);
+                    foreach (ConnectionLine cl in connectors)
+                    {
+                        UIEntity src = cl.SourcePort.Owner;
+                        UIEntity dest = cl.DestinationPort.Owner;
+
+                        if (map.ContainsKey(src) && map.ContainsKey(dest))
+                        {
+                            Entity realSrc = map[src];
+                            Entity realDest = map[dest];
+
+                            if (cl.SourcePort.PortType == PortType.OUTPUT && cl.DestinationPort.PortType == PortType.INPUT)
+                            {
+                                realSrc.addOutput(realDest);
+                                realDest.addInput(realSrc);
+                            }
+                            else if (cl.SourcePort.PortType == PortType.INPUT && cl.DestinationPort.PortType == PortType.OUTPUT)
+                            {
+                                realSrc.addInput(realDest);
+                                realDest.addOutput(realSrc);
+                            }
+                        }
                     }
                 }
             }

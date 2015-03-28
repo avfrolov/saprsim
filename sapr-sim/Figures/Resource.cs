@@ -27,7 +27,7 @@ namespace sapr_sim.Figures
         private UIParam<Double> efficiency = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1.0), "Производительность");
         private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Цена");
         private UIParam<int> count = new UIParam<int>(1, new IntegerParamValidator(), "Кол-во");
-        private UIParam<Boolean> isShared = new UIParam<Boolean>(true, new BooleanParamValidator(), "Разделяемый", new CheckBox());
+        private UIParam<Boolean> isShared = new UIParam<Boolean>(true, new DefaultParamValidator(), "Разделяемый", new CheckBox());
 
         private static readonly string DEFAULT_NAME = "Ресурс";
 
