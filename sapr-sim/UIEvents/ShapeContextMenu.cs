@@ -108,8 +108,7 @@ namespace sapr_sim
             if (selected != null)
             {
                 UIEntity ent = selected as UIEntity;
-                if (!(ent is SubDiagram))
-                    new ParameterDialog(ent.getParams(), ent).ShowDialog();
+                new ParameterDialog(ent.getParams(), ent).ShowDialog();
             }
         }
 
