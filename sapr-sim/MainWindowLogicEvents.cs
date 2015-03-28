@@ -18,6 +18,7 @@ namespace sapr_sim
         private void SimulateButton_Click(object sender, RoutedEventArgs e)
         {
             resetUIShadows(currentCanvas.Children);
+            SaveAll_Click(null, null);
             TransformerService ts = new TransformerService();
             List<Entity> entities = ts.transform(currentCanvas.Children);
             Controller controller = new Controller(entities, ts.getResources());
