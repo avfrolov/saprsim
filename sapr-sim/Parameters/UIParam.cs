@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.WPFCustomElements;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -20,7 +21,7 @@ namespace sapr_sim.Parameters
 
         // default - textbox
         [NonSerialized]
-        protected UIElement control;
+        protected ParameterInput control;
 
         public ParamValidator Validator
         {
@@ -32,7 +33,7 @@ namespace sapr_sim.Parameters
             get { return displayedText; }
         }
 
-        public UIElement ContentControl
+        public ParameterInput ContentControl
         {
             get { return control; }
             set { this.control = value; }
@@ -67,9 +68,9 @@ namespace sapr_sim.Parameters
             this.displayedText = displayedText;
         }
 
-        public UIParam(T value, ParamValidator validator, string displayedText, UIElement cc) : this(value, validator, displayedText)
+        public UIParam(T value, ParamValidator validator, string displayedText, ParameterInput input) : this(value, validator, displayedText)
         {
-            this.control = cc;
+            this.control = input;
         }
 
         public T Value

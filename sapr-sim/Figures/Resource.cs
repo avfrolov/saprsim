@@ -1,5 +1,6 @@
 ﻿using sapr_sim.Parameters;
 using sapr_sim.Parameters.Validators;
+using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -27,7 +28,7 @@ namespace sapr_sim.Figures
         private UIParam<Double> efficiency = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1.0), "Производительность");
         private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Цена");
         private UIParam<int> count = new UIParam<int>(1, new IntegerParamValidator(), "Кол-во");
-        private UIParam<Boolean> isShared = new UIParam<Boolean>(true, new DefaultParamValidator(), "Разделяемый", new CheckBox());
+        private UIParam<Boolean> isShared = new UIParam<Boolean>(true, new DefaultParamValidator(), "Разделяемый", new ParameterCheckBox(true));
 
         private static readonly string DEFAULT_NAME = "Ресурс";
 
@@ -45,7 +46,7 @@ namespace sapr_sim.Figures
             efficiency = info.GetValue("efficiency", typeof(UIParam<Double>)) as UIParam<Double>;
             price = info.GetValue("price", typeof(UIParam<Double>)) as UIParam<Double>;
             isShared = info.GetValue("isShared", typeof(UIParam<Boolean>)) as UIParam<bool>;
-            isShared.ContentControl = new CheckBox();
+            isShared.ContentControl = new ParameterCheckBox(isShared.Value);
             count = info.GetValue("count", typeof(UIParam<int>)) as UIParam<int>;
 
             init();

@@ -123,6 +123,7 @@
     <Compile Include="Utils\ZIndexUtil.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
     <Compile Include="WPFCustomElements\ListBoxItemError.cs" />
+    <Compile Include="WPFCustomElements\ParametersDialogItems.cs" />
     <Compile Include="WPFCustomElements\ProjectItemLabel.cs" />
     <Compile Include="WPFCustomElements\ProjectItemTextBox.cs" />
     <Compile Include="WPFCustomElements\ProjectTreeViewItem.cs" />

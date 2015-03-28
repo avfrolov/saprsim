@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using sapr_sim.Parameters;
+using sapr_sim.WPFCustomElements;
 
 namespace sapr_sim
 {
@@ -41,31 +42,41 @@ namespace sapr_sim
                 {
                     DockPanel dp = el as DockPanel;
                     Label l = dp.Children[0] as Label;
-                    if (dp.Children[1] is TextBox)
+                    ParameterInput input = dp.Children[1] as ParameterInput;
+                    UIParam param = parameters.Find(p => p.DisplayedText == l.Content.ToString());
+                    if (!param.Validator.validate(input.getValue().ToString()))
                     {
-                        TextBox tb = dp.Children[1] as TextBox;
-                        UIParam param = parameters.Find(p => p.DisplayedText == l.Content.ToString());
-                        if (!param.Validator.validate(tb.Text)) 
-                        {
-                            MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
-                            return;
-                        }                    
-                        if (sapr_sim.Figures.UIEntity.ENTITY_NAME_PARAM.Equals(param.DisplayedText) && !param.RawValue.Equals(tb.Text))
-                            owner.updateText(tb.Text);
-                        param.RawValue = tb.Text;
+                        MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
+                        return;
                     }
+                    if (sapr_sim.Figures.UIEntity.ENTITY_NAME_PARAM.Equals(param.DisplayedText) && !param.RawValue.Equals(input.getValue().ToString()))
+                        owner.updateText(input.getValue().ToString());
+                    param.RawValue = input.getValue();
+                    //if (dp.Children[1] is TextBox)
+                    //{
+                    //    TextBox tb = dp.Children[1] as TextBox;
+                    //    UIParam param = parameters.Find(p => p.DisplayedText == l.Content.ToString());
+                    //    if (!param.Validator.validate(tb.Text)) 
+                    //    {
+                    //        MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
+                    //        return;
+                    //    }                    
+                    //    if (sapr_sim.Figures.UIEntity.ENTITY_NAME_PARAM.Equals(param.DisplayedText) && !param.RawValue.Equals(tb.Text))
+                    //        owner.updateText(tb.Text);
+                    //    param.RawValue = tb.Text;
+                    //}
 
-                    if (dp.Children[1] is CheckBox)
-                    {
-                        CheckBox cb = dp.Children[1] as CheckBox;
-                        UIParam param = parameters.Find(p => p.DisplayedText == l.Content.ToString());
-                        if (!param.Validator.validate(""))
-                        {
-                            MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
-                            return;
-                        }
-                        param.RawValue = cb.IsChecked;
-                    }
+                    //if (dp.Children[1] is CheckBox)
+                    //{
+                    //    CheckBox cb = dp.Children[1] as CheckBox;
+                    //    UIParam param = parameters.Find(p => p.DisplayedText == l.Content.ToString());
+                    //    if (!param.Validator.validate(""))
+                    //    {
+                    //        MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
+                    //        return;
+                    //    }
+                    //    param.RawValue = cb.IsChecked;
+                    //}
                 }
             }
 
@@ -97,32 +108,24 @@ namespace sapr_sim
 
                     DockPanel sprow = new DockPanel() { LastChildFill = true, Margin = new Thickness(2, 2, 2, 5) };
                     Label l = new Label() { Content = entry.DisplayedText };
-                    UIElement control = entry.ContentControl;
-                    if (control == null)
-                    {
-                        control = new TextBox()
-                        {
-                            Text = entry.RawValue.ToString(),
-                            HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
-                            MaxWidth = 100,
-                            MinWidth = 100, 
-                            IsEnabled = paramsEnabled
-                        }; ;
-                    }
+                    ParameterInput input = entry.ContentControl;
+                    UIElement uiControl = null;
 
-                    if (control != null && control is CheckBox)
+                    if (input == null)
                     {
-                        control = new CheckBox()
-                        {
-                            HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
-                            MaxWidth = 100,
-                            MinWidth = 100, 
-                            IsEnabled = paramsEnabled,
-                            IsChecked = Convert.ToBoolean(entry.RawValue)//RawValue.ToBoolean ? true : false
-                        };
+                        input = new ParameterTextBox(entry.RawValue, paramsEnabled);
+                        uiControl = input as UIElement;
                     }
+                    else
+                    {
+                        input.setValue(entry.RawValue);
+                        input = input.Clone() as ParameterInput;
+                        uiControl = input as UIElement;
+                        uiControl.IsEnabled = paramsEnabled;
+                    }
+                    
                     sprow.Children.Add(l);
-                    sprow.Children.Add(control);
+                    sprow.Children.Add(uiControl);
                     drawPanel.Children.Add(sprow);
                 }
             }
