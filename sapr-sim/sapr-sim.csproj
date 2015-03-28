@@ -89,11 +89,11 @@
     <Compile Include="Figures\SubDiagram.cs" />
     <Compile Include="Figures\Sync.cs" />
     <Compile Include="Figures\UIEntity.cs" />
-    <Compile Include="MainWindowKeyboardEvents.cs" />
-    <Compile Include="MainWindowLogicEvents.cs" />
-    <Compile Include="MainWindowMouseEvents.cs" />
-    <Compile Include="MainWindowProjectTreeViewEvents.cs" />
-    <Compile Include="MainWindowToolBarEvents.cs" />
+    <Compile Include="UIEvents\KeyboardEvents.cs" />
+    <Compile Include="UIEvents\LogicEvents.cs" />
+    <Compile Include="UIEvents\MouseEvents.cs" />
+    <Compile Include="UIEvents\ProjectTreeViewEvents.cs" />
+    <Compile Include="UIEvents\ToolBarEvents.cs" />
     <Compile Include="ParametersDialog.xaml.cs">
       <DependentUpon>ParametersDialog.xaml</DependentUpon>
     </Compile>
