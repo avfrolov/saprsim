@@ -41,6 +41,13 @@ namespace sapr_sim
                 CommandBindings.Add(new CommandBinding(saveAllBinding, SaveAllCommand, Hotkeys_CanExecute));
 
                 // ****************************************************************************************************
+                // Project Commands
+
+                RoutedCommand runSimulationBinding = new RoutedCommand();
+                runSimulationBinding.InputGestures.Add(new KeyGesture(Key.F5));
+                CommandBindings.Add(new CommandBinding(runSimulationBinding, RunSimulationCommand, Hotkeys_CanExecute));
+
+                // ****************************************************************************************************
                 // Other Commands
                 RoutedCommand closeTabBinding = new RoutedCommand();
                 closeTabBinding.InputGestures.Add(new KeyGesture(Key.W, ModifierKeys.Control));
@@ -129,6 +136,11 @@ namespace sapr_sim
         private void SaveAllCommand(object sender, ExecutedRoutedEventArgs e)
         {
             SaveAll_Click(null, null);
+        }
+
+        private void RunSimulationCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            SimulateButton_Click(null, null);
         }
 
 
