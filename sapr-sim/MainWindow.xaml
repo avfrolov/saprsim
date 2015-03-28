@@ -40,11 +40,11 @@
                 <MenuItem Header="Отменить действие" InputGestureText="Ctrl+Z" IsEnabled="False"/>
                 <MenuItem Header="Вернуть действие" InputGestureText="Ctrl+Y" IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Header="Вырезать" InputGestureText="Ctrl+X" Click="Cut_Click"/>
-                <MenuItem Header="Копировать" InputGestureText="Ctrl+C" Click="Copy_Click"/>
-                <MenuItem Header="Вставить" InputGestureText="Ctrl+V" Click="Paste_Click"/>
+                <MenuItem Name="cutButton" Header="Вырезать" InputGestureText="Ctrl+X" Click="Cut_Click" IsEnabled="False"/>
+                <MenuItem Name="copyButton" Header="Копировать" InputGestureText="Ctrl+C" Click="Copy_Click" IsEnabled="False"/>
+                <MenuItem Name="pasteButton" Header="Вставить" InputGestureText="Ctrl+V" Click="Paste_Click" IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Header="Удалить" InputGestureText="Del" Click="Delete_Click"/>
+                <MenuItem Name="deleteButton" Header="Удалить" InputGestureText="Del" Click="Delete_Click" IsEnabled="False"/>
                 <MenuItem Header="Выделить все" InputGestureText="Ctrl+A" IsEnabled="False"/>
             </MenuItem>
             <MenuItem Header="Инструменты">
@@ -103,13 +103,13 @@
                 </Button>
                 <Separator/>
 
-                <Button x:Name="Cut" ToolTip="Вырезать" IsEnabled="False">
+                <Button x:Name="Cut" ToolTip="Вырезать" Click="Cut_Click" IsEnabled="False">
                     <Image Source="Resources/Cut.png" />
                 </Button>
-                <Button x:Name="Copy" ToolTip="Копировать" IsEnabled="False">
+                <Button x:Name="Copy" ToolTip="Копировать" Click="Copy_Click" IsEnabled="False">
                     <Image Source="Resources/page_copy.png" />
                 </Button>
-                <Button x:Name="Paste" ToolTip="Вставить" IsEnabled="False">
+                <Button x:Name="Paste" ToolTip="Вставить" Click="Paste_Click" IsEnabled="False">
                     <Image Source="Resources/page_paste.png" />
                 </Button>
                 <Separator/>

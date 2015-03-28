@@ -314,18 +314,30 @@ namespace sapr_sim
         // TODO think about button activition design
         private void ButtonsActivation(bool activate)
         {
+            // Файл
             newDiagramButton.IsEnabled = activate;
             openDiagramButton.IsEnabled = activate;
             saveButton.IsEnabled = activate;
             saveAsButton.IsEnabled = activate;
-            saveAllButton.IsEnabled = activate;
-            runSimulationButton.IsEnabled = activate;            
+            saveAllButton.IsEnabled = activate;                   
             closeProjectButton.IsEnabled = activate;
+
+            // Правка
+            cutButton.IsEnabled = activate;
+            copyButton.IsEnabled = activate;
+            pasteButton.IsEnabled = activate;
+            deleteButton.IsEnabled = activate;
+
+            // Модель
+            runSimulationButton.IsEnabled = activate;     
 
             // tool buttons
             NewDiagram.IsEnabled = activate;
             OpenDiagram.IsEnabled = activate;
             SaveDiagram.IsEnabled = activate;
+            Cut.IsEnabled = activate;
+            Copy.IsEnabled = activate;
+            Paste.IsEnabled = activate;
             runSimulationToolButton.IsEnabled = activate;
         }
 
