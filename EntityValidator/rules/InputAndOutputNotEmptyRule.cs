@@ -24,6 +24,12 @@ namespace EntityValidator.rules
             {                  
                 if (!(entity.correctInputCount() && entity.correctOutputCount()))
                     failed.Add(entity);
+                if (entity is Procedure)
+                {
+                    Procedure p = entity as Procedure;
+                    if (p.getResources().Count == 0)
+                        failed.Add(entity);
+                }
             }
             return failed.Count == 0;
         }
