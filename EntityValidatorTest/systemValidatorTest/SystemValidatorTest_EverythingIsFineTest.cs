@@ -42,11 +42,12 @@ namespace EntityValidatorTest.systemValidatorTest
             finish.setInputs(new List<Entity>() { procedure });
 
             instance.addProject(prj);
+            instance.addResource(res);
             instance.addEntity(start);
             instance.addEntity(finish);
             instance.addEntity(procedure);
 
-            IValidator validator = new SystemValidator();
+            IValidator validator = new SystemValidator(instance.getEntities());
             
             Assert.IsTrue(validator.startValidation().Success);
         }   

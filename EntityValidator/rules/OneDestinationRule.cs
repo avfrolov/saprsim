@@ -9,17 +9,20 @@ using EntityValidator.exeptions;
 
 namespace EntityValidator.rules
 {
-    class OneDestinationRule : IRule
+    class OneDestinationRule : Rule
     {
         private List<Entity> destinations = new List<Entity>();
-        private List<Entity> allEntities = Model.Instance.getEntities();
 
-        public Boolean validate()
+        public OneDestinationRule(List<Entity> entities) : base(entities)
         {
-            if (allEntities == null || allEntities.Count == 0)
+        }
+
+        public override bool validate()
+        {
+            if (entities == null || entities.Count == 0)
                 return false;
 
-            foreach (Entity entity in allEntities)
+            foreach (Entity entity in entities)
             {
                 if (entity is EntityDestination)
                     destinations.Add(entity);
@@ -28,7 +31,7 @@ namespace EntityValidator.rules
             return destinations.Count == 1;                
         }
 
-        public List<ValidationError> explain()
+        public override List<ValidationError> explain()
         {
             List<ValidationError> errors = new List<ValidationError>();
             if (destinations.Count == 0)

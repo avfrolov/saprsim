@@ -34,7 +34,7 @@ namespace Kernel
             foreach (Entity ent in entities)
                 model.addEntity(ent);
 
-            SystemValidator validator = new SystemValidator();
+            SystemValidator validator = new SystemValidator(model.getEntities());
             ValidationResult result = validator.startValidation();
 
             if (result.Success)

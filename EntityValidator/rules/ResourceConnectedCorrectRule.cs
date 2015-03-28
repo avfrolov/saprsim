@@ -9,16 +9,19 @@ using System.Threading.Tasks;
 
 namespace EntityValidator.rules
 {
-    public class ResourceConnectedCorrectRule : IRule
+    public class ResourceConnectedCorrectRule : Rule
     {
 
-        private List<Entity> allEntities = Model.Instance.getEntities();
         private List<Resource> resources = Model.Instance.getResources();
 
-        public bool validate()
+        public ResourceConnectedCorrectRule(List<Entity> entities) : base(entities)
+        {
+        }
+
+        public override bool validate()
         {
             int countResources = 0;
-            foreach (Entity e in allEntities)
+            foreach (Entity e in entities)
             {
                 if (e is Procedure)
                     countResources += (e as Procedure).getResources().Count;
@@ -27,7 +30,7 @@ namespace EntityValidator.rules
             return countResources == resources.Count;
         }
 
-        public List<ValidationError> explain()
+        public override List<ValidationError> explain()
         {
             List<ValidationError> errors = new List<ValidationError>();
             errors.Add(new ValidationError("Ресурсы не корректно подключены"));            

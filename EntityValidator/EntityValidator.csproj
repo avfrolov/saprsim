@@ -48,7 +48,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rules\InputAndOutputNotEmptyRule.cs" />
-    <Compile Include="rules\IRule.cs" />
+    <Compile Include="rules\Rule.cs" />
     <Compile Include="rules\OneDestinationRule.cs" />
     <Compile Include="rules\OneStartRule.cs" />
     <Compile Include="ValidationResult.cs" />

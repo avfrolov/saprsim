@@ -8,17 +8,21 @@ using System.Threading.Tasks;
 
 namespace EntityValidator.rules
 {
-    public class EntityHasCorrectInputsAndOutputsRule : IRule
+    public class EntityHasCorrectInputsAndOutputsRule : Rule
     {
-        private List<Entity> allEntities = Model.Instance.getEntities();
+
         private Dictionary<Entity, Entity> failedInputs = new Dictionary<Entity, Entity>();
         private Dictionary<Entity, Entity> failedOutputs = new Dictionary<Entity, Entity>();
 
-        public bool validate()
+        public EntityHasCorrectInputsAndOutputsRule(List<Entity> entities) : base(entities)
+        {
+        }
+
+        public override bool validate()
         {
             // doesn't work because random line protection in TransformesService#transform()
             // TODO
-            foreach (Entity e in allEntities)
+            foreach (Entity e in entities)
             {
                 foreach (Entity input in e.getInputs())
                 {
@@ -36,7 +40,7 @@ namespace EntityValidator.rules
             return failedInputs.Count == 0 && failedOutputs.Count == 0;
         }
 
-        public List<ValidationError> explain()
+        public override List<ValidationError> explain()
         {
             List<ValidationError> errors = new List<ValidationError>();
             

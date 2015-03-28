@@ -4,28 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EntityValidator.rules;
+using Entities;
+using Entities.impl;
 
 namespace EntityValidator.validator
 {
     public class SystemValidator : IValidator
     {
-        List<IRule> rules = new List<IRule>();
+        private List<Rule> rules = new List<Rule>();
 
-        public SystemValidator() //add here new rules for include them into validation
+        public SystemValidator(List<Entity> entities) //add here new rules for include them into validation
         {
-            rules.Add(new OneStartRule());
-            rules.Add(new OneDestinationRule());
-            rules.Add(new InputAndOutputNotEmptyRule());
-            rules.Add(new EntityHasCorrectInputsAndOutputsRule());
-            rules.Add(new ResourceConnectedCorrectRule());
-            rules.Add(new SubmodelRule());
-        }      
+            rules.Add(new OneStartRule(entities));
+            rules.Add(new OneDestinationRule(entities));
+            rules.Add(new InputAndOutputNotEmptyRule(entities));
+            rules.Add(new EntityHasCorrectInputsAndOutputsRule(entities));
+            rules.Add(new ResourceConnectedCorrectRule(entities));
+            rules.Add(new SubmodelRule(entities));
+        }     
 
         public ValidationResult startValidation()
         {
             ValidationResult result = new ValidationResult();
 
-            foreach (IRule rule in rules)
+            foreach (Rule rule in rules)
             {
                 if (!rule.validate())
                 {

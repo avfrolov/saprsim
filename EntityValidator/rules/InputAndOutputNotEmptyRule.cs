@@ -9,18 +9,21 @@ using EntityValidator.exeptions;
 
 namespace EntityValidator.rules
 {
-    public class InputAndOutputNotEmptyRule : IRule
+    public class InputAndOutputNotEmptyRule : Rule
     {
 
-        private List<Entity> allEntities = Model.Instance.getEntities();
         private List<Entity> failed = new List<Entity>();
 
-        public Boolean validate()
+        public InputAndOutputNotEmptyRule(List<Entity> entities) : base(entities)
         {
-            if (allEntities == null || allEntities.Count() == 0)
+        }
+
+        public override bool validate()
+        {
+            if (entities == null || entities.Count() == 0)
                 return false;
 
-            foreach (Entity entity in allEntities)
+            foreach (Entity entity in entities)
             {                  
                 if (!(entity.correctInputCount() && entity.correctOutputCount()))
                     failed.Add(entity);
@@ -34,7 +37,7 @@ namespace EntityValidator.rules
             return failed.Count == 0;
         }
 
-        public List<ValidationError> explain()
+        public override List<ValidationError> explain()
         {
             List<ValidationError> errors = new List<ValidationError>();
             foreach (Entity fail in failed)

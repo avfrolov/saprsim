@@ -26,7 +26,7 @@ namespace EntityValidatorTest.systemValidatorTest
             instance.addEntity(new EntityDestination());
             instance.addEntity(new EntityDestination());
 
-            IValidator validator = new SystemValidator();
+            IValidator validator = new SystemValidator(instance.getEntities());
 
             Assert.IsFalse(validator.startValidation().Success);
         }
