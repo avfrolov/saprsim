@@ -100,6 +100,8 @@ namespace sapr_sim
             tabs.Items.Add(theTabItem);
             tabs.SelectionChanged += TabControl_SelectionChanged;
 
+            attachContextMenu(canvas);
+
             currentCanvas = canvas;
         }
 
@@ -243,6 +245,9 @@ namespace sapr_sim
             entity.MouseLeftButtonDown += Shape_MouseLeftButtonDown;
             entity.MouseMove += Shape_MouseMove;
             entity.MouseLeftButtonUp += Shape_MouseLeftButtonUp;
+            entity.MouseRightButtonDown += Shape_MouseRightButtonDown;
+
+            attachContextMenu(entity);
         }        
 
         private void printInformation(string info)

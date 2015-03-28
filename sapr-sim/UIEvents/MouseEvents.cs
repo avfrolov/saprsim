@@ -73,15 +73,16 @@ namespace sapr_sim
                 ParameterProccesor.drawParameters(selected.getParams(), propertiesPanel, false);
             }
             else if (e.ClickCount == 2 && !(sender is Port || sender is ConnectionLine))
+                OpenShapeProperties_Click(sender, e);
+        }
+
+        public void Shape_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 1)
             {
-                UIEntity ent = sender as UIEntity;
-                if (!(ent is SubDiagram))
-                    new ParameterDialog(ent.getParams(), ent).ShowDialog();
-                else
-                {
-                    SubDiagram sd = ent as SubDiagram;
-                    findAndOpenRelatedTab(sd.ProjectItem);
-                }
+                selected = sender as UIEntity;
+                if (!(selected is ConnectionLine && selected is Port))
+                    selected.selectedBitmapEffect();
             }
         }
 
