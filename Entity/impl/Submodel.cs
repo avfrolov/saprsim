@@ -86,12 +86,12 @@ namespace Entities.impl
 
         public override bool canUseAsInput(Entity entity)
         {
-            return true;
+            return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityStart || entity is Submodel;
         }
 
         public override bool canUseAsOutput(Entity entity)
         {
-            return true;
+            return entity is Procedure || entity is Synchronization || entity is Parallel || entity is EntityDestination || entity is Submodel;
         }
 
         public override bool correctInputCount()
