@@ -21,7 +21,7 @@ namespace sapr_sim
                 {
                     Header = "Запустить моделирование"
                 };
-                runSimulation.Click += SimulateButton_Click;
+                runSimulation.Click += SimulateLocalButton_Click;
                 menu.Items.Add(runSimulation);
 
                 MenuItem paste = new MenuItem()

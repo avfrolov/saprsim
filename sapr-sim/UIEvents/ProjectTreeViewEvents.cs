@@ -50,12 +50,12 @@ namespace sapr_sim
             MenuItem runSimulationItem = new MenuItem() 
             { 
                 Header = "Запустить моделирование", 
-                IsEnabled = false, 
                 Icon = new Image()
                 {
                     Source = new BitmapImage(new Uri("pack://application:,,/Resources/play-circle.png"))
                 }
             };
+            runSimulationItem.Click += SimulateButton_Click;
             menu.Items.Add(runSimulationItem);
 
             MenuItem renameRoot = new MenuItem()
@@ -172,7 +172,7 @@ namespace sapr_sim
                 createNewDiagram(item.ProjectItem.Canvas, item.ProjectItem.Name);
             else
                 cti.IsSelected = true;
-            SimulateButton_Click(null, null);
+            simulate(currentCanvas);
         }
 
         private void RemoveItem_MenuClick(object sender, RoutedEventArgs e)

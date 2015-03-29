@@ -17,21 +17,36 @@ namespace sapr_sim
     {
         private void SimulateButton_Click(object sender, RoutedEventArgs e)
         {
-            resetUIShadows(currentCanvas.Children);
+            ClosableTabItem cti = findTabItem(Project.Instance.MainProjectItem);
+            if (cti == null)
+                createNewDiagram(Project.Instance.MainProjectItem.Canvas, Project.Instance.MainProjectItem.Name);
+            else
+                cti.IsSelected = true;
+            simulate(Project.Instance.MainProjectItem.Canvas);
+        }
+
+        private void SimulateLocalButton_Click(object sender, RoutedEventArgs e)
+        {
+            simulate(currentCanvas);
+        }
+
+        private void simulate(Canvas canvas)
+        {
+            resetUIShadows(canvas.Children);
             SaveAll_Click(null, null);
             TransformerService ts = new TransformerService();
-            List<Entity> entities = ts.transform(currentCanvas.Children);
+            List<Entity> entities = ts.transform(canvas.Children);
             Controller controller = new Controller(entities, ts.getResources());
             errorsListBox.Items.Clear();
             try
             {
                 controller.simulate();
                 MessageBox.Show("Результат выполнения моделирования - " + controller.SimulationTime + " условных единиц времени");
-            } 
-            catch(ValidationException ex)
+            }
+            catch (ValidationException ex)
             {
                 errorsTab.IsSelected = true;
-                foreach(var err in ex.Errors)
+                foreach (var err in ex.Errors)
                 {
                     errorsListBox.Items.Add(new ListBoxItemError(err.Key, ts.transform(err.Value)));
                 }
