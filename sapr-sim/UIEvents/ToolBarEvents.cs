@@ -249,6 +249,8 @@ namespace sapr_sim
         private void ProjectSettings_Click(object sender, RoutedEventArgs e)
         {
             new ProjectSettings().ShowDialog();
+            TreeViewItem item = projectStructure.Items[0] as TreeViewItem;
+            item.Header = ProjectTreeViewItem.packProject(Project.Instance.ProjectName, false);
         }
 
         private bool checkOnceProject()
