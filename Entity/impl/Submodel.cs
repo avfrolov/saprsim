@@ -10,12 +10,23 @@ namespace Entities.impl
     {
 
         private List<Entity> entities = new List<Entity>();
+        private List<Resource> resources = new List<Resource>();
         private List<Entity> pseudoInput = new List<Entity>();
         private List<Entity> pseudoOutput = new List<Entity>();
 
         public void setEntites(List<Entity> entities)
         {
             this.entities = entities;
+        }
+        
+        public void setResources(List<Resource> resources)
+        {
+            this.resources = resources;
+        }
+
+        public List<Resource> getResources()
+        {
+            return resources;
         }
 
         public override void execute() 

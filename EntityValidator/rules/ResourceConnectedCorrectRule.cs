@@ -14,8 +14,9 @@ namespace EntityValidator.rules
 
         private List<Resource> resources = Model.Instance.getResources();
 
-        public ResourceConnectedCorrectRule(List<Entity> entities) : base(entities)
+        public ResourceConnectedCorrectRule(List<Entity> entities, List<Resource> resources) : base(entities)
         {
+            this.resources = resources;
         }
 
         public override bool validate()
