@@ -64,8 +64,12 @@ namespace sapr_sim
         public void removeProjectItem(ProjectItem item)
         {
             items.Remove(item);
-            if (items.Count == 0 && MainProjectItem != null)
-                MainProjectItem = null;
+
+            if (item.Equals(MainProjectItem))
+                if (items.Count > 0)
+                    MainProjectItem = items[0];
+                else
+                    MainProjectItem = null;
         }
 
         public ProjectItem byCanvas(ScrollableCanvas canvas)

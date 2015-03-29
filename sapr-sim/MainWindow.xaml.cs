@@ -72,6 +72,18 @@ namespace sapr_sim
                 {
                     connect();
                 }
+                else if (currentEntity is SubDiagram)
+                {
+                    SubDiagram sd = currentEntity as SubDiagram;
+                    ClosableTabItem tab = findTabItem(sd.ProjectItem);
+                    if (tab.Title.Contains(sd.ProjectItem.Name))
+                    {
+                        currentEntity = null;
+                        MessageBox.Show("Нельзя добавить процесс к самому себе");
+                    }
+                    else
+                        drawOnCanvas(e.GetPosition(this));
+                }
                 else if (!(currentEntity is ConnectionLine))
                 {
                     drawOnCanvas(e.GetPosition(this));

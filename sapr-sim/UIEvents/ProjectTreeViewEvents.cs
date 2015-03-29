@@ -169,14 +169,19 @@ namespace sapr_sim
 
         private void RemoveItem_MenuClick(object sender, RoutedEventArgs e)
         {
-            ProjectTreeViewItem item = projectStructure.SelectedItem as ProjectTreeViewItem;
+            MessageBoxResult result = MessageBox.Show("Вы уверены?",
+                    "Убрать файл из проекта", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                ProjectTreeViewItem item = projectStructure.SelectedItem as ProjectTreeViewItem;
 
-            ClosableTabItem cti = findTabItem(item.ProjectItem);
-            if (cti != null) cti.button_close_Click(null, null);
+                ClosableTabItem cti = findTabItem(item.ProjectItem);
+                if (cti != null) cti.button_close_Click(null, null);
 
-            (projectStructure.Items[0] as TreeViewItem).Items.Remove(item);
-            Project.Instance.Items.Remove(item.ProjectItem);
-            fs.saveProject();
+                (projectStructure.Items[0] as TreeViewItem).Items.Remove(item);
+                Project.Instance.Items.Remove(item.ProjectItem);
+                fs.saveProject();
+            }          
         }
         
         private void Rename_RootMenuClick(object sender, RoutedEventArgs e)
