@@ -153,7 +153,7 @@ namespace sapr_sim
         private void AddToDiagram_MenuClick(object sender, RoutedEventArgs e)
         {
             ProjectTreeViewItem item = projectStructure.SelectedItem as ProjectTreeViewItem;
-            currentEntity = new SubDiagram(currentCanvas, item.ProjectItem);
+            currentEntity = new SubDiagram(null, item.ProjectItem);
         }
 
         private void RunSimulation_MenuClick(object sender, RoutedEventArgs e)
