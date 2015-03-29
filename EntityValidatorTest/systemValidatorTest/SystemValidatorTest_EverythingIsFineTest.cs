@@ -30,7 +30,7 @@ namespace EntityValidatorTest.systemValidatorTest
             EntityDestination finish = new EntityDestination();
             Procedure procedure = new Procedure();
 
-            Resource res = new Resource();
+            Resource res = new Resource() { count = 1 };
             res.efficiency = 0.8;
 
             procedure.addResource(res);
@@ -47,7 +47,7 @@ namespace EntityValidatorTest.systemValidatorTest
             instance.addEntity(finish);
             instance.addEntity(procedure);
 
-            IValidator validator = new SystemValidator(instance.getEntities());
+            IValidator validator = new SystemValidator(instance.getEntities(), instance.getResources());
             
             Assert.IsTrue(validator.startValidation().Success);
         }   
