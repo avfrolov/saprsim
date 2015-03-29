@@ -52,31 +52,7 @@ namespace sapr_sim
                     InputGestureText = "Del"
                 };
                 delete.Click += Delete_Click;
-                menu.Items.Add(delete);
-
-                menu.Items.Add(new Separator());
-
-                MenuItem order = new MenuItem()
-                {
-                    Header = "Порядок",
-                    IsEnabled = false
-                };
-                order.Click += Delete_Click;
-                menu.Items.Add(order);
-
-                MenuItem bottomOrder = new MenuItem()
-                {
-                    Header = "На задний план"
-                };
-                //bottomOrder.Click += Delete_Click;
-                order.Items.Add(bottomOrder);
-
-                MenuItem topOrder = new MenuItem()
-                {
-                    Header = "На передний план"
-                };
-                //topOrder.Click += Delete_Click;
-                order.Items.Add(topOrder);                
+                menu.Items.Add(delete);       
 
                 if (!(ent is SubDiagram))
                 {

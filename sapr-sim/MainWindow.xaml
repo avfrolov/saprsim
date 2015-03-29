@@ -73,11 +73,6 @@
                     <MenuItem Header="По центру по вертикали" IsEnabled="False"/>
                     <MenuItem Header="По нижнему краю" IsEnabled="False"/>
                 </MenuItem>
-                <Separator/>
-                <MenuItem Header="Порядок">
-                    <MenuItem Header="На задний план" IsEnabled="False"/>
-                    <MenuItem Header="На передний план" IsEnabled="False"/>
-                </MenuItem>
             </MenuItem>
             <MenuItem Header="Проект">
                 <MenuItem Name="runSimulationButton" Header="Запуск моделирования" InputGestureText="F5" Click="SimulateButton_Click" IsEnabled="False"/>
@@ -141,14 +136,6 @@
                 </Button>
                 <Button x:Name="Bottom" ToolTip="Выравнять по нижнему краю" IsEnabled="False">
                     <Image Source="Resources/align_bottom.png" />
-                </Button>
-                <Separator/>
-
-                <Button x:Name="MoveFront" ToolTip="На передний план" IsEnabled="False">
-                    <Image Source="Resources/move_front.png" />
-                </Button>
-                <Button x:Name="MoveBack" ToolTip="На задний план" IsEnabled="False">
-                    <Image Source="Resources/move_back.png" />
                 </Button>
                 <Separator/>
 
