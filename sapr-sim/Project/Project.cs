@@ -57,11 +57,15 @@ namespace sapr_sim
         public void addProjectItem(ProjectItem item)
         {
             items.Add(item);
+            if (items.Count == 1 && MainProjectItem == null)
+                MainProjectItem = item;
         }
 
         public void removeProjectItem(ProjectItem item)
         {
             items.Remove(item);
+            if (items.Count == 0 && MainProjectItem != null)
+                MainProjectItem = null;
         }
 
         public ProjectItem byCanvas(ScrollableCanvas canvas)

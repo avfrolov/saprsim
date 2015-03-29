@@ -79,7 +79,7 @@ namespace sapr_sim.Utils
                     item.Canvas = open(item.FullPath);
                     Project.Instance.addProjectItem(item);
 
-                    if (item.Name == openedProject.MainProjectItem.Name)
+                    if (openedProject.MainProjectItem != null && item.Name == openedProject.MainProjectItem.Name)
                         Project.Instance.MainProjectItem = item;
                 }
                 

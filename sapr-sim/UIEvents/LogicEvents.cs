@@ -17,12 +17,19 @@ namespace sapr_sim
     {
         private void SimulateButton_Click(object sender, RoutedEventArgs e)
         {
-            ClosableTabItem cti = findTabItem(Project.Instance.MainProjectItem);
-            if (cti == null)
-                createNewDiagram(Project.Instance.MainProjectItem.Canvas, Project.Instance.MainProjectItem.Name);
+            if (Project.Instance.MainProjectItem != null)
+            {
+                ClosableTabItem cti = findTabItem(Project.Instance.MainProjectItem);
+                if (cti == null)
+                    createNewDiagram(Project.Instance.MainProjectItem.Canvas, Project.Instance.MainProjectItem.Name);
+                else
+                    cti.IsSelected = true;
+                simulate(Project.Instance.MainProjectItem.Canvas);
+            }
             else
-                cti.IsSelected = true;
-            simulate(Project.Instance.MainProjectItem.Canvas);
+            {
+                MessageBox.Show("Не указан главный процесс. Укажите главный процесс в Проект -> Настройки проекта");
+            }
         }
 
         private void SimulateLocalButton_Click(object sender, RoutedEventArgs e)

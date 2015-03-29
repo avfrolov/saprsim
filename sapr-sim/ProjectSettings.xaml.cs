@@ -92,7 +92,10 @@ namespace sapr_sim
                 fs.renameProject(projectName.Text);
                 prj.ProjectName = projectName.Text;
             }
-            prj.MainProjectItem = prj.Items.First(x => x.Name == mainProjectItem.SelectedItem.ToString());
+
+            if (mainProjectItem.SelectedItem != null)
+                prj.MainProjectItem = prj.Items.First(x => x.Name == mainProjectItem.SelectedItem.ToString());
+            
             prj.TimeRestiction = newPrjTime;
             prj.SaveResult = saveResult.IsChecked.Value;
             prj.ResultPath = resultPath;
