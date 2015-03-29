@@ -38,7 +38,7 @@ namespace SimulationTest
             instance.addEntity(start);
             instance.addEntity(procedure);
             instance.addEntity(finish);
-            
+
 
             Simulation.Simulation.simulate();
 
@@ -50,6 +50,9 @@ namespace SimulationTest
         {
             EntityStart start = new EntityStart();
             Project prj = new Project();
+            prj.complexity = 1;
+            Project prj2 = new Project();
+            prj2.complexity = 1;
 
             EntityDestination finish = new EntityDestination();
             Procedure procedure = new Procedure();
@@ -62,6 +65,7 @@ namespace SimulationTest
 
             Resource res = new Resource();
             res.efficiency = 0.8;
+            res.count = 1;
 
             procedure.addResource(res);
             procedure.setInputs(new List<Entity>() { sub_start });
@@ -82,14 +86,19 @@ namespace SimulationTest
             finish.setInputs(new List<Entity>() { subModel });
 
             instance.addProject(prj);
+            instance.addProject(prj2);
             instance.addEntity(start);
             instance.addEntity(subModel);
             instance.addEntity(finish);
+
+            instance.timeRestriction = 10;
 
 
             Simulation.Simulation.simulate();
 
             Assert.IsTrue(prj.state == State.DONE);
+            Assert.IsTrue(prj2.state == State.DONE);
+
         }
     }
 }
