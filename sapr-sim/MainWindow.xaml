@@ -79,11 +79,11 @@
                     <MenuItem Header="На передний план" IsEnabled="False"/>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Модель">
+            <MenuItem Header="Проект">
                 <MenuItem Name="runSimulationButton" Header="Запуск моделиирования" InputGestureText="F5" Click="SimulateButton_Click" IsEnabled="False"/>
-                <MenuItem Header="Запуск оптимизации" InputGestureText="F2" IsEnabled="False"/>
+                <MenuItem Header="Запуск оптимизации" InputGestureText="F6" IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Header="Настройка параметров ресурсов" IsEnabled="False"/>
+                <MenuItem Name="projectSettingsButton" Header="Настройки проекта" Click="ProjectSettings_Click" IsEnabled="False"/>
             </MenuItem>
         </Menu>
 

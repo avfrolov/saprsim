@@ -89,6 +89,9 @@
     <Compile Include="Figures\SubDiagram.cs" />
     <Compile Include="Figures\Sync.cs" />
     <Compile Include="Figures\UIEntity.cs" />
+    <Compile Include="ProjectSettings.xaml.cs">
+      <DependentUpon>ProjectSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UIEvents\CanvasContextMenu.cs" />
     <Compile Include="UIEvents\KeyboardEvents.cs" />
     <Compile Include="UIEvents\LogicEvents.cs" />
@@ -152,6 +155,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ParametersDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProjectSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

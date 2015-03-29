@@ -15,7 +15,7 @@
         </DockPanel>
 
         <DockPanel Margin="2,2,2,5">
-            <CheckBox Content="Создать пустую диаграмму" Margin="5, 5, 5, 5" Name="createNewModel" IsChecked="True"/>
+            <CheckBox Content="Создать пустую диаграмму" Margin="5, 5, 5, 5" Name="createNewModel" IsChecked="True" Checked="createNewProcessChanged" Unchecked="createNewProcessChanged"/>
         </DockPanel>
 
         <DockPanel LastChildFill="True" Margin="2,2,2,5">

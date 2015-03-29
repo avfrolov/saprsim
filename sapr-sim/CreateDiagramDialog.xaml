@@ -14,8 +14,6 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--<Image Source="/WpfTutorialSamples;component/Images/question32.png" Width="32" Height="32" Grid.RowSpan="2" Margin="20,0" />-->
-
         <Label Grid.Column="1">Введите имя диаграммы</Label>
         <TextBox Name="name" Grid.Column="1" Grid.Row="1" MinWidth="250">Имя</TextBox>
 

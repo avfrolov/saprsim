@@ -57,5 +57,11 @@ namespace sapr_sim
             else
                 MessageBox.Show("Заполните все параметры", "Ошибка");
         }
+
+        private void createNewProcessChanged(object sender, RoutedEventArgs e)
+        {
+            if (modelName != null)
+                modelName.IsEnabled = (sender as CheckBox).IsChecked.Value;
+        }
     }
 }

@@ -12,45 +12,40 @@ namespace sapr_sim
     public class Project
     {
 
-        private string projectName;
-        private string projectPath;
+        public string ProjectName { get; set; }
+        public string ProjectPath { get; set; }
+        public ProjectItem MainProjectItem { get; set; } 
+        public int TimeRestiction { get; set; }
+        public bool SaveResult { get; set; }
+        public string ResultPath { get; set; }
 
         private List<ProjectItem> items = new List<ProjectItem>();
 
         private static Project instance = new Project();
 
-        private Project() { }
+        private Project() 
+        {
+            TimeRestiction = 60;
+        }
 
         public static Project Instance
         {
             get { return instance; }
         }
 
-        public string ProjectName
-        {
-            get { return projectName; }
-            set { projectName = value; }
-        }
-
-        public string ProjectPath
-        {
-            get { return projectPath; }
-            set { projectPath = value; }
-        }
-
         public string FullPath
         {
-            get { return projectPath + "\\" + projectName; }
+            get { return ProjectPath + "\\" + ProjectName; }
         }
 
         public string FullName
         {
-            get { return FullPath + "\\" + projectName + FileService.PROJECT_EXTENSION; }
+            get { return FullPath + "\\" + ProjectName + FileService.PROJECT_EXTENSION; }
         }
 
         public bool IsLoaded
         {
-            get { return !String.IsNullOrEmpty(projectPath) && !String.IsNullOrEmpty(projectName); }
+            get { return !String.IsNullOrEmpty(ProjectPath) && !String.IsNullOrEmpty(ProjectName); }
         }
 
         public List<ProjectItem> Items
@@ -77,8 +72,8 @@ namespace sapr_sim
         public void Close()
         {
             items.Clear();
-            projectName = "";
-            projectPath = "";
+            ProjectName = "";
+            ProjectPath = "";
         }
     }
 }

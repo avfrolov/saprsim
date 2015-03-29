@@ -69,14 +69,17 @@ namespace sapr_sim
             renameRoot.Click += Rename_RootMenuClick;
             menu.Items.Add(renameRoot);
 
-            menu.Items.Add(new MenuItem()
+            MenuItem settings = new MenuItem()
             {
-                Header = "Свойства", IsEnabled = false,
+                Header = "Настройки",
                 Icon = new Image()
                 {
                     Source = new BitmapImage(new Uri("pack://application:,,/Resources/settings.png"))
                 }
-            });
+            };
+            settings.Click += ProjectSettings_Click;
+            menu.Items.Add(settings);
+            
             root.ContextMenu = menu;
         }
 

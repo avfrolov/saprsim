@@ -1,11 +1,11 @@
-﻿
-using sapr_sim.WPFCustomElements;
+﻿using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Xml;
@@ -18,6 +18,11 @@ namespace sapr_sim.Utils
 
         public static readonly string PROJECT_EXTENSION = ".ssp";
         public static readonly string PROJECT_ITEM_EXTENSION = ".ssm";
+
+        public static bool IsValidPath(string path)
+        {
+            return Regex.IsMatch(path, @"^(?:[\w]\:|\\)(\\[a-z_\-\s0-9\.]*)+");
+        }
 
         public ScrollableCanvas open(string filepath)
         {
@@ -66,11 +71,18 @@ namespace sapr_sim.Utils
                 // we must set all properties from opened project to our project singletone
                 Project.Instance.ProjectName = openedProject.ProjectName;
                 Project.Instance.ProjectPath = openedProject.ProjectPath;
+                Project.Instance.ResultPath = openedProject.ResultPath;
+                Project.Instance.SaveResult = openedProject.SaveResult;
+                Project.Instance.TimeRestiction = openedProject.TimeRestiction;
                 foreach (ProjectItem item in openedProject.Items)
                 {
                     item.Canvas = open(item.FullPath);
                     Project.Instance.addProjectItem(item);
+
+                    if (item.Name == openedProject.MainProjectItem.Name)
+                        Project.Instance.MainProjectItem = item;
                 }
+                
             }
         }
 

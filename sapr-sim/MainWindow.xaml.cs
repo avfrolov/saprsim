@@ -329,7 +329,8 @@ namespace sapr_sim
             deleteButton.IsEnabled = activate;
 
             // Модель
-            runSimulationButton.IsEnabled = activate;     
+            runSimulationButton.IsEnabled = activate;
+            projectSettingsButton.IsEnabled = activate;
 
             // tool buttons
             NewDiagram.IsEnabled = activate;

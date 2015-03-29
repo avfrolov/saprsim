@@ -189,18 +189,6 @@ namespace sapr_sim
             printInformation("Все измененные файлы сохранены");
         }
 
-        private ClosableTabItem findTabItem(ProjectItem item)
-        {
-            foreach(ClosableTabItem ti in tabs.Items)
-            {
-                ScrollableCanvas sc = (ti.Content as ScrollViewer).Content as ScrollableCanvas;
-                ProjectItem pi = Project.Instance.byCanvas(sc);
-                if (pi.Equals(item))
-                    return ti;
-            }
-            return null;
-        }
-
         private void Open_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
@@ -258,6 +246,11 @@ namespace sapr_sim
             CutComand(selected, null);
         }
 
+        private void ProjectSettings_Click(object sender, RoutedEventArgs e)
+        {
+            new ProjectSettings().ShowDialog();
+        }
+
         private bool checkOnceProject()
         {
             if (projectStructure.Items.Count > 0)
@@ -269,6 +262,18 @@ namespace sapr_sim
                 if (result == MessageBoxResult.No) return false;
             }
             return true;
+        }
+
+        private ClosableTabItem findTabItem(ProjectItem item)
+        {
+            foreach (ClosableTabItem ti in tabs.Items)
+            {
+                ScrollableCanvas sc = (ti.Content as ScrollViewer).Content as ScrollableCanvas;
+                ProjectItem pi = Project.Instance.byCanvas(sc);
+                if (pi.Equals(item))
+                    return ti;
+            }
+            return null;
         }
 
     }
