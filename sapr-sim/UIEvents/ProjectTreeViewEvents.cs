@@ -27,7 +27,7 @@ namespace sapr_sim
 
             MenuItem addNewDgm = new MenuItem()
             {
-                Header = "Добавить новую диаграмму",
+                Header = "Добавить новый процесс",
                 Icon = new Image()
                 {
                     Source = new BitmapImage(new Uri("pack://application:,,/Resources/add_diagram.png"))
@@ -38,7 +38,7 @@ namespace sapr_sim
 
             MenuItem openDgm = new MenuItem()
             {
-                Header = "Открыть диаграмму",
+                Header = "Открыть процесс",
                 Icon = new Image()
                 {
                     Source = new BitmapImage(new Uri("pack://application:,,/Resources/folder.png"))
@@ -92,7 +92,7 @@ namespace sapr_sim
 
             MenuItem addToDiagram = new MenuItem() 
             { 
-                Header = "Добавить на диаграмму",
+                Header = "Добавить как подпроцесс",
                 Icon = new Image()
                 {
                     Source = new BitmapImage(new Uri("pack://application:,,/Resources/add_diagram.png"))
@@ -131,14 +131,6 @@ namespace sapr_sim
             renameItem.Click += Rename_RootMenuClick;
             menu.Items.Add(renameItem);
 
-            menu.Items.Add(new MenuItem() 
-            { 
-                Header = "Свойства", IsEnabled = false,
-                Icon = new Image()
-                {
-                    Source = new BitmapImage(new Uri("pack://application:,,/Resources/settings.png"))
-                }
-            });
             item.ContextMenu = menu;
         }
 
@@ -258,7 +250,7 @@ namespace sapr_sim
                 if (selected is ProjectTreeViewItem && (selected as ProjectTreeViewItem).ProjectItem.Equals(pi))
                     selected.Header = ProjectTreeViewItem.packProjectItem(newName, false);
                 else
-                    MessageBox.Show("Диаграмма с таким именем уже подключена");
+                    MessageBox.Show("Процесс с таким именем уже подключен");
                 return;
             }
 

@@ -89,7 +89,7 @@ namespace sapr_sim.WPFCustomElements
             MainWindow main = (MainWindow) System.Windows.Application.Current.MainWindow;
             if (main.IsModelChanged(this))
             {
-                MessageBoxResult result = MessageBox.Show("Диаграмма изменилась. Сохранить изменения перед закрытием?", 
+                MessageBoxResult result = MessageBox.Show("Процесс изменился. Сохранить изменения перед закрытием?", 
                     "Предупреждение", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
 
                 switch (result)

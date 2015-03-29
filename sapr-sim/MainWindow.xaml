@@ -22,11 +22,11 @@
             <MenuItem Header="Файл">
                 <MenuItem Header="Новый">
                     <MenuItem Header="Проект" Click="CreateNewProject_Click"/>
-                    <MenuItem Name="newDiagramButton" Header="Диаграмма" InputGestureText="Ctrl+N" Click="CreateNewDiagram_Click" IsEnabled="False"/>
+                    <MenuItem Name="newDiagramButton" Header="Процесс" InputGestureText="Ctrl+N" Click="CreateNewDiagram_Click" IsEnabled="False"/>
                 </MenuItem>
                 <MenuItem Header="Открыть">
                     <MenuItem Header="Проект" Click="OpenProject_Click"/>
-                    <MenuItem Name="openDiagramButton" Header="Диаграмма" InputGestureText="Ctrl+O" Click="Open_Click" IsEnabled="False"/>
+                    <MenuItem Name="openDiagramButton" Header="Процесс" InputGestureText="Ctrl+O" Click="Open_Click" IsEnabled="False"/>
                 </MenuItem>
                 <MenuItem Name="closeProjectButton"  Header="Закрыть проект" Click="CloseProject_Click" IsEnabled="False"/>
                 <Separator/>
@@ -80,7 +80,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Проект">
-                <MenuItem Name="runSimulationButton" Header="Запуск моделиирования" InputGestureText="F5" Click="SimulateButton_Click" IsEnabled="False"/>
+                <MenuItem Name="runSimulationButton" Header="Запуск моделирования" InputGestureText="F5" Click="SimulateButton_Click" IsEnabled="False"/>
                 <MenuItem Header="Запуск оптимизации" InputGestureText="F6" IsEnabled="False"/>
                 <Separator/>
                 <MenuItem Name="projectSettingsButton" Header="Настройки проекта" Click="ProjectSettings_Click" IsEnabled="False"/>
@@ -89,10 +89,10 @@
 
         <ToolBarPanel Grid.Row="1">
             <ToolBar Height="26" >
-                <Button x:Name="NewDiagram" ToolTip="Создать новую диаграмму" Click="CreateNewDiagram_Click" IsEnabled="False">
+                <Button x:Name="NewDiagram" ToolTip="Создать новый процесс" Click="CreateNewDiagram_Click" IsEnabled="False">
                     <Image Source="Resources/New_document.png" />
                 </Button>
-                <Button x:Name="OpenDiagram" ToolTip="Открыть диаграмму" Click="Open_Click" IsEnabled="False">
+                <Button x:Name="OpenDiagram" ToolTip="Открыть процесс" Click="Open_Click" IsEnabled="False">
                     <Image Source="Resources/Folder.png" />
                 </Button>
                 <Button x:Name="SaveDiagram" ToolTip="Сохранить" Click="Save_Click" IsEnabled="False">

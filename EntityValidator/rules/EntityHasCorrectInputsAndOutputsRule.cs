@@ -46,12 +46,12 @@ namespace EntityValidator.rules
             
             foreach (var input in failedInputs)
             {
-                errors.Add(new ValidationError("Сущность '" + input.Key.ToString() + "' не может иметь на входе сущность '" + input.Value.ToString() + "'"));
+                errors.Add(new ValidationError("Блок '" + input.Key.ToString() + "' не может иметь на входе блок '" + input.Value.ToString() + "'"));
             }
 
             foreach (var output in failedOutputs)
             {
-                errors.Add(new ValidationError("Сущность '" + output.Key.ToString() + "' не может иметь на выходе сущность '" + output.Value.ToString() + "'"));
+                errors.Add(new ValidationError("Блок '" + output.Key.ToString() + "' не может иметь на выходе блок '" + output.Value.ToString() + "'"));
             }
             
             return errors;
