@@ -52,31 +52,6 @@ namespace sapr_sim
                     if (sapr_sim.Figures.UIEntity.ENTITY_NAME_PARAM.Equals(param.DisplayedText) && !param.RawValue.Equals(input.getValue().ToString()))
                         owner.updateText(input.getValue().ToString());
                     param.RawValue = input.getValue();
-                    //if (dp.Children[1] is TextBox)
-                    //{
-                    //    TextBox tb = dp.Children[1] as TextBox;
-                    //    UIParam param = parameters.Find(p => p.DisplayedText == l.Content.ToString());
-                    //    if (!param.Validator.validate(tb.Text)) 
-                    //    {
-                    //        MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
-                    //        return;
-                    //    }                    
-                    //    if (sapr_sim.Figures.UIEntity.ENTITY_NAME_PARAM.Equals(param.DisplayedText) && !param.RawValue.Equals(tb.Text))
-                    //        owner.updateText(tb.Text);
-                    //    param.RawValue = tb.Text;
-                    //}
-
-                    //if (dp.Children[1] is CheckBox)
-                    //{
-                    //    CheckBox cb = dp.Children[1] as CheckBox;
-                    //    UIParam param = parameters.Find(p => p.DisplayedText == l.Content.ToString());
-                    //    if (!param.Validator.validate(""))
-                    //    {
-                    //        MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
-                    //        return;
-                    //    }
-                    //    param.RawValue = cb.IsChecked;
-                    //}
                 }
             }
 
