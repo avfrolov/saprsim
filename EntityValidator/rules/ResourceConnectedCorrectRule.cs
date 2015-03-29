@@ -20,14 +20,18 @@ namespace EntityValidator.rules
 
         public override bool validate()
         {
-            int countResources = 0;
+            int procedureResources = 0;
             foreach (Entity e in entities)
             {
                 if (e is Procedure)
-                    countResources += (e as Procedure).getResources().Count;
+                    procedureResources += (e as Procedure).getResources().Count;
             }
 
-            return countResources == resources.Count;
+            int totalResources = 0;
+            foreach (Resource res in resources)
+                totalResources += res.count;
+
+            return procedureResources == totalResources;
         }
 
         public override List<ValidationError> explain()
