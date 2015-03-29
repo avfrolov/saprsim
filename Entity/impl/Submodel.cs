@@ -114,6 +114,7 @@ namespace Entities.impl
                     {
                         entity.getOutputs()[0].getInputs().Clear();
                         entity.getOutputs()[0].addInput(input);
+                        this.pseudoInput.Clear();
                         this.pseudoInput.Add(input);
                         return;
                     }
@@ -147,6 +148,7 @@ namespace Entities.impl
                     {
                         entity.getInputs()[0].getOutputs().Clear();
                         entity.getInputs()[0].addOutput(output);
+                        this.pseudoOutput.Clear();
                         this.pseudoOutput.Add(output);
                         return;
                     }
