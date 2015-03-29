@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sapr-sim", "sapr-sim\sapr-sim.csproj", "{6E79E329-9281-4AFE-AB65-BA4BEB207E57}"
 EndProject
@@ -19,64 +19,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityValidator", "EntityVa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportImport", "ExportImport\ExportImport.csproj", "{8A3264AE-99DA-4A7F-8B0C-AE4A66C4A984}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityTransformator", "EntityTransformator\EntityTransformator.csproj", "{4B509F9E-E276-48F5-AC03-0A7D1EA3DAA1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statistics", "Statistics\Statistics.csproj", "{BD0BD758-5AFE-4143-B499-94DD555668AD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathParser", "MathParser\MathParser.csproj", "{216C86F3-B656-4CAA-BE42-B1FA92F44D8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel", "Kernel\Kernel.csproj", "{256F2AE7-A9D0-4A21-855A-66838771C731}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportGenerator", "ReportGenerator\ReportGenerator.csproj", "{6BFF2820-CBA0-4846-A54F-DFE5F362CA15}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "icons", "icons", "{EE724F3B-FE3A-45CE-A198-E9E6208B10CB}"
-	ProjectSection(SolutionItems) = preProject
-		icons\arrow.png = icons\arrow.png
-		icons\audio_pause.png = icons\audio_pause.png
-		icons\audio_play.png = icons\audio_play.png
-		icons\audio_stop.png = icons\audio_stop.png
-		icons\border.png = icons\border.png
-		icons\checkbox_no.png = icons\checkbox_no.png
-		icons\checkbox_yes.png = icons\checkbox_yes.png
-		icons\collector.png = icons\collector.png
-		icons\curveline.png = icons\curveline.png
-		icons\database.png = icons\database.png
-		icons\DB.ico = icons\DB.ico
-		icons\DB2.png = icons\DB2.png
-		icons\delete.ico = icons\delete.ico
-		icons\desktop.ini = icons\desktop.ini
-		icons\Down.png = icons\Down.png
-		icons\down_arrow.ico = icons\down_arrow.ico
-		icons\entitydest.png = icons\entitydest.png
-		icons\entitysource.png = icons\entitysource.png
-		icons\folder_sans.png = icons\folder_sans.png
-		icons\folder_sans_accept.png = icons\folder_sans_accept.png
-		icons\FolderClosed.ico = icons\FolderClosed.ico
-		icons\FolderOpen.png = icons\FolderOpen.png
-		icons\FolderOpened.ico = icons\FolderOpened.ico
-		icons\Icon_Pause.ico = icons\Icon_Pause.ico
-		icons\Icon_Play.ico = icons\Icon_Play.ico
-		icons\Icon_PlaySolid.ico = icons\Icon_PlaySolid.ico
-		icons\Icon_Stop.ico = icons\Icon_Stop.ico
-		icons\if.png = icons\if.png
-		icons\label.png = icons\label.png
-		icons\line.png = icons\line.png
-		icons\multithread.png = icons\multithread.png
-		icons\new.ico = icons\new.ico
-		icons\play-circle.png = icons\play-circle.png
-		icons\plus.ico = icons\plus.ico
-		icons\Plus.png = icons\Plus.png
-		icons\procedure.png = icons\procedure.png
-		icons\Res.ico = icons\Res.ico
-		icons\Resource.ico = icons\Resource.ico
-		icons\resource.png = icons\resource.png
-		icons\Simple_Pause.png = icons\Simple_Pause.png
-		icons\Simple_Play.png = icons\Simple_Play.png
-		icons\Simple_Stop.png = icons\Simple_Stop.png
-		icons\sync.png = icons\sync.png
-		icons\Trash.png = icons\Trash.png
-		icons\very_small_database.png = icons\very_small_database.png
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityValidatorTest", "EntityValidatorTest\EntityValidatorTest.csproj", "{1A6AFA46-5EE5-49D6-97EF-CAA07D47F974}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationTest", "SimulationTest\SimulationTest.csproj", "{39C3FC58-9949-4DCE-9CAB-F5B5DCF61200}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel", "Kernel\Kernel.csproj", "{256F2AE7-A9D0-4A21-855A-66838771C731}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -116,10 +69,6 @@ Global
 		{8A3264AE-99DA-4A7F-8B0C-AE4A66C4A984}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A3264AE-99DA-4A7F-8B0C-AE4A66C4A984}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A3264AE-99DA-4A7F-8B0C-AE4A66C4A984}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4B509F9E-E276-48F5-AC03-0A7D1EA3DAA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B509F9E-E276-48F5-AC03-0A7D1EA3DAA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B509F9E-E276-48F5-AC03-0A7D1EA3DAA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B509F9E-E276-48F5-AC03-0A7D1EA3DAA1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BD0BD758-5AFE-4143-B499-94DD555668AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD0BD758-5AFE-4143-B499-94DD555668AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD0BD758-5AFE-4143-B499-94DD555668AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -128,14 +77,22 @@ Global
 		{216C86F3-B656-4CAA-BE42-B1FA92F44D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{216C86F3-B656-4CAA-BE42-B1FA92F44D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{216C86F3-B656-4CAA-BE42-B1FA92F44D8F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{256F2AE7-A9D0-4A21-855A-66838771C731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{256F2AE7-A9D0-4A21-855A-66838771C731}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{256F2AE7-A9D0-4A21-855A-66838771C731}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{256F2AE7-A9D0-4A21-855A-66838771C731}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6BFF2820-CBA0-4846-A54F-DFE5F362CA15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6BFF2820-CBA0-4846-A54F-DFE5F362CA15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BFF2820-CBA0-4846-A54F-DFE5F362CA15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BFF2820-CBA0-4846-A54F-DFE5F362CA15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A6AFA46-5EE5-49D6-97EF-CAA07D47F974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A6AFA46-5EE5-49D6-97EF-CAA07D47F974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A6AFA46-5EE5-49D6-97EF-CAA07D47F974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A6AFA46-5EE5-49D6-97EF-CAA07D47F974}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39C3FC58-9949-4DCE-9CAB-F5B5DCF61200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39C3FC58-9949-4DCE-9CAB-F5B5DCF61200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39C3FC58-9949-4DCE-9CAB-F5B5DCF61200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39C3FC58-9949-4DCE-9CAB-F5B5DCF61200}.Release|Any CPU.Build.0 = Release|Any CPU
+		{256F2AE7-A9D0-4A21-855A-66838771C731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{256F2AE7-A9D0-4A21-855A-66838771C731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{256F2AE7-A9D0-4A21-855A-66838771C731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{256F2AE7-A9D0-4A21-855A-66838771C731}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

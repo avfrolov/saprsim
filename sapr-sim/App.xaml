@@ -16,8 +16,8 @@
             <Image x:Key="Multithread" Source="pack://application:,,,/Resources/Parallel.gif"/>
             <Image x:Key="If" Source="pack://application:,,,/Resources/decision.gif"/>
             <Image x:Key="Collector" Source="pack://application:,,,/Resources/Collector.gif"/>
-            <Image x:Key="EntitySource" Source="pack://application:,,,/Resources/Source.gif"/>
-            <Image x:Key="EntityDestination" Source="pack://application:,,,/Resources/Sink.gif"/>
+            <Image x:Key="EntitySource" Source="pack://application:,,,/Resources/Sink.gif"/>
+            <Image x:Key="EntityDestination" Source="pack://application:,,,/Resources/Source.gif"/>
 
             <!-- Lines -->
             <Image x:Key="Line" Source="Resources/line.gif"/>

@@ -52,6 +52,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -69,6 +70,79 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreateDiagramDialog.xaml.cs">
+      <DependentUpon>CreateDiagramDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateProject.xaml.cs">
+      <DependentUpon>CreateProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Figures\Collector.cs" />
+    <Compile Include="Figures\ConnectionLine.cs" />
+    <Compile Include="Figures\Decision.cs" />
+    <Compile Include="Figures\Destination.cs" />
+    <Compile Include="Figures\Label.cs" />
+    <Compile Include="Figures\Parallel.cs" />
+    <Compile Include="Figures\Port.cs" />
+    <Compile Include="Figures\Procedure.cs" />
+    <Compile Include="Figures\Resource.cs" />
+    <Compile Include="Figures\Source.cs" />
+    <Compile Include="Figures\SubDiagram.cs" />
+    <Compile Include="Figures\Sync.cs" />
+    <Compile Include="Figures\UIEntity.cs" />
+    <Compile Include="ProjectSettings.xaml.cs">
+      <DependentUpon>ProjectSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UIEvents\CanvasContextMenu.cs" />
+    <Compile Include="UIEvents\KeyboardEvents.cs" />
+    <Compile Include="UIEvents\LogicEvents.cs" />
+    <Compile Include="UIEvents\MouseEvents.cs" />
+    <Compile Include="UIEvents\ProjectTreeViewEvents.cs" />
+    <Compile Include="UIEvents\ShapeContextMenu.cs" />
+    <Compile Include="UIEvents\ToolBarEvents.cs" />
+    <Compile Include="ParametersDialog.xaml.cs">
+      <DependentUpon>ParametersDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Parameters\Validators\BetweenDoubleParamValidator.cs" />
+    <Compile Include="Parameters\Validators\ParamValidator.cs" />
+    <Compile Include="Parameters\UIParam.cs" />
+    <Compile Include="Parameters\Validators\PositiveDoubleParamValidator.cs" />
+    <Compile Include="Parameters\Validators\PositiveIntegerParamValidator.cs" />
+    <Compile Include="Project\Project.cs" />
+    <Compile Include="Project\ProjectException.cs" />
+    <Compile Include="Project\ProjectItem.cs" />
+    <Compile Include="Transformers\SubdiagramTransformer.cs" />
+    <Compile Include="Transformers\TransformerFactory.cs" />
+    <Compile Include="Transformers\TransformerService.cs" />
+    <Compile Include="Transformers\CollectorTransformer.cs" />
+    <Compile Include="Transformers\DecisionTransformer.cs" />
+    <Compile Include="Transformers\DestinationTransformer.cs" />
+    <Compile Include="Transformers\ParallelTransformer.cs" />
+    <Compile Include="Transformers\ProcedureTransformer.cs" />
+    <Compile Include="Transformers\SourceTransformer.cs" />
+    <Compile Include="Transformers\SynchronizationTransformer.cs" />
+    <Compile Include="Transformers\Transformer.cs" />
+    <Compile Include="Utils\ConnectorFinder.cs" />
+    <Compile Include="Utils\FileService.cs" />
+    <Compile Include="Utils\IdGenerator.cs" />
+    <Compile Include="Utils\ZIndexUtil.cs" />
+    <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
+    <Compile Include="WPFCustomElements\ListBoxItemError.cs" />
+    <Compile Include="WPFCustomElements\ParametersDialogItems.cs" />
+    <Compile Include="WPFCustomElements\ProjectItemLabel.cs" />
+    <Compile Include="WPFCustomElements\ProjectItemTextBox.cs" />
+    <Compile Include="WPFCustomElements\ProjectTreeViewItem.cs" />
+    <Compile Include="WPFCustomElements\ScrollableCanvas.cs" />
+    <Compile Include="WPFCustomElements\UserControls\ClosableHeader.xaml.cs">
+      <DependentUpon>ClosableHeader.xaml</DependentUpon>
+    </Compile>
+    <Page Include="CreateDiagramDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateProject.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -81,6 +155,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ParametersDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ProjectSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPFCustomElements\UserControls\ClosableHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -334,6 +420,32 @@
     <Resource Include="Resources\small_folder.png" />
     <Resource Include="Resources\small_resources.png" />
     <Resource Include="Resources\Undo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entity\Entity.csproj">
+      <Project>{122ea07b-0a59-477a-a2bb-26c85461235d}</Project>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kernel\Kernel.csproj">
+      <Project>{256f2ae7-a9d0-4a21-855a-66838771c731}</Project>
+      <Name>Kernel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\diagram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\project.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\rename.png" />
+    <Resource Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add_diagram.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

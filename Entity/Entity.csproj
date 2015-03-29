@@ -7,7 +7,7 @@
     <ProjectGuid>{122EA07B-0A59-477A-A2BB-26C85461235D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Entity</RootNamespace>
+    <RootNamespace>Entities</RootNamespace>
     <AssemblyName>Entity</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -41,8 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity.cs" />
+    <Compile Include="impl\DecisionMaker.cs" />
+    <Compile Include="impl\Submodel.cs" />
+    <Compile Include="impl\EntityDestination.cs" />
+    <Compile Include="impl\EntityStart.cs" />
+    <Compile Include="impl\Parallel.cs" />
+    <Compile Include="impl\Procedure.cs" />
+    <Compile Include="Resource.cs" />
+    <Compile Include="impl\Synchronization.cs" />
+    <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
