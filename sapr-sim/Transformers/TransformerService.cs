@@ -87,17 +87,21 @@ namespace EntityTransformator
             Entities.Resource res = new Entities.Resource() { efficiency = resource.Efficiency, price = resource.Price, count = resource.Count, isShared = resource.IsShared };
             resources.Add(res);
 
-            if (connectors.Count > 0)
+            foreach(ConnectionLine con in connectors)
             {
                 UIEntity procedure = null;
-                if (connectors[0].SourcePort != null && connectors[0].SourcePort.PortType == PortType.RESOURCE)
+                if (con.SourcePort != null && con.SourcePort.PortType == PortType.RESOURCE)
                 {
-                    UIEntity src = connectors[0].SourcePort.Owner;
-                    UIEntity dst = connectors[0].DestinationPort.Owner;
+                    UIEntity src = con.SourcePort.Owner;
+                    UIEntity dst = con.DestinationPort.Owner;
                     procedure = src is Procedure ? src : dst is Procedure ? dst : null;
 
                     if (procedure != null)
-                        addAdditionalRelations(map[procedure], res);
+                    {
+                        Entities.impl.Procedure realProcedure = map[procedure] as Entities.impl.Procedure;
+                        if (!realProcedure.getResources().Contains(res))
+                            addAdditionalRelations(realProcedure, res);
+                    }
                 }
             }
         }

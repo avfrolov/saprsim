@@ -42,7 +42,7 @@ namespace EntityValidator.rules
             List<ValidationError> errors = new List<ValidationError>();
             foreach (Entity fail in failed)
             {
-                errors.Add(new ValidationError("Сущность '" + fail.ToString() + "' не верно подключена", fail));
+                errors.Add(new ValidationError("Блок '" + fail.ToString() + "' не верно подключен", fail));
             }
             return errors;
         }

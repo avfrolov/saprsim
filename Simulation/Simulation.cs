@@ -35,6 +35,8 @@ namespace Simulation
                     }
                 }
                 timer.increment();
+                if (timer.getTime() > model.timeRestriction)
+                    break;
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="sapr_sim.ParameterDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Параметры сущности" Height="300" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Параметры блока" Height="300" Width="300" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     
     <StackPanel Name="sp"/>
 

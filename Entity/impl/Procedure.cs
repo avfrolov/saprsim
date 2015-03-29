@@ -14,7 +14,8 @@ namespace Entities.impl
         private double operationTime;
         List<Resource> resources = new List<Resource>();
 
-        public override void execute() {
+        public override void execute()
+        {
             Timer timer = Timer.Instance;
 
             double overallEfficiency = 0.0000001; //  some inaccuracy 
@@ -34,7 +35,7 @@ namespace Entities.impl
                     outputEntity.addProjectToQueue(prj);
                     getReadyProjectQueue().Remove(prj);
 
-                    foreach (Resource res in getResources()) 
+                    foreach (Resource res in getResources())
                     {
                         res.users.Remove(this.id);
                         res.isBuisy = false;
@@ -77,20 +78,22 @@ namespace Entities.impl
         {
             foreach (Resource res in resources)
             {
+                bool isUsedByThis = res.users.Contains(this.id);
+
                 if (res.users.Count == 0)
                     res.isBuisy = false;
 
-                if (res.isBuisy && !res.isShared)
-                    return Double.MaxValue; //need refactor
+                if (res.isBuisy && !res.isShared && !isUsedByThis)
+                    return Double.MaxValue;
 
-                if (res.isBuisy && res.isShared)                     
+                if (res.isBuisy && res.isShared || res.isBuisy && isUsedByThis)
                 {
-                    overallEfficiency += res.efficiency * res.count / (res.users.Count > 0 ? res.users.Count : 1);
-
                     if (!res.users.Contains(this.id))
                     {
                         res.users.Add(this.id);
                     }
+
+                    overallEfficiency += res.efficiency * res.count / (res.users.Count > 0 ? res.users.Count : 1);
                 }
 
                 if (!res.isBuisy)

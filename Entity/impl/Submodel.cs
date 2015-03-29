@@ -10,28 +10,68 @@ namespace Entities.impl
     {
 
         private List<Entity> entities = new List<Entity>();
+        private List<Resource> resources = new List<Resource>();
         private List<Entity> pseudoInput = new List<Entity>();
         private List<Entity> pseudoOutput = new List<Entity>();
+        private bool isFirstCall = true;
 
         public void setEntites(List<Entity> entities)
         {
             this.entities = entities;
         }
 
-        public override void execute() 
+        public void setResources(List<Resource> resources)
         {
-            Project prj = getProjectFromReadyQueue();
+            this.resources = resources;
+        }
 
+        public List<Resource> getResources()
+        {
+            return resources;
+        }
+
+        public override void execute()
+        {
             foreach (Entity entity in entities)
             {
                 if (!(entity is EntityStart) && !(entity is EntityDestination))
                 {
-                    entity.setReadyProjectQueue(getReadyProjectQueue());
+                    //when we call submodel first time we need to setup projec queue to
+                    // first entity in submodel enities chain
+                    if (isFirstCall)
+                    {
+                        entity.setReadyProjectQueue(getReadyProjectQueue());
+                        isFirstCall = false;
+                    }
                     entity.proceed();
                 }
             }
 
-            getReadyProjectQueue().Remove(prj);
+            deleteProjectFromSubmodelReadyQueue();
+        }
+
+        private void deleteProjectFromSubmodelReadyQueue()
+        {
+            List<Project> prjToDelete = new List<Project>();
+
+            foreach (Project prj in getReadyProjectQueue())
+            {
+                bool needDelete = true;
+                foreach (Entity e in entities)
+                {
+                    if (e.getReadyProjectQueue().Contains(prj)
+                             || e.getNotReadyProjectQueue().Contains(prj)) //if project is proceeded or whait to be proceeded in 
+                        //any submodel entity - dont remove it                       
+                        needDelete = false;
+                }
+                if (needDelete)
+                    prjToDelete.Add(prj);
+            }
+
+            foreach (Project prj in prjToDelete)
+            {
+                getReadyProjectQueue().Remove(prj);
+            }
         }
 
         public void addEntity(Entity entity)

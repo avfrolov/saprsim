@@ -99,6 +99,7 @@ namespace sapr_sim
                 selected.removeAll();
                 currentCanvas.Children.Remove(selected);
                 ModelChanged();
+                propertiesPanel.Children.Clear();
             }
         }
 

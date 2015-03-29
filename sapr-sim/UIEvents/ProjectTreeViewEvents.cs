@@ -27,7 +27,7 @@ namespace sapr_sim
 
             MenuItem addNewDgm = new MenuItem()
             {
-                Header = "Добавить новую диаграмму",
+                Header = "Добавить новый процесс",
                 Icon = new Image()
                 {
                     Source = new BitmapImage(new Uri("pack://application:,,/Resources/add_diagram.png"))
@@ -38,7 +38,7 @@ namespace sapr_sim
 
             MenuItem openDgm = new MenuItem()
             {
-                Header = "Открыть диаграмму",
+                Header = "Открыть процесс",
                 Icon = new Image()
                 {
                     Source = new BitmapImage(new Uri("pack://application:,,/Resources/folder.png"))
@@ -92,7 +92,7 @@ namespace sapr_sim
 
             MenuItem addToDiagram = new MenuItem() 
             { 
-                Header = "Добавить на диаграмму",
+                Header = "Добавить как подпроцесс",
                 Icon = new Image()
                 {
                     Source = new BitmapImage(new Uri("pack://application:,,/Resources/add_diagram.png"))
@@ -131,14 +131,6 @@ namespace sapr_sim
             renameItem.Click += Rename_RootMenuClick;
             menu.Items.Add(renameItem);
 
-            menu.Items.Add(new MenuItem() 
-            { 
-                Header = "Свойства", IsEnabled = false,
-                Icon = new Image()
-                {
-                    Source = new BitmapImage(new Uri("pack://application:,,/Resources/settings.png"))
-                }
-            });
             item.ContextMenu = menu;
         }
 
@@ -161,7 +153,7 @@ namespace sapr_sim
         private void AddToDiagram_MenuClick(object sender, RoutedEventArgs e)
         {
             ProjectTreeViewItem item = projectStructure.SelectedItem as ProjectTreeViewItem;
-            currentEntity = new SubDiagram(currentCanvas, item.ProjectItem);
+            currentEntity = new SubDiagram(null, item.ProjectItem);
         }
 
         private void RunSimulation_MenuClick(object sender, RoutedEventArgs e)
@@ -177,14 +169,19 @@ namespace sapr_sim
 
         private void RemoveItem_MenuClick(object sender, RoutedEventArgs e)
         {
-            ProjectTreeViewItem item = projectStructure.SelectedItem as ProjectTreeViewItem;
+            MessageBoxResult result = MessageBox.Show("Вы уверены?",
+                    "Убрать файл из проекта", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                ProjectTreeViewItem item = projectStructure.SelectedItem as ProjectTreeViewItem;
 
-            ClosableTabItem cti = findTabItem(item.ProjectItem);
-            if (cti != null) cti.button_close_Click(null, null);
+                ClosableTabItem cti = findTabItem(item.ProjectItem);
+                if (cti != null) cti.button_close_Click(null, null);
 
-            (projectStructure.Items[0] as TreeViewItem).Items.Remove(item);
-            Project.Instance.Items.Remove(item.ProjectItem);
-            fs.saveProject();
+                (projectStructure.Items[0] as TreeViewItem).Items.Remove(item);
+                Project.Instance.Items.Remove(item.ProjectItem);
+                fs.saveProject();
+            }          
         }
         
         private void Rename_RootMenuClick(object sender, RoutedEventArgs e)
@@ -258,7 +255,7 @@ namespace sapr_sim
                 if (selected is ProjectTreeViewItem && (selected as ProjectTreeViewItem).ProjectItem.Equals(pi))
                     selected.Header = ProjectTreeViewItem.packProjectItem(newName, false);
                 else
-                    MessageBox.Show("Диаграмма с таким именем уже подключена");
+                    MessageBox.Show("Процесс с таким именем уже подключен");
                 return;
             }
 

@@ -31,7 +31,7 @@ namespace EntityValidator.rules
         {
             if (submodel != null)
             {
-                SystemValidator validator = new SystemValidator(entities);
+                SystemValidator validator = new SystemValidator(entities, submodel.getResources());
                 return validator.startValidation().Success;
             }
             return true;

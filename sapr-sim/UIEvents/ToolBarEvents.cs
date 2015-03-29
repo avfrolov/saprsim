@@ -222,7 +222,7 @@ namespace sapr_sim
                     fs.saveProject();
                 }
                 else
-                    MessageBox.Show("Файл уже есть в проекте");
+                    MessageBox.Show("Файл уже подключен к проекту");
             }            
         }
 

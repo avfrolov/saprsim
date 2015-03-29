@@ -36,13 +36,13 @@ namespace EntityValidator.rules
             List<ValidationError> errors = new List<ValidationError>();
             if (starts.Count == 0)
             {
-                errors.Add(new ValidationError("Сущность 'Старт' не найдена"));
+                errors.Add(new ValidationError("Блок 'Старт' не найден"));
             }
             else if (starts.Count > 1)
             {
                 foreach (Entity start in starts)
                 {
-                    errors.Add(new ValidationError("Лишняя сущность 'Старт'", start));
+                    errors.Add(new ValidationError("Лишний блок старт '" + start.name + "'", start));
                 }
             }
             return errors;

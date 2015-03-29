@@ -72,6 +72,21 @@ namespace sapr_sim
                 {
                     connect();
                 }
+                else if (currentEntity is SubDiagram)
+                {
+                    SubDiagram sd = currentEntity as SubDiagram;
+                    ScrollableCanvas sc = currentCanvas as ScrollableCanvas;
+                    if (sc.Equals(sc, sd.ProjectItem.Canvas as ScrollableCanvas))
+                    {
+                        currentEntity = null;
+                        MessageBox.Show("Нельзя добавить процесс к самому себе");
+                    }
+                    else
+                    {
+                        sd.canvas = currentCanvas;
+                        drawOnCanvas(e.GetPosition(this));
+                    }
+                }
                 else if (!(currentEntity is ConnectionLine))
                 {
                     drawOnCanvas(e.GetPosition(this));
