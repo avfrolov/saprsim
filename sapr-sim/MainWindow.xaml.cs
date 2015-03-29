@@ -242,9 +242,14 @@ namespace sapr_sim
 
         public void attachMovingEvents(UIEntity entity)
         {
+            // Garantee that we have only one event http://stackoverflow.com/questions/136975/has-an-event-handler-already-been-added
+            entity.MouseLeftButtonDown -= Shape_MouseLeftButtonDown;
             entity.MouseLeftButtonDown += Shape_MouseLeftButtonDown;
+            entity.MouseMove -= Shape_MouseMove;
             entity.MouseMove += Shape_MouseMove;
+            entity.MouseLeftButtonUp -= Shape_MouseLeftButtonUp;
             entity.MouseLeftButtonUp += Shape_MouseLeftButtonUp;
+            entity.MouseRightButtonDown -= Shape_MouseRightButtonDown;
             entity.MouseRightButtonDown += Shape_MouseRightButtonDown;
 
             attachContextMenu(entity);

@@ -185,6 +185,8 @@ namespace sapr_sim
                         p.canvas = currentCanvas;
                     }
 
+                    obj.Label.canvas = currentCanvas;
+
                     currentEntity = obj;
                     drawOnCanvas(new Point(320, 120));
 
