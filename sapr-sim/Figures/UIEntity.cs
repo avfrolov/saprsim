@@ -35,7 +35,6 @@ namespace sapr_sim.Figures
         protected UIParam<String> textParam = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM);
 
         protected int id = 0;
-        protected static int nextId = 1;
 
         public UIEntity(SerializationInfo info, StreamingContext context)
         {                      
@@ -46,9 +45,6 @@ namespace sapr_sim.Figures
                 this.textParam = info.GetValue("textParam", typeof(UIParam<String>)) as UIParam<String>;
                 Canvas.SetLeft(this, info.GetDouble("x"));
                 Canvas.SetTop(this, info.GetDouble("y"));
-                this.id = info.GetInt32("id");
-                nextId = Math.Max(id, nextId) == id ? id + 1 : Math.Max(id, nextId);
-
                 ((MainWindow)System.Windows.Application.Current.MainWindow).attachMovingEvents(this);
 
                 // label can be not found - it's normal behavior
@@ -183,7 +179,6 @@ namespace sapr_sim.Figures
             info.AddValue("label", label);
             info.AddValue("x", VisualTreeHelper.GetOffset(this).X);
             info.AddValue("y", VisualTreeHelper.GetOffset(this).Y);
-            info.AddValue("id", id);
             info.AddValue("textParam", textParam);
         }
 
@@ -194,8 +189,7 @@ namespace sapr_sim.Figures
             Stroke = Brushes.Black;
             Fill = Brushes.LemonChiffon;
             defaultBitmapEffect();
-            id = nextId;
-            nextId++;
+            id = IdGenerator.GenerateId();
         }
 
         public struct CoordinatesHandler

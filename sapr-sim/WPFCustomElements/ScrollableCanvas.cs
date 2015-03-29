@@ -23,13 +23,11 @@ namespace sapr_sim.WPFCustomElements
         }
 
         private int id = 0;
-        private static int nextId = 1;
 
         public ScrollableCanvas(SerializationInfo info, StreamingContext context)
         {
-            this.id = info.GetInt32("id");
-            nextId = Math.Max(id, nextId) == id ? id + 1 : Math.Max(id, nextId);
-            for (int i = 0; i < info.MemberCount - 1; i++)
+            this.id = IdGenerator.GenerateId();
+            for (int i = 0; i < info.MemberCount; i++)
             {
                 UIEntity ent = info.GetValue("Child" + i, typeof(UIEntity)) as UIEntity;
                 try
@@ -44,15 +42,15 @@ namespace sapr_sim.WPFCustomElements
                 }
                 catch (Exception ex)
                 {
+                    Console.Out.Write(ex);
                 }
                 state = "copyed";
             }
         }
 
         public ScrollableCanvas()
-        { 
-            id = nextId;
-            nextId++;
+        {
+            id = IdGenerator.GenerateId();
         }
 
         protected override Size MeasureOverride(Size constraint)
@@ -76,7 +74,6 @@ namespace sapr_sim.WPFCustomElements
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            info.AddValue("id", id);
             for (int i = 0; i < Children.Count; i++)
             {
                 UIEntity ent = Children[i] as UIEntity;
