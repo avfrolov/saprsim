@@ -38,7 +38,7 @@ namespace Entities.impl
                 {
                     //when we call submodel first time we need to setup projec queue to
                     // first entity in submodel enities chain
-                    if (isFirstCall)
+                    if (isFirstCall && getReadyProjectQueue() != null && getReadyProjectQueue().Count != 0)
                     {
                         entity.setReadyProjectQueue(getReadyProjectQueue());
                         isFirstCall = false;
