@@ -14,7 +14,7 @@ namespace sapr_sim
 
         private void attachContextMenu(UIEntity ent)
         {
-            if (ent.ContextMenu == null)
+            if (ent.ContextMenu == null && !(ent is Port || ent is ConnectionLine))
             {
                 ContextMenu menu = new ContextMenu();
 

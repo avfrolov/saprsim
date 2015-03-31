@@ -88,7 +88,7 @@ namespace sapr_sim
 
         public void Shape_MouseMove(object sender, MouseEventArgs e)
         {
-            if (captured)
+            if (captured && !(selected is Port || selected is ConnectionLine))
             {
                 double x = e.GetPosition(this).X;
                 double y = e.GetPosition(this).Y;
