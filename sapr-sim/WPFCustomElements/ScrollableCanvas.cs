@@ -22,12 +22,11 @@ namespace sapr_sim.WPFCustomElements
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ScrollableCanvas), new FrameworkPropertyMetadata(typeof(ScrollableCanvas)));
         }
 
-        private int id = 0;
+        private long id = 0;
 
         public ScrollableCanvas(SerializationInfo info, StreamingContext context)
         {
-            this.id = IdGenerator.GenerateId();
-            for (int i = 0; i < info.MemberCount; i++)
+            for (int i = 0; i < info.MemberCount - 1; i++)
             {
                 UIEntity ent = info.GetValue("Child" + i, typeof(UIEntity)) as UIEntity;
                 try
@@ -46,6 +45,7 @@ namespace sapr_sim.WPFCustomElements
                 }
                 state = "copyed";
             }
+            this.id = info.GetInt32("id");
         }
 
         public ScrollableCanvas()
@@ -78,7 +78,8 @@ namespace sapr_sim.WPFCustomElements
             {
                 UIEntity ent = Children[i] as UIEntity;
                 info.AddValue("Child" + i, ent);
-            }            
+            }
+            info.AddValue("id", id);
         }
 
         public bool Equals(ScrollableCanvas x, ScrollableCanvas y)

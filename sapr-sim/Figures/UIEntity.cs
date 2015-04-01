@@ -34,7 +34,7 @@ namespace sapr_sim.Figures
 
         protected UIParam<String> textParam = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM);
 
-        protected int id = 0;
+        protected long id = 0;
 
         public UIEntity(SerializationInfo info, StreamingContext context)
         {                      
@@ -161,16 +161,6 @@ namespace sapr_sim.Figures
             List<UIParam> param = new List<UIParam>();
             param.Add(textParam);
             return param;
-        }
-
-        public Double getX()
-        {
-            return VisualTreeHelper.GetOffset(this).X;
-        }
-
-        public Double getY()
-        {
-            return VisualTreeHelper.GetOffset(this).Y;
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)

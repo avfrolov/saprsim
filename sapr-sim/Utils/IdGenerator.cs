@@ -8,9 +8,9 @@ namespace sapr_sim.Utils
 {
     class IdGenerator
     {
-        private static int id = 0;
+        private static long id = 0;
 
-        public static int GenerateId()
+        public static long GenerateId()
         {
             ++id;
             return id;
