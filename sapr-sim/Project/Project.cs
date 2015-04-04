@@ -12,6 +12,9 @@ namespace sapr_sim
     public class Project
     {
 
+        public static readonly string SRC_FOLDER_NAME = "src";
+        private static Project instance = new Project();
+
         public string ProjectName { get; set; }
         public string ProjectPath { get; set; }
         public ProjectItem MainProjectItem { get; set; } 
@@ -20,8 +23,6 @@ namespace sapr_sim
         public string ResultPath { get; set; }
 
         private List<ProjectItem> items = new List<ProjectItem>();
-
-        private static Project instance = new Project();
 
         private Project() 
         {
@@ -52,6 +53,11 @@ namespace sapr_sim
         {
             get { return items; }
             set { items = value; }
+        }
+
+        public string PathToItem(ProjectItem item)
+        {
+            return FullPath + "\\" + SRC_FOLDER_NAME + "\\" + item.Name + FileService.PROJECT_ITEM_EXTENSION;
         }
 
         public void addProjectItem(ProjectItem item)

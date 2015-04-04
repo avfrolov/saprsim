@@ -179,7 +179,7 @@ namespace sapr_sim
                 if (cti != null) cti.button_close_Click(null, null);
 
                 (projectStructure.Items[0] as TreeViewItem).Items.Remove(item);
-                Project.Instance.Items.Remove(item.ProjectItem);
+                Project.Instance.removeProjectItem(item.ProjectItem);
                 fs.saveProject();
             }          
         }

@@ -44,7 +44,7 @@ namespace sapr_sim
                         item.Canvas = currentCanvas;
 
                         fs.saveProject();
-                        fs.save(currentCanvas, prj.FullPath + "\\" + item.Name + FileService.PROJECT_ITEM_EXTENSION);
+                        fs.save(currentCanvas, prj.PathToItem(item));
 
                         ProjectTreeViewItem newModel = new ProjectTreeViewItem() { Header = ProjectTreeViewItem.packProjectItem(item.Name, false), ProjectItem = item };
                         attachProjectItemEvents(newModel);

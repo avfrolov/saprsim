@@ -48,7 +48,7 @@ namespace sapr_sim
 
         public string FullPath
         {
-            get { return Project.Instance.FullPath + "\\" + name + FileService.PROJECT_ITEM_EXTENSION; }
+            get { return Project.Instance.FullPath + "\\" + Project.SRC_FOLDER_NAME + "\\" + name + FileService.PROJECT_ITEM_EXTENSION; }
         }
 
         public override bool Equals(object obj)

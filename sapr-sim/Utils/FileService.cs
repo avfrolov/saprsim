@@ -32,11 +32,14 @@ namespace sapr_sim.Utils
             }
         }
 
-        public void save(Canvas currentCanvas, string filepath)
+        public void save(Canvas canvas, string filepath)
         {
+            string path = filepath.Substring(0, filepath.LastIndexOf("\\"));
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path); 
             using (FileStream filestream = new FileStream(filepath, FileMode.OpenOrCreate))
             {
-                new BinaryFormatter().Serialize(filestream, currentCanvas);
+                new BinaryFormatter().Serialize(filestream, canvas);
             }
         }
 
@@ -68,9 +71,12 @@ namespace sapr_sim.Utils
                 Project openedProject = (Project) serializer.Deserialize(reader);                
                 reader.Close();
 
-                // we must set all properties from opened project to our project singletone
+                string path = filepath.Substring(0, filepath.LastIndexOf("\\"));
+                path = path.Substring(0, path.LastIndexOf("\\"));
+
+                // we must set all properties from opened project to our project singletone              
                 Project.Instance.ProjectName = openedProject.ProjectName;
-                Project.Instance.ProjectPath = openedProject.ProjectPath;
+                Project.Instance.ProjectPath = openedProject.ProjectPath == path ? openedProject.ProjectPath : path;
                 Project.Instance.ResultPath = openedProject.ResultPath;
                 Project.Instance.SaveResult = openedProject.SaveResult;
                 Project.Instance.TimeRestiction = openedProject.TimeRestiction;
@@ -81,8 +87,7 @@ namespace sapr_sim.Utils
 
                     if (openedProject.MainProjectItem != null && item.Name == openedProject.MainProjectItem.Name)
                         Project.Instance.MainProjectItem = item;
-                }
-                
+                }                
             }
         }
 
