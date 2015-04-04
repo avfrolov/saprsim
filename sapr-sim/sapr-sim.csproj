@@ -89,6 +89,8 @@
     <Compile Include="Figures\SubDiagram.cs" />
     <Compile Include="Figures\Sync.cs" />
     <Compile Include="Figures\UIEntity.cs" />
+    <Compile Include="Parameters\TimeParam.cs" />
+    <Compile Include="Parameters\Validators\BetweenIntegerParamValidator.cs" />
     <Compile Include="ProjectSettings.xaml.cs">
       <DependentUpon>ProjectSettings.xaml</DependentUpon>
     </Compile>
@@ -124,6 +126,7 @@
     <Compile Include="Utils\ConnectorFinder.cs" />
     <Compile Include="Utils\FileService.cs" />
     <Compile Include="Utils\IdGenerator.cs" />
+    <Compile Include="Utils\TimeMeasure.cs" />
     <Compile Include="Utils\ZIndexUtil.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
     <Compile Include="WPFCustomElements\ListBoxItemError.cs" />

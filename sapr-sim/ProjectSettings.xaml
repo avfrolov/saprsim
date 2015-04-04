@@ -5,7 +5,7 @@
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -19,16 +19,20 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" Margin="0, 0, 0, 2">Название проекта</Label>
-        <TextBox Name="projectName" Grid.Column="1" Grid.Row="0" MinWidth="250" Margin="0, 0, 0, 2"/>
+        <TextBox Name="projectName" Grid.Column="1" Grid.Row="0" MinWidth="340" Margin="0, 0, 0, 2"/>
 
         <Label Grid.Column="0" Grid.Row="1" Margin="0, 0, 0, 2">Директория</Label>
-        <TextBox Name="projectDirectory" Grid.Column="1" Grid.Row="1" MinWidth="250" IsEnabled="False" Margin="0, 0, 0, 2"/>
+        <TextBox Name="projectDirectory" Grid.Column="1" Grid.Row="1" MinWidth="340" IsEnabled="False" Margin="0, 0, 0, 2"/>
 
         <Label Grid.Column="0" Grid.Row="2" Margin="0, 0, 0, 2">Запускать проект с </Label>
-        <ComboBox Name="mainProjectItem" Grid.Column="1" Grid.Row="2" MinWidth="250" Margin="0, 0, 0, 2"/>
+        <ComboBox Name="mainProjectItem" Grid.Column="1" Grid.Row="2" MinWidth="340" Margin="0, 0, 0, 2"/>
 
         <Label Grid.Column="0" Grid.Row="3" Margin="0, 0, 0, 2">Время ограничения моделирования</Label>
-        <TextBox Name="projectTimeRestriction" Grid.Column="1" Grid.Row="3" MinWidth="250" Margin="0, 0, 0, 2"/>
+        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+            <TextBox Name="projectTimeRestriction" MinWidth="260" Margin="0, 0, 0, 2"/>
+            <ComboBox Name="projectTimeRestrictionMeasure" MinWidth="80" Margin="2, 0, 0, 2"/>
+        </StackPanel>
+        
 
         <Separator Grid.Column="0" Grid.Row="4"/>
         <Separator Grid.Column="1" Grid.Row="4"/>
@@ -37,7 +41,7 @@
         <CheckBox Name="saveResult" Grid.Column="1" Grid.Row="5" Margin="0, 10, 0, 2" Checked="saveResultDirectoryChanged" Unchecked="saveResultDirectoryChanged" IsEnabled="False"/>
 
         <Label Grid.Column="0" Grid.Row="6" Margin="0, 0, 0, 2">Сохранять результаты в</Label>
-        <TextBox Name="saveResultDirectory" Grid.Column="1" Grid.Row="6" MinWidth="250" Margin="0, 0, 0, 2"/>
+        <TextBox Name="saveResultDirectory" Grid.Column="1" Grid.Row="6" MinWidth="340" Margin="0, 0, 0, 2"/>
 
         <WrapPanel Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,15,0,0">
             <Button IsDefault="True" Name="btnDialogOk" Click="btnDialogOk_Click" MinWidth="60" Margin="0,0,10,0">Применить</Button>

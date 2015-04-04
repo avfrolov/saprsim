@@ -24,7 +24,7 @@ namespace Entities
         public double simulatePeriod { get; set; }
         public double projectAppearenceProbability { get; set; }
 
-        public int timeRestriction { get; set; }
+        public double timeRestriction { get; set; }
 
         private List<Entity> entities = new List<Entity>();
         private List<Project> projects = new List<Project>();

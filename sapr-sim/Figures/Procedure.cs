@@ -1,5 +1,6 @@
 ﻿using sapr_sim.Parameters;
 using sapr_sim.Parameters.Validators;
+using sapr_sim.Utils;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -22,8 +23,9 @@ namespace sapr_sim.Figures
 
         private Rect bound;
         private Port inputPort, outputPort, resourcePort;
-        
-        private UIParam<Double> manHour = new UIParam<Double>(1, new PositiveDoubleParamValidator(), "Продолжительность");
+
+        private UIParam<TimeParam> manHour = new UIParam<TimeParam>(new TimeParam(1, TimeMeasure.SECOND), new PositiveDoubleParamValidator(), "Продолжительность");
+        private UIParam<Int32> scatter = new UIParam<Int32>(0, new BetweenIntegerParamValidator(0, 100), "Разброс (%)");
 
         private static readonly string DEFAULT_NAME = "Процедура";
 
@@ -42,7 +44,8 @@ namespace sapr_sim.Figures
             ports.Add(outputPort);
             ports.Add(resourcePort);
 
-            manHour = info.GetValue("manHour", typeof(UIParam<Double>)) as UIParam<Double>;
+            manHour = info.GetValue("manHour", typeof(UIParam<TimeParam>)) as UIParam<TimeParam>;
+            scatter = info.GetValue("scatter", typeof(UIParam<Int32>)) as UIParam<Int32>;
 
             init();
         }
@@ -85,13 +88,20 @@ namespace sapr_sim.Figures
         {
             List<UIParam> param = base.getParams();
             param.Add(manHour);
+            param.Add(scatter);
             return param;
         }
 
         public double ManHour
         {
-            get { return manHour.Value; }
-            set { manHour.Value = value; }
+            get { return manHour.Value.Time; }
+            set { manHour.Value.Time = value; }
+        }
+
+        public int Scatter
+        {
+            get { return scatter.Value; }
+            set { scatter.Value = value; }
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -101,6 +111,7 @@ namespace sapr_sim.Figures
             info.AddValue("outputPort", outputPort);
             info.AddValue("resourcePort", resourcePort);
             info.AddValue("manHour", manHour);
+            info.AddValue("scatter", scatter);
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

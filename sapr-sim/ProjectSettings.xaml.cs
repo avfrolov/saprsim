@@ -28,6 +28,7 @@ namespace sapr_sim
             projectName.Text = prj.ProjectName;
             projectDirectory.Text = prj.ProjectPath;
 
+            //************************************************************************
             foreach (ProjectItem pi in prj.Items)
                 mainProjectItem.Items.Add(pi.Name);
 
@@ -36,7 +37,14 @@ namespace sapr_sim
             else
                 mainProjectItem.SelectedIndex = 0;
 
-            projectTimeRestriction.Text = prj.TimeRestiction.ToString();
+            //************************************************************************
+            projectTimeRestriction.Text = prj.TimeRestiction.Time.ToString();
+            foreach (TimeMeasure tm in TimeMeasure.list())
+                projectTimeRestrictionMeasure.Items.Add(tm.ToString());
+
+            projectTimeRestrictionMeasure.SelectedIndex = prj.TimeRestiction.Measure.Order;
+
+            //************************************************************************
             saveResult.IsChecked = prj.SaveResult;
             saveResultDirectory.Text = prj.ResultPath;
             saveResultDirectory.IsEnabled = prj.SaveResult;
@@ -96,7 +104,8 @@ namespace sapr_sim
             if (mainProjectItem.SelectedItem != null)
                 prj.MainProjectItem = prj.Items.First(x => x.Name == mainProjectItem.SelectedItem.ToString());
             
-            prj.TimeRestiction = newPrjTime;
+            prj.TimeRestiction.Time = newPrjTime;
+            prj.TimeRestiction.Measure = TimeMeasure.byOrder(projectTimeRestrictionMeasure.SelectedIndex);
             prj.SaveResult = saveResult.IsChecked.Value;
             prj.ResultPath = resultPath;
                         

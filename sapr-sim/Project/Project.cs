@@ -1,4 +1,5 @@
-﻿using sapr_sim.Utils;
+﻿using sapr_sim.Parameters;
+using sapr_sim.Utils;
 using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace sapr_sim
         public string ProjectName { get; set; }
         public string ProjectPath { get; set; }
         public ProjectItem MainProjectItem { get; set; } 
-        public int TimeRestiction { get; set; }
+        public TimeParam TimeRestiction { get; set; }
         public bool SaveResult { get; set; }
         public string ResultPath { get; set; }
 
@@ -26,7 +27,7 @@ namespace sapr_sim
 
         private Project() 
         {
-            TimeRestiction = 60;
+            TimeRestiction = new TimeParam(60, TimeMeasure.SECOND);
         }
 
         public static Project Instance
