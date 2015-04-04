@@ -161,6 +161,10 @@ namespace sapr_sim.Figures
 
         public abstract void createAndDraw(double x, double y);
 
+        // duplicate! from App.xaml
+        public abstract string iconPath();
+        public abstract string description();
+
         public virtual List<UIParam> getParams()
         {
             List<UIParam> param = new List<UIParam>();

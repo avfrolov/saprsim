@@ -49,6 +49,16 @@ namespace sapr_sim.Figures
             ports.Add(backPort);
         }
 
+        public override string iconPath()
+        {
+            return "Resources/Collector.gif";
+        }
+
+        public override string description()
+        {
+            return "Блок объединения сущностей";
+        }
+
         public override List<UIParam> getParams()
         {
             return new List<UIParam>();
@@ -78,5 +88,6 @@ namespace sapr_sim.Figures
             bound = new Rect(new Size(45, 45));
             RenderTransform = new RotateTransform(45, bound.Width / 2, bound.Height / 2);
         }
+
     }
 }

@@ -55,6 +55,16 @@ namespace sapr_sim.Figures
         {            
         }
 
+        public override string iconPath()
+        {
+            return null;
+        }
+
+        public override string description()
+        {
+            return "";
+        }
+
         public override List<UIParam> getParams()
         {
             return null;

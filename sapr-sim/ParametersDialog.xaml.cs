@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 using sapr_sim.Parameters;
 using sapr_sim.WPFCustomElements;
+using System.Reflection;
 
 namespace sapr_sim
 {
@@ -30,8 +31,10 @@ namespace sapr_sim
             this.parameters = param;
             this.owner = owner;
 
+            image.Source = new BitmapImage(new Uri(@"pack://application:,,,/" + owner.iconPath(), UriKind.Absolute));
+            description.Text = owner.description();
+
             ParameterProccesor.drawParameters(parameters, sp, true);
-            addButtons();
         }
 
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
@@ -59,16 +62,6 @@ namespace sapr_sim
             ((MainWindow)System.Windows.Application.Current.MainWindow).ModelChanged();
         }
 
-        private void addButtons()
-        {
-            WrapPanel wp = new WrapPanel() { HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 15, 0, 0) };
-            Button ok = new Button() { IsDefault = true, Name = "btnDialogOk", MinWidth = 60, Margin = new Thickness(0, 0, 10, 0), Content = "Ок" };
-            Button cancel = new Button() { IsCancel = true, MinWidth = 60, Content = "Отмена" };
-            ok.Click += btnDialogOk_Click;
-            wp.Children.Add(ok);
-            wp.Children.Add(cancel);
-            sp.Children.Add(wp);
-        }
     }
 
     public static class ParameterProccesor
@@ -96,7 +89,13 @@ namespace sapr_sim
                         input.setValue(entry.RawValue);
                         input = input.Clone() as ParameterInput;
                         uiControl = input as UIElement;
-                        uiControl.IsEnabled = paramsEnabled;
+                        uiControl.IsEnabled = paramsEnabled;                        
+                    }
+
+                    if (!paramsEnabled)
+                    {
+                        (uiControl as FrameworkElement).MinWidth = ParameterConstants.QUICK_PANEL_WIDTH;
+                        (uiControl as FrameworkElement).MaxWidth = ParameterConstants.QUICK_PANEL_WIDTH;
                     }
 
                     sprow.Children.Add(l);

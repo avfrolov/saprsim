@@ -46,6 +46,16 @@ namespace sapr_sim.Figures
             ports.Add(port);
         }
 
+        public override string iconPath()
+        {
+            return "Resources/Sink.gif";
+        }
+
+        public override string description()
+        {
+            return "Блок \"СТАРТ\". Является входной точкой процесса проектирования.";
+        }
+
         public override List<UIParam> getParams()
         {
             List<UIParam> param = new List<UIParam>();

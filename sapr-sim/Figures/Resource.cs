@@ -27,7 +27,7 @@ namespace sapr_sim.Figures
 
         private UIParam<Double> efficiency = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1.0), "Производительность");
         private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Цена");
-        private UIParam<int> count = new UIParam<int>(1, new IntegerParamValidator(), "Кол-во");
+        private UIParam<int> count = new UIParam<int>(1, new IntegerParamValidator(), "Количество");
         private UIParam<Boolean> isShared = new UIParam<Boolean>(true, new DefaultParamValidator(), "Разделяемый", new ParameterCheckBox(true));
 
         private static readonly string DEFAULT_NAME = "Ресурс";
@@ -60,6 +60,20 @@ namespace sapr_sim.Figures
 
             label = new Label(this, canvas, x + 28, y + 22, textParam.Value);
             canvas.Children.Add(label);
+        }
+
+        public override string iconPath()
+        {
+            return "Resources/Resource.gif";
+        }
+
+        public override string description()
+        {
+            return "Блок \"Ресурс\" состоит из списка атомарных ресурсов, используемых при выполнении" + 
+                " действий над задачей проектирования. Все атомарные ресурсы образуют составной ресурс," + 
+                " т.е. могут быть заняты или освобождены только одновременно. Для неразделяемого ресурса" + 
+                " параметр \"Количество\" отвечает за количество экземпляров данного ресурса. Разделяемый" + 
+                " ресурс может быть занят произвольным числом действий.";
         }
 
         public override List<UIParam> getParams()

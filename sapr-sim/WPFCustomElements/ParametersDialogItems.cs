@@ -8,6 +8,14 @@ using System.Windows.Controls;
 namespace sapr_sim.WPFCustomElements
 {
 
+    public sealed class ParameterConstants
+    {
+        public static readonly int WIDTH = 400;
+        public static readonly int QUICK_PANEL_WIDTH = 100;
+
+        private ParameterConstants() { }
+    }
+
     public interface ParameterInput : ICloneable
     {
         void setValue(IConvertible c);
@@ -21,8 +29,8 @@ namespace sapr_sim.WPFCustomElements
         {
             Text = value.ToString();
             HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-            MaxWidth = 100;
-            MinWidth = 100;
+            MaxWidth = ParameterConstants.WIDTH;
+            MinWidth = ParameterConstants.WIDTH;
             IsEnabled = enabled;
         }
 
@@ -49,8 +57,8 @@ namespace sapr_sim.WPFCustomElements
         public ParameterCheckBox()
         {
             HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-            MaxWidth = 100;
-            MinWidth = 100;
+            MaxWidth = ParameterConstants.WIDTH;
+            MinWidth = ParameterConstants.WIDTH;
         }
 
         public ParameterCheckBox(IConvertible value) : this()

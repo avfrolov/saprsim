@@ -51,6 +51,16 @@ namespace sapr_sim.Figures
             canvas.Children.Add(label);
         }
 
+        public override string iconPath()
+        {
+            return "Resources/Subprocess.gif";
+        }
+
+        public override string description()
+        {
+            return "Подпроцесс проектирования";
+        }
+
         public ProjectItem ProjectItem
         {
             get { return projectItem; }

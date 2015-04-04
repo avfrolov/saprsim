@@ -69,6 +69,18 @@ namespace sapr_sim.Figures
             canvas.Children.Add(label);
         }
 
+        public override string iconPath()
+        {
+            return "Resources/Procedure.gif";
+        }
+
+        public override string description()
+        {
+            return "Блок \"Процедура\" описывает некоторую деятельность над задачей проектирования," + 
+                " которая требует время и занимает подключенные ресурсы. Задаваемое время является" + 
+                " стохастической величиной и зависит от параметра \"РРРР\"";
+        }
+
         public override List<UIParam> getParams()
         {
             List<UIParam> param = base.getParams();

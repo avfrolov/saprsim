@@ -57,6 +57,17 @@ namespace sapr_sim.Figures
             canvas.Children.Add(label);
         }
 
+        public override string iconPath()
+        {
+            return "Resources/decision.gif";
+        }
+
+        public override string description()
+        {
+            return "Блок принятия решений. Задается вероятность, при которой задача имитации" + 
+                " будет передана в ветку \"ДА\". В противном случае - ветка \"НЕТ\"";
+        }
+
         public override List<UIParam> getParams()
         {
             List<UIParam> param = base.getParams();

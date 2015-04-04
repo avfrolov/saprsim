@@ -58,6 +58,16 @@ namespace sapr_sim.Figures
         {            
         }
 
+        public override string iconPath()
+        {
+            return "Resources/Label.gif";
+        }
+
+        public override string description()
+        {
+            return "Надпись";
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

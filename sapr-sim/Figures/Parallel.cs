@@ -48,6 +48,21 @@ namespace sapr_sim.Figures
             ports.Add(outputPort2);
         }
 
+        public override string iconPath()
+        {
+            return "Resources/Parallel.gif";
+        }
+
+        public override string description()
+        {
+            return "";
+        }
+
+        public override List<UIParam> getParams()
+        {
+            return null;
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
