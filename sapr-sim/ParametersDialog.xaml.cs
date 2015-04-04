@@ -68,9 +68,9 @@ namespace sapr_sim
     {
         public static void drawParameters(List<UIParam> parameters, StackPanel drawPanel, bool paramsEnabled)
         {
-            drawPanel.Children.Clear();
             if (parameters != null)
             {
+                drawPanel.Children.Clear();
                 foreach (UIParam entry in parameters)
                 {
 
@@ -97,7 +97,7 @@ namespace sapr_sim
                         (uiControl as FrameworkElement).MinWidth = ParameterConstants.QUICK_PANEL_WIDTH;
                         (uiControl as FrameworkElement).MaxWidth = ParameterConstants.QUICK_PANEL_WIDTH;
                     }
-
+                    
                     sprow.Children.Add(l);
                     sprow.Children.Add(uiControl);
                     drawPanel.Children.Add(sprow);

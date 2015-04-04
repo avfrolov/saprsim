@@ -18,9 +18,12 @@ namespace sapr_sim.Figures
         private Rect bound;
         private Port inputPort, outputPort1, outputPort2;
 
+        private static readonly string DEFAULT_NAME = "Распараллеливание";
+
         public Parallel(Canvas canvas) : base(canvas)
         {
             init();
+            textParam.Value = DEFAULT_NAME;
         }
 
         public Parallel(SerializationInfo info, StreamingContext context) : base(info, context)
@@ -46,6 +49,9 @@ namespace sapr_sim.Figures
             ports.Add(inputPort);
             ports.Add(outputPort1);
             ports.Add(outputPort2);
+
+            label = new Label(this, canvas, x - 45, y - 20, textParam.Value);
+            canvas.Children.Add(label);
         }
 
         public override string iconPath()

@@ -54,7 +54,7 @@ namespace sapr_sim
                 delete.Click += Delete_Click;
                 menu.Items.Add(delete);       
 
-                if (!(ent is SubDiagram) && ent.ParametersExist)
+                if (!(ent is SubDiagram))
                 {
                     menu.Items.Add(new Separator());
 
@@ -84,8 +84,7 @@ namespace sapr_sim
             if (selected != null)
             {
                 UIEntity ent = selected as UIEntity;
-                if (ent.ParametersExist)
-                    new ParameterDialog(ent.getParams(), ent).ShowDialog();
+                new ParameterDialog(ent.getParams(), ent).ShowDialog();
             }
         }
 

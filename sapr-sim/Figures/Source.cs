@@ -16,12 +16,13 @@ namespace sapr_sim.Figures
     [Serializable]
     public class Source : UIEntity, ISerializable
     {
-
         protected Port port;
         private Rect bound;
 
         private UIParam<Int32> projectsCount = new UIParam<Int32>(1, new PositiveIntegerParamValidator(), "Количество проектов");
         private UIParam<Int32> complexity = new UIParam<Int32>(1, new PositiveIntegerParamValidator(), "Сложность проектов");
+
+        private static readonly string DEFAULT_NAME = "Начало";
 
         public Source(SerializationInfo info, StreamingContext context) : base(info, context)
         {
@@ -37,13 +38,17 @@ namespace sapr_sim.Figures
         public Source(Canvas canvas) : base(canvas)
         {
             init();
+            textParam.Value = DEFAULT_NAME;
         }
 
         public override void createAndDraw(double x, double y)
         {
-            port = new Port(this, canvas, PortType.OUTPUT, x + 26, y + 12);
+            port = new Port(this, canvas, PortType.OUTPUT, x + 56, y + 26.5);
             canvas.Children.Add(port);
             ports.Add(port);
+
+            label = new Label(this, canvas, x + 12, y + 23, textParam.Value);
+            canvas.Children.Add(label);
         }
 
         public override string iconPath()
@@ -58,7 +63,7 @@ namespace sapr_sim.Figures
 
         public override List<UIParam> getParams()
         {
-            List<UIParam> param = new List<UIParam>();
+            List<UIParam> param = base.getParams();
             param.Add(projectsCount);
             param.Add(complexity);
             return param;
@@ -99,7 +104,7 @@ namespace sapr_sim.Figures
         private void init()
         {
             Fill = Brushes.LightGreen;
-            bound = new Rect(new Size(30, 30));
+            bound = new Rect(new Size(60, 60));
         }
     }
 }
