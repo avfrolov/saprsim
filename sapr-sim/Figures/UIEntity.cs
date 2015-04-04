@@ -137,6 +137,11 @@ namespace sapr_sim.Figures
             get { return textParam.Value; }
         }
 
+        public bool ParametersExist
+        {
+            get { return getParams() != null && getParams().Count > 0; }
+        }
+
         public List<Port> getPorts()
         {
             return ports;

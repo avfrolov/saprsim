@@ -33,22 +33,16 @@ namespace sapr_sim.Figures
 
         public override void createAndDraw(double x, double y)
         {
-            port = new Port(this, canvas, PortType.INPUT, x - 4, y + 26.5);
+            port = new Port(this, canvas, PortType.INPUT, x - 4, y + 12);
             canvas.Children.Add(port);
             ports.Add(port);
 
             label = new Label(this, canvas, x + 13, y + 23, textParam.Value);
-            canvas.Children.Add(label);
         }
 
         public override List<UIParam> getParams()
         {
-            List<UIParam> param = base.getParams();
-            // removing inheireted property 'projectsCount'
-            param.RemoveAt(1);
-            // removing inheireted property 'complexity'
-            param.RemoveAt(1);
-            return param;
+            return null;
         }
 
     }

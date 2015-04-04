@@ -43,12 +43,11 @@ namespace sapr_sim.Figures
 
         public override void createAndDraw(double x, double y)
         {
-            port = new Port(this, canvas, PortType.OUTPUT, x + 56, y + 26.5);
+            port = new Port(this, canvas, PortType.OUTPUT, x + 26, y + 12);
             canvas.Children.Add(port);
             ports.Add(port);
 
             label = new Label(this, canvas, x + 12, y + 23, textParam.Value);
-            canvas.Children.Add(label);
         }
 
         public override string iconPath()
@@ -63,10 +62,7 @@ namespace sapr_sim.Figures
 
         public override List<UIParam> getParams()
         {
-            List<UIParam> param = base.getParams();
-            param.Add(projectsCount);
-            param.Add(complexity);
-            return param;
+            return new List<UIParam>() { projectsCount, complexity };
         }
 
         public int ProjectsCount
@@ -104,7 +100,7 @@ namespace sapr_sim.Figures
         private void init()
         {
             Fill = Brushes.LightGreen;
-            bound = new Rect(new Size(60, 60));
+            bound = new Rect(new Size(30, 30));
         }
     }
 }

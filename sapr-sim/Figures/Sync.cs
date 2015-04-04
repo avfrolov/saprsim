@@ -52,7 +52,6 @@ namespace sapr_sim.Figures
             ports.Add(outputPort);
 
             label = new Label(this, canvas, x - 30, y - 20, textParam.Value);
-            canvas.Children.Add(label);
         }
 
         public override string iconPath()

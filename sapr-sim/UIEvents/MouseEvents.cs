@@ -80,6 +80,10 @@ namespace sapr_sim
         {
             if (e.ClickCount == 1)
             {
+                // clear bitmap effect for previous selected entity
+                if (selected != null)
+                    selected.defaultBitmapEffect();
+
                 selected = sender as UIEntity;
                 if (!(selected is ConnectionLine && selected is Port))
                     selected.selectedBitmapEffect();
