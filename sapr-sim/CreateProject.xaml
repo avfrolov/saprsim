@@ -15,12 +15,12 @@
         </DockPanel>
 
         <DockPanel Margin="2,2,2,5">
-            <CheckBox Content="Создать пустой процесс" Margin="5, 5, 5, 5" Name="createNewModel" IsChecked="True" Checked="createNewProcessChanged" Unchecked="createNewProcessChanged"/>
+            <CheckBox Content="Создать новый процесс" Margin="5, 5, 5, 5" Name="createNewModel" IsChecked="True" Checked="createNewProcessChanged" Unchecked="createNewProcessChanged"/>
         </DockPanel>
 
         <DockPanel LastChildFill="True" Margin="2,2,2,5">
             <Label Content="Имя процесса" Width="140"/>
-            <TextBox Name="modelName" HorizontalAlignment="Left" Width="240">Новый процесс</TextBox>
+            <TextBox Name="modelName" HorizontalAlignment="Left" Width="240">Процесс</TextBox>
         </DockPanel>
 
         <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,15,0,0">
