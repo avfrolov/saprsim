@@ -1,4 +1,5 @@
-﻿using System;
+﻿using sapr_sim.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace sapr_sim
 {
-    /// <summary>
-    /// Interaction logic for CreateProject.xaml
-    /// </summary>
     public partial class CreateProject : Window
     {
 
@@ -35,7 +33,12 @@ namespace sapr_sim
 
         private void Create_Click(object sender, RoutedEventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(name.Text) && !String.IsNullOrWhiteSpace(directory.Text))
+            if (String.IsNullOrWhiteSpace(name.Text))
+            {
+                MessageBox.Show("Параметр 'Имя проекта' заполнен неверно", "Ошибка");
+                return;
+            }
+            if (FileService.IsValidPath(directory.Text))
             {
                 Project project = Project.Instance;
                 project.ProjectName = name.Text;
@@ -55,7 +58,7 @@ namespace sapr_sim
                 this.Close();
             }
             else
-                MessageBox.Show("Заполните все параметры", "Ошибка");
+                MessageBox.Show("Параметр 'Директория проекта' заполнен неверно", "Ошибка");
         }
 
         private void createNewProcessChanged(object sender, RoutedEventArgs e)
