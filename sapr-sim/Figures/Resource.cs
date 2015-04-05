@@ -1,5 +1,6 @@
 ﻿using sapr_sim.Parameters;
 using sapr_sim.Parameters.Validators;
+using sapr_sim.Utils;
 using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace sapr_sim.Figures
 
         private Port port;
 
+        private UIParam<ResourceType> type = new UIParam<ResourceType>(ResourceType.WORKER, new DefaultParamValidator(), "Тип ресурса", new ParameterComboBox(ResourceType.list()));
         private UIParam<Double> efficiency = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1.0), "Производительность");
         private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Цена");
         private UIParam<int> count = new UIParam<int>(1, new IntegerParamValidator(), "Количество");
@@ -42,6 +44,9 @@ namespace sapr_sim.Figures
         {
             this.port = info.GetValue("port", typeof(Port)) as Port;
             ports.Add(port);
+
+            type = info.GetValue("type", typeof(UIParam<ResourceType>)) as UIParam<ResourceType>;
+            type.ContentControl = new ParameterComboBox(ResourceType.list()) { SelectedIndex = type.Value.Order };
 
             efficiency = info.GetValue("efficiency", typeof(UIParam<Double>)) as UIParam<Double>;
             price = info.GetValue("price", typeof(UIParam<Double>)) as UIParam<Double>;
@@ -79,6 +84,7 @@ namespace sapr_sim.Figures
         public override List<UIParam> getParams()
         {
             List<UIParam> param = base.getParams();
+            param.Add(type);
             param.Add(efficiency);
             param.Add(price);
             param.Add(isShared);
@@ -118,7 +124,7 @@ namespace sapr_sim.Figures
             info.AddValue("price", price);
             info.AddValue("isShared", isShared);
             info.AddValue("count", count);
-
+            info.AddValue("type", type);
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

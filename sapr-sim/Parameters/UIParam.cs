@@ -95,7 +95,7 @@ namespace sapr_sim.Parameters
                     this.value = (T)(object)Convert.ToBoolean(value);
                 if (valueType == typeof(Int32))
                     this.value = (T)(object)Convert.ToInt32(value);
-                if (valueType == typeof(TimeMeasure))
+                if (valueType == typeof(TimeMeasure) || valueType == typeof(ResourceType))
                     this.value = (T)(object)value;
                 if (valueType == typeof(TimeParam))
                 {

@@ -126,6 +126,7 @@
     <Compile Include="Utils\ConnectorFinder.cs" />
     <Compile Include="Utils\FileService.cs" />
     <Compile Include="Utils\IdGenerator.cs" />
+    <Compile Include="Utils\ResourceType.cs" />
     <Compile Include="Utils\TimeMeasure.cs" />
     <Compile Include="Utils\ZIndexUtil.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />
