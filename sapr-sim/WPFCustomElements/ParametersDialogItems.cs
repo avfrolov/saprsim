@@ -87,5 +87,46 @@ namespace sapr_sim.WPFCustomElements
         }
     }
 
+    public class ParameterComboBox : ComboBox, ParameterInput
+    {
+
+        private ParameterComboBox()
+        {
+            HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+            MaxWidth = ParameterConstants.WIDTH;
+            MinWidth = ParameterConstants.WIDTH;
+        }
+
+        public ParameterComboBox(List<IConvertible> values) : this()
+        {
+            foreach (IConvertible value in values)
+                Items.Add(value);
+        }
+
+        public ParameterComboBox(List<IConvertible> values, bool enabled) : this(values)
+        {
+            IsEnabled = enabled;
+        }
+
+        public void setValue(IConvertible value)
+        {
+            SelectedItem = value;
+        }
+
+        public IConvertible getValue()
+        {
+            return SelectedItem as IConvertible;
+        }
+
+        public object Clone()
+        {
+            List<IConvertible> res = new List<IConvertible>();
+            foreach (var item in Items)
+                res.Add(item as IConvertible);
+            ParameterComboBox pcb = new ParameterComboBox(res, IsEnabled);
+            pcb.setValue(this.getValue());
+            return pcb;
+        }
+    }
     
 }

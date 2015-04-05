@@ -1,6 +1,7 @@
 ﻿using sapr_sim.Parameters;
 using sapr_sim.Parameters.Validators;
 using sapr_sim.Utils;
+using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,7 +25,8 @@ namespace sapr_sim.Figures
         private Rect bound;
         private Port inputPort, outputPort, resourcePort;
 
-        private UIParam<TimeParam> manHour = new UIParam<TimeParam>(new TimeParam(1, TimeMeasure.SECOND), new PositiveDoubleParamValidator(), "Продолжительность");
+        private UIParam<Double> time = new UIParam<Double>(1, new PositiveDoubleParamValidator(), "Продолжительность");
+        private UIParam<TimeMeasure> timeMeasure = new UIParam<TimeMeasure>(TimeMeasure.SECOND, new DefaultParamValidator(), "Единицы измерения", new ParameterComboBox(TimeMeasure.list()));
         private UIParam<Int32> scatter = new UIParam<Int32>(0, new BetweenIntegerParamValidator(0, 100), "Разброс (%)");
 
         private static readonly string DEFAULT_NAME = "Процедура";
@@ -44,8 +46,11 @@ namespace sapr_sim.Figures
             ports.Add(outputPort);
             ports.Add(resourcePort);
 
-            manHour = info.GetValue("manHour", typeof(UIParam<TimeParam>)) as UIParam<TimeParam>;
+            time = info.GetValue("time", typeof(UIParam<Double>)) as UIParam<Double>;
             scatter = info.GetValue("scatter", typeof(UIParam<Int32>)) as UIParam<Int32>;
+
+            timeMeasure = info.GetValue("timeMeasure", typeof(UIParam<TimeMeasure>)) as UIParam<TimeMeasure>;
+            timeMeasure.ContentControl = new ParameterComboBox(TimeMeasure.list()) { SelectedIndex = timeMeasure.Value.Order };
 
             init();
         }
@@ -81,21 +86,28 @@ namespace sapr_sim.Figures
         {
             return "Блок \"Процедура\" описывает некоторую деятельность над задачей проектирования," + 
                 " которая требует время и занимает подключенные ресурсы. Задаваемое время является" + 
-                " стохастической величиной и зависит от параметра \"РРРР\"";
+                " стохастической величиной и зависит от параметра \"Разброс (%)\"";
         }
 
         public override List<UIParam> getParams()
         {
             List<UIParam> param = base.getParams();
-            param.Add(manHour);
+            param.Add(time);
+            param.Add(timeMeasure);
             param.Add(scatter);
             return param;
         }
 
-        public double ManHour
+        public double Time
         {
-            get { return manHour.Value.Time; }
-            set { manHour.Value.Time = value; }
+            get { return time.Value; }
+            set { time.Value = value; }
+        }
+
+        public TimeMeasure TimeMeasure
+        {
+            get { return timeMeasure.Value; }
+            set { timeMeasure.Value = value; }
         }
 
         public int Scatter
@@ -110,7 +122,8 @@ namespace sapr_sim.Figures
             info.AddValue("inputPort", inputPort);
             info.AddValue("outputPort", outputPort);
             info.AddValue("resourcePort", resourcePort);
-            info.AddValue("manHour", manHour);
+            info.AddValue("time", time);
+            info.AddValue("timeMeasure", timeMeasure);
             info.AddValue("scatter", scatter);
         }
 
