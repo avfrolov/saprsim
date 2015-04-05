@@ -86,7 +86,7 @@ namespace sapr_sim
 
                     if (prj.Items.Count > 0)
                     {
-                        printInformation("Количество диаграмм в проекте: " + prj.Items.Count);
+                        printInformation("Количество процессов проектирования в проекте: " + prj.Items.Count);
                         foreach (ProjectItem item in prj.Items)
                         {
                             createNewDiagram(item.Canvas, item.Name);
@@ -94,7 +94,7 @@ namespace sapr_sim
                             ProjectTreeViewItem tvi = new ProjectTreeViewItem() { Header = ProjectTreeViewItem.packProjectItem(item.Name, false), ProjectItem = item };
                             attachProjectItemEvents(tvi);
                             projectItem.Items.Add(tvi);
-                            printInformation("Открыта диаграмма : " + item.Name);
+                            printInformation("Открыт процесс : " + item.Name);
                         }
                         projectItem.IsExpanded = true;
                         attachProjectEvents(projectItem);

@@ -34,7 +34,7 @@ namespace sapr_sim
         private const int X_OFFSET = -300;
         private const int Y_OFFSET = -100;
 
-        private readonly string defaultTabName = "Новая диаграмма ";
+        private readonly string defaultTabName = "Новый процесс ";
         private readonly string modelChangedPostfix = "* "; 
 
         public MainWindow()
