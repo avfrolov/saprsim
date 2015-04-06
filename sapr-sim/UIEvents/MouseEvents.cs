@@ -17,8 +17,8 @@ namespace sapr_sim
     {
 
         // used in moving figure on canvas
+        public UIEntity selected { get; set; }
         private bool captured = false;
-        private UIEntity selected = null;
 
         private void Canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -70,7 +70,7 @@ namespace sapr_sim
                 if (!(selected is ConnectionLine && selected is Port))
                     selected.selectedBitmapEffect();
 
-                ParameterProccesor.drawParameters(selected.getParams(), propertiesPanel, false);
+                ParameterProccesor.drawParameters(selected, propertiesPanel, false);
             }
             else if (e.ClickCount == 2 && !(sender is Port || sender is ConnectionLine))
                 OpenShapeProperties_Click(sender, e);

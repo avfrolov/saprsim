@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using sapr_sim.Parameters;
 using sapr_sim.WPFCustomElements;
 using System.Reflection;
+using sapr_sim.Utils;
+using sapr_sim.Figures;
 
 namespace sapr_sim
 {
@@ -34,17 +36,49 @@ namespace sapr_sim
             image.Source = new BitmapImage(new Uri(@"pack://application:,,,/" + owner.iconPath(), UriKind.Absolute));
             description.Text = owner.description();
 
-            ParameterProccesor.drawParameters(parameters, sp, true);
+            ParameterProccesor.drawParameters(owner, sp, true);
         }
 
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
-            foreach(UIElement el in sp.Children)
+            if (ParameterProccesor.newResource == null || ParameterProccesor.newResource.GetType() == owner.GetType())
+            {
+                applyNewParams(parameters);
+                ParameterProccesor.newResource = null;
+            }
+            else
+            {
+                MainWindow mw = (MainWindow)System.Windows.Application.Current.MainWindow;
+
+                Point p = new Point(VisualTreeHelper.GetOffset(owner).X + MainWindow.X_OFFSET * (-1),
+                                    VisualTreeHelper.GetOffset(owner).Y + MainWindow.Y_OFFSET * (-1));
+
+                
+                mw.currentEntity = ParameterProccesor.newResource;
+                mw.drawOnCanvas(p);
+                mw.selected = ParameterProccesor.newResource;
+
+                restoreConnectionLines(mw);
+
+                mw.deleteEntity(owner);
+
+                applyNewParams(ParameterProccesor.newResource.getParams());
+                ParameterProccesor.drawParameters(ParameterProccesor.newResource, sp, false);
+                ParameterProccesor.newResource = null;
+            }
+
+            this.Close();
+            ((MainWindow)System.Windows.Application.Current.MainWindow).ModelChanged();
+        }
+
+        private void applyNewParams(List<UIParam> parameters)
+        {
+            foreach (UIElement el in sp.Children)
             {
                 if (el is DockPanel)
                 {
                     DockPanel dp = el as DockPanel;
-                    Label l = dp.Children[0] as Label;
+                    System.Windows.Controls.Label l = dp.Children[0] as System.Windows.Controls.Label;
                     ParameterInput input = dp.Children[1] as ParameterInput;
                     UIParam param = parameters.Find(p => p.DisplayedText == l.Content.ToString());
                     if (!param.Validator.validate(input.getValue().ToString()))
@@ -57,25 +91,66 @@ namespace sapr_sim
                     param.RawValue = input.getValue();
                 }
             }
+        }
 
-            this.Close();
-            ((MainWindow)System.Windows.Application.Current.MainWindow).ModelChanged();
+        private void restoreConnectionLines(MainWindow mw)
+        {
+            List<ConnectionLine> connections = ConnectorFinder.find(owner.canvas.Children, owner);
+            foreach (ConnectionLine cl in connections)
+            {
+                // can use ==, because it's same object instance 
+                UIEntity connectedTo = cl.SourcePort.Owner != owner ? cl.SourcePort.Owner : cl.DestinationPort.Owner;
+                PortType srcPortType = cl.SourcePort.Owner != owner ? cl.SourcePort.PortType : cl.DestinationPort.PortType;
+                PortType dstPortType = cl.SourcePort.Owner != owner ? cl.DestinationPort.PortType : cl.SourcePort.PortType;
+
+                if (!(ParameterProccesor.newResource.GetType() == typeof(MaterialResource) && PortType.BOTTOM_RESOURCE.Equals(dstPortType)))
+                {
+                    ConnectionLine newCl = new ConnectionLine(owner.canvas);
+
+                    newCl.SetBinding(ConnectionLine.SourceProperty, new Binding()
+                    {
+                        Source = connectedTo.findPort(srcPortType),
+                        Path = new PropertyPath(Port.AnchorPointProperty)
+                    });
+                    newCl.SetBinding(ConnectionLine.DestinationProperty, new Binding()
+                    {
+                        Source = ParameterProccesor.newResource.findPort(dstPortType),
+                        Path = new PropertyPath(Port.AnchorPointProperty)
+                    });
+
+
+                    newCl.MouseLeftButtonDown += mw.Shape_MouseLeftButtonDown;
+                    newCl.MouseLeftButtonUp += mw.Shape_MouseLeftButtonUp;
+
+                    ZIndexUtil.setCorrectZIndex(newCl.canvas, newCl);
+
+                    owner.canvas.Children.Add(newCl);
+                }
+            }
         }
 
     }
 
     public static class ParameterProccesor
     {
-        public static void drawParameters(List<UIParam> parameters, StackPanel drawPanel, bool paramsEnabled)
+
+        public static Resource newResource;
+
+        private static sapr_sim.Figures.UIEntity entity;
+        private static StackPanel panel;
+
+        public static void drawParameters(sapr_sim.Figures.UIEntity owner, StackPanel drawPanel, bool paramsEnabled)
         {
             drawPanel.Children.Clear();
-            if (parameters != null)
+            if (owner != null && owner.getParams() != null)
             {
-                foreach (UIParam entry in parameters)
+                entity = owner;
+                panel = drawPanel;
+                foreach (UIParam entry in owner.getParams())
                 {
 
                     DockPanel sprow = new DockPanel() { LastChildFill = true, Margin = new Thickness(2, 2, 2, 5) };
-                    Label l = new Label() { Content = entry.DisplayedText };
+                    System.Windows.Controls.Label l = new System.Windows.Controls.Label() { Content = entry.DisplayedText };
                     ParameterInput input = entry.ContentControl;
                     UIElement uiControl = null;
 
@@ -97,12 +172,38 @@ namespace sapr_sim
                         (uiControl as FrameworkElement).MinWidth = ParameterConstants.QUICK_PANEL_WIDTH;
                         (uiControl as FrameworkElement).MaxWidth = ParameterConstants.QUICK_PANEL_WIDTH;
                     }
+
+                    if (entry.DisplayedText == "Тип ресурса" && input is ParameterComboBox)
+                        (input as ComboBox).SelectionChanged += ParameterProccesor_SelectionChanged;
                     
                     sprow.Children.Add(l);
                     sprow.Children.Add(uiControl);
                     drawPanel.Children.Add(sprow);
                 }
             }
+        }
+
+        static void ParameterProccesor_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ResourceType oldRt = (e.RemovedItems[0] as ResourceType);
+            ResourceType newRt = (e.AddedItems[0] as ResourceType);
+
+            Resource res = entity as Resource;
+
+            if (ResourceType.WORKER.Equals(newRt))
+            {
+                newResource = new WorkerResource(res.canvas) { Count = res.Count, IsShared = res.IsShared };              
+            }
+            else if (ResourceType.INSTRUMENT.Equals(newRt))
+            {
+                newResource = new InstrumentResource(res.canvas) { Count = res.Count, IsShared = res.IsShared };
+            }
+            else if (ResourceType.MATERIAL.Equals(newRt))
+            {
+                newResource = new MaterialResource(res.canvas) { Count = res.Count, IsShared = res.IsShared };
+            }
+
+            ParameterProccesor.drawParameters(newResource, panel, true);
         }
     }
 }

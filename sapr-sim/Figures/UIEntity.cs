@@ -181,6 +181,14 @@ namespace sapr_sim.Figures
             info.AddValue("textParam", textParam);
         }
 
+        public Port findPort(PortType type)
+        {
+            foreach (Port port in ports)
+                if (port.PortType.Equals(type))
+                    return port;
+            return null;
+        }
+
         private void init(Canvas canvas)
         {
             this.canvas = canvas;

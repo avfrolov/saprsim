@@ -84,26 +84,26 @@ namespace EntityTransformator
         {
             List<ConnectionLine> connectors = ConnectorFinder.find(elements, resource);
 
-            Entities.Resource res = new Entities.Resource() { efficiency = resource.Efficiency, price = resource.Price, count = resource.Count, isShared = resource.IsShared };
-            resources.Add(res);
+            //Entities.Resource res = new Entities.Resource() { efficiency = resource.Efficiency, price = resource.Price, count = resource.Count, isShared = resource.IsShared };
+            //resources.Add(res);
 
-            foreach(ConnectionLine con in connectors)
-            {
-                UIEntity procedure = null;
-                if (con.SourcePort != null && con.SourcePort.PortType == PortType.RESOURCE)
-                {
-                    UIEntity src = con.SourcePort.Owner;
-                    UIEntity dst = con.DestinationPort.Owner;
-                    procedure = src is Procedure ? src : dst is Procedure ? dst : null;
+            //foreach(ConnectionLine con in connectors)
+            //{
+            //    UIEntity procedure = null;
+            //    if (con.SourcePort != null && con.SourcePort.PortType == PortType.RESOURCE)
+            //    {
+            //        UIEntity src = con.SourcePort.Owner;
+            //        UIEntity dst = con.DestinationPort.Owner;
+            //        procedure = src is Procedure ? src : dst is Procedure ? dst : null;
 
-                    if (procedure != null)
-                    {
-                        Entities.impl.Procedure realProcedure = map[procedure] as Entities.impl.Procedure;
-                        if (!realProcedure.getResources().Contains(res))
-                            addAdditionalRelations(realProcedure, res);
-                    }
-                }
-            }
+            //        if (procedure != null)
+            //        {
+            //            Entities.impl.Procedure realProcedure = map[procedure] as Entities.impl.Procedure;
+            //            if (!realProcedure.getResources().Contains(res))
+            //                addAdditionalRelations(realProcedure, res);
+            //        }
+            //    }
+            //}
         }
 
         private void processSubprocess(UIElementCollection elements)

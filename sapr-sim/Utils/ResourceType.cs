@@ -12,7 +12,7 @@ namespace sapr_sim.Utils
 
         public static readonly ResourceType WORKER = new ResourceType(0, "Рабочий");
         public static readonly ResourceType INSTRUMENT = new ResourceType(1, "Инструмент");
-        public static readonly ResourceType MATERIAL = new ResourceType(2, "Материальный");
+        public static readonly ResourceType MATERIAL = new ResourceType(2, "Расходник");
 
         public int Order { get; set; }
         public string Name { get; set; }

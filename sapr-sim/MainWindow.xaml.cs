@@ -24,15 +24,15 @@ namespace sapr_sim
     public partial class MainWindow : Window
     {
 
-        private UIEntity currentEntity;
+        public UIEntity currentEntity { get; set; }
         private Canvas currentCanvas;
        
         private bool firstConnect;
 
         // 300 - width of left panel (it's a constant in xaml)
         // 100 - random +- value :)
-        private const int X_OFFSET = -300;
-        private const int Y_OFFSET = -100;
+        public static readonly int X_OFFSET = -300;
+        public static readonly int Y_OFFSET = -100;
 
         private readonly string defaultTabName = "Новый процесс ";
         private readonly string modelChangedPostfix = "* "; 
@@ -169,7 +169,7 @@ namespace sapr_sim
             });
         }
 
-        private void drawOnCanvas(Point position)
+        public void drawOnCanvas(Point position)
         {
             attachMovingEvents(currentEntity);
 
@@ -216,7 +216,7 @@ namespace sapr_sim
 
         private void ResourceButton_Click(object sender, RoutedEventArgs e)
         {
-            currentEntity = new Resource(currentCanvas);
+            currentEntity = new WorkerResource(currentCanvas);
         }
 
         private void SyncButton_Click(object sender, RoutedEventArgs e)

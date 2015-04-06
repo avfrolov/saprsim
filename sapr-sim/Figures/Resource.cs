@@ -17,22 +17,21 @@ using System.Windows.Shapes;
 namespace sapr_sim.Figures
 {
     [Serializable]
-    public class Resource : UIEntity, ISerializable
+    public abstract class Resource : UIEntity, ISerializable
     {
+
+
+        private static readonly string DEFAULT_NAME = "Ресурс";
+
+        protected UIParam<ResourceType> type = new UIParam<ResourceType>(ResourceType.WORKER, new DefaultParamValidator(), "Тип ресурса", new ParameterComboBox(ResourceType.list()));
+        protected UIParam<int> count = new UIParam<int>(1, new IntegerParamValidator(), "Количество");
+        protected UIParam<Boolean> isShared = new UIParam<Boolean>(true, new DefaultParamValidator(), "Разделяемый", new ParameterCheckBox(true));    
 
         private Rect bound;
         private Rect topExternalBound;
         private Rect bottomExternalBound;
 
-        private Port port;
-
-        private UIParam<ResourceType> type = new UIParam<ResourceType>(ResourceType.WORKER, new DefaultParamValidator(), "Тип ресурса", new ParameterComboBox(ResourceType.list()));
-        private UIParam<Double> efficiency = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1.0), "Производительность");
-        private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Цена");
-        private UIParam<int> count = new UIParam<int>(1, new IntegerParamValidator(), "Количество");
-        private UIParam<Boolean> isShared = new UIParam<Boolean>(true, new DefaultParamValidator(), "Разделяемый", new ParameterCheckBox(true));
-
-        private static readonly string DEFAULT_NAME = "Ресурс";
+        private Port topPort;    
 
         public Resource(Canvas canvas) : base(canvas)
         {
@@ -42,14 +41,12 @@ namespace sapr_sim.Figures
 
         public Resource(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            this.port = info.GetValue("port", typeof(Port)) as Port;
-            ports.Add(port);
+            this.topPort = info.GetValue("topPort", typeof(Port)) as Port;
+            ports.Add(topPort);
 
             type = info.GetValue("type", typeof(UIParam<ResourceType>)) as UIParam<ResourceType>;
             type.ContentControl = new ParameterComboBox(ResourceType.list()) { SelectedIndex = type.Value.Order };
 
-            efficiency = info.GetValue("efficiency", typeof(UIParam<Double>)) as UIParam<Double>;
-            price = info.GetValue("price", typeof(UIParam<Double>)) as UIParam<Double>;
             isShared = info.GetValue("isShared", typeof(UIParam<Boolean>)) as UIParam<bool>;
             isShared.ContentControl = new ParameterCheckBox(isShared.Value);
             count = info.GetValue("count", typeof(UIParam<int>)) as UIParam<int>;
@@ -59,11 +56,11 @@ namespace sapr_sim.Figures
 
         public override void createAndDraw(double x, double y)
         {
-            port = new Port(this, canvas, PortType.RESOURCE, x + 42.5, y - 3.5);
-            canvas.Children.Add(port);
-            ports.Add(port);
+            topPort = new Port(this, canvas, PortType.TOP_RESOURCE, x + 42.5, y - 3.5);
+            canvas.Children.Add(topPort);
+            ports.Add(topPort);
 
-            label = new Label(this, canvas, x + 28, y + 22, textParam.Value);
+            label = new Label(this, canvas, x + 25, y + 22, textParam.Value);
             canvas.Children.Add(label);
         }
 
@@ -85,24 +82,10 @@ namespace sapr_sim.Figures
         {
             List<UIParam> param = base.getParams();
             param.Add(type);
-            param.Add(efficiency);
-            param.Add(price);
             param.Add(isShared);
             param.Add(count);
             return param;
-        }
-
-        public double Efficiency
-        {
-            get { return efficiency.Value; }
-            set { efficiency.Value = value; }
-        }
-
-        public double Price
-        {
-            get { return price.Value; }
-            set { price.Value = value; }
-        }
+        }        
 
         public Boolean IsShared
         {
@@ -116,12 +99,16 @@ namespace sapr_sim.Figures
             set { count.Value = value; }
         }
 
+        public ResourceType Type
+        {
+            get { return type.Value; }
+            set { type.Value = value; }
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue("port", port);
-            info.AddValue("efficiency", efficiency);
-            info.AddValue("price", price);
+            info.AddValue("topPort", topPort);
             info.AddValue("isShared", isShared);
             info.AddValue("count", count);
             info.AddValue("type", type);
@@ -140,7 +127,7 @@ namespace sapr_sim.Figures
             }
         }
 
-        private void init()
+        protected virtual void init()
         {
             bound = new Rect(new Size(90, 60));
             topExternalBound = new Rect(new Point(0, 0), new Point(90, 10));

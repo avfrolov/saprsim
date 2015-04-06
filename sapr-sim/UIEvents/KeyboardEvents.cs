@@ -81,14 +81,14 @@ namespace sapr_sim
 
         private void DeleteShapeCommand(object sender, ExecutedRoutedEventArgs e)
         {
-            deleteEntity();
+            deleteEntity(selected);
         }
 
-        private void deleteEntity()
+        public void deleteEntity(UIEntity ent)
         {
-            if (selected != null && !(selected is Port))
+            if (ent != null && !(ent is Port))
             {
-                List<ConnectionLine> connectors = ConnectorFinder.find(currentCanvas.Children, selected);
+                List<ConnectionLine> connectors = ConnectorFinder.find(currentCanvas.Children, ent);
                 foreach (ConnectionLine c in connectors)
                 {
                     BindingOperations.ClearBinding(c, ConnectionLine.SourceProperty);
@@ -96,8 +96,8 @@ namespace sapr_sim
                     currentCanvas.Children.Remove(c);
                 }
 
-                selected.removeAll();
-                currentCanvas.Children.Remove(selected);
+                ent.removeAll();
+                currentCanvas.Children.Remove(ent);
                 ModelChanged();
                 propertiesPanel.Children.Clear();
             }
@@ -163,7 +163,7 @@ namespace sapr_sim
                 dataObj.SetData(DataFormats.Serializable, selected, false);
                 Clipboard.SetDataObject(dataObj, false);
 
-                deleteEntity();
+                deleteEntity(selected);
             }
         }
 

@@ -16,7 +16,8 @@ namespace sapr_sim.Figures
     {
         INPUT,
         OUTPUT,
-        RESOURCE,
+        TOP_RESOURCE,
+        BOTTOM_RESOURCE,
         UNDEFINED
     }
 
