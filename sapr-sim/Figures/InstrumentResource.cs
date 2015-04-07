@@ -18,6 +18,7 @@ namespace sapr_sim.Figures
 
         private Port bottomPort;
 
+        private UIParam<Double> power = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Мощность");
         private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Цена");
 
         public InstrumentResource(Canvas canvas) : base(canvas)
@@ -33,6 +34,7 @@ namespace sapr_sim.Figures
             ports.Add(bottomPort);
 
             price = info.GetValue("price", typeof(UIParam<Double>)) as UIParam<Double>;
+            power = info.GetValue("power", typeof(UIParam<Double>)) as UIParam<Double>;
 
             init();
         }
@@ -49,6 +51,7 @@ namespace sapr_sim.Figures
         {
             List<UIParam> param = base.getParams();
             param.Add(price);
+            param.Add(power);
             return param;
         }
 
@@ -58,11 +61,18 @@ namespace sapr_sim.Figures
             set { price.Value = value; }
         }
 
+        public double Power
+        {
+            get { return power.Value; }
+            set { power.Value = value; }
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
             info.AddValue("bottomPort", bottomPort);
             info.AddValue("price", price);
+            info.AddValue("power", power);
         }
 
         protected override void init()
