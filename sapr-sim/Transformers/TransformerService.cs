@@ -82,15 +82,50 @@ namespace EntityTransformator
 
         private void processResource(UIElementCollection elements, sapr_sim.Figures.Resource resource)
         {
-            List<ConnectionLine> connectors = ConnectorFinder.find(elements, resource);
+            //List<ConnectionLine> connectors = ConnectorFinder.find(elements, resource);
 
-            //Entities.Resource res = new Entities.Resource() { efficiency = resource.Efficiency, price = resource.Price, count = resource.Count, isShared = resource.IsShared };
+            //Entities.Resource res = null;
+            //if (resource is sapr_sim.Figures.WorkerResource)
+            //{
+            //    sapr_sim.Figures.WorkerResource wr = resource as sapr_sim.Figures.WorkerResource;
+            //    res = new Entities.WorkerResource() 
+            //    { 
+            //        count = wr.Count, 
+            //        type = Entities.ResourceType.WORKER, 
+            //        efficiency = wr.Efficiency, 
+            //        isShared = wr.IsShared, 
+            //        price = wr.Price 
+            //    };
+            //}
+            //else if (resource is sapr_sim.Figures.InstrumentResource)
+            //{
+            //    sapr_sim.Figures.InstrumentResource ir = resource as sapr_sim.Figures.InstrumentResource;
+            //    res = new Entities.InstrumentResource()
+            //    {
+            //        count = ir.Count,
+            //        type = Entities.ResourceType.INSTRUMENT,                   
+            //        isShared = ir.IsShared,
+            //        price = ir.Price,
+            //        power = ir.Power
+            //    };
+            //}
+            //else if (resource is sapr_sim.Figures.MaterialResource)
+            //{
+            //    sapr_sim.Figures.MaterialResource ir = resource as sapr_sim.Figures.MaterialResource;
+            //    res = new Entities.MaterialResource()
+            //    {
+            //        count = ir.Count,
+            //        type = Entities.ResourceType.MATERIAL,
+            //        isShared = ir.IsShared
+            //    };
+            //}
+
             //resources.Add(res);
 
-            //foreach(ConnectionLine con in connectors)
+            //foreach (ConnectionLine con in connectors)
             //{
             //    UIEntity procedure = null;
-            //    if (con.SourcePort != null && con.SourcePort.PortType == PortType.RESOURCE)
+            //    if (con.SourcePort != null && con.SourcePort.PortType == PortType.BOTTOM_RESOURCE)
             //    {
             //        UIEntity src = con.SourcePort.Owner;
             //        UIEntity dst = con.DestinationPort.Owner;

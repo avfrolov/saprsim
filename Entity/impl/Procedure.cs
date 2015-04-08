@@ -38,7 +38,7 @@ namespace Entities.impl
                     foreach (Resource res in getResources())
                     {
                         res.users.Remove(this.id);
-                        res.isBuisy = false;
+                        res.isBusy = false;
                     }
                 }
             }
@@ -81,12 +81,12 @@ namespace Entities.impl
                 bool isUsedByThis = res.users.Contains(this.id);
 
                 if (res.users.Count == 0)
-                    res.isBuisy = false;
+                    res.isBusy = false;
 
-                if (res.isBuisy && !res.isShared && !isUsedByThis)
+                if (res.isBusy && !res.isShared && !isUsedByThis)
                     return Double.MaxValue;
 
-                if (res.isBuisy && res.isShared || res.isBuisy && isUsedByThis)
+                if (res.isBusy && res.isShared || res.isBusy && isUsedByThis)
                 {
                     if (!res.users.Contains(this.id))
                     {
@@ -96,13 +96,13 @@ namespace Entities.impl
                     overallEfficiency += res.efficiency * res.count / (res.users.Count > 0 ? res.users.Count : 1);
                 }
 
-                if (!res.isBuisy)
+                if (!res.isBusy)
                 {
                     overallEfficiency += res.efficiency * res.count;
                     if (!res.users.Contains(this.id))
                     {
                         res.users.Add(this.id);
-                        res.isBuisy = true;
+                        res.isBusy = true;
                     }
                 }
 

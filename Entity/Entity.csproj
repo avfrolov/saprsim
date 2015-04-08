@@ -48,12 +48,16 @@
     <Compile Include="impl\EntityStart.cs" />
     <Compile Include="impl\Parallel.cs" />
     <Compile Include="impl\Procedure.cs" />
-    <Compile Include="Resource.cs" />
+    <Compile Include="resource\InstrumentResource.cs" />
+    <Compile Include="resource\MaterialResource.cs" />
+    <Compile Include="resource\Resource.cs" />
     <Compile Include="impl\Synchronization.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="resource\ResourceType.cs" />
+    <Compile Include="resource\WorkerResource.cs" />
     <Compile Include="Timer.cs" />
   </ItemGroup>
   <ItemGroup>
