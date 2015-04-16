@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    // TODO make abstract! remove efficiency and price
-    public class Resource
+    public abstract class Resource
     {
 
         public ResourceType type { get; set; }
