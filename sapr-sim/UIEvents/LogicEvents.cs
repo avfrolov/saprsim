@@ -49,7 +49,10 @@ namespace sapr_sim
             try
             {
                 controller.simulate();
-                MessageBox.Show("Результат выполнения моделирования - " + controller.SimulationTime + " условных единиц времени");
+                if (controller.ModelState.Equals(ProcessingState.RESOURCES_EMPTY))
+                    MessageBox.Show("Результат выполнения моделирования - нехватка ресурсов");
+                else
+                    MessageBox.Show("Результат выполнения моделирования - " + controller.SimulationTime + " условных единиц времени");
             }
             catch (ValidationException ex)
             {

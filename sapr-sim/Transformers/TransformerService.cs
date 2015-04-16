@@ -15,6 +15,7 @@ namespace EntityTransformator
     {
 
         private Dictionary<UIEntity, Entity> map = new Dictionary<UIEntity, Entity>();
+        private Dictionary<UIEntity, Entities.Resource> resMap = new Dictionary<UIEntity, Entities.Resource>();
         private List<Entities.Resource> resources = new List<Entities.Resource>();
         
         public List<Entity> transform(UIElementCollection elements)
@@ -41,6 +42,12 @@ namespace EntityTransformator
                     processConnectionLine(e as ConnectionLine, true);
                 else if (e is sapr_sim.Figures.Resource)
                     processResource(elements, e as sapr_sim.Figures.Resource);
+            }
+
+            foreach (UIElement e in elements)
+            {
+                if (e is sapr_sim.Figures.MaterialResource || e is sapr_sim.Figures.InstrumentResource)
+                    connectResourcesBetweenThemselves(elements, e as sapr_sim.Figures.Resource);
             }
 
             processSubprocess(elements);
@@ -82,63 +89,113 @@ namespace EntityTransformator
 
         private void processResource(UIElementCollection elements, sapr_sim.Figures.Resource resource)
         {
-            //List<ConnectionLine> connectors = ConnectorFinder.find(elements, resource);
+            List<ConnectionLine> connectors = ConnectorFinder.find(elements, resource);
 
-            //Entities.Resource res = null;
-            //if (resource is sapr_sim.Figures.WorkerResource)
-            //{
-            //    sapr_sim.Figures.WorkerResource wr = resource as sapr_sim.Figures.WorkerResource;
-            //    res = new Entities.WorkerResource() 
-            //    { 
-            //        count = wr.Count, 
-            //        type = Entities.ResourceType.WORKER, 
-            //        efficiency = wr.Efficiency, 
-            //        isShared = wr.IsShared, 
-            //        price = wr.Price 
-            //    };
-            //}
-            //else if (resource is sapr_sim.Figures.InstrumentResource)
-            //{
-            //    sapr_sim.Figures.InstrumentResource ir = resource as sapr_sim.Figures.InstrumentResource;
-            //    res = new Entities.InstrumentResource()
-            //    {
-            //        count = ir.Count,
-            //        type = Entities.ResourceType.INSTRUMENT,                   
-            //        isShared = ir.IsShared,
-            //        price = ir.Price,
-            //        power = ir.Power
-            //    };
-            //}
-            //else if (resource is sapr_sim.Figures.MaterialResource)
-            //{
-            //    sapr_sim.Figures.MaterialResource ir = resource as sapr_sim.Figures.MaterialResource;
-            //    res = new Entities.MaterialResource()
-            //    {
-            //        count = ir.Count,
-            //        type = Entities.ResourceType.MATERIAL,
-            //        isShared = ir.IsShared
-            //    };
-            //}
+            Entities.Resource res = null;
+            if (resource is sapr_sim.Figures.WorkerResource)
+            {
+                sapr_sim.Figures.WorkerResource wr = resource as sapr_sim.Figures.WorkerResource;
+                res = new Entities.WorkerResource()
+                {
+                    count = wr.Count,
+                    type = Entities.ResourceType.WORKER,
+                    efficiency = wr.Efficiency,
+                    isShared = wr.IsShared,
+                    price = wr.Price,
+                    instruments = new List<Entities.InstrumentResource>()
+                };
+            }
+            else if (resource is sapr_sim.Figures.InstrumentResource)
+            {
+                sapr_sim.Figures.InstrumentResource ir = resource as sapr_sim.Figures.InstrumentResource;
+                res = new Entities.InstrumentResource()
+                {
+                    count = ir.Count,
+                    type = Entities.ResourceType.INSTRUMENT,
+                    isShared = ir.IsShared,
+                    price = ir.Price,
+                    power = ir.Power,
+                    materials = new List<Entities.MaterialResource>()
+                };
+            }
+            else if (resource is sapr_sim.Figures.MaterialResource)
+            {
+                sapr_sim.Figures.MaterialResource ir = resource as sapr_sim.Figures.MaterialResource;
+                res = new Entities.MaterialResource()
+                {
+                    count = ir.Count,
+                    type = Entities.ResourceType.MATERIAL,
+                    isShared = ir.IsShared,
+                    perTick = 1
+                };
+            }
 
-            //resources.Add(res);
+            resources.Add(res);
+            resMap.Add(resource as UIEntity, res);
 
-            //foreach (ConnectionLine con in connectors)
-            //{
-            //    UIEntity procedure = null;
-            //    if (con.SourcePort != null && con.SourcePort.PortType == PortType.BOTTOM_RESOURCE)
-            //    {
-            //        UIEntity src = con.SourcePort.Owner;
-            //        UIEntity dst = con.DestinationPort.Owner;
-            //        procedure = src is Procedure ? src : dst is Procedure ? dst : null;
+            foreach (ConnectionLine con in connectors)
+            {
+                UIEntity procedure = null;
+                if (con.SourcePort != null && con.SourcePort.PortType == PortType.BOTTOM_RESOURCE)
+                {
+                    UIEntity src = con.SourcePort.Owner;
+                    UIEntity dst = con.DestinationPort.Owner;
+                    procedure = src is Procedure ? src : dst is Procedure ? dst : null;
+                    
+                    if (procedure != null)
+                    {
+                        Entities.impl.Procedure realprocedure = map[procedure] as Entities.impl.Procedure;
+                        if (!realprocedure.getResources().Contains(res))
+                            addAdditionalRelations(realprocedure, res);
+                    }                    
+                    
+                }
+            }
+        }
 
-            //        if (procedure != null)
-            //        {
-            //            Entities.impl.Procedure realProcedure = map[procedure] as Entities.impl.Procedure;
-            //            if (!realProcedure.getResources().Contains(res))
-            //                addAdditionalRelations(realProcedure, res);
-            //        }
-            //    }
-            //}
+        private void connectResourcesBetweenThemselves(UIElementCollection elements, sapr_sim.Figures.Resource resource)
+        {
+            List<ConnectionLine> connectors = ConnectorFinder.find(elements, resource);
+
+            foreach (ConnectionLine con in connectors)
+            {
+                UIEntity worker = null;
+                UIEntity instrument = null;
+                UIEntity material = null;
+
+                if (con.SourcePort != null)
+                {
+                    UIEntity src = con.SourcePort.Owner;
+                    UIEntity dst = con.DestinationPort.Owner;
+                    worker = src is sapr_sim.Figures.WorkerResource ? src : dst is sapr_sim.Figures.WorkerResource ? dst : null;
+                    instrument = src is sapr_sim.Figures.InstrumentResource ? src : dst is sapr_sim.Figures.InstrumentResource ? dst : null;
+                    material = src is sapr_sim.Figures.MaterialResource ? src : dst is sapr_sim.Figures.MaterialResource ? dst : null;
+
+                    if (src is sapr_sim.Figures.WorkerResource && dst is sapr_sim.Figures.InstrumentResource
+                        || dst is sapr_sim.Figures.WorkerResource && src is sapr_sim.Figures.InstrumentResource)
+                    {
+                        if (worker != null && instrument != null)
+                        {
+                            Entities.WorkerResource realWorker = resMap[worker] as Entities.WorkerResource;
+                            Entities.InstrumentResource realInstrument = resMap[instrument] as Entities.InstrumentResource;
+                            if (!realWorker.instruments.Contains(realInstrument))
+                                realWorker.instruments.Add(realInstrument);
+                        }
+                    }
+
+                    if (src is sapr_sim.Figures.InstrumentResource && dst is sapr_sim.Figures.MaterialResource
+                        || src is sapr_sim.Figures.MaterialResource && dst is sapr_sim.Figures.InstrumentResource)
+                    {
+                        if (instrument != null && material != null)
+                        {
+                            Entities.InstrumentResource realInstrument = resMap[instrument] as Entities.InstrumentResource;
+                            Entities.MaterialResource realMaterial = resMap[material] as Entities.MaterialResource;
+                            if (!realInstrument.materials.Contains(realMaterial))
+                                realInstrument.materials.Add(realMaterial);
+                        }
+                    }
+                }
+            }
         }
 
         private void processSubprocess(UIElementCollection elements)

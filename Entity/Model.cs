@@ -25,6 +25,7 @@ namespace Entities
         public double projectAppearenceProbability { get; set; }
 
         public double timeRestriction { get; set; }
+        public ProcessingState state { get; set; }
 
         private List<Entity> entities = new List<Entity>();
         private List<Project> projects = new List<Project>();

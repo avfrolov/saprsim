@@ -113,6 +113,8 @@ namespace Entities
            {
                getReadyProjectQueue().Add(project);
            }
+
+           getNotReadyProjectQueue().Clear(); //did we miss that?
         }
 
         public abstract void execute();

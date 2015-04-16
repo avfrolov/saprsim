@@ -12,5 +12,6 @@ namespace Entities
         public double power { get; set; }
         public double price { get; set; }
 
+        public List<MaterialResource> materials { get; set; }
     }
 }

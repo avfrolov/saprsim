@@ -9,48 +9,48 @@ using EntityValidator.validator;
 
 namespace EntityValidatorTest.systemValidatorTest
 {
-    [TestClass]
-    public class SystemValidatorTest_EverythingIsFineTest
-    {
-        Model instance = Model.Instance;
+    //[TestClass]
+    //public class SystemValidatorTest_EverythingIsFineTest
+    //{
+    //    Model instance = Model.Instance;
 
-        [TestCleanup]
-        public void clean()
-        {
-            instance.getEntities().Clear();
-        }
+    //    [TestCleanup]
+    //    public void clean()
+    //    {
+    //        instance.getEntities().Clear();
+    //    }
 
-        [TestMethod]
-        public void test_EverythingIsFineTest()
-        {
-            //creating testModel
-            EntityStart start = new EntityStart();
-            Project prj = new Project();
+    //    [TestMethod]
+    //    public void test_EverythingIsFineTest()
+    //    {
+    //        //creating testModel
+    //        EntityStart start = new EntityStart();
+    //        Project prj = new Project();
 
-            EntityDestination finish = new EntityDestination();
-            Procedure procedure = new Procedure();
+    //        EntityDestination finish = new EntityDestination();
+    //        Procedure procedure = new Procedure();
 
-            Resource res = new Resource() { count = 1 };
-            res.efficiency = 0.8;
+    //        Resource res = new Resource() { count = 1 };
+    //        res.efficiency = 0.8;
 
-            procedure.addResource(res);
-            procedure.setInputs(new List<Entity>(){ start });
-            procedure.setOutputs(new List<Entity>() { finish });
-            procedure.manHour = 1;
+    //        procedure.addResource(res);
+    //        procedure.setInputs(new List<Entity>(){ start });
+    //        procedure.setOutputs(new List<Entity>() { finish });
+    //        procedure.manHour = 1;
 
-            start.setOutputs(new List<Entity>() { procedure });
-            finish.setInputs(new List<Entity>() { procedure });
+    //        start.setOutputs(new List<Entity>() { procedure });
+    //        finish.setInputs(new List<Entity>() { procedure });
 
-            instance.addProject(prj);
-            instance.addResource(res);
-            instance.addEntity(start);
-            instance.addEntity(finish);
-            instance.addEntity(procedure);
+    //        instance.addProject(prj);
+    //        instance.addResource(res);
+    //        instance.addEntity(start);
+    //        instance.addEntity(finish);
+    //        instance.addEntity(procedure);
 
-            IValidator validator = new SystemValidator(instance.getEntities(), instance.getResources());
+    //        IValidator validator = new SystemValidator(instance.getEntities(), instance.getResources());
             
-            Assert.IsTrue(validator.startValidation().Success);
-        }   
+    //        Assert.IsTrue(validator.startValidation().Success);
+    //    }   
         
-    }
+    //}
 }

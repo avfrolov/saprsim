@@ -52,6 +52,10 @@ namespace Kernel
             }
         }
 
+        public ProcessingState ModelState
+        {
+            get { return Model.Instance.state; }
+        }
         public double SimulationTime
         {
             get { return Timer.Instance.getTime(); }

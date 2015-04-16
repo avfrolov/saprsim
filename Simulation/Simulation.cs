@@ -24,6 +24,8 @@ namespace Simulation
 
             start.setReadyProjectQueue(projects);
 
+            model.state = ProcessingState.FINE;
+
             while (projects.Count != 0 && checkForNotReadyProjects(projects))
             {
                 foreach (Entity entity in entities)
@@ -36,6 +38,8 @@ namespace Simulation
                 }
                 timer.increment();
                 if (timer.getTime() > model.timeRestriction)
+                    break;
+                if (model.state.Equals(ProcessingState.RESOURCES_EMPTY))
                     break;
             }
         }

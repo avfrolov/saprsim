@@ -12,5 +12,7 @@ namespace Entities
         public double efficiency { get; set; }
         public double price { get; set; }
 
+        public List<InstrumentResource> instruments { get; set; }
+
     }
 }

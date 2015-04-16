@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public class MaterialResource : Resource
+    public enum ProcessingState
     {
-        public int perTick { get; set; }
+        FINE,
+        RESOURCES_EMPTY
     }
 }

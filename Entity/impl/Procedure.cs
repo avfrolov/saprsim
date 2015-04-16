@@ -37,6 +37,20 @@ namespace Entities.impl
 
                     foreach (Resource res in getResources())
                     {
+                        if (res is WorkerResource)
+                        {
+                            foreach (InstrumentResource instrument in (res as WorkerResource).instruments)
+                            {
+                                foreach (MaterialResource material in instrument.materials)
+                                {
+                                    material.users.Remove(this.id);
+                                    material.isBusy = false;
+                                }
+
+                                instrument.users.Remove(this.id);
+                                instrument.isBusy = false;
+                            }
+                        }
                         res.users.Remove(this.id);
                         res.isBusy = false;
                     }
@@ -77,50 +91,121 @@ namespace Entities.impl
         private double getNeedTime(double overallEfficiency, int complexity)
         {
             foreach (Resource res in resources)
-            {
-                bool isUsedByThis = res.users.Contains(this.id);
-
-                if (res.users.Count == 0)
-                    res.isBusy = false;
-
-                if (res.isBusy && !res.isShared && !isUsedByThis)
-                    return Double.MaxValue;
-
-                if (res.isBusy && res.isShared || res.isBusy && isUsedByThis)
+            {  
+                if (res is WorkerResource)
                 {
-                    if (!res.users.Contains(this.id))
+                    WorkerResource worker = res as WorkerResource;
+                    bool isUsedByThis = worker.users.Contains(this.id);
+
+                    if (worker.users.Count == 0)
+                        worker.isBusy = false;
+
+                    if (worker.isBusy && !worker.isShared && !isUsedByThis)
+                        return Double.MaxValue;
+
+                    if (worker.isBusy && worker.isShared || worker.isBusy && isUsedByThis)
                     {
-                        res.users.Add(this.id);
+                        if (!worker.users.Contains(this.id))
+                        {
+                            worker.users.Add(this.id);
+                        }
+
+                        overallEfficiency += processInstrumentalReesource(worker) * worker.efficiency * worker.count / (worker.users.Count > 0 ? worker.users.Count : 1);
                     }
 
-                    overallEfficiency += res.efficiency * res.count / (res.users.Count > 0 ? res.users.Count : 1);
-                }
-
-                if (!res.isBusy)
-                {
-                    overallEfficiency += res.efficiency * res.count;
-                    if (!res.users.Contains(this.id))
+                    if (!worker.isBusy)
                     {
-                        res.users.Add(this.id);
-                        res.isBusy = true;
+                        overallEfficiency += worker.efficiency * worker.count;
+                        if (!worker.users.Contains(this.id))
+                        {
+                            worker.users.Add(this.id);
+                            worker.isBusy = true;
+                        }
                     }
                 }
 
-            }
+                if (res is MaterialResource)
+                {
+                    processSingleMaterial(res as MaterialResource);
+                }
+            }               
 
             return needTime = (1 / overallEfficiency) * manHour * complexity;
         }
 
-        private void calculatePerformanse(Project project, double needTime)
+        private double processInstrumentalReesource(WorkerResource worker)
         {
-            double sumPrice = 0.0;
-            foreach (Resource res in resources)
+            double result = 1.0;
+            foreach (InstrumentResource instrument in worker.instruments)
             {
-                sumPrice += res.price;
-            }
+                bool isUsedByThis = instrument.users.Contains(this.id);
 
-            project.performance += needTime / sumPrice;
+                if (instrument.users.Count == 0)
+                    instrument.isBusy = false;
+
+                if (instrument.isBusy && !instrument.isShared && !isUsedByThis)
+                    return Double.Epsilon;
+
+                if (instrument.isBusy && instrument.isShared || instrument.isBusy && isUsedByThis)
+                {
+                    if (!instrument.users.Contains(this.id))
+                    {
+                        instrument.users.Add(this.id);
+                    }
+
+                    result += processMaterials(instrument) * instrument.power * instrument.count / (instrument.users.Count > 0 ? instrument.users.Count : 1);
+                }
+
+                if (!instrument.isBusy)
+                {
+                    result += processMaterials(instrument) * instrument.power * instrument.count;
+                    if (!instrument.users.Contains(this.id))
+                    {
+                        instrument.users.Add(this.id);
+                        instrument.isBusy = true;
+                    }
+                }
+            }
+            return result == 1.0 ? result : result - 1.0;
         }
+
+        private double processMaterials(InstrumentResource resource) 
+        {
+            double result = 1.0;
+ 
+            foreach (MaterialResource material in resource.materials)
+            {      
+
+                result += processSingleMaterial(material);                    
+            }
+            return result == 1.0 ? result : result - 1.0;
+        }
+
+        private double processSingleMaterial(MaterialResource material)
+        {
+            Model model = Model.Instance;
+
+            if ((material.count - material.perTick) > 0)
+            {
+                material.count -= material.perTick;
+                return 1.0;
+            }
+            else
+            {
+                model.state = ProcessingState.RESOURCES_EMPTY;
+                return Double.Epsilon;
+            } 
+        }
+        //private void calculatePerformanse(Project project, double needTime)
+        //{
+        //    double sumPrice = 0.0;
+        //    foreach (Resource res in resources)
+        //    {
+        //        sumPrice += res.price;
+        //    }
+
+        //    project.performance += needTime / sumPrice;
+        //}
 
     }
 }

@@ -11,9 +11,7 @@ namespace Entities
     {
 
         public ResourceType type { get; set; }
-
-        public double efficiency { get; set; }
-        public double price { get; set; }
+        
         public int count { get; set; }
         public bool isShared { get; set; }
         public bool isBusy { get; set; }
