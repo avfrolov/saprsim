@@ -34,7 +34,7 @@ namespace sapr_sim.Figures
 
         protected UIParam<String> name = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM);
 
-        public long id {get; set;}
+        protected long id {get; set;}
 
         public UIEntity(SerializationInfo info, StreamingContext context)
         {                      
@@ -182,6 +182,7 @@ namespace sapr_sim.Figures
         {
             info.AddValue("canvas", canvas);
             info.AddValue("label", label);
+            info.AddValue("textParam", name);
 
             if (VisualTreeHelper.GetOffset(this).X == 0.0 &&  VisualTreeHelper.GetOffset(this).Y == 0.0 &&
                 Canvas.GetTop(this) != double.NaN && Canvas.GetLeft(this) != double.NaN)
@@ -193,10 +194,7 @@ namespace sapr_sim.Figures
             {
                 info.AddValue("x", VisualTreeHelper.GetOffset(this).X);
                 info.AddValue("y", VisualTreeHelper.GetOffset(this).Y);
-            }
-
-
-            info.AddValue("textParam", textParam);
+            }  
         }
 
         public Port findPort(PortType type)
