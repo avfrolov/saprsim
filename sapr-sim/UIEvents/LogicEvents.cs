@@ -59,7 +59,7 @@ namespace sapr_sim
                 errorsTab.IsSelected = true;
                 foreach (var err in ex.Errors)
                 {
-                    errorsListBox.Items.Add(new ListBoxItemError(err.Key, ts.transform(err.Value)));
+                    errorsListBox.Items.Add(new ListBoxItemError(err.Message, ts.transform(err.Entities)));
                 }
             }
         }

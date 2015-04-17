@@ -9,34 +9,44 @@ namespace Kernel
 {
     public class ValidationException : Exception
     {
-        private Dictionary<string, List<Entity>> errors = new Dictionary<string, List<Entity>>();
+        private List<ErrorTuple> errors = new List<ErrorTuple>();
 
-        public void addError(string message, List<Entity> entities)
+        public void addError(string message, List<Identifable> entities)
         {
-            if (errors.ContainsKey(message))
-            {
-                List<Entity> failed = errors[message];
-                failed.AddRange(entities);
-                errors.Remove(message);
-                errors.Add(message, failed);
-            }
-            else
-            {
-                errors.Add(message, entities);
-            }
+            errors.Add(new ErrorTuple(message, entities));
         }
 
-        public void addError(string message, Entity entity)
+        public void addError(string message, Identifable entity)
         {
-            List<Entity> entities = new List<Entity>();
-            entities.Add(entity);
-            addError(message, entities);
+            addError(message, new List<Identifable>() { entity });
         }
 
-        public Dictionary<string, List<Entity>> Errors
+        public List<ErrorTuple> Errors
         {
             get { return errors; }
         }
 
+    }
+
+    public class ErrorTuple
+    {
+        private string message;
+        private List<Identifable> entities;
+
+        public ErrorTuple(string message, List<Identifable> entities)
+        {
+            this.message = message;
+            this.entities = entities;
+        }
+
+        public string Message
+        {
+            get { return message; }
+        }
+
+        public List<Identifable> Entities
+        {
+            get { return entities; }
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace EntityValidator.rules
                 if (entity is Procedure)
                 {
                     Procedure p = entity as Procedure;
-                    if (p.getResources().Count == 0)
+                    if (p.getResources().Count == 0 && !failed.Contains(entity))
                         failed.Add(entity);
                 }
             }

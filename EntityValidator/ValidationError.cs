@@ -10,14 +10,14 @@ namespace EntityValidator.exeptions
     {
 
         private string message;
-        private Entities.Entity failedEntity;
+        private Entities.Identifable failedEntity;
 
         public ValidationError(string message) 
         {
             this.message = message;
         }
 
-        public ValidationError(string message, Entities.Entity failedEntity) : this(message)
+        public ValidationError(string message, Entities.Identifable failedEntity) : this(message)
         {
             this.failedEntity = failedEntity;
         }
@@ -27,7 +27,7 @@ namespace EntityValidator.exeptions
             get { return message; }
         }
 
-        public Entities.Entity FailedEntity
+        public Entities.Identifable FailedEntity
         { 
             get { return failedEntity; } 
         }

@@ -55,17 +55,31 @@ namespace EntityTransformator
             return realEntities;
         }
 
-        public List<UIEntity> transform(List<Entity> elements)
+        public List<UIEntity> transform(List<Identifable> elements)
         {
             List<UIEntity> uiEntities = new List<UIEntity>(elements.Count);
 
-            foreach(Entity e in elements)
-            { 
-                if (map.ContainsValue(e))
+            foreach(Identifable e in elements)
+            {
+                if (e is Entity)
                 {
-                    UIEntity uie = map.FirstOrDefault(x => x.Value.Equals(e)).Key;
-                    if (uie != null)
-                        uiEntities.Add(uie);
+                    Entity ent = e as Entity;
+                    if (map.ContainsValue(ent))
+                    {
+                        UIEntity uie = map.FirstOrDefault(x => x.Value.Equals(ent)).Key;
+                        if (uie != null)
+                            uiEntities.Add(uie);
+                    }
+                }
+                else if (e is Entities.Resource)
+                {
+                    Entities.Resource res = e as Entities.Resource;
+                    if (resources.Contains(res))
+                    {
+                        UIEntity uie = resMap.FirstOrDefault(x => x.Value.Equals(res)).Key;
+                        if (uie != null)
+                            uiEntities.Add(uie);
+                    }
                 }
             }
             return uiEntities;
@@ -84,7 +98,7 @@ namespace EntityTransformator
             if (skipSubprocess && (src is SubDiagram || dest is SubDiagram)) return;
 
             if (map.ContainsKey(src) && map.ContainsKey(dest))
-                addLinkForRealEntities(c, map[src], map[dest]);
+                addLinkForRealEntities(c, map[src] as Entity, map[dest] as Entity);
         }
 
         private void processResource(UIElementCollection elements, sapr_sim.Figures.Resource resource)
