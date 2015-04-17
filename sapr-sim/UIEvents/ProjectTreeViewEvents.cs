@@ -154,7 +154,7 @@ namespace sapr_sim
         {
             ProjectTreeViewItem item = projectStructure.SelectedItem as ProjectTreeViewItem;
             currentEntity = new SubDiagram(null, item.ProjectItem);
-            Mouse.OverrideCursor = Cursors.Pen;
+            currentCanvas.Cursor = Cursors.Pen;
         }
 
         private void RunSimulation_MenuClick(object sender, RoutedEventArgs e)

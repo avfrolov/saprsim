@@ -32,7 +32,7 @@ namespace sapr_sim
 
         private void Canvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Mouse.OverrideCursor = Cursors.Arrow;
+            currentCanvas.Cursor = Cursors.Arrow;
             currentEntity = null;
         }
 

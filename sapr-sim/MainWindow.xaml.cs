@@ -210,68 +210,68 @@ namespace sapr_sim
         private void ArrowButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = null;
-            Mouse.OverrideCursor = Cursors.Arrow;
+            currentCanvas.Cursor = Cursors.Arrow;
         }
         
         private void LabelButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new sapr_sim.Figures.Label(currentCanvas);
-            Mouse.OverrideCursor = Cursors.Pen;
+            currentCanvas.Cursor = Cursors.Pen;
         }
 
         private void ProcedureButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Procedure(currentCanvas);
-            Mouse.OverrideCursor = Cursors.Pen;
+            currentCanvas.Cursor = Cursors.Pen;
         }
 
         private void ResourceButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new WorkerResource(currentCanvas);
-            Mouse.OverrideCursor = Cursors.Pen;
+            currentCanvas.Cursor = Cursors.Pen;
         }
 
         private void SyncButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Sync(currentCanvas);
-            Mouse.OverrideCursor = Cursors.Pen;
+            currentCanvas.Cursor = Cursors.Pen;
         }
 
         private void ParallelButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new sapr_sim.Figures.Parallel(currentCanvas);
-            Mouse.OverrideCursor = Cursors.Pen;
+            currentCanvas.Cursor = Cursors.Pen;
         }
 
         private void DecisionButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Decision(currentCanvas);
-            Mouse.OverrideCursor = Cursors.Pen;
+            currentCanvas.Cursor = Cursors.Pen;
         }
 
         private void CollectorButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Collector(currentCanvas);
-            Mouse.OverrideCursor = Cursors.Pen;
+            currentCanvas.Cursor = Cursors.Pen;
         }
 
         private void EntitySourceButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Source(currentCanvas);
-            Mouse.OverrideCursor = Cursors.Pen;
+            currentCanvas.Cursor = Cursors.Pen;
         }
 
         private void EntityDestinationButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Destination(currentCanvas);
-            Mouse.OverrideCursor = Cursors.Pen;
+            currentCanvas.Cursor = Cursors.Pen;
         }
 
         private void LineButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new ConnectionLine(currentCanvas);
             firstConnect = true;
-            Mouse.OverrideCursor = Cursors.Pen;
+            currentCanvas.Cursor = Cursors.Pen;
         }
 
         public void attachMovingEvents(UIEntity entity)
