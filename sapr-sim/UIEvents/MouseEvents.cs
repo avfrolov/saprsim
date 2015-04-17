@@ -1,5 +1,6 @@
 ﻿using sapr_sim.Figures;
 using sapr_sim.Parameters;
+using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,9 @@ namespace sapr_sim
         {
             if (e.ClickCount == 1)
             {
+                UndoRedoManager.putInUndoStack((ScrollableCanvas)currentCanvas);
+                UndoRedoManager.clearRedoStack((ScrollableCanvas)currentCanvas);
+
                 // clear bitmap effect for previous selected entity
                 if (selected != null)
                     selected.defaultBitmapEffect();
