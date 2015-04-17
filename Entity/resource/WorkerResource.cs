@@ -22,6 +22,8 @@ namespace Entities
                 int total = count;
                 foreach (InstrumentResource res in instruments)
                     total += res.totalCount;
+                foreach (MaterialResource res in materials)
+                    total += res.totalCount;
                 return total;
             }
         }
