@@ -18,7 +18,7 @@ namespace EntityTransformator.Transformers
         {
             TransformerService ts = new TransformerService();
             SubDiagram sd = entity as SubDiagram;
-            Submodel submodel = new Submodel() { name = entity.EntityName };
+            Submodel submodel = new Submodel() { name = entity.EntityName, id = entity.Id };
             submodel.setEntites(ts.transform(new FileService().open(sd.ProjectItem.FullPath).Children));
             submodel.setResources(ts.getResources());
             return submodel;

@@ -14,7 +14,7 @@ namespace EntityTransformator.Transformers
         public Entities.Entity transform(UIEntity entity)
         {
             Decision d = entity as Decision;
-            return new DecisionMaker() { inputProbabilityParams = d.InputProbabilityParams, name = d.EntityName };
+            return new DecisionMaker() { inputProbabilityParams = d.InputProbabilityParams, name = d.EntityName, id = d.Id };
         }
     }
 }

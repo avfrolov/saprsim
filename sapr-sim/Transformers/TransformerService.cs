@@ -97,6 +97,8 @@ namespace EntityTransformator
                 sapr_sim.Figures.WorkerResource wr = resource as sapr_sim.Figures.WorkerResource;
                 res = new Entities.WorkerResource()
                 {
+                    name = wr.EntityName,
+                    id = wr.Id,
                     count = wr.Count,
                     type = Entities.ResourceType.WORKER,
                     efficiency = wr.Efficiency,
@@ -110,6 +112,8 @@ namespace EntityTransformator
                 sapr_sim.Figures.InstrumentResource ir = resource as sapr_sim.Figures.InstrumentResource;
                 res = new Entities.InstrumentResource()
                 {
+                    name = ir.EntityName,
+                    id = ir.Id,
                     count = ir.Count,
                     type = Entities.ResourceType.INSTRUMENT,
                     isShared = ir.IsShared,
@@ -120,13 +124,15 @@ namespace EntityTransformator
             }
             else if (resource is sapr_sim.Figures.MaterialResource)
             {
-                sapr_sim.Figures.MaterialResource ir = resource as sapr_sim.Figures.MaterialResource;
+                sapr_sim.Figures.MaterialResource mr = resource as sapr_sim.Figures.MaterialResource;
                 res = new Entities.MaterialResource()
                 {
-                    count = ir.Count,
+                    name = mr.EntityName,
+                    id = mr.Id,
+                    count = mr.Count,
                     type = Entities.ResourceType.MATERIAL,
-                    isShared = ir.IsShared,
-                    perTick = 1
+                    isShared = mr.IsShared,
+                    perTick = mr.Consumption
                 };
             }
 

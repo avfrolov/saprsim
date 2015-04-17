@@ -52,6 +52,12 @@ namespace sapr_sim.Figures
             return param;
         }
 
+        public int Consumption
+        {
+            get { return consumption.Value; }
+            set { consumption.Value = value; }
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

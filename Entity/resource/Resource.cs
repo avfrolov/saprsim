@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public abstract class Resource
+    public abstract class Resource : Identifable
     {
 
         public ResourceType type { get; set; }

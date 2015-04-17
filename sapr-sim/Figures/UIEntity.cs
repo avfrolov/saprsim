@@ -127,6 +127,11 @@ namespace sapr_sim.Figures
             }             
         }
 
+        public long Id 
+        { 
+            get { return id; } 
+        }
+
         public Label Label
         {
             get { return label; }

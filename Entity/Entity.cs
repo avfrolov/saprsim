@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    public abstract class Entity
+    public abstract class Entity : Identifable
     {
-        public String name {get; set;}
-        public long id {get; set;}
 
         protected List<Entity> input = new List<Entity>();
         protected List<Entity> output = new List<Entity>();
