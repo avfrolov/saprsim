@@ -65,6 +65,7 @@ namespace sapr_sim
                 
                 ParameterProccesor.drawParameters(ParameterProccesor.newResource, sp, false);
                 ParameterProccesor.newResource = null;
+                mw.currentEntity = null;
             }
 
             if (result)
