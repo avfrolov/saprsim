@@ -1,4 +1,6 @@
-﻿using sapr_sim.Utils;
+﻿using sapr_sim.Parameters;
+using sapr_sim.Utils;
+using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,9 @@ namespace sapr_sim.Figures
     public class MaterialResource : Resource, ISerializable
     {
 
+        private UIParam<int> consumption = new UIParam<int>(1, new IntegerParamValidator(), "Расход");
+        private UIParam<TimeMeasure> consumptionTimeMeasure = new UIParam<TimeMeasure>(TimeMeasure.SECOND, new DefaultParamValidator(), "за", new ParameterComboBox(TimeMeasure.list()));
+
         public MaterialResource(Canvas canvas) : base(canvas)
         {
             init();
@@ -23,6 +28,11 @@ namespace sapr_sim.Figures
 
         public MaterialResource(SerializationInfo info, StreamingContext context) : base(info, context)
         {
+            consumption = info.GetValue("consumption", typeof(UIParam<int>)) as UIParam<int>;
+
+            consumptionTimeMeasure = info.GetValue("consumptionTimeMeasure", typeof(UIParam<TimeMeasure>)) as UIParam<TimeMeasure>;
+            consumptionTimeMeasure.ContentControl = new ParameterComboBox(TimeMeasure.list()) { SelectedIndex = consumptionTimeMeasure.Value.Order };
+
             init();
         }
 
@@ -33,9 +43,19 @@ namespace sapr_sim.Figures
             canvas.Children.Add(label);
         }
 
+        public override List<UIParam> getParams()
+        {
+            List<UIParam> param = base.getParams();
+            param.Add(consumption);
+            param.Add(consumptionTimeMeasure);
+            return param;
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
+            info.AddValue("consumption", consumption);
+            info.AddValue("consumptionTimeMeasure", consumptionTimeMeasure);
         }
 
         protected override void init()
