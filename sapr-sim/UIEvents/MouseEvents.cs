@@ -30,6 +30,12 @@ namespace sapr_sim
             }
         }
 
+        private void Canvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Arrow;
+            currentEntity = null;
+        }
+
         public void Shape_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 1)

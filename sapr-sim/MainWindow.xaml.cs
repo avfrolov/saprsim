@@ -104,6 +104,7 @@ namespace sapr_sim
             canvas.Background = Brushes.Transparent;
             canvas.MouseDown += OnMouseDown;
             canvas.MouseLeftButtonDown += Canvas_MouseLeftButtonDown;
+            canvas.MouseRightButtonDown += Canvas_MouseRightButtonDown;
 
             scrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
             scrollViewer.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
@@ -155,7 +156,8 @@ namespace sapr_sim
                 ZIndexUtil.setCorrectZIndex(currentCanvas, currentEntity);
 
                 currentCanvas.Children.Add(currentEntity);
-                currentEntity = null;
+                currentEntity = Activator.CreateInstance(currentEntity.GetType(), currentCanvas) as UIEntity;
+                firstConnect = true;
                 ModelChanged();
             }
         }
@@ -187,7 +189,12 @@ namespace sapr_sim
                 p.MouseLeftButtonUp += Shape_MouseLeftButtonUp;
             }
 
-            currentEntity = null;
+            if (!(currentEntity is SubDiagram))
+                currentEntity = Activator.CreateInstance(currentEntity.GetType(), currentCanvas) as UIEntity;
+            else
+                currentEntity = Activator.CreateInstance(currentEntity.GetType(), currentCanvas, 
+                    (currentEntity as SubDiagram).ProjectItem) as UIEntity;
+            
             ModelChanged();
         }
 
@@ -202,57 +209,68 @@ namespace sapr_sim
         private void ArrowButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = null;
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
         
         private void LabelButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new sapr_sim.Figures.Label(currentCanvas);
+            Mouse.OverrideCursor = Cursors.Pen;
         }
 
         private void ProcedureButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Procedure(currentCanvas);
+            Mouse.OverrideCursor = Cursors.Pen;
         }
 
         private void ResourceButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new WorkerResource(currentCanvas);
+            Mouse.OverrideCursor = Cursors.Pen;
         }
 
         private void SyncButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Sync(currentCanvas);
+            Mouse.OverrideCursor = Cursors.Pen;
         }
 
         private void ParallelButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new sapr_sim.Figures.Parallel(currentCanvas);
+            Mouse.OverrideCursor = Cursors.Pen;
         }
 
         private void DecisionButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Decision(currentCanvas);
+            Mouse.OverrideCursor = Cursors.Pen;
         }
 
         private void CollectorButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Collector(currentCanvas);
+            Mouse.OverrideCursor = Cursors.Pen;
         }
 
         private void EntitySourceButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Source(currentCanvas);
+            Mouse.OverrideCursor = Cursors.Pen;
         }
 
         private void EntityDestinationButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new Destination(currentCanvas);
+            Mouse.OverrideCursor = Cursors.Pen;
         }
 
         private void LineButton_Click(object sender, RoutedEventArgs e)
         {
             currentEntity = new ConnectionLine(currentCanvas);
             firstConnect = true;
+            Mouse.OverrideCursor = Cursors.Pen;
         }
 
         public void attachMovingEvents(UIEntity entity)
