@@ -14,6 +14,11 @@ namespace Entities
 
         public List<MaterialResource> materials { get; set; }
 
+        public InstrumentResource()
+        {
+            materials = new List<MaterialResource>();
+        }
+
         public override int totalCount
         {
             get 

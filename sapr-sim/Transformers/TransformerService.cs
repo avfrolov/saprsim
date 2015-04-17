@@ -117,8 +117,7 @@ namespace EntityTransformator
                     type = Entities.ResourceType.WORKER,
                     efficiency = wr.Efficiency,
                     isShared = wr.IsShared,
-                    price = wr.Price,
-                    instruments = new List<Entities.InstrumentResource>()
+                    price = wr.Price
                 };
             }
             else if (resource is sapr_sim.Figures.InstrumentResource)
@@ -132,8 +131,7 @@ namespace EntityTransformator
                     type = Entities.ResourceType.INSTRUMENT,
                     isShared = ir.IsShared,
                     price = ir.Price,
-                    power = ir.Power,
-                    materials = new List<Entities.MaterialResource>()
+                    power = ir.Power
                 };
             }
             else if (resource is sapr_sim.Figures.MaterialResource)
@@ -196,7 +194,7 @@ namespace EntityTransformator
                         if (worker != null && material != null)
                         {
                             Entities.WorkerResource realWorker = resMap[worker] as Entities.WorkerResource;
-                            Entities.MaterialResource realMaterial = resMap[instrument] as Entities.MaterialResource;
+                            Entities.MaterialResource realMaterial = resMap[material] as Entities.MaterialResource;
                             if (!realWorker.materials.Contains(realMaterial))
                                 realWorker.materials.Add(realMaterial);
                         }
