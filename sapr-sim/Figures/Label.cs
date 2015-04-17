@@ -34,7 +34,7 @@ namespace sapr_sim.Figures
 
         public Label(Canvas canvas) : base(canvas)
         { 
-            textParam.Value = DEFAULT_NAME;
+            name.Value = DEFAULT_NAME;
             init(null, DEFAULT_NAME);
         }
 
@@ -42,7 +42,7 @@ namespace sapr_sim.Figures
         {
             init(owner, text);
 
-            textParam.Value = text;                 
+            name.Value = text;                 
             this.canvas = canvas;
 
             Canvas.SetLeft(this, xPos);
@@ -51,7 +51,7 @@ namespace sapr_sim.Figures
 
         public string Text
         {
-            get { return textParam.Value; }
+            get { return name.Value; }
         }
 
         public override void createAndDraw(double x, double y)
@@ -71,7 +71,7 @@ namespace sapr_sim.Figures
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue("text", textParam.Value);
+            info.AddValue("text", name.Value);
             info.AddValue("owner", owner);
         }
 

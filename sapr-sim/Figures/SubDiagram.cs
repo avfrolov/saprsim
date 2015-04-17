@@ -24,7 +24,7 @@ namespace sapr_sim.Figures
         {
             init();
             this.projectItem = item;
-            textParam.Value = item.Name;
+            name.Value = item.Name;
         }
 
         public SubDiagram(SerializationInfo info, StreamingContext context) : base(info, context)
@@ -47,7 +47,7 @@ namespace sapr_sim.Figures
             ports.Add(inputPort);
             ports.Add(outputPort);
 
-            label = new Label(this, canvas, x + 22, y + 22, textParam.Value);
+            label = new Label(this, canvas, x + 22, y + 22, name.Value);
             canvas.Children.Add(label);
         }
 

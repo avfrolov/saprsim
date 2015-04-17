@@ -24,7 +24,7 @@ namespace sapr_sim.Figures
         public InstrumentResource(Canvas canvas) : base(canvas)
         {
             init();
-            textParam.Value = ResourceType.INSTRUMENT.Name;
+            name.Value = ResourceType.INSTRUMENT.Name;
             type.Value = ResourceType.INSTRUMENT;
         }
 
@@ -46,7 +46,7 @@ namespace sapr_sim.Figures
             canvas.Children.Add(bottomPort);
             ports.Add(bottomPort);
 
-            label = new Label(this, canvas, x + 10, y + 22, textParam.Value);
+            label = new Label(this, canvas, x + 10, y + 22, name.Value);
             canvas.Children.Add(label);
         }
 

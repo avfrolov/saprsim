@@ -38,7 +38,7 @@ namespace sapr_sim.Figures
         public Source(Canvas canvas) : base(canvas)
         {
             init();
-            textParam.Value = DEFAULT_NAME;
+            name.Value = DEFAULT_NAME;
         }
 
         public override void createAndDraw(double x, double y)
@@ -47,7 +47,7 @@ namespace sapr_sim.Figures
             canvas.Children.Add(port);
             ports.Add(port);
 
-            label = new Label(this, canvas, x + 12, y + 23, textParam.Value);
+            label = new Label(this, canvas, x + 12, y + 23, name.Value);
         }
 
         public override string iconPath()

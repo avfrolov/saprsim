@@ -1,4 +1,5 @@
 ﻿using sapr_sim.Parameters;
+using sapr_sim.Parameters.Validators;
 using sapr_sim.Utils;
 using sapr_sim.WPFCustomElements;
 using System;
@@ -16,13 +17,13 @@ namespace sapr_sim.Figures
     public class MaterialResource : Resource, ISerializable
     {
 
-        private UIParam<int> consumption = new UIParam<int>(1, new IntegerParamValidator(), "Расход");
+        private UIParam<int> consumption = new UIParam<int>(1, new PositiveIntegerParamValidator(), "Расход");
         private UIParam<TimeMeasure> consumptionTimeMeasure = new UIParam<TimeMeasure>(TimeMeasure.SECOND, new DefaultParamValidator(), "за", new ParameterComboBox(TimeMeasure.list()));
 
         public MaterialResource(Canvas canvas) : base(canvas)
         {
             init();
-            textParam.Value = ResourceType.MATERIAL.Name;
+            name.Value = ResourceType.MATERIAL.Name;
             type.Value = ResourceType.MATERIAL;
         }
 
@@ -39,7 +40,7 @@ namespace sapr_sim.Figures
         public override void createAndDraw(double x, double y)
         {
             base.createAndDraw(x, y);
-            label = new Label(this, canvas, x + 20, y + 22, textParam.Value);
+            label = new Label(this, canvas, x + 20, y + 22, name.Value);
             canvas.Children.Add(label);
         }
 

@@ -23,7 +23,7 @@ namespace sapr_sim.Figures
         public Parallel(Canvas canvas) : base(canvas)
         {
             init();
-            textParam.Value = DEFAULT_NAME;
+            name.Value = DEFAULT_NAME;
         }
 
         public Parallel(SerializationInfo info, StreamingContext context) : base(info, context)
@@ -50,7 +50,7 @@ namespace sapr_sim.Figures
             ports.Add(outputPort1);
             ports.Add(outputPort2);
 
-            label = new Label(this, canvas, x - 45, y - 20, textParam.Value);
+            label = new Label(this, canvas, x - 45, y - 20, name.Value);
         }
 
         public override string iconPath()

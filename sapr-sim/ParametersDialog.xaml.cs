@@ -41,9 +41,10 @@ namespace sapr_sim
 
         private void btnDialogOk_Click(object sender, RoutedEventArgs e)
         {
+            bool result;
             if (ParameterProccesor.newResource == null || ParameterProccesor.newResource.GetType() == owner.GetType())
             {
-                applyNewParams(parameters);
+                result = applyNewParams(parameters);
                 ParameterProccesor.newResource = null;
             }
             else
@@ -53,25 +54,27 @@ namespace sapr_sim
                 Point p = new Point(VisualTreeHelper.GetOffset(owner).X + MainWindow.X_OFFSET * (-1),
                                     VisualTreeHelper.GetOffset(owner).Y + MainWindow.Y_OFFSET * (-1));
 
-                
+                result = applyNewParams(ParameterProccesor.newResource.getParams());
+
                 mw.currentEntity = ParameterProccesor.newResource;
                 mw.drawOnCanvas(p);
                 mw.selected = ParameterProccesor.newResource;
 
                 restoreConnectionLines(mw);
-
                 mw.deleteEntity(owner);
-
-                applyNewParams(ParameterProccesor.newResource.getParams());
+                
                 ParameterProccesor.drawParameters(ParameterProccesor.newResource, sp, false);
                 ParameterProccesor.newResource = null;
             }
 
-            this.Close();
-            ((MainWindow)System.Windows.Application.Current.MainWindow).ModelChanged();
+            if (result)
+            {
+                this.Close();
+                ((MainWindow)System.Windows.Application.Current.MainWindow).ModelChanged();
+            }
         }
 
-        private void applyNewParams(List<UIParam> parameters)
+        private bool applyNewParams(List<UIParam> parameters)
         {
             foreach (UIElement el in sp.Children)
             {
@@ -84,13 +87,14 @@ namespace sapr_sim
                     if (!param.Validator.validate(input.getValue().ToString()))
                     {
                         MessageBox.Show("Параметр '" + l.Content + "' задан не верно");
-                        return;
+                        return false;
                     }
                     if (sapr_sim.Figures.UIEntity.ENTITY_NAME_PARAM.Equals(param.DisplayedText) && !param.RawValue.Equals(input.getValue().ToString()))
                         owner.updateText(input.getValue().ToString());
                     param.RawValue = input.getValue();
                 }
             }
+            return true;
         }
 
         private void restoreConnectionLines(MainWindow mw)
@@ -192,7 +196,7 @@ namespace sapr_sim
 
             if (ResourceType.WORKER.Equals(newRt))
             {
-                newResource = new WorkerResource(res.canvas) { Count = res.Count, IsShared = res.IsShared };              
+                newResource = new WorkerResource(res.canvas) { Count = res.Count, IsShared = res.IsShared };                   
             }
             else if (ResourceType.INSTRUMENT.Equals(newRt))
             {
@@ -202,6 +206,9 @@ namespace sapr_sim
             {
                 newResource = new MaterialResource(res.canvas) { Count = res.Count, IsShared = res.IsShared };
             }
+
+            if (!ResourceType.nameList().Contains(res.EntityName))
+                newResource.EntityName = res.EntityName;
 
             ParameterProccesor.drawParameters(newResource, panel, true);
         }

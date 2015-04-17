@@ -24,7 +24,7 @@ namespace sapr_sim.Figures
         private static readonly string DEFAULT_NAME = "Ресурс";
 
         protected UIParam<ResourceType> type = new UIParam<ResourceType>(ResourceType.WORKER, new DefaultParamValidator(), "Тип ресурса", new ParameterComboBox(ResourceType.list()));
-        protected UIParam<int> count = new UIParam<int>(1, new IntegerParamValidator(), "Количество");
+        protected UIParam<int> count = new UIParam<int>(1, new PositiveIntegerParamValidator(), "Количество");
         protected UIParam<Boolean> isShared = new UIParam<Boolean>(true, new DefaultParamValidator(), "Разделяемый", new ParameterCheckBox(true));    
 
         private Rect bound;
@@ -36,7 +36,7 @@ namespace sapr_sim.Figures
         public Resource(Canvas canvas) : base(canvas)
         {
             init();
-            textParam.Value = DEFAULT_NAME;
+            name.Value = DEFAULT_NAME;
         }
 
         public Resource(SerializationInfo info, StreamingContext context) : base(info, context)

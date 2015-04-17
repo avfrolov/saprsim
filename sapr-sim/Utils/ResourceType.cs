@@ -22,6 +22,11 @@ namespace sapr_sim.Utils
             return new List<IConvertible>() { WORKER, INSTRUMENT, MATERIAL };
         }
 
+        public static List<string> nameList()
+        {
+            return new List<string>() { WORKER.Name, INSTRUMENT.Name, MATERIAL.Name };
+        }
+
         public static ResourceType byOrder(int order)
         {
             switch (order)

@@ -34,7 +34,7 @@ namespace sapr_sim.Figures
         public Procedure(Canvas canvas) : base(canvas)
         {
             init();
-            textParam.Value = DEFAULT_NAME;
+            name.Value = DEFAULT_NAME;
         }
 
         public Procedure(SerializationInfo info, StreamingContext context) : base(info, context)
@@ -73,7 +73,7 @@ namespace sapr_sim.Figures
             ports.Add(outputPort);
             ports.Add(resourcePort);
 
-            label = new Label(this, canvas, x + 18, y + 22, textParam.Value);
+            label = new Label(this, canvas, x + 18, y + 22, name.Value);
             canvas.Children.Add(label);
         }
 

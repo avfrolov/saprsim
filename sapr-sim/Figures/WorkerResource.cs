@@ -24,7 +24,7 @@ namespace sapr_sim.Figures
         public WorkerResource(Canvas canvas) : base(canvas)
         {
             init();
-            textParam.Value = ResourceType.WORKER.Name;
+            name.Value = ResourceType.WORKER.Name;
             type.Value = ResourceType.WORKER;
         }
 
@@ -46,7 +46,7 @@ namespace sapr_sim.Figures
             canvas.Children.Add(bottomPort);
             ports.Add(bottomPort);
 
-            label = new Label(this, canvas, x + 14, y + 22, textParam.Value);
+            label = new Label(this, canvas, x + 14, y + 22, name.Value);
             canvas.Children.Add(label);
         }
 

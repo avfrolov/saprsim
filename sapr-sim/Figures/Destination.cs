@@ -21,7 +21,7 @@ namespace sapr_sim.Figures
         public Destination(Canvas canvas) : base(canvas)
         {
             Fill = Brushes.Red;
-            textParam.Value = DEFAULT_NAME;
+            name.Value = DEFAULT_NAME;
         }
 
         public Destination(SerializationInfo info, StreamingContext context) : base(info, context)
@@ -37,7 +37,7 @@ namespace sapr_sim.Figures
             canvas.Children.Add(port);
             ports.Add(port);
 
-            label = new Label(this, canvas, x + 13, y + 23, textParam.Value);
+            label = new Label(this, canvas, x + 13, y + 23, name.Value);
         }
 
         public override List<UIParam> getParams()

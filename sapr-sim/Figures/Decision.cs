@@ -26,7 +26,7 @@ namespace sapr_sim.Figures
         public Decision(Canvas canvas) : base(canvas)
         {
             init();
-            textParam.Value = DEFAULT_NAME;
+            name.Value = DEFAULT_NAME;
         }
 
         public Decision(SerializationInfo info, StreamingContext context) : base(info, context)
@@ -53,7 +53,7 @@ namespace sapr_sim.Figures
             ports.Add(yesPort);
             ports.Add(noPort);
 
-            label = new Label(this, canvas, x + 20, y + 16, textParam.Value);
+            label = new Label(this, canvas, x + 20, y + 16, name.Value);
             canvas.Children.Add(label);
         }
 

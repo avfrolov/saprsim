@@ -24,7 +24,7 @@ namespace sapr_sim.Figures
         public Sync(Canvas canvas) : base(canvas)
         {
             init();
-            textParam.Value = DEFAULT_NAME;
+            name.Value = DEFAULT_NAME;
         }
 
         public Sync(SerializationInfo info, StreamingContext context) : base(info, context)
@@ -51,7 +51,7 @@ namespace sapr_sim.Figures
             ports.Add(inputPort2);
             ports.Add(outputPort);
 
-            label = new Label(this, canvas, x - 30, y - 20, textParam.Value);
+            label = new Label(this, canvas, x - 30, y - 20, name.Value);
         }
 
         public override string iconPath()

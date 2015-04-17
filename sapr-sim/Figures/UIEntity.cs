@@ -32,7 +32,7 @@ namespace sapr_sim.Figures
 
         private string state = "original";
 
-        protected UIParam<String> textParam = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM);
+        protected UIParam<String> name = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM);
 
         protected long id = 0;
 
@@ -42,7 +42,7 @@ namespace sapr_sim.Figures
             {
                 init(info.GetValue("canvas", typeof(ScrollableCanvas)) as Canvas);
 
-                this.textParam = info.GetValue("textParam", typeof(UIParam<String>)) as UIParam<String>;
+                this.name = info.GetValue("textParam", typeof(UIParam<String>)) as UIParam<String>;
                 Canvas.SetLeft(this, info.GetDouble("x"));
                 Canvas.SetTop(this, info.GetDouble("y"));
                 ((MainWindow)System.Windows.Application.Current.MainWindow).attachMovingEvents(this);
@@ -134,7 +134,8 @@ namespace sapr_sim.Figures
 
         public string EntityName
         {
-            get { return textParam.Value; }
+            get { return name.Value; }
+            set { name.Value = value; }
         }
 
         public bool ParametersExist
@@ -168,7 +169,7 @@ namespace sapr_sim.Figures
         public virtual List<UIParam> getParams()
         {
             List<UIParam> param = new List<UIParam>();
-            param.Add(textParam);
+            param.Add(name);
             return param;
         }
 
@@ -178,7 +179,7 @@ namespace sapr_sim.Figures
             info.AddValue("label", label);
             info.AddValue("x", VisualTreeHelper.GetOffset(this).X);
             info.AddValue("y", VisualTreeHelper.GetOffset(this).Y);
-            info.AddValue("textParam", textParam);
+            info.AddValue("textParam", name);
         }
 
         public Port findPort(PortType type)
