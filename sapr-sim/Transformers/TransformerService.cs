@@ -136,7 +136,7 @@ namespace EntityTransformator
             foreach (ConnectionLine con in connectors)
             {
                 UIEntity procedure = null;
-                if (con.SourcePort != null && con.SourcePort.PortType == PortType.BOTTOM_RESOURCE)
+                if (con.SourcePort != null)
                 {
                     UIEntity src = con.SourcePort.Owner;
                     UIEntity dst = con.DestinationPort.Owner;
@@ -148,7 +148,6 @@ namespace EntityTransformator
                         if (!realprocedure.getResources().Contains(res))
                             addAdditionalRelations(realprocedure, res);
                     }                    
-                    
                 }
             }
         }
