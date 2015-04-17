@@ -3,6 +3,7 @@ using EntityTransformator;
 using Kernel;
 using sapr_sim.Figures;
 using sapr_sim.WPFCustomElements;
+using sapr_sim.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,16 +44,15 @@ namespace sapr_sim
             SaveAll_Click(null, null);
             TransformerService ts = new TransformerService();
             List<Entity> entities = ts.transform(canvas.Children);
-            Model.Instance.timeRestriction = Project.Instance.TimeRestiction.Time;
+            Model.Instance.timeRestriction = TimeConverter.fromHumanToModel(Project.Instance.TimeRestiction);
             Controller controller = new Controller(entities, ts.getResources());
             errorsListBox.Items.Clear();
             try
             {
                 controller.simulate();
-                if (controller.ModelState.Equals(ProcessingState.RESOURCES_EMPTY))
-                    MessageBox.Show("Результат выполнения моделирования - нехватка ресурсов");
-                else
-                    MessageBox.Show("Результат выполнения моделирования - " + controller.SimulationTime + " условных единиц времени");
+                TimeWithMeasure simulationTime = TimeConverter.fromModelToHuman(controller.SimulationTime);
+
+                MessageBox.Show(ProcessingStateMethods.GetDescription(controller.SimulationState) + " Время выполнения моделирования - " + Math.Round(simulationTime.doubleValue, 3) + " " + simulationTime.measure.Name);
             }
             catch (ValidationException ex)
             {
