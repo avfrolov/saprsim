@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using sapr_sim.Parameters;
 
 namespace sapr_sim.Utils
 {
@@ -20,6 +21,29 @@ namespace sapr_sim.Utils
 
     public class TimeConverter
     {
+        public static double fromHumanToModel(TimeParam time)
+        {
+            double result = 0;
+            switch (time.Measure.Order)
+            {
+                case 0:
+                    result = time.Time;
+                    break;
+                case 1:
+                    result = time.Time * 10;
+                    break;
+                case 2:
+                    result = time.Time * 100;
+                    break;
+                case 3:
+                    result = time.Time * 1000;
+                    break;
+                default:
+                    throw new Exception("Wrong time measure");
+            }
+            return result;
+        }
+
         public static double fromHumanToModel(TimeWithMeasure time)
         {
             double result = 0;

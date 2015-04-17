@@ -44,7 +44,7 @@ namespace sapr_sim
             SaveAll_Click(null, null);
             TransformerService ts = new TransformerService();
             List<Entity> entities = ts.transform(canvas.Children);
-            Model.Instance.timeRestriction = Project.Instance.TimeRestiction.Time;
+            Model.Instance.timeRestriction = TimeConverter.fromHumanToModel(Project.Instance.TimeRestiction);
             Controller controller = new Controller(entities, ts.getResources());
             errorsListBox.Items.Clear();
             try
@@ -52,12 +52,8 @@ namespace sapr_sim
                 controller.simulate();
                 TimeWithMeasure simulationTime = TimeConverter.fromModelToHuman(controller.SimulationTime);
 
-                if (controller.SimulationState.Equals(ProcessingState.RESOURCES_EMPTY))
-                    MessageBox.Show("Результат выполнения моделирования - нехватка ресурсов");
-                else
-                    //MessageBox.Show("Результат выполнения моделирования - " + controller.SimulationTime + " условных единиц времени");
-                    MessageBox.Show("Результат выполнения моделирования - " + simulationTime.doubleValue + " " + simulationTime.measure.Name);
-                }
+                MessageBox.Show(ProcessingStateMethods.GetDescription(controller.SimulationState) + " Время выполнения моделирования - " + Math.Round(simulationTime.doubleValue, 3) + " " + simulationTime.measure.Name);
+            }
             catch (ValidationException ex)
             {
                 errorsTab.IsSelected = true;
