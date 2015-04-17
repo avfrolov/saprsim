@@ -164,8 +164,8 @@ namespace sapr_sim
 
         private void CopyComand(object sender, ExecutedRoutedEventArgs e)
         {
-            UndoRedoManager.putInUndoStack(selected);
-            UndoRedoManager.clearRedoStack(selected);
+            UndoRedoManager.putInUndoStack((ScrollableCanvas)currentCanvas);
+            UndoRedoManager.clearRedoStack((ScrollableCanvas)currentCanvas);
 
             if (sender != null && selected != null)
             {
@@ -177,8 +177,8 @@ namespace sapr_sim
 
         private void CutComand(object sender, ExecutedRoutedEventArgs e)
         {
-            UndoRedoManager.putInUndoStack(selected);
-            UndoRedoManager.clearRedoStack(selected);
+            UndoRedoManager.putInUndoStack((ScrollableCanvas)currentCanvas);
+            UndoRedoManager.clearRedoStack((ScrollableCanvas)currentCanvas);
 
             if (sender != null && selected != null)
             {
@@ -194,8 +194,8 @@ namespace sapr_sim
 
         private void PasteComand(object sender, ExecutedRoutedEventArgs e)
         {
-            UndoRedoManager.putInUndoStack(selected);
-            UndoRedoManager.clearRedoStack(selected);
+            UndoRedoManager.putInUndoStack((ScrollableCanvas)currentCanvas);
+            UndoRedoManager.clearRedoStack((ScrollableCanvas)currentCanvas);
 
             IDataObject dataObj = Clipboard.GetDataObject();
             string format = typeof(UIEntity).FullName;
