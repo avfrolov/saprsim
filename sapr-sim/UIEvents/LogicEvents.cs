@@ -3,6 +3,7 @@ using EntityTransformator;
 using Kernel;
 using sapr_sim.Figures;
 using sapr_sim.WPFCustomElements;
+using sapr_sim.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,11 +50,14 @@ namespace sapr_sim
             try
             {
                 controller.simulate();
-                if (controller.ModelState.Equals(ProcessingState.RESOURCES_EMPTY))
+                TimeWithMeasure simulationTime = TimeConverter.fromModelToHuman(controller.SimulationTime);
+
+                if (controller.SimulationState.Equals(ProcessingState.RESOURCES_EMPTY))
                     MessageBox.Show("Результат выполнения моделирования - нехватка ресурсов");
                 else
-                    MessageBox.Show("Результат выполнения моделирования - " + controller.SimulationTime + " условных единиц времени");
-            }
+                    //MessageBox.Show("Результат выполнения моделирования - " + controller.SimulationTime + " условных единиц времени");
+                    MessageBox.Show("Результат выполнения моделирования - " + simulationTime.doubleValue + " " + simulationTime.measure.Name);
+                }
             catch (ValidationException ex)
             {
                 errorsTab.IsSelected = true;

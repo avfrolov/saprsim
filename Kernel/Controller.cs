@@ -16,6 +16,7 @@ namespace Kernel
 
         private List<Entity> entities;
         private Model model = Model.Instance;
+        private SimulationResult simulationResult = null;
 
         public Controller(List<Entity> entities, List<Resource> resources)
         {
@@ -39,7 +40,7 @@ namespace Kernel
 
             if (result.Success)
             {
-                Simulation.Simulation.simulate();
+                simulationResult = Simulation.Simulation.simulate();
             } 
             else
             {
@@ -51,14 +52,20 @@ namespace Kernel
                 throw ex;
             }
         }
-
-        public ProcessingState ModelState
+        
+        public ProcessingState SimulationState
         {
-            get { return Model.Instance.state; }
+            get { return simulationResult.state; }
         }
+
         public double SimulationTime
         {
-            get { return Timer.Instance.getTime(); }
+            get { return simulationResult.simulationTime; }
         }
+
+        //public double SimulationTime
+        //{
+        //    get { return Timer.Instance.getTime(); }
+        //}
     }
 }

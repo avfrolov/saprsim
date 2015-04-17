@@ -9,6 +9,7 @@ namespace Entities
     public enum ProcessingState
     {
         FINE,
-        RESOURCES_EMPTY
+        RESOURCES_EMPTY,
+        TIME_OUT
     }
 }

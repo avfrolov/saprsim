@@ -10,8 +10,10 @@ namespace Simulation
 {
     public class Simulation
     {
-        public static void simulate()
+        public static SimulationResult simulate()
         {
+            SimulationResult result = new SimulationResult();
+
             Model model = Model.Instance;
             Timer timer = Timer.Instance;
 
@@ -38,10 +40,19 @@ namespace Simulation
                 }
                 timer.increment();
                 if (timer.getTime() > model.timeRestriction)
+                {
+                    model.state = ProcessingState.TIME_OUT;
                     break;
+                }
                 if (model.state.Equals(ProcessingState.RESOURCES_EMPTY))
                     break;
             }
+            
+            //set simulations results
+            result.simulationTime = timer.getTime();
+            result.state = model.state;
+
+            return result;
         }
 
         private static bool checkForNotReadyProjects(List<Project> projects)

@@ -1,4 +1,5 @@
 ﻿using sapr_sim.Figures;
+using sapr_sim.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,11 @@ namespace EntityTransformator.Transformers
         public Entities.Entity transform(sapr_sim.Figures.UIEntity entity)
         {
             Procedure p = entity as Procedure;
-            return new Entities.impl.Procedure() { manHour = p.Time, name = p.EntityName };
+           
+            return new Entities.impl.Procedure() { 
+                manHour = TimeConverter.fromHumanToModel(new TimeWithMeasure(p.Time, p.TimeMeasure)), 
+                name = p.EntityName 
+            };
         }
     }
 }
