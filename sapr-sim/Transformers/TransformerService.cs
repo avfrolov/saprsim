@@ -170,6 +170,18 @@ namespace EntityTransformator
                     instrument = src is sapr_sim.Figures.InstrumentResource ? src : dst is sapr_sim.Figures.InstrumentResource ? dst : null;
                     material = src is sapr_sim.Figures.MaterialResource ? src : dst is sapr_sim.Figures.MaterialResource ? dst : null;
 
+                    if (src is sapr_sim.Figures.WorkerResource && dst is sapr_sim.Figures.MaterialResource
+                        || dst is sapr_sim.Figures.WorkerResource && src is sapr_sim.Figures.MaterialResource)
+                    {
+                        if (worker != null && material != null)
+                        {
+                            Entities.WorkerResource realWorker = resMap[worker] as Entities.WorkerResource;
+                            Entities.MaterialResource realMaterial = resMap[instrument] as Entities.MaterialResource;
+                            if (!realWorker.materials.Contains(realMaterial))
+                                realWorker.materials.Add(realMaterial);
+                        }
+                    }
+
                     if (src is sapr_sim.Figures.WorkerResource && dst is sapr_sim.Figures.InstrumentResource
                         || dst is sapr_sim.Figures.WorkerResource && src is sapr_sim.Figures.InstrumentResource)
                     {
