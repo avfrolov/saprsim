@@ -9,5 +9,10 @@ namespace Entities
     public class MaterialResource : Resource
     {
         public int perTick { get; set; }
+
+        public override int totalCount
+        {
+            get { return count; }
+        }
     }
 }

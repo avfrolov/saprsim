@@ -28,7 +28,7 @@ namespace EntityValidator.rules
                 {
                     Procedure p = (e as Procedure);
                     foreach(Resource res in p.getResources())
-                        procedureResources += res.count;
+                        procedureResources += res.totalCount;
                 }
             }
 

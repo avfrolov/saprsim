@@ -13,5 +13,16 @@ namespace Entities
         public double price { get; set; }
 
         public List<MaterialResource> materials { get; set; }
+
+        public override int totalCount
+        {
+            get 
+            {
+                int total = count;
+                foreach (MaterialResource res in materials)
+                    total += res.totalCount;
+                return total;
+            }
+        }
     }
 }

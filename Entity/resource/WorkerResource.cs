@@ -10,9 +10,20 @@ namespace Entities
     {
 
         public double efficiency { get; set; }
+
         public double price { get; set; }
 
         public List<InstrumentResource> instruments { get; set; }
 
+        public override int totalCount
+        {
+            get 
+            {
+                int total = count;
+                foreach (InstrumentResource res in instruments)
+                    total += res.totalCount;
+                return total;
+            }
+        }
     }
 }
