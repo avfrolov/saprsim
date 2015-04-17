@@ -22,32 +22,32 @@
             <MenuItem Header="Файл">
                 <MenuItem Header="Новый">
                     <MenuItem Header="Проект" Click="CreateNewProject_Click"/>
-                    <MenuItem Name="newDiagramButton" Header="Процесс" InputGestureText="Ctrl+N" Click="CreateNewDiagram_Click" IsEnabled="False"/>
+                    <MenuItem Name="newDiagramButton" Header="Процесс" InputGestureText="Ctrl+N" Click="CreateNewDiagram_Click"/>
                 </MenuItem>
                 <MenuItem Header="Открыть">
                     <MenuItem Header="Проект" Click="OpenProject_Click"/>
-                    <MenuItem Name="openDiagramButton" Header="Процесс" InputGestureText="Ctrl+O" Click="Open_Click" IsEnabled="False"/>
+                    <MenuItem Name="openDiagramButton" Header="Процесс" InputGestureText="Ctrl+O" Click="Open_Click"/>
                 </MenuItem>
-                <MenuItem Name="closeProjectButton"  Header="Закрыть проект" Click="CloseProject_Click" IsEnabled="False"/>
+                <MenuItem Name="closeProjectButton"  Header="Закрыть проект" Click="CloseProject_Click"/>
                 <Separator/>
-                <MenuItem Name="saveButton" Header="Сохранить" InputGestureText="Ctrl+S" Click="Save_Click" IsEnabled="False"/>
-                <MenuItem Name="saveAsButton" Header="Сохранить как..." Click="SaveAs_Click" IsEnabled="False"/>
-                <MenuItem Name="saveAllButton" Header="Сохранить все" InputGestureText="Ctrl+Shift+S" Click="SaveAll_Click" IsEnabled="False"/>
+                <MenuItem Name="saveButton" Header="Сохранить" InputGestureText="Ctrl+S" Click="Save_Click"/>
+                <MenuItem Name="saveAsButton" Header="Сохранить как..." Click="SaveAs_Click"/>
+                <MenuItem Name="saveAllButton" Header="Сохранить все" InputGestureText="Ctrl+Shift+S" Click="SaveAll_Click"/>
                 <Separator/>
                 <MenuItem Header="Экспорт" IsEnabled="False"/>
             </MenuItem>
-            <MenuItem Header="Правка">
+            <MenuItem Name="editMenuItem" Header="Правка">
                 <MenuItem Header="Отменить действие" InputGestureText="Ctrl+Z" IsEnabled="False"/>
                 <MenuItem Header="Вернуть действие" InputGestureText="Ctrl+Y" IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Name="cutButton" Header="Вырезать" InputGestureText="Ctrl+X" Click="Cut_Click" IsEnabled="False"/>
-                <MenuItem Name="copyButton" Header="Копировать" InputGestureText="Ctrl+C" Click="Copy_Click" IsEnabled="False"/>
-                <MenuItem Name="pasteButton" Header="Вставить" InputGestureText="Ctrl+V" Click="Paste_Click" IsEnabled="False"/>
+                <MenuItem Name="cutButton" Header="Вырезать" InputGestureText="Ctrl+X" Click="Cut_Click"/>
+                <MenuItem Name="copyButton" Header="Копировать" InputGestureText="Ctrl+C" Click="Copy_Click"/>
+                <MenuItem Name="pasteButton" Header="Вставить" InputGestureText="Ctrl+V" Click="Paste_Click"/>
                 <Separator/>
-                <MenuItem Name="deleteButton" Header="Удалить" InputGestureText="Del" Click="Delete_Click" IsEnabled="False"/>
+                <MenuItem Name="deleteButton" Header="Удалить" InputGestureText="Del" Click="Delete_Click"/>
                 <MenuItem Header="Выделить все" InputGestureText="Ctrl+A" IsEnabled="False"/>
             </MenuItem>
-            <MenuItem Header="Инструменты">
+            <MenuItem Name="instrumentMenuItem" Header="Инструменты">
                 <MenuItem Header="Указатель" Click="ArrowButton_Click"/>
                 <MenuItem Header="Надпись" Click="LabelButton_Click"/>
                 <Separator/>
@@ -63,7 +63,7 @@
                 <MenuItem Header="Прямая линия" Click="LineButton_Click"/>
                 <MenuItem Header="Линия с изломом" IsEnabled="False"/>
             </MenuItem>
-            <MenuItem Header="Формат">
+            <MenuItem Name="formatMenuItem" Header="Формат">
                 <MenuItem Header="Выровнять">
                     <MenuItem Header="По левому краю" IsEnabled="False"/>
                     <MenuItem Header="По центру по горизонтали" IsEnabled="False"/>
@@ -74,23 +74,23 @@
                     <MenuItem Header="По нижнему краю" IsEnabled="False"/>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Проект">
-                <MenuItem Name="runSimulationButton" Header="Запуск моделирования" InputGestureText="F5" Click="SimulateButton_Click" IsEnabled="False"/>
+            <MenuItem Name="projectMenuItem" Header="Проект">
+                <MenuItem Name="runSimulationButton" Header="Запуск моделирования" InputGestureText="F5" Click="SimulateButton_Click"/>
                 <MenuItem Header="Запуск оптимизации" InputGestureText="F6" IsEnabled="False"/>
                 <Separator/>
-                <MenuItem Name="projectSettingsButton" Header="Настройки проекта" Click="ProjectSettings_Click" IsEnabled="False"/>
+                <MenuItem Name="projectSettingsButton" Header="Настройки проекта" Click="ProjectSettings_Click"/>
             </MenuItem>
         </Menu>
 
         <ToolBarPanel Grid.Row="1">
-            <ToolBar Height="26" >
-                <Button x:Name="NewDiagram" ToolTip="Создать новый процесс" Click="CreateNewDiagram_Click" IsEnabled="False">
+            <ToolBar Name="toolBar" Height="26" >
+                <Button x:Name="NewDiagram" ToolTip="Создать новый процесс" Click="CreateNewDiagram_Click">
                     <Image Source="Resources/New_document.png" />
                 </Button>
-                <Button x:Name="OpenDiagram" ToolTip="Открыть процесс" Click="Open_Click" IsEnabled="False">
+                <Button x:Name="OpenDiagram" ToolTip="Открыть процесс" Click="Open_Click">
                     <Image Source="Resources/Folder.png" />
                 </Button>
-                <Button x:Name="SaveDiagram" ToolTip="Сохранить" Click="Save_Click" IsEnabled="False">
+                <Button x:Name="SaveDiagram" ToolTip="Сохранить" Click="Save_Click">
                     <Image Source="Resources/Save.png" />
                 </Button>
                 <Button x:Name="Export" ToolTip="Экспорт в качестве изображения" IsEnabled="False">
@@ -98,13 +98,13 @@
                 </Button>
                 <Separator/>
 
-                <Button x:Name="Cut" ToolTip="Вырезать" Click="Cut_Click" IsEnabled="False">
+                <Button x:Name="Cut" ToolTip="Вырезать" Click="Cut_Click">
                     <Image Source="Resources/Cut.png" />
                 </Button>
-                <Button x:Name="Copy" ToolTip="Копировать" Click="Copy_Click" IsEnabled="False">
+                <Button x:Name="Copy" ToolTip="Копировать" Click="Copy_Click">
                     <Image Source="Resources/page_copy.png" />
                 </Button>
-                <Button x:Name="Paste" ToolTip="Вставить" Click="Paste_Click" IsEnabled="False">
+                <Button x:Name="Paste" ToolTip="Вставить" Click="Paste_Click">
                     <Image Source="Resources/page_paste.png" />
                 </Button>
                 <Separator/>
@@ -139,7 +139,7 @@
                 </Button>
                 <Separator/>
 
-                <Button x:Name="runSimulationToolButton" ToolTip="Запустить моделирование" Click="SimulateButton_Click" IsEnabled="False">
+                <Button x:Name="runSimulationToolButton" ToolTip="Запустить моделирование" Click="SimulateButton_Click">
                     <Image Source="Resources/Icon_PlaySolid.ico" />
                 </Button>
             </ToolBar>
@@ -192,7 +192,7 @@
                 </Border>
                 <Border Grid.Column="2" Width="50" Background="White" BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Right">
                     <DockPanel Background="AliceBlue" VerticalAlignment="Top">
-                        <Grid DockPanel.Dock="Bottom" Width="50" >
+                        <Grid Name="instrumentPanel" DockPanel.Dock="Bottom" Width="50" >
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>

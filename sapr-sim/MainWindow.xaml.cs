@@ -41,6 +41,7 @@ namespace sapr_sim
         {
             InitializeComponent();
             bindHotkeys();
+            ButtonsActivation(false);
         }
 
         private void Application_ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
@@ -349,7 +350,6 @@ namespace sapr_sim
             }
         }
 
-        // TODO think about button activition design
         private void ButtonsActivation(bool activate)
         {
             // Файл
@@ -360,24 +360,13 @@ namespace sapr_sim
             saveAllButton.IsEnabled = activate;                   
             closeProjectButton.IsEnabled = activate;
 
-            // Правка
-            cutButton.IsEnabled = activate;
-            copyButton.IsEnabled = activate;
-            pasteButton.IsEnabled = activate;
-            deleteButton.IsEnabled = activate;
+            editMenuItem.IsEnabled = activate;
+            instrumentMenuItem.IsEnabled = activate;
+            formatMenuItem.IsEnabled = activate;
+            projectMenuItem.IsEnabled = activate;
 
-            // Модель
-            runSimulationButton.IsEnabled = activate;
-            projectSettingsButton.IsEnabled = activate;
-
-            // tool buttons
-            NewDiagram.IsEnabled = activate;
-            OpenDiagram.IsEnabled = activate;
-            SaveDiagram.IsEnabled = activate;
-            Cut.IsEnabled = activate;
-            Copy.IsEnabled = activate;
-            Paste.IsEnabled = activate;
-            runSimulationToolButton.IsEnabled = activate;
+            toolBar.IsEnabled = activate;
+            instrumentPanel.IsEnabled = activate;            
         }
 
         private bool needSave()
