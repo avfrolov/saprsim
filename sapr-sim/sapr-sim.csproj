@@ -126,11 +126,14 @@
     <Compile Include="Transformers\SourceTransformer.cs" />
     <Compile Include="Transformers\SynchronizationTransformer.cs" />
     <Compile Include="Transformers\Transformer.cs" />
+    <Compile Include="UndoRedoManager\FixedSizeStack.cs" />
+    <Compile Include="UndoRedoManager\UndoRedoManager.cs" />
     <Compile Include="Utils\ConnectorFinder.cs" />
     <Compile Include="Utils\FileService.cs" />
     <Compile Include="Utils\IdGenerator.cs" />
     <Compile Include="Utils\ResourceType.cs" />
     <Compile Include="Utils\TimeConverter.cs" />
+    <Compile Include="Utils\StreamUtils.cs" />
     <Compile Include="Utils\TimeMeasure.cs" />
     <Compile Include="Utils\ZIndexUtil.cs" />
     <Compile Include="WPFCustomElements\ClosableTabItem.cs" />

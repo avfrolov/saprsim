@@ -15,14 +15,12 @@ namespace sapr_sim.WPFCustomElements
     [Serializable]
    public class ScrollableCanvas : Canvas, ISerializable, IEqualityComparer<ScrollableCanvas>  
    {
-        string state = "original";
-
         static ScrollableCanvas()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ScrollableCanvas), new FrameworkPropertyMetadata(typeof(ScrollableCanvas)));
         }
 
-        private long id = 0;
+        public long id {get; set;} 
 
         public ScrollableCanvas(SerializationInfo info, StreamingContext context)
         {
@@ -43,7 +41,6 @@ namespace sapr_sim.WPFCustomElements
                 {
                     Console.Out.Write(ex);
                 }
-                state = "copyed";
             }
             this.id = info.GetInt32("id");
         }

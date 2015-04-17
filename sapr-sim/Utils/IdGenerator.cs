@@ -12,8 +12,7 @@ namespace sapr_sim.Utils
 
         public static long GenerateId()
         {
-            ++id;
-            return id;
+            return ++id;
         }
     }
 }

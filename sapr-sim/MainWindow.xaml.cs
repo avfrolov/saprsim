@@ -84,12 +84,16 @@ namespace sapr_sim
                     }
                     else
                     {
+                        UndoRedoManager.putInUndoStack((ScrollableCanvas)currentCanvas);
+                        UndoRedoManager.clearRedoStack((ScrollableCanvas)currentCanvas);
                         sd.canvas = currentCanvas;
                         drawOnCanvas(e.GetPosition(this));
                     }
                 }
                 else if (!(currentEntity is ConnectionLine))
                 {
+                    UndoRedoManager.putInUndoStack((ScrollableCanvas)currentCanvas);
+                    UndoRedoManager.clearRedoStack((ScrollableCanvas)currentCanvas);
                     drawOnCanvas(e.GetPosition(this));
                 }                
             }
@@ -142,6 +146,11 @@ namespace sapr_sim
 
         private void connect()
         {
+
+            UndoRedoManager.putInUndoStack(currentEntity);
+            UndoRedoManager.clearRedoStack(currentEntity);
+
+
             if (firstConnect)
             {
                 setBinding(ConnectionLine.SourceProperty);

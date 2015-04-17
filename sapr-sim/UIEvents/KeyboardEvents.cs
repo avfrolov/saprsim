@@ -1,5 +1,7 @@
-﻿using sapr_sim.Figures;
+﻿using Entities;
+using sapr_sim.Figures;
 using sapr_sim.Utils;
+using sapr_sim.WPFCustomElements;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,10 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using System.Xml;
 
 namespace sapr_sim
@@ -69,6 +73,15 @@ namespace sapr_sim
                 RoutedCommand pasteBinding = new RoutedCommand();
                 pasteBinding.InputGestures.Add(new KeyGesture(Key.V, ModifierKeys.Control));
                 CommandBindings.Add(new CommandBinding(pasteBinding, PasteComand));
+
+
+                RoutedCommand undoBinding = new RoutedCommand();
+                undoBinding.InputGestures.Add(new KeyGesture(Key.Z, ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(undoBinding, UndoCommand));
+
+                RoutedCommand redoBinding = new RoutedCommand();
+                redoBinding.InputGestures.Add(new KeyGesture(Key.Y, ModifierKeys.Control));
+                CommandBindings.Add(new CommandBinding(redoBinding, RedoComand));
        
             }
             catch (Exception err)
@@ -86,6 +99,10 @@ namespace sapr_sim
 
         public void deleteEntity(UIEntity ent)
         {
+
+            UndoRedoManager.putInUndoStack(ent);
+            UndoRedoManager.clearRedoStack(ent);
+
             if (ent != null && !(ent is Port))
             {
                 List<ConnectionLine> connectors = ConnectorFinder.find(currentCanvas.Children, ent);
@@ -147,6 +164,9 @@ namespace sapr_sim
 
         private void CopyComand(object sender, ExecutedRoutedEventArgs e)
         {
+            UndoRedoManager.putInUndoStack(selected);
+            UndoRedoManager.clearRedoStack(selected);
+
             if (sender != null && selected != null)
             {
                 IDataObject dataObj = new DataObject();
@@ -157,6 +177,9 @@ namespace sapr_sim
 
         private void CutComand(object sender, ExecutedRoutedEventArgs e)
         {
+            UndoRedoManager.putInUndoStack(selected);
+            UndoRedoManager.clearRedoStack(selected);
+
             if (sender != null && selected != null)
             {
                 IDataObject dataObj = new DataObject();
@@ -167,8 +190,13 @@ namespace sapr_sim
             }
         }
 
+
+
         private void PasteComand(object sender, ExecutedRoutedEventArgs e)
         {
+            UndoRedoManager.putInUndoStack(selected);
+            UndoRedoManager.clearRedoStack(selected);
+
             IDataObject dataObj = Clipboard.GetDataObject();
             string format = typeof(UIEntity).FullName;
             format = DataFormats.Serializable;
@@ -197,6 +225,76 @@ namespace sapr_sim
                 catch (Exception ex)
                 {
                     Console.Out.WriteLine(ex);
+                }
+
+            }
+        }
+
+        private void UndoCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            ScrollableCanvas canvas = (ScrollableCanvas) currentCanvas;
+            Project instance = Project.Instance;
+            ProjectItem projectItem = instance.byCanvas((ScrollableCanvas)canvas);
+
+            ScrollableCanvas storedCanvas = UndoRedoManager.undoProceed(canvas.id);
+            if (storedCanvas != null)
+            {
+
+                UndoRedoManager.putInRedoStack((ScrollableCanvas)currentCanvas);
+
+                // Simple changing canvas dosen't work
+                // Elements can't be children in two canvas, so we have to store it and clear stored canvas
+                // Also we need to change canvas in elements
+                List<UIElement> elements = new List<UIElement>();
+
+                foreach (UIElement elem in storedCanvas.Children)
+                {
+                    elements.Add(elem);
+                }
+
+                storedCanvas.Children.Clear();
+                currentCanvas.Children.Clear();
+
+                foreach (UIElement elem in elements)
+                {
+                    ((UIEntity)elem).canvas = currentCanvas;
+                    currentCanvas.Children.Add(elem);
+                }
+                
+            }
+        }
+
+
+
+        private void RedoComand(object sender, ExecutedRoutedEventArgs e)
+        {
+            ScrollableCanvas canvas = (ScrollableCanvas) currentCanvas;
+            Project instance = Project.Instance;
+            ProjectItem projectItem = instance.byCanvas((ScrollableCanvas)canvas);
+
+            ScrollableCanvas storedCanvas = UndoRedoManager.redoProceed(canvas.id);
+            if (storedCanvas != null)
+            {
+
+                UndoRedoManager.putInUndoStack((ScrollableCanvas)currentCanvas);
+
+                // Simple changing canvas dosen't work
+                // Elements can't be children in two canvas, so we have to store it and clear stored canvas
+                // Also we need to change canvas in elements
+                List<UIElement> elements = new List<UIElement>();
+
+                foreach (UIElement elem in storedCanvas.Children)
+                {
+                    elements.Add(elem);
+                }
+
+                storedCanvas.Children.Clear();
+                currentCanvas.Children.Clear();
+
+                foreach (UIElement elem in elements)
+                {
+                    ((UIEntity)elem).canvas = currentCanvas;
+                    currentCanvas.Children.Add(elem);
                 }
 
             }

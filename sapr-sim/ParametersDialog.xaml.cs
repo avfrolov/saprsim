@@ -77,6 +77,10 @@ namespace sapr_sim
 
         private bool applyNewParams(List<UIParam> parameters)
         {
+
+            UndoRedoManager.putInUndoStack(owner);
+            UndoRedoManager.clearRedoStack(owner);
+
             foreach (UIElement el in sp.Children)
             {
                 if (el is DockPanel)
