@@ -30,13 +30,13 @@ namespace sapr_sim.Utils
                     result = time.Time;
                     break;
                 case 1:
-                    result = time.Time * 10;
+                    result = time.Time * 60;
                     break;
                 case 2:
-                    result = time.Time * 100;
+                    result = time.Time * 3600;
                     break;
                 case 3:
-                    result = time.Time * 1000;
+                    result = time.Time * 86400;
                     break;
                 default:
                     throw new Exception("Wrong time measure");
@@ -53,13 +53,13 @@ namespace sapr_sim.Utils
                     result = time.doubleValue;
                     break;
                 case 1:
-                    result = time.doubleValue * 10;
+                    result = time.doubleValue * 60;
                     break;
                 case 2:
-                    result = time.doubleValue * 100;
+                    result = time.doubleValue * 3600;
                     break;
                 case 3:
-                    result = time.doubleValue * 1000;
+                    result = time.doubleValue * 86400;
                     break;
                 default:
                     throw new Exception("Wrong time measure");
@@ -69,15 +69,15 @@ namespace sapr_sim.Utils
 
         public static TimeWithMeasure fromModelToHuman(double modelTime)
         {
-            // "modelTime / 1000" in return statement is for beautifull output. Further the divider will decrease   
-            if ((modelTime / 1000) >= 1)
-                return new TimeWithMeasure(modelTime / 1000, TimeMeasure.DAY); 
+            // "modelTime / 86400" in return statement is for beautifull output. Further the divider will decrease   
+            if ((modelTime / 86400) >= 1)
+                return new TimeWithMeasure(modelTime / 86400, TimeMeasure.DAY); 
 
-            if ((modelTime / 1000) >= 0.1)
-                return new TimeWithMeasure(modelTime / 100, TimeMeasure.HOUR);
+            if ((modelTime / 3600) >= 1)
+                return new TimeWithMeasure(modelTime / 3600, TimeMeasure.HOUR);
 
-            if ((modelTime / 1000) >= 0.01)
-                return new TimeWithMeasure(modelTime / 10, TimeMeasure.MINUTE);
+            if ((modelTime / 60) >= 1)
+                return new TimeWithMeasure(modelTime / 60, TimeMeasure.MINUTE);
 
             return new TimeWithMeasure(modelTime , TimeMeasure.SECOND);
         }
