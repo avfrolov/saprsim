@@ -192,6 +192,7 @@ namespace sapr_sim
                     drawOnCanvas(new Point(320, 120));
 
                     ZIndexUtil.setCorrectZIndex(currentCanvas, obj);
+                    currentEntity = null;
                 }
                 catch (Exception ex)
                 {
