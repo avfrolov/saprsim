@@ -35,6 +35,11 @@ namespace sapr_sim
             get { return instance; }
         }
 
+        public string SourcesFullPath
+        {
+            get { return FullPath + "\\" + SRC_FOLDER_NAME; }
+        }
+
         public string FullPath
         {
             get { return ProjectPath + "\\" + ProjectName; }

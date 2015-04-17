@@ -101,7 +101,7 @@ namespace sapr_sim.Utils
 
         public void renameProjectItem(ProjectItem pi, string newName)
         {
-            string newPath = Project.Instance.FullPath + "\\" + newName + PROJECT_ITEM_EXTENSION;
+            string newPath = Project.Instance.SourcesFullPath + "\\" + newName + PROJECT_ITEM_EXTENSION;
             if (!File.Exists(newPath))
                 File.Move(pi.FullPath, newPath);
             else

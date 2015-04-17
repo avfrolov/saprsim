@@ -209,8 +209,12 @@ namespace sapr_sim
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             TreeViewItem item = projectStructure.SelectedItem as TreeViewItem;
-            if (item != null && item.Header is TextBox)
-                renameTreeViewItem(sender);
+            if (item != null && item.Header is StackPanel)
+            {
+                StackPanel sp = item.Header as StackPanel;
+                if (sp.Children.Count == 2 && sp.Children[1] is TextBox)
+                    renameTreeViewItem(sender);
+            }
         }
 
         private void TextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
