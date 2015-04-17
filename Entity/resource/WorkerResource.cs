@@ -13,6 +13,6 @@ namespace Entities
         public double price { get; set; }
 
         public List<InstrumentResource> instruments { get; set; }
-
+        public List<MaterialResource> materials { get; set; }
     }
 }
