@@ -45,6 +45,9 @@ namespace sapr_sim.Figures
             bottomPort = new Port(this, canvas, PortType.BOTTOM_RESOURCE, x + 42.5, y + 56.5);
             canvas.Children.Add(bottomPort);
             ports.Add(bottomPort);
+
+            label = new Label(this, canvas, x + 10, y + 22, textParam.Value);
+            canvas.Children.Add(label);
         }
 
         public override List<UIParam> getParams()

@@ -10,8 +10,8 @@ namespace sapr_sim.Utils
     public sealed class ResourceType : IConvertible
     {
 
-        public static readonly ResourceType WORKER = new ResourceType(0, "Рабочий");
-        public static readonly ResourceType INSTRUMENT = new ResourceType(1, "Инструмент");
+        public static readonly ResourceType WORKER = new ResourceType(0, "Исполнитель");
+        public static readonly ResourceType INSTRUMENT = new ResourceType(1, "Оборудование");
         public static readonly ResourceType MATERIAL = new ResourceType(2, "Расходник");
 
         public int Order { get; set; }

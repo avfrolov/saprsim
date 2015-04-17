@@ -59,9 +59,6 @@ namespace sapr_sim.Figures
             topPort = new Port(this, canvas, PortType.TOP_RESOURCE, x + 42.5, y - 3.5);
             canvas.Children.Add(topPort);
             ports.Add(topPort);
-
-            label = new Label(this, canvas, x + 25, y + 22, textParam.Value);
-            canvas.Children.Add(label);
         }
 
         public override string iconPath()

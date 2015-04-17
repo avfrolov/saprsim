@@ -26,6 +26,13 @@ namespace sapr_sim.Figures
             init();
         }
 
+        public override void createAndDraw(double x, double y)
+        {
+            base.createAndDraw(x, y);
+            label = new Label(this, canvas, x + 20, y + 22, textParam.Value);
+            canvas.Children.Add(label);
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
