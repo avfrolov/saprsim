@@ -35,6 +35,7 @@ namespace sapr_sim
         {
             currentCanvas.Cursor = Cursors.Arrow;
             currentEntity = null;
+            firstConnect = true;
         }
 
         public void Shape_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

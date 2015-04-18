@@ -15,9 +15,9 @@ namespace EntityValidator.rules
         private List<Identifable> failed = new List<Identifable>();
         private List<Resource> resources = Model.Instance.getResources();
 
-        Dictionary<WorkerResource, int> workers = new Dictionary<WorkerResource, int>();
-        Dictionary<InstrumentResource, int> instruments = new Dictionary<InstrumentResource, int>();
-        Dictionary<MaterialResource, int> materials = new Dictionary<MaterialResource, int>();
+        private List<WorkerResource> workers = new List<WorkerResource>();
+        private List<InstrumentResource> instruments = new List<InstrumentResource>();
+        private List<MaterialResource> materials = new List<MaterialResource>();
 
         public ResourceConnectedCorrectRule(List<Entity> entities, List<Resource> resources) : base(entities)
         {
@@ -29,11 +29,11 @@ namespace EntityValidator.rules
             foreach (Resource res in resources)
             {
                 if (ResourceType.WORKER.Equals(res.type))
-                    workers.Add(res as WorkerResource, res.count);
+                    workers.Add(res as WorkerResource);
                 else if (ResourceType.INSTRUMENT.Equals(res.type))
-                    instruments.Add(res as InstrumentResource, res.count);
+                    instruments.Add(res as InstrumentResource);
                 else if (ResourceType.MATERIAL.Equals(res.type))
-                    materials.Add(res as MaterialResource, res.count);
+                    materials.Add(res as MaterialResource);
             }
 
             foreach (Entity e in entities)
@@ -53,9 +53,9 @@ namespace EntityValidator.rules
                 }
             }
 
-            failed.AddRange(workers.Keys);
-            failed.AddRange(instruments.Keys);
-            failed.AddRange(materials.Keys);
+            failed.AddRange(workers);
+            failed.AddRange(instruments);
+            failed.AddRange(materials);
 
             return failed.Count == 0;
         }
@@ -73,12 +73,8 @@ namespace EntityValidator.rules
             processInstrumentResources(wr.instruments);
             processMaterialResources(wr.materials);
 
-            if (workers.ContainsKey(wr))
-            {
-                workers[wr] -= wr.count;
-                if (workers[wr] == 0)
-                    workers.Remove(wr);
-            }
+            if (workers.Contains(wr))
+                workers.Remove(wr);
         }
 
         private void processInstrumentResources(List<InstrumentResource> resources)
@@ -87,12 +83,8 @@ namespace EntityValidator.rules
             {
                 processMaterialResources(ir.materials);
 
-                if (instruments.ContainsKey(ir))
-                {
-                    instruments[ir] -= ir.count;
-                    if (instruments[ir] == 0)
-                        instruments.Remove(ir);
-                }
+                if (instruments.Contains(ir))
+                    instruments.Remove(ir);
             }
         }
 
@@ -100,12 +92,8 @@ namespace EntityValidator.rules
         {
             foreach (MaterialResource mr in resources)
             {
-                if (materials.ContainsKey(mr))
-                {
-                    materials[mr] -= mr.count;
-                    if (materials[mr] == 0)
-                        materials.Remove(mr);
-                }
+                if (materials.Contains(mr))
+                    materials.Remove(mr);
             }
         }
     }
