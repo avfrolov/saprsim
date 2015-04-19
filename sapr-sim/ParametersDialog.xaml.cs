@@ -158,7 +158,7 @@ namespace sapr_sim
                 foreach (UIParam entry in owner.getParams())
                 {
 
-                    DockPanel sprow = new DockPanel() { LastChildFill = true, Margin = new Thickness(2, 2, 2, 5) };
+                    DockPanel sprow = new DockPanel() { LastChildFill = true, Margin = new Thickness(0, 2, 0, 5), Height = 28 };
                     System.Windows.Controls.Label l = new System.Windows.Controls.Label() { Content = entry.DisplayedText };
                     ParameterInput input = entry.ContentControl;
                     UIElement uiControl = null;
@@ -187,9 +187,35 @@ namespace sapr_sim
                     
                     sprow.Children.Add(l);
                     sprow.Children.Add(uiControl);
+
+                    if (paramsEnabled)
+                    {
+                        l.Width = 150;
+                        Image tooltip = new Image() 
+                        { 
+                            Source = new BitmapImage(new Uri(@"pack://application:,,,/Resources/param_tooltip.png", UriKind.Absolute)) 
+                        };
+
+                        tooltip.ToolTip = new ToolTip() { Content = new TextBox() { Text = entry.ToolTip, TextWrapping = TextWrapping.Wrap, Width = 250 }};
+                        tooltip.MouseEnter += tooltip_MouseEnter;
+                        tooltip.MouseLeave += tooltip_MouseLeave;
+
+                        sprow.Children.Add(tooltip);
+                    }
+                    
                     drawPanel.Children.Add(sprow);
                 }
             }
+        }
+
+        private static void tooltip_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ((ToolTip)((FrameworkElement)sender).ToolTip).IsOpen = false;
+        }
+
+        private static void tooltip_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ((ToolTip)((FrameworkElement)sender).ToolTip).IsOpen = true;
         }
 
         static void ParameterProccesor_SelectionChanged(object sender, SelectionChangedEventArgs e)

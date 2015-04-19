@@ -19,6 +19,7 @@ namespace sapr_sim.Parameters
     {
         protected ParamValidator validator;
         protected string displayedText;
+        protected string tooltip;
 
         // default - textbox
         [NonSerialized]
@@ -32,6 +33,11 @@ namespace sapr_sim.Parameters
         public string DisplayedText
         {
             get { return displayedText; }
+        }
+
+        public string ToolTip
+        {
+            get { return tooltip; }
         }
 
         public ParameterInput ContentControl
@@ -62,14 +68,16 @@ namespace sapr_sim.Parameters
         
         private T value;
 
-        public UIParam(T value, ParamValidator validator, string displayedText)
+        public UIParam(T value, ParamValidator validator, string displayedText, string tooltip)
         {
             this.value = value;
             this.validator = validator;
             this.displayedText = displayedText;
+            this.tooltip = tooltip;
         }
 
-        public UIParam(T value, ParamValidator validator, string displayedText, ParameterInput input) : this(value, validator, displayedText)
+        public UIParam(T value, ParamValidator validator, string displayedText, string tooltip, ParameterInput input) 
+            : this(value, validator, displayedText, tooltip)
         {
             this.control = input;
         }

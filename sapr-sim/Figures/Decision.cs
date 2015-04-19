@@ -19,7 +19,7 @@ namespace sapr_sim.Figures
 
         private Port inputPort, yesPort, noPort;
 
-        private UIParam<String> inputProbabilityParams = new UIParam<String>("", new StringParamValidator(), "Параметры входа");
+        private UIParam<String> inputProbabilityParams = new UIParam<String>("", new StringParamValidator(), "Параметры входа", "");
 
         private static readonly string DEFAULT_NAME = "?";
 

@@ -19,8 +19,10 @@ namespace sapr_sim.Figures
         protected Port port;
         private Rect bound;
 
-        private UIParam<Int32> projectsCount = new UIParam<Int32>(1, new PositiveIntegerParamValidator(), "Количество проектов");
-        private UIParam<Int32> complexity = new UIParam<Int32>(1, new PositiveIntegerParamValidator(), "Сложность проектов");
+        private UIParam<Int32> projectsCount = new UIParam<Int32>(1, new PositiveIntegerParamValidator(), "Количество задач",
+            "Количество задач процесса проектирования, участвующих в имитационном моделировании. Может принимать положительное целочисленное значение");
+        private UIParam<Int32> complexity = new UIParam<Int32>(1, new PositiveIntegerParamValidator(), "Сложность проектов",
+            "Качественная оценка задачи процесса проектирования. Может принимать положительное целочисленное значение");
 
         private static readonly string DEFAULT_NAME = "Начало";
 

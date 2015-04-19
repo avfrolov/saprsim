@@ -18,8 +18,10 @@ namespace sapr_sim.Figures
 
         private Port bottomPort;
 
-        private UIParam<Double> power = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Мощность");
-        private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Цена");
+        private UIParam<Double> power = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Мощность", 
+            "Мощность данного оборудования. Может принимать вещественное значение на отрезке [0; 1000]");
+        private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1000.0), "Цена",
+            "Цена данного оборудования. Может принимать вещественное значение на отрезке [0; 1000]");
 
         public InstrumentResource(Canvas canvas) : base(canvas)
         {

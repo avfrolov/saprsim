@@ -32,7 +32,7 @@ namespace sapr_sim.Figures
 
         private string state = "original";
 
-        protected UIParam<String> name = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM);
+        protected UIParam<String> name = new UIParam<String>("Сущность", new StringParamValidator(), ENTITY_NAME_PARAM, "Отображаемое название блока");
 
         protected long id {get; set;}
 

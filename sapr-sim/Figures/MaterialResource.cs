@@ -17,8 +17,10 @@ namespace sapr_sim.Figures
     public class MaterialResource : Resource, ISerializable
     {
 
-        private UIParam<int> consumption = new UIParam<int>(1, new PositiveIntegerParamValidator(), "Расход");
-        private UIParam<TimeMeasure> consumptionTimeMeasure = new UIParam<TimeMeasure>(TimeMeasure.SECOND, new DefaultParamValidator(), "за", new ParameterComboBox(TimeMeasure.list()));
+        private UIParam<int> consumption = new UIParam<int>(1, new PositiveIntegerParamValidator(), "Расход",
+            "Количество расходуемых единиц материала за указанную единицу времени. Может принимать положительное целочисленное значение");
+        private UIParam<TimeMeasure> consumptionTimeMeasure = new UIParam<TimeMeasure>(TimeMeasure.SECOND, new DefaultParamValidator(), "за",
+            "Единица измерения времени", new ParameterComboBox(TimeMeasure.list()));
 
         public MaterialResource(Canvas canvas) : base(canvas)
         {

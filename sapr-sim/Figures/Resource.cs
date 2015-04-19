@@ -23,9 +23,12 @@ namespace sapr_sim.Figures
 
         private static readonly string DEFAULT_NAME = "Ресурс";
 
-        protected UIParam<ResourceType> type = new UIParam<ResourceType>(ResourceType.WORKER, new DefaultParamValidator(), "Тип ресурса", new ParameterComboBox(ResourceType.list()));
-        protected UIParam<int> count = new UIParam<int>(1, new PositiveIntegerParamValidator(), "Количество");
-        protected UIParam<Boolean> isShared = new UIParam<Boolean>(true, new DefaultParamValidator(), "Разделяемый", new ParameterCheckBox(true));    
+        protected UIParam<ResourceType> type = new UIParam<ResourceType>(ResourceType.WORKER, new DefaultParamValidator(), "Тип ресурса",
+            "Тип ресурса", new ParameterComboBox(ResourceType.list()));
+        protected UIParam<int> count = new UIParam<int>(1, new PositiveIntegerParamValidator(), "Количество",
+            "Количество экземпляров данного ресурса. Может принимать положительное целочисленное значение");
+        protected UIParam<Boolean> isShared = new UIParam<Boolean>(true, new DefaultParamValidator(), "Разделяемый",
+            "Позволяет ресурсу заниматься произвольным числом действий", new ParameterCheckBox(true));    
 
         private Rect bound;
         private Rect topExternalBound;

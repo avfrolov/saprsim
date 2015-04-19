@@ -25,9 +25,13 @@ namespace sapr_sim.Figures
         private Rect bound;
         private Port inputPort, outputPort, resourcePort;
 
-        private UIParam<Double> time = new UIParam<Double>(1, new PositiveDoubleParamValidator(), "Продолжительность");
-        private UIParam<TimeMeasure> timeMeasure = new UIParam<TimeMeasure>(TimeMeasure.SECOND, new DefaultParamValidator(), "Единицы измерения", new ParameterComboBox(TimeMeasure.list()));
-        private UIParam<Int32> scatter = new UIParam<Int32>(0, new BetweenIntegerParamValidator(0, 100), "Разброс (%)");
+        private UIParam<Double> time = new UIParam<Double>(1, new PositiveDoubleParamValidator(), "Продолжительность",
+            "Временная продолжительность процедуры. Может принимать положительное целочисленное значение");
+        private UIParam<TimeMeasure> timeMeasure = new UIParam<TimeMeasure>(TimeMeasure.SECOND, new DefaultParamValidator(), "Единицы измерения",
+            "Единица измерения времени", new ParameterComboBox(TimeMeasure.list()));
+        private UIParam<Int32> scatter = new UIParam<Int32>(0, new BetweenIntegerParamValidator(0, 100), "Разброс (%)",
+            "Вводит стохастичность в процедуры. Продолжительность процедуры начинает измеряться по формуле: \"Продолжительность\" ± \"Разброс\". " + 
+            "Может принимать целочисленное значение на отрезке [0; 100]");
 
         private static readonly string DEFAULT_NAME = "Процедура";
 

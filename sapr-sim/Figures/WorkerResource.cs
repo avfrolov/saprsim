@@ -18,8 +18,10 @@ namespace sapr_sim.Figures
 
         private Port bottomPort;
 
-        private UIParam<Double> efficiency = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1.0), "Производительность");
-        private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 100000.0), "Зарплата (у.е)");
+        private UIParam<Double> efficiency = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 1.0), "Производительность",
+            "Производительность исполнителя. Может принимать вещественное значение на отрезке [0; 1]");
+        private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 100000.0), "Зарплата (у.е)",
+            "Зарплата исполнителя. Может принимать вещественное значение на отрезке [0; 100000]");
 
         public WorkerResource(Canvas canvas) : base(canvas)
         {
