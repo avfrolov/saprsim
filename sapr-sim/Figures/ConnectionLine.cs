@@ -103,11 +103,38 @@ namespace sapr_sim.Figures
                 BindingBase destinationBinding = new Binding { Source = this, Path = new PropertyPath(DestinationProperty) };
                 BindingOperations.SetBinding(figure, PathFigure.StartPointProperty, sourceBinding);
                 BindingOperations.SetBinding(segment, LineSegment.PointProperty, destinationBinding);
-                
-                StrokeThickness = 2;
-                Stroke = Brushes.Black;
+
+                LineDefinition ld = new LineDefinition(SourcePort.Owner, DestinationPort.Owner);
+
+                StrokeThickness = ld.Thickness;
+                Stroke = ld.Color;
 
                 return geometry;
+            }
+        }
+
+        private class LineDefinition
+        {
+            private int thickness = 1;
+            private Brush brush = Brushes.Black;
+
+            public LineDefinition(UIEntity from, UIEntity to)
+            {
+                if (from is Resource || to is Resource)
+                {
+                    thickness = 2;
+                    brush = from is Resource && to is Resource ? Brushes.Brown : Brushes.Violet;
+                }
+            }
+
+            public int Thickness
+            {
+                get { return thickness; }
+            }
+
+            public Brush Color
+            {
+                get { return brush; }
             }
         }
     }
