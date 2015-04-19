@@ -115,14 +115,14 @@ namespace sapr_sim.Figures
 
         private class LineDefinition
         {
-            private int thickness = 1;
+            private int thickness = 2;
             private Brush brush = Brushes.Black;
 
             public LineDefinition(UIEntity from, UIEntity to)
             {
                 if (from is Resource || to is Resource)
                 {
-                    thickness = 2;
+                    thickness = 3;
                     brush = from is Resource && to is Resource ? Brushes.Brown : Brushes.Violet;
                 }
             }
