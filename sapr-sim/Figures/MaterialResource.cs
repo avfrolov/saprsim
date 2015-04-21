@@ -19,7 +19,7 @@ namespace sapr_sim.Figures
 
         private UIParam<int> consumption = new UIParam<int>(1, new PositiveIntegerParamValidator(), "Расход",
             "Количество расходуемых единиц материала за указанную единицу времени. Может принимать положительное целочисленное значение");
-        private UIParam<TimeMeasure> consumptionTimeMeasure = new UIParam<TimeMeasure>(TimeMeasure.SECOND, new DefaultParamValidator(), "за",
+        private UIParam<TimeMeasure> consumptionTimeMeasure = new UIParam<TimeMeasure>(TimeMeasure.SECOND, new DefaultParamValidator(), "Единица времени",
             "Единица измерения времени", new ParameterComboBox(TimeMeasure.list()));
 
         public MaterialResource(Canvas canvas) : base(canvas)
