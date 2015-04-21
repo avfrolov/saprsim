@@ -99,12 +99,11 @@ namespace sapr_sim
 
         public void deleteEntity(UIEntity ent)
         {
-
-            UndoRedoManager.putInUndoStack(ent);
-            UndoRedoManager.clearRedoStack(ent);
-
             if (ent != null && !(ent is Port))
             {
+                UndoRedoManager.putInUndoStack(ent);
+                UndoRedoManager.clearRedoStack(ent);
+
                 List<ConnectionLine> connectors = ConnectorFinder.find(currentCanvas.Children, ent);
                 foreach (ConnectionLine c in connectors)
                 {
