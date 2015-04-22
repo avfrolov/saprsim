@@ -133,6 +133,12 @@ namespace Entities.impl
                 {
                     processSingleMaterial(res as MaterialResource);
                 }
+
+                if (res is InstrumentResource)
+                {
+                    overallEfficiency += processSingleInstrument(res as InstrumentResource);
+                }
+
             }               
 
             return needTime = (1 / overallEfficiency) * manHour * complexity;
@@ -143,32 +149,39 @@ namespace Entities.impl
             double result = 1.0;
             foreach (InstrumentResource instrument in worker.instruments)
             {
-                bool isUsedByThis = instrument.users.Contains(this.id);
+                result += processSingleInstrument(instrument);
+            }
+            return result == 1.0 ? result : result - 1.0;
+        }
 
-                if (instrument.users.Count == 0)
-                    instrument.isBusy = false;
+        private double processSingleInstrument(InstrumentResource instrument)
+        {
+            double result = 1.0;
+            bool isUsedByThis = instrument.users.Contains(this.id);
 
-                if (instrument.isBusy && !instrument.isShared && !isUsedByThis)
-                    return Double.Epsilon;
+            if (instrument.users.Count == 0)
+                instrument.isBusy = false;
 
-                if (instrument.isBusy && instrument.isShared || instrument.isBusy && isUsedByThis)
+            if (instrument.isBusy && !instrument.isShared && !isUsedByThis)
+                return Double.Epsilon;
+
+            if (instrument.isBusy && instrument.isShared || instrument.isBusy && isUsedByThis)
+            {
+                if (!instrument.users.Contains(this.id))
                 {
-                    if (!instrument.users.Contains(this.id))
-                    {
-                        instrument.users.Add(this.id);
-                    }
-
-                    result += processMaterials(instrument) * instrument.power * instrument.count / (instrument.users.Count > 0 ? instrument.users.Count : 1);
+                    instrument.users.Add(this.id);
                 }
 
-                if (!instrument.isBusy)
+                result += processMaterials(instrument) * instrument.power * instrument.count / (instrument.users.Count > 0 ? instrument.users.Count : 1);
+            }
+
+            if (!instrument.isBusy)
+            {
+                result += processMaterials(instrument) * instrument.power * instrument.count;
+                if (!instrument.users.Contains(this.id))
                 {
-                    result += processMaterials(instrument) * instrument.power * instrument.count;
-                    if (!instrument.users.Contains(this.id))
-                    {
-                        instrument.users.Add(this.id);
-                        instrument.isBusy = true;
-                    }
+                    instrument.users.Add(this.id);
+                    instrument.isBusy = true;
                 }
             }
             return result == 1.0 ? result : result - 1.0;
