@@ -122,6 +122,11 @@ namespace Entities.impl
                             worker.isBusy = true;
                         }
                     }
+
+                    foreach (MaterialResource material in worker.materials)
+                    {
+                        processSingleMaterial(material);
+                    }
                 }
 
                 if (res is MaterialResource)
@@ -185,9 +190,23 @@ namespace Entities.impl
         {
             Model model = Model.Instance;
 
-            if ((material.count - material.perTick) > 0)
+            bool isUsedByThis = material.users.Contains(this.id);
+
+            if (material.users.Count == 0)
+                material.isBusy = false;
+
+            if (material.isBusy && !material.isShared && !isUsedByThis)
+                return Double.Epsilon;
+
+            double usersCount = material.users.Count > 0 ? material.users.Count : 1.0 ;
+            if ((material.count - material.perTick / usersCount) > 0)
             {
-                material.count -= material.perTick;
+                material.count -= material.perTick / usersCount;
+                
+                if (!isUsedByThis) {
+                    material.users.Add(this.id);
+                    material.isBusy = true;
+                }
                 return 1.0;
             }
             else

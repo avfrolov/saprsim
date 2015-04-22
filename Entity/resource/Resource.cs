@@ -11,12 +11,12 @@ namespace Entities
 
         public ResourceType type { get; set; }
         
-        public int count { get; set; }
+        public double count { get; set; }
         public bool isShared { get; set; }
         public bool isBusy { get; set; }
         
         public HashSet<long> users = new HashSet<long>();
 
-        public abstract int totalCount { get; }
+        public abstract double totalCount { get; }
     }
 }

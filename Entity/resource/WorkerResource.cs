@@ -22,11 +22,11 @@ namespace Entities
             materials = new List<MaterialResource>();
         }
 
-        public override int totalCount
+        public override double totalCount
         {
             get 
             {
-                int total = count;
+                double total = count;
                 foreach (InstrumentResource res in instruments)
                     total += res.totalCount;
                 foreach (MaterialResource res in materials)

@@ -10,7 +10,7 @@ namespace Entities
     {
         public int perTick { get; set; }
 
-        public override int totalCount
+        public override double totalCount
         {
             get { return count; }
         }
