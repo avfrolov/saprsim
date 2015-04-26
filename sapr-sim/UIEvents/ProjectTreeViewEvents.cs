@@ -165,7 +165,7 @@ namespace sapr_sim
                 createNewDiagram(item.ProjectItem.Canvas, item.ProjectItem.Name);
             else
                 cti.IsSelected = true;
-            simulate(currentCanvas);
+            SimulateLocalButton_Click(null, null);
         }
 
         private void RemoveItem_MenuClick(object sender, RoutedEventArgs e)

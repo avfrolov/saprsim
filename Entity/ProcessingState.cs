@@ -9,11 +9,11 @@ namespace Entities
 {
     public enum ProcessingState
     {
-        [Description("Моделирование выполнено успешно!")]
+        [Description("Успешно!")]
         FINE,
-        [Description("Моделирование не завершено, нехватка ресурсов!")]
+        [Description("Не завершено, нехватка ресурсов!")]
         RESOURCES_EMPTY,
-        [Description("Моделирование не завершено, превышен максимальный период моделирования!")]
+        [Description("Не завершено, превышен максимальный период моделирования!")]
         TIME_OUT
     }
 

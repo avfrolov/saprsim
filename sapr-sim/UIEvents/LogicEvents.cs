@@ -25,7 +25,7 @@ namespace sapr_sim
                     createNewDiagram(Project.Instance.MainProjectItem.Canvas, Project.Instance.MainProjectItem.Name);
                 else
                     cti.IsSelected = true;
-                simulate(Project.Instance.MainProjectItem.Canvas);
+                simulate(Project.Instance.MainProjectItem);
             }
             else
             {
@@ -35,32 +35,28 @@ namespace sapr_sim
 
         private void SimulateLocalButton_Click(object sender, RoutedEventArgs e)
         {
-            simulate(currentCanvas);
+            simulate(Project.Instance.byCanvas(currentCanvas as ScrollableCanvas));
         }
 
-        private void simulate(Canvas canvas)
+        private void simulate(ProjectItem pi)
         {
-            resetUIShadows(canvas.Children);
-            SaveAll_Click(null, null);
             TransformerService ts = new TransformerService();
-            List<Entity> entities = ts.transform(canvas.Children);
-            Model.Instance.timeRestriction = TimeConverter.fromHumanToModel(Project.Instance.TimeRestiction);
-            Controller controller = new Controller(entities, ts.getResources());
-            errorsListBox.Items.Clear();
+            List<Entity> entities = ts.transform(pi.Canvas.Children);           
+            Controller controller = new Controller(entities, ts.getResources());            
+
             try
             {
-                controller.simulate();
-                TimeWithMeasure simulationTime = TimeConverter.fromModelToHuman(controller.SimulationTime);
-
-                MessageBox.Show(ProcessingStateMethods.GetDescription(controller.SimulationState) + " Время выполнения моделирования - " + Math.Round(simulationTime.doubleValue, 3) + " " + simulationTime.measure.Name);
+                resetUIShadows(Project.Instance.MainProjectItem.Canvas.Children);
+                SaveAll_Click(null, null);
+                errorsListBox.Items.Clear();
+                controller.validate();
+                new RunSimulation(pi, controller).ShowDialog();
             }
             catch (ValidationException ex)
             {
                 errorsTab.IsSelected = true;
                 foreach (var err in ex.Errors)
-                {
                     errorsListBox.Items.Add(new ListBoxItemError(err.Message, ts.transform(err.Entities)));
-                }
             }
         }
 

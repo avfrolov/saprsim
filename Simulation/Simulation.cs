@@ -17,6 +17,9 @@ namespace Simulation
             Model model = Model.Instance;
             Timer timer = Timer.Instance;
 
+            Timer.Instance.resetTime();
+            model.getProjects().Clear();
+
             List<Entity> entities = model.getEntities();
 
             EntityStart start = getSchemaStart(entities) as EntityStart;

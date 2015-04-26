@@ -97,6 +97,9 @@
     <Compile Include="ProjectSettings.xaml.cs">
       <DependentUpon>ProjectSettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RunSimulation.xaml.cs">
+      <DependentUpon>RunSimulation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UIEvents\CanvasContextMenu.cs" />
     <Compile Include="UIEvents\KeyboardEvents.cs" />
     <Compile Include="UIEvents\LogicEvents.cs" />
@@ -174,6 +177,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="RunSimulation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPFCustomElements\UserControls\ClosableHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,7 +216,9 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\arrow.png">
@@ -463,6 +472,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\param_tooltip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\failure.png" />
+    <Resource Include="Resources\success.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

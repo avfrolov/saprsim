@@ -30,7 +30,7 @@ namespace Kernel
             model.setResources(resources);
         }
 
-        public void simulate()
+        public void validateAndSimulate()
         {
             foreach (Entity ent in entities)
                 model.addEntity(ent);
@@ -40,12 +40,36 @@ namespace Kernel
 
             if (result.Success)
             {
-                simulationResult = Simulation.Simulation.simulate();
+                simulate();
             } 
             else
             {
                 ValidationException ex = new ValidationException();
                 foreach(ValidationError err in result.Errors)
+                {
+                    ex.addError(err.Message, err.FailedEntity);
+                }
+                throw ex;
+            }
+        }
+
+        public void simulate()
+        {
+            simulationResult = Simulation.Simulation.simulate();
+        }
+
+        public void validate()
+        {
+            foreach (Entity ent in entities)
+                model.addEntity(ent);
+
+            SystemValidator validator = new SystemValidator(model.getEntities(), model.getResources());
+            ValidationResult result = validator.startValidation();
+
+            if (!result.Success)
+            {
+                ValidationException ex = new ValidationException();
+                foreach (ValidationError err in result.Errors)
                 {
                     ex.addError(err.Message, err.FailedEntity);
                 }
@@ -63,9 +87,5 @@ namespace Kernel
             get { return simulationResult.simulationTime; }
         }
 
-        //public double SimulationTime
-        //{
-        //    get { return Timer.Instance.getTime(); }
-        //}
     }
 }
