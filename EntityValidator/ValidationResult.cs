@@ -26,7 +26,7 @@ namespace EntityValidator
             errors.Add(err);
         }
 
-        public void addErrors(List<ValidationError> err)
+        public void addErrors(ICollection<ValidationError> err)
         {
             errors.AddRange(err);
         }

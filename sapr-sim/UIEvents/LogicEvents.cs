@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Statistics;
 
 namespace sapr_sim
 {
@@ -41,8 +42,8 @@ namespace sapr_sim
         private void simulate(ProjectItem pi)
         {
             TransformerService ts = new TransformerService();
-            List<Entity> entities = ts.transform(pi.Canvas.Children);           
-            Controller controller = new Controller(entities, ts.getResources());            
+            List<Entity> entities = ts.transform(pi.Canvas.Children);
+            Controller controller = new Controller(entities, ts.getResources());
 
             try
             {
@@ -62,10 +63,11 @@ namespace sapr_sim
 
         private void resetUIShadows(UIElementCollection col)
         {
-            foreach(UIElement el in col)
+            foreach (UIElement el in col)
             {
                 (el as UIEntity).defaultBitmapEffect();
             }
         }
     }
 }
+

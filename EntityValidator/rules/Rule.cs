@@ -11,14 +11,14 @@ namespace EntityValidator.rules
     public abstract class Rule
     {
 
-        protected List<Entity> entities;
+        protected ICollection<Entity> entities;
 
-        public Rule(List<Entity> entities)
+        public Rule(ICollection<Entity> entities)
         {
             this.entities = entities;
         }
 
         public abstract bool validate();
-        public abstract List<ValidationError> explain();
+        public abstract ICollection<ValidationError> explain();
     }
 }

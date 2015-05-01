@@ -20,12 +20,12 @@ namespace Simulation
             Timer.Instance.resetTime();
             model.getProjects().Clear();
 
-            List<Entity> entities = model.getEntities();
+            ICollection<Entity> entities = model.getEntities();
 
             EntityStart start = getSchemaStart(entities) as EntityStart;
             for (int i = 0; i < start.projectsCount; i++)
-                model.addProject(new Project() { complexity = start.Complexity });
-            List<Project> projects = model.getProjects();
+                model.addProject(new Project() { complexity = start.Complexity, id = i });
+            ICollection<Project> projects = model.getProjects();
 
             start.setReadyProjectQueue(projects);
 
@@ -58,7 +58,7 @@ namespace Simulation
             return result;
         }
 
-        private static bool checkForNotReadyProjects(List<Project> projects)
+        private static bool checkForNotReadyProjects(ICollection<Project> projects)
         {
             foreach (Project prj in projects)
             {
@@ -69,7 +69,7 @@ namespace Simulation
             return false;
         }
 
-        private static Entity getSchemaStart(List<Entity> entities)
+        private static Entity getSchemaStart(ICollection<Entity> entities)
         {
             foreach (Entity ent in entities)
             {
@@ -81,7 +81,7 @@ namespace Simulation
             return null;
         }
 
-        private static Entity getSchemaDestenation(List<Entity> entities)
+        private static Entity getSchemaDestenation(ICollection<Entity> entities)
         {
             foreach (Entity ent in entities)
             {

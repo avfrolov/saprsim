@@ -14,7 +14,8 @@ namespace EntityValidator.rules
         private Dictionary<Entity, Entity> failedInputs = new Dictionary<Entity, Entity>();
         private Dictionary<Entity, Entity> failedOutputs = new Dictionary<Entity, Entity>();
 
-        public EntityHasCorrectInputsAndOutputsRule(List<Entity> entities) : base(entities)
+        public EntityHasCorrectInputsAndOutputsRule(ICollection<Entity> entities)
+            : base(entities)
         {
         }
 
@@ -40,7 +41,7 @@ namespace EntityValidator.rules
             return failedInputs.Count == 0 && failedOutputs.Count == 0;
         }
 
-        public override List<ValidationError> explain()
+        public override ICollection<ValidationError> explain()
         {
             List<ValidationError> errors = new List<ValidationError>();
             

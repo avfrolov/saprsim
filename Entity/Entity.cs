@@ -60,7 +60,7 @@ namespace Entities
             return readyProjectQueue;
         }
 
-        public void setReadyProjectQueue(List<Project> inputQueue)
+        public void setReadyProjectQueue(ICollection<Project> inputQueue)
         {
             this.readyProjectQueue = new List<Project>(inputQueue);
         }
@@ -70,7 +70,7 @@ namespace Entities
             return notReadyProjectQueue;
         }
 
-        public void setNotReadyProjectQueue(List<Project> inputQueue)
+        public void setNotReadyProjectQueue(ICollection<Project> inputQueue)
         {
             this.notReadyProjectQueue = new List<Project>(inputQueue);
         }

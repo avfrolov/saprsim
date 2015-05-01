@@ -12,7 +12,7 @@ namespace Entities
         DONE
     };
 
-    public class Project
+    public class Project : Identifable
     {
         public Project()
         {

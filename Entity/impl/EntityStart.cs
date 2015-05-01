@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,9 @@ namespace Entities.impl
     public class EntityStart : Entity
     {
         public int projectsCount { get; set; }
+        [Column("Complexity_EntityStart")]
         public int Complexity { get; set; }
+        // TODO rename
 
         public override void execute() {
             List<Entity> outputs = getOutputs();

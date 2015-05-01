@@ -11,9 +11,10 @@ namespace EntityValidator.rules
 {
     public class OneStartRule : Rule
     {
-        private List<Entity> starts = new List<Entity>();
+        private ICollection<Entity> starts = new List<Entity>();
 
-        public OneStartRule(List<Entity> entities) : base(entities)
+        public OneStartRule(ICollection<Entity> entities)
+            : base(entities)
         {
         }
 
@@ -31,9 +32,9 @@ namespace EntityValidator.rules
             return starts.Count == 1;
         }
 
-        public override List<ValidationError> explain()
+        public override ICollection<ValidationError> explain()
         {
-            List<ValidationError> errors = new List<ValidationError>();
+            ICollection<ValidationError> errors = new List<ValidationError>();
             if (starts.Count == 0)
             {
                 errors.Add(new ValidationError("Блок 'Старт' не найден"));

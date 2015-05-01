@@ -14,7 +14,8 @@ namespace EntityValidator.rules
 
         private List<Entity> failed = new List<Entity>();
 
-        public InputAndOutputNotEmptyRule(List<Entity> entities) : base(entities)
+        public InputAndOutputNotEmptyRule(ICollection<Entity> entities)
+            : base(entities)
         {
         }
 
@@ -37,7 +38,7 @@ namespace EntityValidator.rules
             return failed.Count == 0;
         }
 
-        public override List<ValidationError> explain()
+        public override ICollection<ValidationError> explain()
         {
             List<ValidationError> errors = new List<ValidationError>();
             foreach (Entity fail in failed)

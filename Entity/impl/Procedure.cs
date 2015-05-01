@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Statistics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Entities.impl
 {
@@ -13,6 +15,10 @@ namespace Entities.impl
         private double needTime;
         private double operationTime;
         List<Resource> resources = new List<Resource>();
+        IEnumerable<Resource> busyResBefore = null;
+
+        public List<String> strs { get; set; }
+
 
         public override void execute()
         {
@@ -24,6 +30,11 @@ namespace Entities.impl
 
             if (prj != null)
             {
+                if (busyResBefore == null)
+                {
+                    busyResBefore = resources.FindAll(i => i.isBusy == true);
+                }
+
                 needTime = getNeedTime(overallEfficiency, prj.complexity);
 
                 operationTime += timer.getStep();
@@ -34,6 +45,10 @@ namespace Entities.impl
                     Entity outputEntity = getOutputs()[0];
                     outputEntity.addProjectToQueue(prj);
                     getReadyProjectQueue().Remove(prj);
+
+                    ICollection<ResourceDataHolder> resList = getUsedResources();
+
+                    TimeTrackerEngine.track(this.id, this.name, prj.id, resList, timer.getTime() - needTime, timer.getTime()); 
 
                     foreach (Resource res in getResources())
                     {
@@ -54,8 +69,30 @@ namespace Entities.impl
                         res.users.Remove(this.id);
                         res.isBusy = false;
                     }
+
+                    busyResBefore = null;
                 }
+
             }
+        }
+
+        private ICollection<ResourceDataHolder> getUsedResources()
+        {
+            IEnumerable<Resource> busyResAfter = resources.FindAll(i => i.isBusy == true);
+            IEnumerable<Resource> procedureUsedResources = busyResAfter.Except(busyResBefore);
+
+            // Duplication of resources =(( Need to resolve cyclic dependencies 
+            IDictionary<ResourceType, ResourceDataHolder.ResourceType> mapping = new Dictionary<ResourceType, ResourceDataHolder.ResourceType>();
+            mapping.Add(ResourceType.INSTRUMENT, ResourceDataHolder.ResourceType.INSTRUMENT);
+            mapping.Add(ResourceType.MATERIAL, ResourceDataHolder.ResourceType.MATERIAL);
+            mapping.Add(ResourceType.WORKER, ResourceDataHolder.ResourceType.WORKER);
+
+            ICollection<ResourceDataHolder> resList = new List<ResourceDataHolder>();
+            foreach (Resource res in procedureUsedResources)
+            {
+                resList.Add(new ResourceDataHolder(res.id, res.name, mapping[res.type]));
+            }
+            return resList;
         }
 
         public override bool canUseAsInput(Entity entity)

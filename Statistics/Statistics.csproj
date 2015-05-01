@@ -44,11 +44,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Beans\AbstractBean.cs" />
+    <Compile Include="Beans\ProcedureBean.cs" />
+    <Compile Include="Beans\ProjectBean.cs" />
+    <Compile Include="Beans\ResourceBean.cs" />
+    <Compile Include="Extractors\impl\ProcedureStatisticsDE.cs" />
+    <Compile Include="Extractors\impl\ProjectsStatisticsDE.cs" />
+    <Compile Include="Extractors\impl\ResourceStatisticDE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceDataHolder.cs" />
+    <Compile Include="Extractors\StatisticsDataExtractor.cs" />
+    <Compile Include="TimeHolder.cs" />
+    <Compile Include="IntervalHolder.cs" />
+    <Compile Include="TimeTrackerEngine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

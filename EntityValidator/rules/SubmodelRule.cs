@@ -15,7 +15,8 @@ namespace EntityValidator.rules
 
         private Submodel submodel;
 
-        public SubmodelRule(List<Entity> entities) : base(entities)
+        public SubmodelRule(ICollection<Entity> entities)
+            : base(entities)
         {
             foreach (Entity e in entities)
             {
@@ -37,7 +38,7 @@ namespace EntityValidator.rules
             return true;
         }
 
-        public override List<ValidationError> explain()
+        public override ICollection<ValidationError> explain()
         {
             return new List<ValidationError>() 
             { 

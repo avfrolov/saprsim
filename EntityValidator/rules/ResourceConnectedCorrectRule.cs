@@ -13,13 +13,14 @@ namespace EntityValidator.rules
     {
 
         private List<Identifable> failed = new List<Identifable>();
-        private List<Resource> resources = Model.Instance.getResources();
+        private ICollection<Resource> resources = Model.Instance.getResources();
 
         private List<WorkerResource> workers = new List<WorkerResource>();
         private List<InstrumentResource> instruments = new List<InstrumentResource>();
         private List<MaterialResource> materials = new List<MaterialResource>();
 
-        public ResourceConnectedCorrectRule(List<Entity> entities, List<Resource> resources) : base(entities)
+        public ResourceConnectedCorrectRule(ICollection<Entity> entities, ICollection<Resource> resources)
+            : base(entities)
         {
             this.resources = resources;
         }
@@ -60,7 +61,7 @@ namespace EntityValidator.rules
             return failed.Count == 0;
         }
 
-        public override List<ValidationError> explain()
+        public override ICollection<ValidationError> explain()
         {
             List<ValidationError> errors = new List<ValidationError>();
             foreach(Identifable fail in failed)

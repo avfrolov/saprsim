@@ -13,7 +13,8 @@ namespace EntityValidator.rules
     {
         private List<Entity> destinations = new List<Entity>();
 
-        public OneDestinationRule(List<Entity> entities) : base(entities)
+        public OneDestinationRule(ICollection<Entity> entities)
+            : base(entities)
         {
         }
 
@@ -31,7 +32,7 @@ namespace EntityValidator.rules
             return destinations.Count == 1;                
         }
 
-        public override List<ValidationError> explain()
+        public override ICollection<ValidationError> explain()
         {
             List<ValidationError> errors = new List<ValidationError>();
             if (destinations.Count == 0)
