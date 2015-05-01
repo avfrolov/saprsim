@@ -13,7 +13,7 @@ namespace Entities
     {
         private static Model instance = new Model();
 
-       // private Model(){ }
+        private Model(){ }
 
         public static Model Instance
         {

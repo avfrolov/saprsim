@@ -45,56 +45,6 @@ namespace sapr_sim
             Model.Instance.timeRestriction = TimeConverter.fromHumanToModel(Project.Instance.TimeRestiction);
             TimeTrackerEngine.clear();
 
-            try {
-                using (var ctx = new SaprSimDbContext())
-                {
-                    Model model = Model.Instance;
-
-                    model.addProject(new Entities.Project());
-                    ctx.models.Add(model);
-
-
-                    //Model model = new Model();
-                    //model.id = 1;
-
-
-                    //Procedure proc = new Procedure();
-                    //proc.name = "TEST ENROLLMENT";
-                    //proc.id = 2;
-
-                    //Entities.Project prj = new Entities.Project();
-                    //prj.id = 102;
-                    //prj.name = "adf";
-
-                    //model.entities.Add(proc);
-                    //model.projects.Add(prj);
-
-                    //ctx.models.Add(model); 
-
-
-                    ctx.SaveChanges();
-
-                }
-            }
-            catch (Exception ex){
-                Console.WriteLine(ex);
-            }
-
-
-            try
-            {
-                using (var ctx = new SaprSimDbContext())
-                {
-                    var model = ctx.models.Where(i => i.id == 0 || i.id == 1);
-                  //  var proc = ctx.procedures.Where(i => i.id == 0 || i.id == 1);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-
-
             controller.simulate();
                 
             TimeWithMeasure simulationTime = TimeConverter.fromModelToHuman(controller.SimulationTime);

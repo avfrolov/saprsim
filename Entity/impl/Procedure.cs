@@ -17,9 +17,6 @@ namespace Entities.impl
         List<Resource> resources = new List<Resource>();
         IEnumerable<Resource> busyResBefore = null;
 
-        public List<String> strs { get; set; }
-
-
         public override void execute()
         {
             Timer timer = Timer.Instance;

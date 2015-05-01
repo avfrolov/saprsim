@@ -53,29 +53,29 @@
             <TabItem Header="Задачи">
                 <DataGrid AutoGenerateColumns="False" Name="taskTab" CanUserAddRows="False" CanUserResizeColumns="True" CanUserSortColumns="True" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Задача" Width="1*" />
-                        <DataGridTextColumn Header="Статус" Width="1*" />
+                        <DataGridTextColumn Binding="{Binding name}" Header="Задача" Width="1*" />
+                        <DataGridTextColumn Binding="{Binding value}" Header="Время выполнения" Width="1*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
             <TabItem Header="Процедуры">
                 <DataGrid AutoGenerateColumns="False" Name="procedureTab" CanUserAddRows="False" CanUserResizeColumns="True" CanUserSortColumns="True" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Задача" Width="1*" />
-                        <DataGridTextColumn Header="Название" Width="1*" />
-                        <DataGridTextColumn Header="Количество выполнений" Width="1*" />
-                        <DataGridTextColumn Header="Мин. длительность" Width="1*" />
-                        <DataGridTextColumn Header="Сред. длительность" Width="1*" />
-                        <DataGridTextColumn Header="Макс. длительность" Width="1*" />
+                        <!--<DataGridTextColumn Header="Задача" Width="1*" />-->
+                        <DataGridTextColumn Header="Процедура" Binding="{Binding name}" Width="1*" />
+                        <DataGridTextColumn Header="Количество выполнений" Binding="{Binding count}" Width="1*" />
+                        <DataGridTextColumn Header="Мин. длительность" Binding="{Binding min}" Width="1*" />
+                        <DataGridTextColumn Header="Сред. длительность" Binding="{Binding avg}" Width="1*" />
+                        <DataGridTextColumn Header="Макс. длительность" Binding="{Binding max}" Width="1*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
             <TabItem Header="Ресурсы">
                 <DataGrid AutoGenerateColumns="False" Name="resourceTab" CanUserAddRows="False" CanUserResizeColumns="True" CanUserSortColumns="True" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Ресурс" Width="1*" />
-                        <DataGridTextColumn Header="Тип" Width="1*" />
-                        <DataGridTextColumn Header="Время занятости" Width="1*" />
+                        <DataGridTextColumn Header="Ресурс" Binding="{Binding name}" Width="1*" />
+                        <DataGridTextColumn Header="Тип" Binding="{Binding type}" Width="1*" />
+                        <DataGridTextColumn Header="Время занятости" Binding="{Binding time}" Width="1*" />
                         <DataGridTextColumn Header="Процент занятости" Width="1*" />
                     </DataGrid.Columns>
                 </DataGrid>
