@@ -12,7 +12,6 @@ namespace Entities.impl
         public int projectsCount { get; set; }
         [Column("Complexity_EntityStart")]
         public int Complexity { get; set; }
-        // TODO rename
 
         public override void execute() {
             ICollection<Entity> outputs = getOutputs();

@@ -69,30 +69,6 @@ namespace sapr_sim
             ResourceStatisticDE reExt = new ResourceStatisticDE();
             ICollection<ResourceBean> resourseStat = reExt.extract();
 
-
-            // TODO
-
-            //using (var ctx = new SaprSimDbContext())
-            //{
-            //    foreach (ProjectBean proj in projectStat)
-            //    {
-            //        ctx.statistics.Add(proj);
-            //    }
-
-            //    foreach (ProcedureBean peoc in procedureStat)
-            //    {
-            //        ctx.statistics.Add(peoc);
-            //    }
-
-
-            //    foreach (ResourceBean res in resourseStat)
-            //    {
-            //        ctx.statistics.Add(res);
-            //    }
-
-            //    ctx.SaveChanges();
-            //}
-
             taskTab.ItemsSource = projectStat;
             procedureTab.ItemsSource = procedureStat;
             resourceTab.ItemsSource = resourseStat;
