@@ -15,10 +15,10 @@ namespace Entities.impl
         // TODO rename
 
         public override void execute() {
-            List<Entity> outputs = getOutputs();
+            ICollection<Entity> outputs = getOutputs();
             if (outputs != null && outputs.Count != 0)
             {
-                outputs[0].setReadyProjectQueue(getReadyProjectQueue());
+                outputs.First().setReadyProjectQueue(getReadyProjectQueue());
                 getReadyProjectQueue().Clear();
             }
         }

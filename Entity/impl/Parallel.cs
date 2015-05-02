@@ -16,7 +16,7 @@ namespace Entities.impl
             {
                 Project prj = getProjectFromReadyQueue();
 
-                Entity outputEntity1 = getOutputs()[0];
+                Entity outputEntity1 = getOutputs().First();
                 outputEntity1.addProjectToQueue(prj);
 
                 Entity outputEntity2 = getOutputs()[1];

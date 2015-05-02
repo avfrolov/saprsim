@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Beans\AbstractBean.cs" />
+    <Compile Include="Beans\AbstractStatiscticsBean.cs" />
     <Compile Include="Beans\ProcedureBean.cs" />
     <Compile Include="Beans\ProjectBean.cs" />
     <Compile Include="Beans\ResourceBean.cs" />

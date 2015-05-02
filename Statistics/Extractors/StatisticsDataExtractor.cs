@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Statistics
 {
-    interface StatisticsDataExtractor <T> where T: AbstractBean
+    interface StatisticsDataExtractor <T> where T: AbstractStatiscticsBean
     {
         ICollection<T> extract();
     }

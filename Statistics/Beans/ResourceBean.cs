@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Statistics.Beans
 {
-    public class ResourceBean : AbstractBean
+    public class ResourceBean : AbstractStatiscticsBean
     {
         public string type { get; set; }
         public double time { get; set; }

@@ -13,14 +13,23 @@ namespace Entities
 
         public double price { get; set; }
 
-        public List<InstrumentResource> instruments { get; set; }
-        public List<MaterialResource> materials { get; set; }
+        private IList<InstrumentResource> _instruments;
 
-        public WorkerResource()
-        {            
-            instruments = new List<InstrumentResource>();
-            materials = new List<MaterialResource>();
+        public virtual IList<InstrumentResource> instruments
+        {
+            get { return _instruments ?? (_instruments = new List<InstrumentResource>()); }
+            protected set { _instruments = value; }
         }
+
+
+        private IList<MaterialResource> _materials;
+
+        public virtual IList<MaterialResource> materials
+        {
+            get { return _materials ?? (_materials = new List<MaterialResource>()); }
+            protected set { _materials = value; }
+        }
+
 
         public override double totalCount
         {

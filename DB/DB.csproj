@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\ModelDAO.cs" />
+    <Compile Include="DAO.cs" />
+    <Compile Include="DAO\StatisticsDAO.cs" />
     <Compile Include="SaprSimDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -62,6 +65,10 @@
     <ProjectReference Include="..\Entity\Entity.csproj">
       <Project>{122ea07b-0a59-477a-a2bb-26c85461235d}</Project>
       <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Statistics\Statistics.csproj">
+      <Project>{bd0bd758-5afe-4143-b499-94dd555668ad}</Project>
+      <Name>Statistics</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

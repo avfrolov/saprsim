@@ -19,7 +19,7 @@ namespace Entities.impl
             if (projects != null && projects.Count != 0)
             {
                 Project proj = projects[0];
-                Entity outputEntity = getOutputs()[0];
+                Entity outputEntity = getOutputs().First();
                 outputEntity.addProjectToQueue(proj);
 
                 getReadyProjectQueue().Remove(proj);

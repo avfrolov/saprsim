@@ -12,11 +12,12 @@ namespace Entities
         public double power { get; set; }
         public double price { get; set; }
 
-        public List<MaterialResource> materials { get; set; }
+        private IList<MaterialResource> _materials;
 
-        public InstrumentResource()
+        public virtual IList<MaterialResource> materials
         {
-            materials = new List<MaterialResource>();
+            get { return _materials ?? (_materials = new List<MaterialResource>()); }
+            protected set { _materials = value; }
         }
 
         public override double totalCount

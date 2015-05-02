@@ -112,8 +112,8 @@ namespace Entities.impl
                 {
                     if (entity.getOutputs().Count > 0)
                     {
-                        entity.getOutputs()[0].getInputs().Clear();
-                        entity.getOutputs()[0].addInput(input);
+                        entity.getOutputs().First().getInputs().Clear();
+                        entity.getOutputs().First().addInput(input);
                         this.pseudoInput.Clear();
                         this.pseudoInput.Add(input);
                         return;
@@ -122,7 +122,7 @@ namespace Entities.impl
             }
         }
 
-        public override void setInputs(List<Entity> inputs)
+        public override void setInputs(IList<Entity> inputs)
         {
             foreach (Entity entity in entities)
             {
@@ -130,7 +130,7 @@ namespace Entities.impl
                 {
                     if (entity.getOutputs().Count > 0)
                     {
-                        entity.getOutputs()[0].setInputs(inputs);
+                        entity.getOutputs().First().setInputs(inputs);
                         this.pseudoInput.AddRange(inputs);
                         return;
                     }
@@ -146,8 +146,8 @@ namespace Entities.impl
                 {
                     if (entity.getInputs().Count > 0)
                     {
-                        entity.getInputs()[0].getOutputs().Clear();
-                        entity.getInputs()[0].addOutput(output);
+                        entity.getInputs().First().getOutputs().Clear();
+                        entity.getInputs().First().addOutput(output);
                         this.pseudoOutput.Clear();
                         this.pseudoOutput.Add(output);
                         return;
@@ -156,7 +156,7 @@ namespace Entities.impl
             }
         }
 
-        public override void setOutputs(List<Entity> outputs)
+        public override void setOutputs(IList<Entity> outputs)
         {
             foreach (Entity entity in entities)
             {
@@ -164,7 +164,7 @@ namespace Entities.impl
                 {
                     if (entity.getInputs().Count > 0)
                     {
-                        entity.getInputs()[0].setOutputs(outputs);
+                        entity.getInputs().First().setOutputs(outputs);
                         this.pseudoOutput.AddRange(outputs);
                         return;
                     }

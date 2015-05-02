@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Statistics.Beans
 {
-    public class AbstractBean
+    public class AbstractStatiscticsBean
     {
         public long id { get; set; }
         public string name { get; set; }

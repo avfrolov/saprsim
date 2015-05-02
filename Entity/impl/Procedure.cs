@@ -14,7 +14,16 @@ namespace Entities.impl
 
         private double needTime;
         private double operationTime;
-        List<Resource> resources = new List<Resource>();
+        IList<Resource> _resources;
+
+
+        public virtual IList<Resource> resources
+        {
+            get { return _resources ?? (_resources = new List<Resource>()); }
+            protected set { _resources = value; }
+        }
+
+
         IEnumerable<Resource> busyResBefore = null;
 
         public override void execute()
@@ -29,7 +38,7 @@ namespace Entities.impl
             {
                 if (busyResBefore == null)
                 {
-                    busyResBefore = resources.FindAll(i => i.isBusy == true);
+                    busyResBefore = new List<Resource>(resources.Where(i => i.isBusy == true));
                 }
 
                 needTime = getNeedTime(overallEfficiency, prj.complexity);
@@ -39,7 +48,7 @@ namespace Entities.impl
                 if (operationTime >= needTime)
                 {
                     operationTime = 0;
-                    Entity outputEntity = getOutputs()[0];
+                    Entity outputEntity = getOutputs().First();
                     outputEntity.addProjectToQueue(prj);
                     getReadyProjectQueue().Remove(prj);
 
@@ -75,7 +84,7 @@ namespace Entities.impl
 
         private ICollection<ResourceDataHolder> getUsedResources()
         {
-            IEnumerable<Resource> busyResAfter = resources.FindAll(i => i.isBusy == true);
+            IEnumerable<Resource> busyResAfter = new List<Resource>( resources.Where(i => i.isBusy == true));
             IEnumerable<Resource> procedureUsedResources = busyResAfter.Except(busyResBefore);
 
             // Duplication of resources =(( Need to resolve cyclic dependencies 
@@ -107,7 +116,7 @@ namespace Entities.impl
             resources.Add(res);
         }
 
-        public List<Resource> getResources()
+        public IList<Resource> getResources()
         {
             return resources;
         }

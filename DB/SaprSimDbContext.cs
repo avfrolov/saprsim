@@ -1,5 +1,6 @@
 ﻿using Entities;
 using Entities.impl;
+using Statistics.Beans;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,22 +10,19 @@ using System.Threading.Tasks;
 
 namespace DB
 {
-    public class SaprSimDbContext : DbContext
+    class SaprSimDbContext : DbContext
     {
-
-
         public SaprSimDbContext() : base("SaprSimDbContext")
         {
-           // this.Configuration.ProxyCreationEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
-        //public DbSet<Project> projects { get; set; }
         public DbSet<Model> models { get; set; }
 
-        //public DbSet<Entity> entities { get; set; }
-        //public DbSet<Resource> resources { get; set; }
+        public DbSet<Resource> resources { get; set; }
 
-        //public DbSet<Procedure> procedures { get; set; }
+        public DbSet<AbstractStatiscticsBean> statistics { get; set; }
 
     }
 }

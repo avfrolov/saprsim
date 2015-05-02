@@ -20,12 +20,12 @@ namespace Simulation
             Timer.Instance.resetTime();
             model.getProjects().Clear();
 
-            ICollection<Entity> entities = model.getEntities();
+            IList<Entity> entities = model.getEntities();
 
             EntityStart start = getSchemaStart(entities) as EntityStart;
             for (int i = 0; i < start.projectsCount; i++)
                 model.addProject(new Project() { complexity = start.Complexity, id = i });
-            ICollection<Project> projects = model.getProjects();
+            IList<Project> projects = model.getProjects();
 
             start.setReadyProjectQueue(projects);
 

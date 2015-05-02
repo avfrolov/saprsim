@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,18 +10,31 @@ namespace Entities
     public abstract class Entity : Identifable
     {
 
-        protected List<Entity> input = new List<Entity>();
-        protected List<Entity> output = new List<Entity>();
+        private IList<Entity> _input;
 
-        private List<Project> notReadyProjectQueue = new List<Project>();
-        private List<Project> readyProjectQueue = new List<Project>();
+        public virtual IList<Entity> input
+        {
+            get { return _input ?? (_input = new List<Entity>()); }
+            protected set { _input = value; }
+        }
 
-        public List<Entity> getInputs()
+        private IList<Entity> _output;
+
+        public virtual IList<Entity> output
+        {
+            get { return _output ?? (_output = new List<Entity>()); }
+            protected set { _output = value; }
+        }
+
+        private IList<Project> notReadyProjectQueue = new List<Project>();
+        private IList<Project> readyProjectQueue = new List<Project>();
+
+        public IList<Entity> getInputs()
         {
             return input;
         }
 
-        public virtual void setInputs(List<Entity> inputs)
+        public virtual void setInputs(IList<Entity> inputs)
         {
             input = inputs;
         }
@@ -35,12 +49,12 @@ namespace Entities
             return input.Count > 0;
         }
 
-        public List<Entity> getOutputs()
+        public IList<Entity> getOutputs()
         {
             return output;
         }
 
-        public virtual void setOutputs(List<Entity> output)
+        public virtual void setOutputs(IList<Entity> output)
         {
             this.output = output;
         }
@@ -55,32 +69,32 @@ namespace Entities
             return output.Count > 0;
         }
 
-        public List<Project> getReadyProjectQueue()
+        public IList<Project> getReadyProjectQueue()
         {
             return readyProjectQueue;
         }
 
-        public void setReadyProjectQueue(ICollection<Project> inputQueue)
+        public void setReadyProjectQueue(IList<Project> inputQueue)
         {
             this.readyProjectQueue = new List<Project>(inputQueue);
         }
 
-        public List<Project> getNotReadyProjectQueue()
+        public IList<Project> getNotReadyProjectQueue()
         {
             return notReadyProjectQueue;
         }
 
-        public void setNotReadyProjectQueue(ICollection<Project> inputQueue)
+        public void setNotReadyProjectQueue(IList<Project> inputQueue)
         {
             this.notReadyProjectQueue = new List<Project>(inputQueue);
         }
 
         public Project getProjectFromReadyQueue()
         {
-            List<Project> prjQueue = getReadyProjectQueue();
+            IList<Project> prjQueue = getReadyProjectQueue();
             if (prjQueue != null && prjQueue.Count != 0)
             {
-                return prjQueue[0];
+                return prjQueue.First();
             }
 
             return null;
@@ -88,16 +102,17 @@ namespace Entities
 
         public void removeProjectFromReadyQueue()
         {
-            List<Project> prjQueue = getReadyProjectQueue();
+            IList<Project> prjQueue = getReadyProjectQueue();
             if (prjQueue != null && prjQueue.Count != 0)
             {
-                prjQueue.RemoveAt(0);
+                Project prj = prjQueue.First();
+                prjQueue.Remove(prj);
             }
         }
 
         public void addProjectToQueue(Project project)
         {
-            List<Project> prjQueue = getNotReadyProjectQueue();
+            IList<Project> prjQueue = getNotReadyProjectQueue();
             prjQueue.Add(project);
             setNotReadyProjectQueue(prjQueue);
         }
@@ -105,7 +120,7 @@ namespace Entities
         public void proceed()
         {
            execute();
-           List<Project> projects = getNotReadyProjectQueue();
+           ICollection<Project> projects = getNotReadyProjectQueue();
 
            foreach (Project project in projects)
            {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Statistics.Beans
 {
-    public class ProcedureBean : AbstractBean
+    public class ProcedureBean : AbstractStatiscticsBean
     {
         public int count { get; set; }
         public double min { get; set; }

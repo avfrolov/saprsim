@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Statistics.Beans
 {
-    public class ProjectBean : AbstractBean
+    public class ProjectBean : AbstractStatiscticsBean
     {
         public double value { get; set; }
 

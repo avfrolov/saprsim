@@ -10,8 +10,8 @@ namespace Entities.impl
     {
 
         public override void execute() {
-            List<Project> projects = getReadyProjectQueue();
-            List<Project> projects1 = getNotReadyProjectQueue();
+            ICollection<Project> projects = getReadyProjectQueue();
+            ICollection<Project> projects1 = getNotReadyProjectQueue();
             
             foreach (Project prj in projects)
             {

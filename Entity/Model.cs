@@ -13,7 +13,10 @@ namespace Entities
     {
         private static Model instance = new Model();
 
-        private Model(){ }
+
+        // EF not set params if constructor is private.
+        // TODO find workaround 
+        //private Model(){ }
 
         public static Model Instance
         {
@@ -21,6 +24,8 @@ namespace Entities
             {
                 return instance;
             }
+            // todo remove 
+            set { instance = value; }
         }
 
         public long id { get; set; }
@@ -31,29 +36,29 @@ namespace Entities
         public double timeRestriction { get; set; }
         public ProcessingState state { get; set; }
 
-        private ICollection<Entity> _entities;
+        private IList<Entity> _entities;
 
-        public virtual ICollection<Entity> entities
+        public virtual IList<Entity> entities
         {
-            get { return _entities ?? (_entities = new Collection<Entity>()); }
+            get { return _entities ?? (_entities = new List<Entity>()); }
             protected set { _entities = value; }
         }
 
 
-        private ICollection<Project> _projects;
+        private IList<Project> _projects;
 
-        public virtual ICollection<Project> projects
+        public virtual IList<Project> projects
         {
-            get { return _projects ?? (_projects = new Collection<Project>()); }
+            get { return _projects ?? (_projects = new List<Project>()); }
             protected set { _projects = value; }
         }
 
 
-        private ICollection<Resource> _resources;
+        private IList<Resource> _resources;
 
-        public virtual ICollection<Resource> resources
+        public virtual IList<Resource> resources
         {
-            get { return _resources ?? (_resources = new Collection<Resource>()); }
+            get { return _resources ?? (_resources = new List<Resource>()); }
             protected set { _resources = value; }
         }
 
@@ -62,7 +67,7 @@ namespace Entities
             entities.Add(entity);
         }
 
-        public ICollection<Entity> getEntities()
+        public IList<Entity> getEntities()
         {
             return entities;
         }
@@ -72,7 +77,7 @@ namespace Entities
             projects.Add(project);
         }
 
-        public ICollection<Project> getProjects()
+        public IList<Project> getProjects()
         {
             return projects;
         }
@@ -82,12 +87,12 @@ namespace Entities
             resources.Add(resource);
         }
 
-        public ICollection<Resource> getResources()
+        public IList<Resource> getResources()
         {
             return resources;
         }
 
-        public void setResources(ICollection<Resource> resources)
+        public void setResources(IList<Resource> resources)
         {
             this.resources = resources;
         }

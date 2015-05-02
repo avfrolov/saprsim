@@ -78,7 +78,7 @@ namespace EntityValidator.rules
                 workers.Remove(wr);
         }
 
-        private void processInstrumentResources(List<InstrumentResource> resources)
+        private void processInstrumentResources(IList<InstrumentResource> resources)
         {
             foreach (InstrumentResource ir in resources)
             {
@@ -89,7 +89,7 @@ namespace EntityValidator.rules
             }
         }
 
-        private void processMaterialResources(List<MaterialResource> resources)
+        private void processMaterialResources(IList<MaterialResource> resources)
         {
             foreach (MaterialResource mr in resources)
             {
