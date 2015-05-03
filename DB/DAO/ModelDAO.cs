@@ -33,7 +33,7 @@ namespace DB.DAO
             }
         }
 
-        public Model get(int id)
+        public Model findById(int id)
         {
             using (var ctx = new SaprSimDbContext())
             {
@@ -44,7 +44,7 @@ namespace DB.DAO
             }
         }
 
-        public ICollection<Model> getAll()
+        public ICollection<Model> findAll()
         {
             IList<Model> mdls;
 
@@ -56,7 +56,7 @@ namespace DB.DAO
             return mdls;
         }
 
-        public void remove(int id)
+        public void removeById(int id)
         {
             using (var ctx = new SaprSimDbContext())
             {

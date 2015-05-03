@@ -32,7 +32,7 @@ namespace DB.DAO
             }
         }
 
-        public AbstractStatiscticsBean get(int id)
+        public AbstractStatiscticsBean findById(int id)
         {
             using (var ctx = new SaprSimDbContext())
             {
@@ -40,7 +40,7 @@ namespace DB.DAO
             }
         }
 
-        public ICollection<AbstractStatiscticsBean> getAll()
+        public ICollection<AbstractStatiscticsBean> findAll()
         {
             IList<AbstractStatiscticsBean> stat;
 
@@ -52,7 +52,7 @@ namespace DB.DAO
             return stat;
         }
 
-        public void remove(int id)
+        public void removeById(int id)
         {
             using (var ctx = new SaprSimDbContext())
             {

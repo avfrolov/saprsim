@@ -13,15 +13,14 @@ namespace DB
 
         void saveAll(ICollection<T> values);
 
-        T get(int id);
+        T findById(int id);
 
-        ICollection<T> getAll();
+        ICollection<T> findAll();
 
-        void remove(int id);
+        void removeById(int id);
 
         void removeAll();
 
         DbContext getContext();
-
     }
 }
