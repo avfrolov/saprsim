@@ -41,8 +41,13 @@ namespace Statistics.Extractors.impl
             }
 
             ICollection<ResourceBean> resourcesTimeSum = resources.Select(
-                        i =>  new ResourceBean(i.Key.id,  i.Key.name, mapping[i.Key.type], i.Value.Sum( j => j.getTo() - j.getFrom() ))  
-                    ).ToList();
+                        i =>  new ResourceBean(i.Key.id,  
+                                               i.Key.name, 
+                                               mapping[i.Key.type], 
+                                               i.Value.Sum( j => j.getTo() - j.getFrom() ),
+                                               i.Value.Sum(j => j.getTo() - j.getFrom()) / TimeTrackerEngine.fullTime * 100
+                                              )  
+            ).ToList();
 
             return resourcesTimeSum;
         }

@@ -76,7 +76,7 @@
                         <DataGridTextColumn Header="Ресурс" Binding="{Binding name}" Width="1*" />
                         <DataGridTextColumn Header="Тип" Binding="{Binding type}" Width="1*" />
                         <DataGridTextColumn Header="Время занятости" Binding="{Binding time}" Width="1*" />
-                        <DataGridTextColumn Header="Процент занятости" Width="1*" />
+                        <DataGridTextColumn Header="Процент занятости" Binding="{Binding percentage}" Width="1*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>

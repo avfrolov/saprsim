@@ -59,6 +59,7 @@ namespace sapr_sim
             else
                 image.Source = new BitmapImage(new Uri(@"pack://application:,,,/Resources/failure.png", UriKind.Absolute));
 
+            TimeTrackerEngine.fullTime = Timer.Instance.getTime();
 
             ProjectsStatisticsDE prjExt = new ProjectsStatisticsDE();
             ICollection<ProjectBean> projectStat = prjExt.extract();

@@ -10,6 +10,8 @@ namespace Statistics
     public class TimeTrackerEngine
     {
 
+        public static double fullTime { get; set; }
+
         static ICollection<StatDataHolder> tracker = new List<StatDataHolder>();
 
         public static void track(long procedureId, string procedureName, long projectId, ICollection<ResourceDataHolder> resources, double startTime, double endTime)
@@ -32,6 +34,8 @@ namespace Statistics
         public static void clear()
         {
             tracker.Clear();
+            fullTime = 0;
         }
+
     }
 }
