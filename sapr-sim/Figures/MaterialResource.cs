@@ -42,7 +42,7 @@ namespace sapr_sim.Figures
         public override void createAndDraw(double x, double y)
         {
             base.createAndDraw(x, y);
-            label = new Label(this, canvas, x + 20, y + 22, name.Value);
+            label = new Label(this, canvas, x + 2, y + 22, name.Value);
             canvas.Children.Add(label);
         }
 
