@@ -29,9 +29,6 @@ namespace sapr_sim.Figures
             "Временная продолжительность процедуры. Может принимать положительное целочисленное значение");
         private UIParam<TimeMeasure> timeMeasure = new UIParam<TimeMeasure>(TimeMeasure.SECOND, new DefaultParamValidator(), "Единицы измерения",
             "Единица измерения времени", new ParameterComboBox(TimeMeasure.list()));
-        private UIParam<Int32> scatter = new UIParam<Int32>(0, new BetweenIntegerParamValidator(0, 100), "Разброс (%)",
-            "Вводит стохастичность в процедуры. Продолжительность процедуры начинает измеряться по формуле: \"Продолжительность\" ± \"Разброс\". " + 
-            "Может принимать целочисленное значение на отрезке [0; 100]");
 
         private static readonly string DEFAULT_NAME = "Процедура";
 
@@ -51,7 +48,6 @@ namespace sapr_sim.Figures
             ports.Add(resourcePort);
 
             time = info.GetValue("time", typeof(UIParam<Double>)) as UIParam<Double>;
-            scatter = info.GetValue("scatter", typeof(UIParam<Int32>)) as UIParam<Int32>;
 
             timeMeasure = info.GetValue("timeMeasure", typeof(UIParam<TimeMeasure>)) as UIParam<TimeMeasure>;
             timeMeasure.ContentControl = new ParameterComboBox(TimeMeasure.list()) { SelectedIndex = timeMeasure.Value.Order };
@@ -98,7 +94,6 @@ namespace sapr_sim.Figures
             List<UIParam> param = base.getParams();
             param.Add(time);
             param.Add(timeMeasure);
-            param.Add(scatter);
             return param;
         }
 
@@ -114,12 +109,6 @@ namespace sapr_sim.Figures
             set { timeMeasure.Value = value; }
         }
 
-        public int Scatter
-        {
-            get { return scatter.Value; }
-            set { scatter.Value = value; }
-        }
-
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
@@ -128,7 +117,6 @@ namespace sapr_sim.Figures
             info.AddValue("resourcePort", resourcePort);
             info.AddValue("time", time);
             info.AddValue("timeMeasure", timeMeasure);
-            info.AddValue("scatter", scatter);
         }
 
         protected override System.Windows.Media.Geometry DefiningGeometry

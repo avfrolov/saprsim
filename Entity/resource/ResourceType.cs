@@ -10,6 +10,7 @@ namespace Entities
     {
         WORKER,
         INSTRUMENT,
-        MATERIAL
+        MATERIAL,
+        SOFTWARE
     }
 }

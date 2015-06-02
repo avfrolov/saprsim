@@ -12,6 +12,8 @@ namespace Entities
         public double efficiency { get; set; }
 
         public double price { get; set; }
+        
+        public double errorProbability { get; set; }
 
         private IList<InstrumentResource> _instruments;
 

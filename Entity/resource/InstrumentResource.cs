@@ -11,6 +11,7 @@ namespace Entities
 
         public double power { get; set; }
         public double price { get; set; }
+        public double errorProbability { get; set; }
 
         private IList<MaterialResource> _materials;
 
