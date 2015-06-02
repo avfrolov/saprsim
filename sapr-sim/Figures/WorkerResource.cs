@@ -22,6 +22,9 @@ namespace sapr_sim.Figures
             "Производительность исполнителя. Может принимать вещественное значение на отрезке [0; 1]");
         private UIParam<Double> price = new UIParam<Double>(1, new BetweenDoubleParamValidator(0.0, 100000.0), "Зарплата (у.е)",
             "Зарплата исполнителя. Может принимать вещественное значение на отрезке [0; 100000]");
+        private UIParam<Double> failure = new UIParam<Double>(0.1, new BetweenDoubleParamValidator(0.0, 1.0), "Вероятность ошибки",
+            "Вероятность ошибки ресурса. Может принимать вещественное значение на отрезке [0; 1]");
+
 
         public WorkerResource(Canvas canvas) : base(canvas)
         {
@@ -37,6 +40,7 @@ namespace sapr_sim.Figures
 
             efficiency = info.GetValue("efficiency", typeof(UIParam<Double>)) as UIParam<Double>;
             price = info.GetValue("price", typeof(UIParam<Double>)) as UIParam<Double>;
+            failure = info.GetValue("failure", typeof(UIParam<Double>)) as UIParam<Double>;
 
             init();
         }
@@ -57,6 +61,7 @@ namespace sapr_sim.Figures
             List<UIParam> param = base.getParams();
             param.Add(efficiency);
             param.Add(price);
+            param.Add(failure);
             return param;
         }
 
@@ -72,12 +77,19 @@ namespace sapr_sim.Figures
             set { price.Value = value; }
         }
 
+        public double Failure
+        {
+            get { return failure.Value; }
+            set { failure.Value = value; }
+        }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
             info.AddValue("bottomPort", bottomPort);
             info.AddValue("efficiency", efficiency);
             info.AddValue("price", price);
+            info.AddValue("failure", failure);
         }
 
         protected override void init()

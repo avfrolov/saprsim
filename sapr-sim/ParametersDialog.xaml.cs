@@ -233,6 +233,10 @@ namespace sapr_sim
             {
                 newResource = new InstrumentResource(res.canvas) { Count = res.Count, IsShared = res.IsShared };
             }
+            else if (ResourceType.SOFTWARE.Equals(newRt))
+            {
+                newResource = new SoftwareResource(res.canvas) { Count = res.Count, IsShared = res.IsShared };
+            }
             else if (ResourceType.MATERIAL.Equals(newRt))
             {
                 newResource = new MaterialResource(res.canvas) { Count = res.Count, IsShared = res.IsShared };

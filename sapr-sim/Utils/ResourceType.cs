@@ -11,20 +11,21 @@ namespace sapr_sim.Utils
     {
 
         public static readonly ResourceType WORKER = new ResourceType(0, "Исполнитель");
-        public static readonly ResourceType INSTRUMENT = new ResourceType(1, "Оборудование");
+        public static readonly ResourceType INSTRUMENT = new ResourceType(1, "Техн. средства");
         public static readonly ResourceType MATERIAL = new ResourceType(2, "Расход. материал");
+        public static readonly ResourceType SOFTWARE = new ResourceType(3, "ПО");
 
         public int Order { get; set; }
         public string Name { get; set; }
 
         public static List<IConvertible> list()
         {
-            return new List<IConvertible>() { WORKER, INSTRUMENT, MATERIAL };
+            return new List<IConvertible>() { WORKER, INSTRUMENT, MATERIAL, SOFTWARE };
         }
 
         public static List<string> nameList()
         {
-            return new List<string>() { WORKER.Name, INSTRUMENT.Name, MATERIAL.Name };
+            return new List<string>() { WORKER.Name, INSTRUMENT.Name, MATERIAL.Name, SOFTWARE.Name };
         }
 
         public static ResourceType byOrder(int order)
@@ -37,6 +38,8 @@ namespace sapr_sim.Utils
                     return INSTRUMENT;
                 case 2:
                     return MATERIAL;
+                case 3:
+                    return SOFTWARE;
                 default:
                     throw new Exception("WTF, dude!?");
             }
